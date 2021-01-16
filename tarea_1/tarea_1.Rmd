@@ -1,0 +1,140 @@
+---
+title: "Tarea_1"
+author: "Equipo_x"
+date: "1/16/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#instalo librerias
+list.of.packages <- c("ggplot2", "dplyr","ggthemes")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+#cargo librerias
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+```
+
+# Tarea 1
+
+Preguntas del capítulo 2 del libro de Ray
+
+## I.
+
+En el contexto del capítulo, un bien comerciado o *traded* se refiere a bienes en los que hay comercio internacional. Un bien no comerciado o *non traded* se refiere a bienes cuyo consumo es enteramente doméstico (dentro de un mismo país). 
+
+En cuanto a la segunda pregunta, los bienes no comerciados son más baratos en países pobres simplemente debido a que el ingreso de dichos país es mucho menor.
+
+Finalmente, en cuanto a la tercer pregunta sobre PPP, no necesariamente porque en estos métodos de comparación se propone la comparación con bienes similares aunque no sean comerciados internacionalmente.
+
+## II.
+
+Creemos que es debido a que en primer lugar, Mc Donald`s es una cadena con presencia casi en todos los países; en segundo lugar, debido a que vende alimentos, un sector con elasticidad precio muy alta; finalmente, debido a que se enfrenta a los precios locales de los insumos, en este sentido, refleja el costo local de un mismo producto internacional.
+
+## V.
+
+Matriz sin mobilidad
+
+````{r}
+#Creo la matriz
+a<-c(10,0,0,0,0)
+b<-c(0,10,0,0,0)
+c<-c(0,0,10,0,0)
+d<-c(0,0,0,10,0)
+e<-c(0,0,0,0,10)
+matriz_sin_movilidad<-data.frame(a,b,c,d,e)
+row.names(matriz_sin_movilidad)<-c("a","b","c","d","e")
+
+#Imprimo la matriz
+matriz_sin_movilidad
+```
+
+Matriz con mobilidad perfecta
+
+````{r}
+#Creo la matriz
+a<-c(2,2,2,2,2)
+b<-c(2,2,2,2,2)
+c<-c(2,2,2,2,2)
+d<-c(2,2,2,2,2)
+e<-c(2,2,2,2,2)
+matriz_con_movilidad_perf<-data.frame(a,b,c,d,e)
+row.names(matriz_con_movilidad_perf)<-c("a","b","c","d","e")
+
+#Imprimo la matriz
+matriz_con_movilidad_perf
+```
+
+Matriz con mobilidad ligeramente ascendente
+
+````{r}
+#Creo la matriz
+a<-c(7,3,0,0,0)
+b<-c(2,5,3,0,0)
+c<-c(0,2,5,3,0)
+d<-c(0,0,2,5,3)
+e<-c(0,0,0,2,8)
+matriz_con_movilidad_asc<-data.frame(a,b,c,d,e)
+row.names(matriz_con_movilidad_asc)<-c("a","b","c","d","e")
+
+#Imprimo la matriz
+matriz_con_movilidad_asc
+```
+
+
+## VI.
+
+*Comentario: En los datos está dos veces Costa Rica, se asumió que la primera mención en realidad hace referencia a Puerto Rico.
+
+````{r}
+#Recreo los datos
+country<-c("Malawi","Uganda","Tanzania","Bangladesh","Senegal","Pakistan","Nicaragua",
+"Sri Lanka","Guatemala","El Salvador","Peru","Puerto Rico","Thailand",
+"Panama","Colombia","Brazil","Costa Rica","Venezuela","Mexico",
+"Korea","Spain","UK","Sweden","Switzerland","USA","Norway")
+PPP<-c("Low","Low","Low","Low","Low","Low","Low","Low","Low","Middle","Middle",
+       "Middle","Middle","Middle","Middle","Middle","Middle",
+       "Middle","Middle","High","High","High","High","High","High","High")
+GDP_pc<-c(546,765,866,893,1492,1898,2157,3106,3350,5183,5444,5520,5568,5840,
+          6617,7911,8113,9924,12095,16015,25129,28575,29126,34713,39578,43642)
+bottom_share<-c(13,16,19,22,17,21,12,17,11,10,11,13,11,8,9,7,
+                13,12,12,21,19,18,23,20,16,24)
+top_share<-c(56,50,42,40,48,42,55,48,59,55,57,50,59,60,61,65,
+             51,52,56,37,42,44,37,41,46,37)
+kuznets_data<-data.frame(country,PPP,GDP_pc,top_share,bottom_share)
+
+#Agrego el kuznetz ratio
+
+kuznets_data<-kuznets_data%>% mutate(k_ratio=top_share/bottom_share)
+
+
+ggplot(kuznets_data) +
+  geom_point(aes(x = GDP_pc, y = k_ratio, colour = PPP)) +
+  labs(title = "Kuznets Ratio",
+       x = "GDP per capita",
+       y = "Ratio",
+       colour = "PPP") + geom_hline(yintercept=.5, linetype="dashed", color = "red")+
+  theme_bw()
+
+```
+
+Si el ingreso se distribuyera de manera perfectamente equitativa, el ratio tomaría un valor de 1/2 (representado por la línea roja punteada) debido a que cada share sería equivalente y en consecuencia el ratio sería solo la división de .2 entre .4.
+
+Podemos notar algunas tendencias claras. En primer lugar, todos los países de la muestra se encuentran por encima de la línea horizontal roja de distrubución equitativa perfecta. En segundo lugar, parece que en los países de bajo PPP, la relación entre GDP per capita y el ratio es positiva; en cuanto a los países de mediano PPP, la relación sigue siendo positiva aunque se alcanza a notar un decrecimiento en la magnitud de la relación; finalmente, en cuanto a los países de alto PPP, la relación es casi cero. Esto puede ser señal de un comportamiento de curva en la que la inequidad de la distribución aumenta conforme aumenta el GDP per capita hasta que se estabiliza y deja de crecer después de cierto umbral.
+
+
+## IX. a)
+
+Podría ser débido a que el costo de oportunidad la vida y reproducción es muy alto en países ricos. Asimismo, también se puede deber a factores institucionales-culturales como una mayor educación sexual y derechos reproductivos efectivos. Finalmente, se podría deber también factores estructurales, en las economías agrícolas, los hijos pueden ser considerados como un brazo más para el trabajo.
+
+
+## IX. b)
+
+Es una pregunta díficil, sin duda hay comunidades urbanas pobres y comunidades rurales de ingresos medianamente altos. Creemos que la causalidad va en los dos sentidos pues la pobreza condiciona al desarrollo que un país pueda tener en sectores secundarios y terciarios, en este sentido, se condiciona a que el sector más atractivo siga siendo el primario. Por el otro lado, la preponderancia sel sector primario afecta lois costos de oportunidad del capital humano.  Cada persona que está en el sector agricola es una persona menos en sectores que generan más valor. En este sentido, es muy difícil atribuir causalidad en un solo sentido.
+
+
+

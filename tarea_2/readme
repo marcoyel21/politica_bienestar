@@ -1,0 +1,9 @@
+
+
+Archivos:
+
+pobreza_2018.dta --------- es la base final de la medición de pobreza, la que sería el resultado del txt que mandó la maestra
+
+codebook------------------ es el Codebook de la base, que tiene los ocho indicadores y no sé cuánto
+
+cuadros_resultados.do----- el do file son unos cuadros descriptivos de la base final, namely "pobreza a nivel nacional" "porcentaje y número de personas por condición de pobreza por estado" y "% y # de personas con carencias sociales por estado"

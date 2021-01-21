@@ -25,15 +25,20 @@ Preguntas del capítulo 2 del libro de Ray
 
 ## I.
 
-En el contexto del capítulo, un bien comerciado o *traded* se refiere a bienes en los que hay comercio internacional. Un bien no comerciado o *non traded* se refiere a bienes cuyo consumo es enteramente doméstico (dentro de un mismo país). 
+En el contexto del capítulo, un bien comerciado o *traded* se refiere a bienes en los que hay comercio internacional. Un bien no comerciado o *non traded* se refiere a bienes cuyo consumo es enteramente doméstico (dentro de un mismo país), al sector de servicios. 
 
-En cuanto a la segunda pregunta, los bienes no comerciados son más baratos en países pobres simplemente debido a que el ingreso de dichos país es mucho menor.
+Las eyes de migración internacionales no permiten que las personas pobres “comercien” servicios con países más ricos: los servicios que los pobres son “buenos” proveyendo son baratos en los países donde ellos viven, y caros en los países ricos. Si no hubiera leyes de migración, los trabajadores de este sector en países pobres migrarían a lugares donde sus servicios fueran bien pagados. Como cuando se da arbitraje con bienes comerciables, los precios, entonces, tenderían a igualarse, aumentando la calidad de vida de los pobres. 
+
+Por otro lado, los servicios son baratos porque suelen tener menos dotaciones de capital, menos productividad de la mano de obra, mano de obra no calificada, y por lo tanto menores salarios. 
 
 Finalmente, en cuanto a la tercer pregunta sobre PPP, no necesariamente porque en estos métodos de comparación se propone la comparación con bienes similares aunque no sean comerciados internacionalmente.
 
 ## II.
 
-Creemos que es debido a que en primer lugar, Mc Donald`s es una cadena con presencia casi en todos los países; en segundo lugar, debido a que vende alimentos, un sector con elasticidad precio muy alta; finalmente, debido a que se enfrenta a los precios locales de los insumos, en este sentido, refleja el costo local de un mismo producto internacional.
+Porque la Big Mac se sirve de forma prácticamente idéntica en todos los países del mundo, lo cual implica que su costo es el mismo, por lo que sirve como test para ver en qué grado el tipo de cambio afecta los precios en diferentes países. 
+
+Dado que su costo implica tanto a los ingredientes como a otros factores como renta, equipo, mano de obra, etc., si el precio de una Big Mac es bajo se puede asumir que los precious de ese país también lo son. 
+
 
 ## V.
 
@@ -41,11 +46,11 @@ Matriz sin mobilidad
 
 ````{r}
 #Creo la matriz
-a<-c(10,0,0,0,0)
-b<-c(0,10,0,0,0)
-c<-c(0,0,10,0,0)
-d<-c(0,0,0,10,0)
-e<-c(0,0,0,0,10)
+a<-c(100,0,0,0,0)
+b<-c(0,100,0,0,0)
+c<-c(0,0,100,0,0)
+d<-c(0,0,0,100,0)
+e<-c(0,0,0,0,100)
 matriz_sin_movilidad<-data.frame(a,b,c,d,e)
 row.names(matriz_sin_movilidad)<-c("a","b","c","d","e")
 
@@ -57,11 +62,11 @@ Matriz con mobilidad perfecta
 
 ````{r}
 #Creo la matriz
-a<-c(2,2,2,2,2)
-b<-c(2,2,2,2,2)
-c<-c(2,2,2,2,2)
-d<-c(2,2,2,2,2)
-e<-c(2,2,2,2,2)
+a<-c(20,20,20,20,20)
+b<-c(20,20,20,20,20)
+c<-c(20,20,20,20,20)
+d<-c(20,20,20,20,20)
+e<-c(20,20,20,20,20)
 matriz_con_movilidad_perf<-data.frame(a,b,c,d,e)
 row.names(matriz_con_movilidad_perf)<-c("a","b","c","d","e")
 
@@ -73,11 +78,11 @@ Matriz con mobilidad ligeramente ascendente
 
 ````{r}
 #Creo la matriz
-a<-c(7,3,0,0,0)
-b<-c(2,5,3,0,0)
-c<-c(0,2,5,3,0)
-d<-c(0,0,2,5,3)
-e<-c(0,0,0,2,8)
+a<-c(50,30,20,0,0)
+b<-c(10,40,40,10,0)
+c<-c(0,20,50,30,0)
+d<-c(0,0,20,70,10)
+e<-c(0,0,0,20,80)
 matriz_con_movilidad_asc<-data.frame(a,b,c,d,e)
 row.names(matriz_con_movilidad_asc)<-c("a","b","c","d","e")
 
@@ -124,15 +129,19 @@ ggplot(kuznets_data) +
 
 Si el ingreso se distribuyera de manera perfectamente equitativa, el ratio tomaría un valor de 1/2 (representado por la línea roja punteada) debido a que cada share sería equivalente y en consecuencia el ratio sería solo la división de .2 entre .4.
 
-Podemos notar algunas tendencias claras. En primer lugar, todos los países de la muestra se encuentran por encima de la línea horizontal roja de distrubución equitativa perfecta. En segundo lugar, parece que en los países de bajo PPP, la relación entre GDP per capita y el ratio es positiva; en cuanto a los países de mediano PPP, la relación sigue siendo positiva aunque se alcanza a notar un decrecimiento en la magnitud de la relación; finalmente, en cuanto a los países de alto PPP, la relación es casi cero. Esto puede ser señal de un comportamiento de curva en la que la inequidad de la distribución aumenta conforme aumenta el GDP per capita hasta que se estabiliza y deja de crecer después de cierto umbral.
+Podemos notar algunas tendencias claras. En primer lugar, todos los países de la muestra se encuentran por encima de la línea horizontal roja de distrubución equitativa perfecta. En segundo lugar, parece que en los países de bajo PPP, la relación entre GDP per capita y el ratio es positiva; en cuanto a los países de mediano PPP, la relación sigue siendo positiva aunque se alcanza a notar un decrecimiento en la magnitud de la relación; finalmente, en cuanto a los países de alto PPP, la relación es la más baja. Esto puede ser señal de un comportamiento de curva en la que la inequidad de la distribución aumenta conforme aumenta el GDP per capita hasta que se estabiliza y deja de crecer después de cierto umbral.
 
 
 ## IX. a)
 
-Podría ser débido a que el costo de oportunidad la vida y reproducción es muy alto en países ricos. Asimismo, también se puede deber a factores institucionales-culturales como una mayor educación sexual y derechos reproductivos efectivos. Finalmente, se podría deber también factores estructurales, en las economías agrícolas, los hijos pueden ser considerados como un brazo más para el trabajo.
+Cuando los ingresos aumentan, también lo hacen las oportunidades laborales de las mujeres. Si los niños son bienes de consumo normales, al aumentar el ingreso su demanda también aumentaría. Sin embargo, tener y criar hijos son actividades intensivas en tiempo. Como el aumento de oportunidades aumenta el valor de su tiempo, los “precios sombra” de tener hijos aumentan con el ingreso. La disminución de las tasas de fertilidad en los países ricos implican que el efecto sustitución de los hijos vs trabajo domina al de ingreso.
 
 
-## IX. b)
+Podría ser débido a que el costo de oportunidad la vida y reproducción es muy alto en países ricos.  Asimismo, también se puede deber a factores institucionales-culturales como una mayor educación sexual y derechos reproductivos efectivos. Finalmente, se podría deber también factores estructurales, en las economías agrícolas, los hijos pueden ser considerados como un brazo más para el trabajoo.
+
+Entrando más a detalle en el primer punto, 
+
+## IX. c)
 
 Es una pregunta díficil, sin duda hay comunidades urbanas pobres y comunidades rurales de ingresos medianamente altos. Creemos que la causalidad va en los dos sentidos pues la pobreza condiciona al desarrollo que un país pueda tener en sectores secundarios y terciarios, en este sentido, se condiciona a que el sector más atractivo siga siendo el primario. Por el otro lado, la preponderancia sel sector primario afecta lois costos de oportunidad del capital humano.  Cada persona que está en el sector agricola es una persona menos en sectores que generan más valor. En este sentido, es muy difícil atribuir causalidad en un solo sentido.
 

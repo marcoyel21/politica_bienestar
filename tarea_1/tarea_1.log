@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.17)  22 JAN 2021 12:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.17)  22 JAN 2021 13:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -783,6 +783,18 @@ n-te, se po-dría de-ber tam-bién fac-to-res es-truc-tu-ra-les,
  []
 
 
+Overfull \hbox (4.08311pt too wide) in paragraph at lines 331--336
+\T1/lmr/m/n/10.95 al-to in-gre-so tan-to en paí-ses po-bres co-mo en paí-ses ri
+-cos. Asi-mis-mo, exis-ten poí-ses pre-do-mi-nan-te-men-te
+ []
+
+
+Overfull \hbox (17.15692pt too wide) in paragraph at lines 331--336
+\T1/lmr/m/n/10.95 ru-ra-les de in-gre-so al-to, co-mo Nue-va Ze-lan-da, y paí-s
+es pre-do-mi-nan-te-men-te ur-ba-nos de in-gre-so ba-jo, co-mo
+ []
+
+
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
 (fancyhdr)                \setlength{\headheight}{13.59999pt}.
@@ -817,7 +829,7 @@ ers/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Use
 rs/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users
 /marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/m
 arcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
-Output written on tarea_1.pdf (7 pages, 199726 bytes).
+Output written on tarea_1.pdf (7 pages, 199660 bytes).
 PDF statistics:
  137 PDF objects out of 1000 (max. 8388607)
  115 compressed objects within 2 object streams

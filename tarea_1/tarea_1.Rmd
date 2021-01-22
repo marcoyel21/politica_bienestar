@@ -37,9 +37,9 @@ Finalmente, en cuanto a la tercer pregunta sobre PPP, no necesariamente porque e
 
 ## II.
 
-Porque la Big Mac se sirve de forma prácticamente idéntica en todos los países del mundo, lo cual implica que su costo es el mismo, por lo que sirve como test para ver en qué grado el tipo de cambio afecta los precios en diferentes países. 
+Porque la Big Mac se sirve de forma prácticamente idéntica en todos los países del mundo, lo cual implica que su costo real (medido en bienes) es el mismo, por lo que sirve como test para ver en qué grado el tipo de cambio afecta los precios en diferentes países. 
 
-Dado que su costo implica tanto a los ingredientes como a otros factores como renta, equipo, mano de obra, etc., si el precio de una Big Mac es bajo se puede asumir que los precious de ese país también lo son. 
+Dado que su costo implica tanto a los ingredientes como a otros factores como renta, equipo, mano de obra, etc., si el precio de una Big Mac es bajo se puede asumir que los precios de ese país también lo son. 
 
 
 ## V.
@@ -145,7 +145,7 @@ Entrando más a detalle en el primer punto,
 
 ## IX. c)
 
-Es una pregunta díficil, sin duda hay comunidades urbanas pobres y comunidades rurales de ingresos medianamente altos. Creemos que la causalidad va en los dos sentidos pues la pobreza condiciona al desarrollo que un país pueda tener en sectores secundarios y terciarios, en este sentido, se condiciona a que el sector más atractivo siga siendo el primario. Por el otro lado, la preponderancia sel sector primario afecta lois costos de oportunidad del capital humano.  Cada persona que está en el sector agricola es una persona menos en sectores que generan más valor. En este sentido, es muy difícil atribuir causalidad en un solo sentido.
+Es una pregunta díficil, sin duda hay comunidades urbanas pobres (por ejemplo dentro de las megaurbes) y comunidades rurales de ingresos medianamente altos (por ejemplo en Estados Unidos, Europa y Japón). Creemos que la causalidad va en los dos sentidos pues la pobreza condiciona al desarrollo que un país pueda tener en sectores secundarios y terciarios, en este sentido, se condiciona a que el sector más atractivo siga siendo el primario. Por el otro lado, la preponderancia del sector primario afecta los costos de oportunidad del capital humano.  Cada persona que está en el sector agricola es una persona menos en sectores que generan más valor. En este sentido, es muy difícil atribuir causalidad en un solo sentido.
 
 
 

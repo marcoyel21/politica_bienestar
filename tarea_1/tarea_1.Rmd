@@ -87,10 +87,6 @@ library(ggthemes)
 library(kableExtra)
 ```
 
-# Comentarios
-
-Faltan 3 cosas: la tercer pregunta del inciso I, citar el argumento de las mujeres y los precios sombra y corroborar la ultima respuesta.
-
 # I.
 
 **Explica de manera intuitiva lo que es un bien comerciado y uno no comerciado**
@@ -202,18 +198,20 @@ Podemos notar algunas tendencias claras. En primer lugar, todos los países de l
 
 **¿Por qué crees que el crecimiento de la población disminuye con el desarrollo económico?**
 
-Podría ser débido a que el costo de oportunidad la vida y reproducción es muy alto en países ricos. Desde una perspecitva muy economicista, de acuerdo a  _______,cuando los ingresos aumentan, también lo hacen las oportunidades laborales de las mujeres. Si los niños son bienes de consumo normales, al aumentar el ingreso su demanda también aumentaría. Sin embargo, tener y criar hijos son actividades intensivas en tiempo. Como el aumento de oportunidades aumenta el valor de su tiempo, los “precios sombra” de tener hijos aumentan con el ingreso. La disminución de las tasas de fertilidad en los países ricos implican que el efecto sustitución de los hijos contra el trabajo domina al efecto ingreso.
+Podría ser débido a que el costo de oportunidad de la vida y reproducción es muy alto en países ricos. Si los niños son bienes de consumo normales, al aumentar el ingreso su demanda también aumentaría. Sin embargo, tener y criar hijos son actividades intensivas en tiempo. Como el aumento de oportunidades laborales (ie. salarios) aumenta el valor del tiempo de las mujeres y los hogares, los “precios sombra” de tener hijos aumentan (Becker y Lewis, 1974). La disminución de las tasas de fertilidad en los países ricos implican que el efecto sustitución de los hijos contra el trabajo domina al efecto ingreso (Becker, 1974).
 
 Asimismo, también se puede deber a factores institucionales-culturales como una mayor educación sexual y derechos reproductivos efectivos. Finalmente, se podría deber también factores estructurales, en las economías agrícolas, los hijos pueden ser considerados como un brazo más para el trabajoo.
 
 
 # IX. c)
 
-**¿Son los países rurales más proclives a ser pobres, o son los países pobres más proclibes a ser rurales? ¿En qué sentido va la causalidad?**
+**¿Son los países rurales más proclives a ser pobres, o son los países pobres más proclives a ser rurales? ¿En qué sentido va la causalidad?**
 
 Es una pregunta díficil, sin duda existen comunidades urbanas pobres y comunidades rurales con alto ingreso tanto en países pobres como en países ricos. Asimismo, existen poíses predominantemente rurales de ingreso alto, como Nueva Zelanda, y países predominantemente urbanos de ingreso bajo, como El Salvador. 
 
-Creemos que la causalidad va en los dos sentidos pues la pobreza condiciona al desarrollo que un país pueda tener en sectores secundarios y terciarios, en este sentido, se condiciona a que el sector más atractivo siga siendo el primario. Por el otro lado, la preponderancia del sector primario afecta los costos de oportunidad del capital humano.  Cada persona que está en el sector agricola es una persona menos en sectores que generan más valor. En este sentido, es muy difícil atribuir causalidad en un solo sentido.
+Creemos que la causalidad va en los dos sentidos, pues un país pobre tiene menos probabilidades de tener sectores industriales sustanciales, concentrándose en el primario. Esto hace que haya pocos incentivos para dejar este sector e irse al industrial, el cual es mejor pagado. Entonces, la mano de obra trabaja con poco capital, y por ende con menos productividad, ganancias y salarios. 
+
+La preponderancia del sector primario afecta los costos de oportunidad del capital humano.  Cada persona que está en el sector agrícola es una persona menos en sectores que generan más valor. En este sentido, es muy difícil atribuir causalidad en un solo sentido.
 
 
 

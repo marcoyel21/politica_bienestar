@@ -26,7 +26,7 @@ attach(d)
 #creo una variable del grupo 3 (mi objetivo)
 d.1<-d%>%mutate(y_3=ifelse(d$cuadrantes==3,1,0))
 
-#1. An·lisis correlaciones
+#1. An√°lisis correlaciones
 
 varscor<- data.frame(y_3,tam_loc,rururb,tamhogesc,ic_rezedu,
                      ic_asalud,ic_segsoc,pea,jef_ss,
@@ -46,7 +46,7 @@ cor_data2<-as.data.frame(cor(varscor2,use="complete.obs"))
 cor_data_filtered<-cor_data2 %>%select(y_3)
 kable(cor_data_filtered,"simple")
 
-#MÌo
+#M√≠o
 corrplot(cor(varscor,use="complete.obs"), method="circle")
 
 #Marco
@@ -57,16 +57,16 @@ corrplot(cor(varscor2,use="complete.obs"), method="circle")
 #1.5 Tabla Descriptivas (media, mediana,tango, sd)
 
 t1<-tableby(as.factor(cuadrantes)~.,data=varscor)
-l1<-list(plb="Ingreso < LB",s_salud="Servicios mÈdicos",jef_ss="Acceso SS x jefatura",
-         rururb="Loc. Rural",ic_sbv="Carencia serv. b·sicos viv.", 
-         tam_loc="TamaÒo loc.", ic_rezedu="Carencia rezago educativo",
+l1<-list(plb="Ingreso < LB",s_salud="Servicios m√©dicos",jef_ss="Acceso SS x jefatura",
+         rururb="Loc. Rural",ic_sbv="Carencia serv. b√°sicos viv.", 
+         tam_loc="Tama√±o loc.", ic_rezedu="Carencia rezago educativo",
          ic_asalud="Carencia x acceso serv. salud",ic_cv="carencia x calidad y esp. vivienda",
-         isb_combus="Carencia acceso serv. combustible", ic_ali="Carencia acceso alimentaciÛn")
-t2<-summary(t1, title = "EstadÌsticas Descriptivas",labelTranslations = l1)
+         isb_combus="Carencia acceso serv. combustible", ic_ali="Carencia acceso alimentaci√≥n")
+t2<-summary(t1, title = "Estad√≠sticas Descriptivas",labelTranslations = l1)
 
 kable(t2,"simple")
 
-#2. Tablas cruzadas entre Cuadrantes y variables de interÈs
+#2. Tablas cruzadas entre Cuadrantes y variables de inter√©s
 
 # s_salud 
 tabyl(d, cuadrantes, s_salud) %>% adorn_totals(c("row", "col")) %>%
@@ -244,10 +244,10 @@ tabyl(d, cuadrantes,ic_ali) %>% adorn_totals(c("row", "col")) %>%
   knitr::kable()
 
 ##############################################################
-#3. Datos cruzados y variables interÈs, en gr·fico
+#3. Datos cruzados y variables inter√©s, en gr√°fico
 
 
-## cAMBIAR GR¡FICOS, CON %
+## cAMBIAR GR√ÅFICOS, CON %
 
 PlotXTabs(d,s_salud,cuadrantes,plottype = "percent")
 PlotXTabs(d,jef_ss,cuadrantes,plottype = "percent")
@@ -259,7 +259,7 @@ PlotXTabs(d,ic_sbv,cuadrantes,plottype = "percent")
 
 PlotXTabs(d,tam_loc,cuadrantes,plottype = "percent")
 
-#Todos est·n en 0
+#Todos est√°n en 0
 PlotXTabs(d,ic_rezedu,cuadrantes,plottype = "percent")
 #Todos 0
 PlotXTabs(d,ic_asalud,cuadrantes,plottype = "percent")
@@ -316,7 +316,7 @@ d  %>%ggplot(aes(x=as.factor(cuadrantes), y=ing_lab, fill=as.factor(cuadrantes))
 d %>% drop_na(ing_lab)%>% ggplot(aes(x=as.factor(cuadrantes),y=ing_lab))+geom_bar(stat='identity')+
   facet_wrap(facets=vars(s_salud),scales="free_y")
 
-#
+#ggridge ingreso vs cuadrantes 
 ggplot(d, aes(x = `ing_mon`, y = as.factor(`cuadrantes`), fill = ..x..,group=`cuadrantes`)) +
   geom_density_ridges_gradient(scale = 3, rel_min_height = 0.01) +
   scale_fill_viridis(name = "Ingreso por hogar", option = "C") +
@@ -329,13 +329,13 @@ theme(
 )
 
 
-#Histograma regresiones ingreso vs tamaÒo del hogar por cuadrantes
+#Histograma regresiones ingreso vs tama√±o del hogar por cuadrantes
 
 d%>%ggplot(aes(x=tamhogesc, y=ing_mon, col=as.factor(cuadrantes))) + 
   geom_smooth(method="lm", size=1, se=FALSE) + 
   coord_cartesian(xlim=c(0, 19), ylim=c(0, 35000)) + 
   labs( y="Ingreso hogares",
-        x="TamaÒo hogar", caption="Por Cuadrante")
+        x="Tama√±o hogar", caption="Por Cuadrante")
 
 
 

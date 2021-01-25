@@ -20,20 +20,21 @@ library(kableExtra)
 library(stargazer)
 
 #importo los datos
+
 d<-read_csv("pobreza_18.csv")
-attach(d)
-
-#creo una variable del grupo 3 (mi objetivo)
-d.1<-d%>%mutate(y_3=ifelse(d$cuadrantes==3,1,0))
-attach(d.1)
-
-
-#1. Análisis correlaciones
-
-varscor<- data.frame(y_3,tam_loc,rururb,tamhogesc,ic_rezedu,
+d<-d%>%mutate(y_3=ifelse(d$cuadrantes==3,1,0))%>%
+  select(factor,y_3,tam_loc,rururb,tamhogesc,ic_rezedu,
                      ic_asalud,ic_segsoc,pea,jef_ss,
                      s_salud,isb_combus,ins_ali,ictpc,
                      carencias,ing_mon,ing_lab,ing_ren,ing_tra,ic_cv,ic_ali)
+d<-na.omit(d)
+d<-expandRows(d,'factor')
+
+
+##SAM, AHORA LOS DATOS AHORA ESTAN EXPANDIDOS Y FILTRADOS POR LAS COLUMNAS QUE ESTAMOS OCUPANDO
+#LA BASE DE DATOS QUE VAS A USAR SE LLAMA d
+
+
 
 cor_data<-as.data.frame(cor(varscor,use="complete.obs"))
 cor_data_filtered<-cor_data %>%select(y_3)
@@ -48,7 +49,7 @@ cor_data2<-as.data.frame(cor(varscor2,use="complete.obs"))
 cor_data_filtered<-cor_data2 %>%select(y_3)
 kable(cor_data_filtered,"simple")
 
-#Mío
+#M?o
 corrplot(cor(varscor,use="complete.obs"), method="circle")
 
 #Marco
@@ -66,16 +67,16 @@ varscor<-expandRows(varscor2,"factor")
 #1.5 Tabla Descriptivas (media, mediana,rango, sd)
 
 t1<-tableby(as.factor(cuadrantes)~.,data=varscor)
-l1<-list(plb="Ingreso < LB",s_salud="Servicios médicos",jef_ss="Acceso SS x jefatura",
-         rururb="Loc. Rural",ic_sbv="Carencia serv. básicos viv.", 
-         tam_loc="Tamaño loc.", ic_rezedu="Carencia rezago educativo",
+l1<-list(plb="Ingreso < LB",s_salud="Servicios m?dicos",jef_ss="Acceso SS x jefatura",
+         rururb="Loc. Rural",ic_sbv="Carencia serv. b?sicos viv.", 
+         tam_loc="Tama?o loc.", ic_rezedu="Carencia rezago educativo",
          ic_asalud="Carencia x acceso serv. salud",ic_cv="carencia x calidad y esp. vivienda",
-         isb_combus="Carencia acceso serv. combustible", ic_ali="Carencia acceso alimentación")
-t2<-summary(t1, title = "Estadísticas Descriptivas",labelTranslations = l1)
+         isb_combus="Carencia acceso serv. combustible", ic_ali="Carencia acceso alimentaci?n")
+t2<-summary(t1, title = "Estad?sticas Descriptivas",labelTranslations = l1)
 
 kable(t2,"simple")
 
-#2. Tablas cruzadas entre Cuadrantes y variables de interés
+#2. Tablas cruzadas entre Cuadrantes y variables de inter?s
 
 # s_salud 
 tabyl(d, show_na= FALSE,cuadrantes, s_salud) %>% adorn_totals(c("row", "col")) %>%
@@ -253,10 +254,10 @@ tabyl(d,show_na= FALSE, cuadrantes,ic_ali) %>% adorn_totals(c("row", "col")) %>%
   knitr::kable()
 
 ##############################################################
-#3. Datos cruzados y variables interés, en gráfico
+#3. Datos cruzados y variables inter?s, en gr?fico
 
 
-## cAMBIAR GRÁFICOS, CON %
+## cAMBIAR GR?FICOS, CON %
 
 PlotXTabs(d,s_salud,cuadrantes,plottype = "percent")
 PlotXTabs(d,jef_ss,cuadrantes,plottype = "percent")
@@ -268,7 +269,7 @@ PlotXTabs(d,ic_sbv,cuadrantes,plottype = "percent")
 
 PlotXTabs(d,tam_loc,cuadrantes,plottype = "percent")
 
-#Todos están en 0
+#Todos est?n en 0
 PlotXTabs(d,ic_rezedu,cuadrantes,plottype = "percent")
 #Todos 0
 PlotXTabs(d,ic_asalud,cuadrantes,plottype = "percent")
@@ -340,13 +341,13 @@ theme(
 )
 
 
-#Histograma regresiones ingreso vs tamaño del hogar por cuadrantes
+#Histograma regresiones ingreso vs tama?o del hogar por cuadrantes
 
 ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=tamhogesc, y=ing_mon, col=as.factor(cuadrantes))) + 
   geom_smooth(method="lm", size=1, se=FALSE) + 
   coord_cartesian(xlim=c(0, 19), ylim=c(0, 35000)) + 
   labs( y="Ingreso hogares",
-        x="Tamaño hogar", caption="Por Cuadrante")
+        x="Tama?o hogar", caption="Por Cuadrante")
 
 
 

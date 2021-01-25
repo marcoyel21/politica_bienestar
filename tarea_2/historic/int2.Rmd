@@ -1,0 +1,163 @@
+---
+title: "Descriptivas"
+author: "Equipo"
+date: "25/1/2021"
+output:
+  html_document:
+    df_print: paged
+---
+### Librerías e Importar datos
+
+```{r setup, include=FALSE}
+library(readr)
+library(dplyr)
+library(splitstackshape)
+library(corrplot)
+library(ggplot2)
+library(viridis)
+library(viridisLite)
+library(hrbrthemes)
+library(tidyr)
+library(gapminder)
+library(janitor)
+library(vtree)
+library(CGPfunctions)
+library(ggridges)
+library(arsenal)
+library(table1)
+library(kableExtra)
+library(stargazer)
+
+d<-read_csv("pobreza_18.csv")
+attach(d)
+
+```
+
+### Análisis de Correlaciones
+
+#Posibles relaciones
+
+Como comienzo, se realizó un análisis de correlaciones entre la pertenencia a  esta "clase media" (vulnerable en ingresos pero no en carencias por derechos sociales) y variables que se consideraron relacionadas con esta situación, como relacionadas a contar con un seguro médico (directa o indirectamente), aspectos geográficos (tamaño de localidad, estado, entorno urbano y rural), económicos (ser parte de la PEA), ingreso del hogar, y carencias de combustible, educación, servicios básicos del hogar, etc.
+
+Después de ver las correlaciones y después de revisar la literatura, se optó por el modelo ya mencionado, cuyas correlaciones con el "cuadrante 3" son las siguientes:
+
+#Modelo final
+```{r}
+d<-d%>%mutate(y_3=ifelse(d$cuadrantes==3,1,0))%>%
+  select(y_3,factor,plb,cuadrantes,s_salud,tamhogesc, jef_ss,ss_dir,rururb,
+                     ic_sbv,tam_loc ,ic_rezedu,ic_asalud ,
+                     ic_cv,isb_combus,ic_ali,ing_mon,ing_lab,ing_ren)
+
+corrplot(cor(d,use="complete.obs"), method="circle")
+```
+
+
+```{r}
+cor_data2<-as.data.frame(cor(d,use="complete.obs"))
+cor_data_filtered<-cor_data2 %>%select(y_3)
+kable(cor_data_filtered,"simple")
+```
+
+Donde las relaciones más claras son negativas con indicadores de carencias a servicios médicos y de educación. Como sabemos, esta población es vulnerable en ingresos, pero no en carencias en derechos sociales, por lo que este modelo parece adecuado. 
+
+### Tabla descriptivas
+
+Realizamos una tabla de estadísticas descriptivas con estadísticos básicos: media, rango, y desviación estándar. 
+
+```{r}
+t1<-tableby(as.factor(cuadrantes)~.,data=d)
+l1<-list(plb="Ingreso < LB",s_salud="Servicios médicos",jef_ss="Acceso SS x jefatura",
+         rururb="Loc. Rural",ic_sbv="Carencia serv. básicos viv.", 
+         tam_loc="Tamaño loc.", ic_rezedu="Carencia rezago educativo",
+         ic_asalud="Carencia x acceso serv. salud",ic_cv="carencia x calidad y esp. vivienda",
+         isb_combus="Carencia acceso serv. combustible", ic_ali="Carencia acceso alimentación")
+t2<-summary(t1, title = "Estadísticas Descriptivas",labelTranslations = l1)
+
+kable(t2,"simple")
+```
+
+Algunos aspectos que notamos del cuadrante 3 respecto a los otros son:
+* Mayor proporción de su población viviendo en localidades de menos de 2500 habitantes (y rural)
+* Antecedido por el cuadrante 1, tienen el mayor promedio de integrantes del hogar (4.1)
+* No cuentan con carencias educativas ni de salud, y junto con el cuadrante 4 tienen la mayor proporción de acceso a servicios médicos. 
+* La inseguridad alimentaria no es 0 pero es baja (respecto a los cuadrantes 1 y 2).
+*Tienen el menor promedio de ingreso per cápita y del hogar.
+
+
+### Datos cruzados cuadrantes y variables de interés 
+
+Para corroborar y ver con más detalle la relación entre los cuadrantes con las variables de interés dicotómicas (indicadores de carencias y accesos), generamos gráficos de barras mostrando al porcentaje de personas que sí o que no contaban con el atributo respectivo. Omitimos las gráficas de los indicadores de carencia por acceso a alimentación, a servicios de combustible, servicios básicos de vivienda y a servicios de salud; y a la carencia por rezago educativo debido a que el porcentaje de personas del cuadrante 3 con estas carencias era 0%. 
+
+```{r}
+PlotXTabs(d,s_salud,cuadrantes,plottype = "percent")
+PlotXTabs(d,jef_ss,cuadrantes,plottype = "percent")
+PlotXTabs(d,ss_dir,cuadrantes,plottype = "percent")
+PlotXTabs(d,rururb,cuadrantes,plottype = "percent")
+PlotXTabs(d,tam_loc,cuadrantes,plottype = "percent")
+```
+
+
+### Boxplots de ingresos monetarios por hogar por cuadrantes
+
+Luego se realizaron boxplots para observar el comportamiento del ingreso per cápita y de los hogares de los cuadrantes. 
+### Boxplot de ingreso per cápita por cuadrantes
+
+#```{r}
+ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=as.factor(cuadrantes), y=ictpc, fill=as.factor(cuadrantes))) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.6, option="A") +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  ggtitle("Ingreso per Cápita por Cuadrante") +
+  xlab("")+
+  ylim(0,7000)
+#```
+
+Podemos observar que los ingresos per cápita del cuadrante 3 son solo ligeramente mayores a los del 1, con menor varianza. 
+
+```{r}
+ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=as.factor(cuadrantes), y=ing_mon, fill=as.factor(cuadrantes))) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.6, option="A") +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  ggtitle("Ingreso por Cuadrante") +
+  xlab("")+
+  ylim(0,35000)
+```
+
+Se observa el mismo patrón en el de ingresos por hogar, aunque en este gráfico no se muestra tan distanciado del cuadrante 2.
+
+
+#### Ingreso laboral por cuadrantes: Cuentan con seguro social vs sin SS
+
+Para observar la relación entre servicios médicos e ingresos laborales realizamos este gráfico de barras. Notamos que las familias que cuentan con servicios médicos por contratación propia u otros medios tienen un ingreso laboral sustancialmente mayor. 
+
+```{r}
+ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=as.factor(cuadrantes),y=ing_lab))+geom_bar(stat='identity')+
+  facet_wrap(facets=vars(s_salud),scales="free_y")
+```
+
+### Regresión Tamaño del hogar vs Ingreso Monetario, por cuadrante
+
+Por último y con fines exploratorios, quisimos observar la relación entre tamaño del hogar, ingreso monetario de este y cuadrante. 
+
+```{r}
+ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=tamhogesc, y=ing_mon, col=as.factor(cuadrantes))) + 
+  geom_smooth(method="lm", size=1, se=FALSE) + 
+  coord_cartesian(xlim=c(0, 19), ylim=c(0, 35000)) + 
+  labs( y="Ingreso hogares",
+        x="Tamaño hogar", caption="Por Cuadrante")
+```
+
+Notamos comportamientos diferentes entre los grupos 2 y 4 (los que tienen ingresos mayores a la línea de pobreza) y el 1 y 3. El primer grupo tiene una pendiente mayor que los otros. Asimismo, el segundo grupo parece partir del mismo punto, pero a medida que el número de integrantes del hogar va creciendo, aumenta el ingreso más rápidamente. 
+
+
+
+

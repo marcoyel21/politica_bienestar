@@ -75,16 +75,19 @@ header-includes :
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-#instalo librerias
-list.of.packages <- c("ggplot2", "dplyr","ggthemes")
-new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages)
-
 #cargo librerias
 library(dplyr)
 library(ggplot2)
 library(ggthemes)
 library(kableExtra)
+
+library(readr)
+library(corrplot)
+
+#importo los datos
+data<-read_csv("muestra_idd.csv")
+
+
 ```
 
 # Metodología.
@@ -96,6 +99,35 @@ Para abordar este reto debemos realizar un investigación comprensiva que incluy
 En segundo lugar, debemos hacer una sintesis de ambos hallazgos con el fin de obtener la selección de variables final. En tercer lugar, procederemos a estimar un modelo logistico donde nuestra variable independiente es solamente una variable dicotómica que indica la pertenencia al cuadrante 3, nuestra población objetivo. En cuarto lugar, compararemos la clasificación que indica el modelo en contra de la clasificación original del CONEVAL. Finalmente, haremos una breve conclusión del ejercicio.
 
 # Estadística descriptiva.
+
+#. Estimación de modelo
+
+```{r}
+
+#Como la base de datos es muy grande, propongo una muestra aleatoria de tamaño n para "jugar"
+
+data_filtered<-data%>%select(y_3,plb, s_salud, jef_ss,ss_dir,
+                              rururb,ic_sbv,tam_loc ,ic_rezedu, 
+                               ic_asalud ,ic_cv,isb_combus,ic_ali)
+
+logitMod <- glm(y_3 ~ ., data=data_filtered, family=binomial(link="logit"))
+
+
+#Creo una función para generar matriz de confusión
+confusion.glm <- function(data, model) {
+  prediction <- ifelse(predict(model, data, type='response') > 0.5, TRUE, FALSE)
+  confusion  <- table(prediction, as.logical(model$y))
+  confusion  <- cbind(confusion, c(1 - confusion[1,1]/(confusion[1,1]+confusion[2,1]), 1 - confusion[2,2]/(confusion[2,2]+confusion[1,2])))
+  confusion  <- as.data.frame(confusion)
+  names(confusion) <- c('FALSE', 'TRUE', 'class.error')
+  confusion
+}
+
+#Genero la matriz de confusión
+confusion.glm(data_filtered,logitMod)
+
+```
+
 
 # Resultados.
 

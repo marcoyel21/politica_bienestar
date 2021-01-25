@@ -102,7 +102,7 @@ PlotXTabs(d,tam_loc,cuadrantes,plottype = "percent")
 Luego se realizaron boxplots para observar el comportamiento del ingreso per cápita y de los hogares de los cuadrantes. 
 ### Boxplot de ingreso per cápita por cuadrantes
 
-```{r}
+#```{r}
 ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=as.factor(cuadrantes), y=ictpc, fill=as.factor(cuadrantes))) +
   geom_boxplot() +
   scale_fill_viridis(discrete = TRUE, alpha=0.6, option="A") +
@@ -114,7 +114,7 @@ ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=as.factor(cuadrantes), y=ictpc, f
   ggtitle("Ingreso per Cápita por Cuadrante") +
   xlab("")+
   ylim(0,7000)
-```
+#```
 
 Podemos observar que los ingresos per cápita del cuadrante 3 son solo ligeramente mayores a los del 1, con menor varianza. 
 

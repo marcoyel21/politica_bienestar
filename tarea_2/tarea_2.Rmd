@@ -92,23 +92,58 @@ data<-read_csv("muestra_idd.csv")
 
 # Metodología.
 
-El proposito de esta tarea es desarrollar un nuevo índice (con base en el trabajo existente del CONEVAL) que pueda focalizar a un grupo específico de la clase media, aquellos que solamente tienen pobreza de ingresos, es decir que no presentan ninguna de las X carencias. Sin duda, este grupo es sumamente interesante y presenta un reto en cuanto a la focalización debido a dos razones: en primer lugar, debido a que es la población más pequeña dentro de los cuadrantes previamente delimitados por el Comité XXXX del CONEVAL, en este sentido el reto es que nuestro modelo sea lo suficientemente estricto como para no perder ninguna observación; en segundo lugar, porque es un grupo con características que se podrían conceptualizar como contradictorias.
+El proposito de esta tarea es desarrollar un nuevo índice (con base en el trabajo existente del CONEVAL) que pueda focalizar a un grupo específico de la clase media, aquellos que solamente tienen pobreza de ingresos, es decir, que no presentan ninguna de las carencias que el CONEVAL incluye en su índice. Sin duda, este grupo es sumamente interesante y presenta un reto en cuanto a la focalización debido a dos razones: en primer lugar, debido a que es la población más pequeña dentro de los cuadrantes previamente delimitados por el CONEVAL; en segundo lugar, porque es un grupo con características que se podrían conceptualizar como contradictorias. 
 
-Para abordar este reto debemos realizar un investigación comprensiva que incluya tanto exploración de las variables disponibles en las bases de datos pertinentes como también una revisión breve de literatura acerca de lo que se sabe de este grupo. Esto con el fin de tener tanto una perspectiva estadística pero también teórica del grupo. Por ello, decidimos hacer un análisis exploratorio de manera independiente y paralela a la revisión de liateratura con el objetivo de identificar las variables importantes, en donde esperemos que ambos caminos nos lleven a encontrar variables similares para posteriormente contrastar resultados.
+Para abordar la investigación, se  exploraron las variables disponibles en las bases de datos pertinentes y se llevó a cabo una revisión breve de literatura acerca de la caracterización de este grupo. Esto con el fin de tener tanto una perspectiva estadística pero también teórica del grupo. Se realizó una breve síntesis de ambos hallazgos con el fin de obtener la selección de variables final. 
 
-En segundo lugar, debemos hacer una sintesis de ambos hallazgos con el fin de obtener la selección de variables final. En tercer lugar, procederemos a estimar un modelo logistico donde nuestra variable independiente es solamente una variable dicotómica que indica la pertenencia al cuadrante 3, nuestra población objetivo. En cuarto lugar, compararemos la clasificación que indica el modelo en contra de la clasificación original del CONEVAL. Finalmente, haremos una breve conclusión del ejercicio.
+Posteriormente, se estimó un modelo logistico donde nuestra variable independiente es una variable dicotómica que indica la pertenencia al cuadrante 3, nuestra población objetivo, mientras que las regresoras fueron XXX. Por último, se realizó una matriz de confusión para comparar la clasificación del modelo propuesto contra la del CONEVAL. 
 
 # Estadística descriptiva.
 
+Primero se realizó un análisis de correlaciones entre la pertenencia a  esta "clase media" (vulnerable en ingresos pero no en carencias por derechos sociales) y variables que se consideraron relacionadas con esta situación, como relacionadas a contar con un seguro médico (directa o indirectamente), aspectos geográficos (tamaño de localidad, estado, entorno urbano y rural), económicos (ser parte de la PEA), ingreso del hogar, y carencias de combustible, educación, servicios básicos del hogar, etc.
+
+Después de ver las correlaciones y después de revisar la literatura, se optó por el modelo ya mencionado, cuyas correlaciones con el "cuadrante 3" son las siguientes:
+```{r}
+d<-d%>%mutate(y_3=ifelse(d$cuadrantes==3,1,0))%>%
+  select(y_3,factor,plb,cuadrantes,s_salud,tamhogesc, jef_ss,ss_dir,rururb,
+                     ic_sbv,tam_loc ,ic_rezedu,ic_asalud ,
+                     ic_cv,isb_combus,ic_ali,ing_mon,ing_lab,ing_ren)
+cor_data2<-as.data.frame(cor(d,use="complete.obs"))
+cor_data_filtered<-cor_data2 %>%select(y_3)
+kable(cor_data_filtered,"simple")
+```
+Donde las relaciones más claras son negativas con indicadores de carencias a servicios médicos y de educación. Como sabemos, esta población es vulnerable en ingresos, pero no en carencias en derechos sociales, por lo que este modelo parece adecuado. 
+
+Para corroborar y ver con más detalle la relación entre los cuadrantes con las variables de interés dicotómicas (indicadores de carencias y accesos), generamos gráficos de barras mostrando al porcentaje de personas que sí o que no contaban con el atributo respectivo. Omitimos las gráficas de los indicadores de carencia por acceso a alimentación, a servicios de combustible, servicios básicos de vivienda y a servicios de salud; y a la carencia por rezago educativo debido a que el porcentaje de personas del cuadrante 3 con estas carencias era 0%, como se esperaba para este grupo.
+
+```{r}
+PlotXTabs(d,s_salud,cuadrantes,plottype = "percent")
+PlotXTabs(d,jef_ss,cuadrantes,plottype = "percent")
+PlotXTabs(d,ss_dir,cuadrantes,plottype = "percent")
+PlotXTabs(d,rururb,cuadrantes,plottype = "percent")
+PlotXTabs(d,tam_loc,cuadrantes,plottype = "percent")
+```
+Para corroborar el nivel de ingresos de este grupo, realizamos un gráfico de caja y brazos para comparar los ingresos monetarios de los hogares de los cuatro cuadrantes. Se obtuvo: 
+
+```{r}
+ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=as.factor(cuadrantes), y=ing_mon, fill=as.factor(cuadrantes))) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.6, option="A") +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  ggtitle("Ingreso por Cuadrante") +
+  xlab("")+
+  ylim(0,35000)
+```
+Se puede observar que los ingresos son ligeramente mayores a los del grupo 1 (pobreza por ingresos y derechos sociales), con menor varianza. 
+
+# Resultados.
 #. Estimación de modelo
 
 ```{r}
-
-#Como la base de datos es muy grande, propongo una muestra aleatoria de tamaño n para "jugar"
-
-data_filtered<-data%>%select(y_3,plb, s_salud, jef_ss,ss_dir,
-                              rururb,ic_sbv,tam_loc ,ic_rezedu, 
-                               ic_asalud ,ic_cv,isb_combus,ic_ali)
 
 logitMod <- glm(y_3 ~ ., data=data_filtered, family=binomial(link="logit"))
 
@@ -127,10 +162,6 @@ confusion.glm <- function(data, model) {
 confusion.glm(data_filtered,logitMod)
 
 ```
-
-
-# Resultados.
-
 # Comparación.
 
 # Conclusiones.

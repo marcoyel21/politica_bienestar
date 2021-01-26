@@ -93,11 +93,7 @@ library(viridis)
 library(viridisLite)
 library(hrbrthemes)
 library(tidyr)
-library(gapminder)
-library(janitor)
-library(vtree)
 library(CGPfunctions)
-library(ggridges)
 library(arsenal)
 library(table1)
 library(kableExtra)
@@ -119,7 +115,7 @@ Posteriormente, se estimó un modelo logistico donde nuestra variable independie
 
 # Estadística descriptiva.
 
-En primer lugar exploraremos el nivel de ingresos de este grupo.Para ello, realizamos un gráfico de caja y brazos para comparar los ingresos monetarios de los hogares de los cuatro cuadrantes.
+En primer lugar exploraremos el nivel de ingresos de este grupo. Para ello, realizamos un gráfico de caja y brazos para comparar los ingresos monetarios de los hogares de los cuatro cuadrantes.
 
 ```{r, out.width= "60%",fig.align = 'center'}
 ggplot(data,aes(x=as.factor(cuadrantes), y=ing_mon, fill=as.factor(cuadrantes))) +

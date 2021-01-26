@@ -134,10 +134,12 @@ Esta gráfica es muy reveladora porque muestra que el promedio del ingreso monet
 Asimismo, para ver con más detalle la relación entre los cuadrantes con variables de interés dicotómicas (indicadores de carencias y accesos), generamos gráficos de barras mostrando al porcentaje de personas que sí o que no contaban con el atributo respectivo.^[En esta sección omitimos las gráficas de los indicadores de carencia por acceso a alimentación, a servicios de combustible, servicios básicos de vivienda y a servicios de salud; y a la carencia por rezago educativo debido a que el porcentaje de personas del cuadrante 3 con estas carencias era 0%, como se esperaba para este grupo.]
 
 ```{r, out.width= "60%",fig.align = 'center'}
-PlotXTabs(data,s_salud,cuadrantes,plottype = "percent")
-PlotXTabs(data,jef_ss,cuadrantes,plottype = "percent")
-PlotXTabs(data,ss_dir,cuadrantes,plottype = "percent")
-PlotXTabs(data,tam_loc,cuadrantes,plottype = "percent")
+
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(s_salud)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(jef_ss)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(ss_dir)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(tam_loc)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)
+
 ```
 
 En resumen, algunos aspectos que notamos del cuadrante 3 respecto a los otros son:
@@ -233,8 +235,14 @@ kable(tabla_2,booktabs=T,
 
 # Conclusiones.
 
-El grupo es predominantemente urbano
-Cuenta con caractersiticas como.....
+La población que se estudió, la perteneciente al cuadrante 3 de la clasificación de pobreza del CONEVAL, tiene una pobreza por ingresos, pero no por derechos sociales. En el primer aspecto se asemeja al 1° grupo, en lo segundo llega a niveles parecidos a los del 4°. Es difícil ubicarlos como clase baja, media, o alta, pero dadas sus características la clase media es más adecuada: es una población mayoritariamente urbana, con acceso a servicios de salud y sin rezago educativa, algo de lo que el cuadrante 1 no se puede jactar.
+
+Para comparar el índice propuesto con el del CONEVAL se optó por un logit. Este tenía como variable dependiente a una dummy que indicaba la pertenencia a este cuadrante (1) con la no pertenencia, usando a los otros indicadores como regresoras. 
+
+Dado lo que encontramos, el índice propuesto hace una focalización bastante acertada, ya que se aproxima a la del CONEVAL. Esto se puede observar en la matriz de confusión, ya que la coincidencia de clasificación de personas del cuadrante 3 vs. de otros cuadrantes es casi 100% acertada. 
+
+
+Este grupo es una fracción pequeña de la población mexicana, compuesta solo del 7%. Sin embargo, no debe ser desdeñada en la planeación y ejecución de los programas sociales, usualmente concentrados en atacar los niveles más fuertes de pobreza. Aunque cuenten con acceso a servicios básicos de salud, educación, y servicios básicos de vivienda, cuentan con un grado leve de inseguridad alimentaria, ingreso per cápita y familiar muy bajo, y el 48% es parte de la PNEA. 
 
 
 

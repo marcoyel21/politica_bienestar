@@ -118,6 +118,13 @@ PlotXTabs(data,jef_ss,cuadrantes,plottype = "percent")
 PlotXTabs(data,ss_dir,cuadrantes,plottype = "percent")
 PlotXTabs(data,tam_loc,cuadrantes,plottype = "percent")
 ```
+Algunos aspectos que notamos del cuadrante 3 respecto a los otros son:
+* Mayor proporción de su población viviendo en localidades de menos de 2500 habitantes (y rural)
+* Antecedido por el cuadrante 1, tienen el mayor promedio de integrantes del hogar (4.1)
+* No cuentan con carencias educativas ni de salud, y junto con el cuadrante 4 tienen la mayor proporción de acceso a servicios médicos. 
+* La inseguridad alimentaria no es 0 pero es baja (respecto a los cuadrantes 1 y 2).
+*Tienen el menor promedio de ingreso per cápita y del hogar.
+
 Para corroborar el nivel de ingresos de este grupo, realizamos un gráfico de caja y brazos para comparar los ingresos monetarios de los hogares de los cuatro cuadrantes. Se obtuvo: 
 
 ```{r}

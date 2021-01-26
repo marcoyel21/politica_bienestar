@@ -104,11 +104,7 @@ Primero se realizó un análisis de correlaciones entre la pertenencia a  esta "
 
 Después de ver las correlaciones y después de revisar la literatura, se optó por el modelo ya mencionado, cuyas correlaciones con el "cuadrante 3" son las siguientes:
 ```{r}
-d<-d%>%mutate(y_3=ifelse(d$cuadrantes==3,1,0))%>%
-  select(y_3,factor,plb,cuadrantes,s_salud,tamhogesc, jef_ss,ss_dir,rururb,
-                     ic_sbv,tam_loc ,ic_rezedu,ic_asalud ,
-                     ic_cv,isb_combus,ic_ali,ing_mon,ing_lab,ing_ren)
-cor_data2<-as.data.frame(cor(d,use="complete.obs"))
+cor_data2<-as.data.frame(cor(data))
 cor_data_filtered<-cor_data2 %>%select(y_3)
 kable(cor_data_filtered,"simple")
 ```
@@ -117,16 +113,15 @@ Donde las relaciones más claras son negativas con indicadores de carencias a se
 Para corroborar y ver con más detalle la relación entre los cuadrantes con las variables de interés dicotómicas (indicadores de carencias y accesos), generamos gráficos de barras mostrando al porcentaje de personas que sí o que no contaban con el atributo respectivo. Omitimos las gráficas de los indicadores de carencia por acceso a alimentación, a servicios de combustible, servicios básicos de vivienda y a servicios de salud; y a la carencia por rezago educativo debido a que el porcentaje de personas del cuadrante 3 con estas carencias era 0%, como se esperaba para este grupo.
 
 ```{r}
-PlotXTabs(d,s_salud,cuadrantes,plottype = "percent")
-PlotXTabs(d,jef_ss,cuadrantes,plottype = "percent")
-PlotXTabs(d,ss_dir,cuadrantes,plottype = "percent")
-PlotXTabs(d,rururb,cuadrantes,plottype = "percent")
-PlotXTabs(d,tam_loc,cuadrantes,plottype = "percent")
+PlotXTabs(data,s_salud,cuadrantes,plottype = "percent")
+PlotXTabs(data,jef_ss,cuadrantes,plottype = "percent")
+PlotXTabs(data,ss_dir,cuadrantes,plottype = "percent")
+PlotXTabs(data,tam_loc,cuadrantes,plottype = "percent")
 ```
 Para corroborar el nivel de ingresos de este grupo, realizamos un gráfico de caja y brazos para comparar los ingresos monetarios de los hogares de los cuatro cuadrantes. Se obtuvo: 
 
 ```{r}
-ggplot(data=subset(d,!is.na(cuadrantes)),aes(x=as.factor(cuadrantes), y=ing_mon, fill=as.factor(cuadrantes))) +
+ggplot(data,aes(x=as.factor(cuadrantes), y=ing_mon, fill=as.factor(cuadrantes))) +
   geom_boxplot() +
   scale_fill_viridis(discrete = TRUE, alpha=0.6, option="A") +
   theme_ipsum() +

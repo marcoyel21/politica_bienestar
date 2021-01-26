@@ -97,9 +97,9 @@ En el contexto del capítulo, un bien comerciado o *traded* se refiere a bienes 
 
 Mientras que el precio de los bienes comerciados tiende a converger,(y a aumentar con respecto a países pobres y disminuir frente a los ricos), los precios de los bienes no comerciados se definen de manera aislada, solo reflejando las condiciones de oferta y demanda locales. En este sentido, los bajos ingresos son el determinante principal de los precios bajos. En este sentido, los precios son baratos porque los países pobres suelen tener menores dotaciones de capital, menor productividad de la mano de obra, mayor proporción de mano de obra no calificada, y en consecuencia, menores salarios. 
 
-**Si los precios son menores, ¿los sueldos en países bajos podrían verse altos comparados con EEUU?**
+**Si los precios son menores, ¿los ingresos en países bajos podrían verse altos comparados con EEUU?**
 
-Finalmente, en cuanto a la tercer pregunta sobre PPP, no necesariamente porque en estos métodos de comparación se propone la comparación con bienes similares aunque no sean comerciados internacionalmente.
+Es probable que un país rico y productivo como Estados Unidos tenga una moneda más fuerte y mayores ingresos. Estos mayores ingresos, a su vez, hacen subir los precios de aquellos productos dentro del país que no son comercializados. Así, medido en términos de ingreso por tipo de cambio, un país rico se ve más rico de lo que realmente es, porque, no se está tomando en cuenta el hecho de que se enfrenta, en promedio, a precios internos más altos para los bienes no comercializados. Esta es la razón por la que las mediciones de la PPP suelen reducir el ingreso relativo de un país rico, lo que hace subir el ingreso relativo de un país pobre.
 
 # II.
 

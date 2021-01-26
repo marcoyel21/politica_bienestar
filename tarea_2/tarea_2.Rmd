@@ -121,7 +121,7 @@ ggplot(data,aes(x=as.factor(cuadrantes), y=ing_mon, fill=as.factor(cuadrantes)))
     legend.position="none",
     plot.title = element_text(size=11)
   ) +
-  ggtitle("Ingreso por Cuadrante") +
+  ggtitle("Ingreso monetario de los hogares por Cuadrante") +
   ylim(0,35000)
 ```
 
@@ -131,10 +131,10 @@ Asimismo, para ver con más detalle la relación entre los cuadrantes con variab
 
 ```{r, out.width= "60%",fig.align = 'center'}
 
-data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(s_salud)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)
-data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(jef_ss)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)
-data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(ss_dir)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)
-data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(tam_loc)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(s_salud)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Servicios médicos",x="Cuadrante", y="%")
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(jef_ss)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Acceso a seguro social por jefatura",x="Cuadrante", y="%")
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(ss_dir)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Acceso directo a seguro social",x="Cuadrante", y="%")
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(tam_loc)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Tamaño de localidad",x="Cuadrante", y="%")
 
 ```
 

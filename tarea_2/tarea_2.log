@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.17)  26 JAN 2021 02:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.17)  26 JAN 2021 02:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -527,6 +527,9 @@ File: l3backend-pdftex.def 2021-01-09 L3 backend support: PDF output (pdfTeX)
 ) (./tarea_2.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
+
+LaTeX Warning: Label `tab:unnamed-chunk-5' multiply defined.
+
 )
 \openout1 = `tarea_2.aux'.
 
@@ -793,6 +796,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [4 <./tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf> <./tarea_2_files/figure
 -latex/unnamed-chunk-2-4.pdf>]
 
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
 (fancyhdr)                \setlength{\headheight}{13.59999pt}.
@@ -800,18 +806,30 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[5] (./tarea_2.aux
+[5]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[6] (./tarea_2.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `tarea_2.out' has not changed.
-(rerunfilecheck)             Checksum: 8CF3F88C24AD2751FBB68B6E9FCBF2EC;592.
+(rerunfilecheck)             Checksum: 751E93BB1321331CC2E8E90727B36333;592.
  ) 
 Here is how much of TeX's memory you used:
- 14917 strings out of 481234
- 220785 string characters out of 5913670
- 543668 words of memory out of 5000000
- 31563 multiletter control sequences out of 15000+600000
+ 14923 strings out of 481234
+ 220882 string characters out of 5913670
+ 544766 words of memory out of 5000000
+ 31567 multiletter control sequences out of 15000+600000
  459561 words of font info for 68 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  71i,12n,74p,569b,415s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -829,10 +847,10 @@ marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/ma
 rcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/marc
 oyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/marc
 oyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on tarea_2.pdf (6 pages, 310869 bytes).
+Output written on tarea_2.pdf (7 pages, 312908 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
- 124 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
+ 161 PDF objects out of 1000 (max. 8388607)
+ 130 compressed objects within 2 object streams
+ 22 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

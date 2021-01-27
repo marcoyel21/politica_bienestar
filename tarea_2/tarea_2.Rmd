@@ -117,7 +117,7 @@ Según la literatura consultada, la clase media mexicana es un concepto muy elá
 
 Es por ello que la determinación de la clase media abarca una cuestión más allá de los criterios basados en ingresos, también deben tomarse en cuenta los rasgos distintivos de esta clase particular y tomar en consideración para cualquier análisis el hecho de que puede ser abordada desde distintos ángulos.
 
-Para la selección de varibles se tomaron en cuenta aquellas no ligadas a la subsistencia, sino que estuvieran en un ámbito por encima del consumo de bienes y servicios básicos que deben presentarse en todo hogar, pero con cierta restricción en cuanto al nivel de ingreso. Por ejemplo, XXX dice que blabla; por ootr lado XXXX dice que blabla...
+Para la selección de varibles se tomaron en cuenta aquellas no ligadas a la subsistencia, sino que estuvieran en un ámbito por encima del consumo de bienes y servicios básicos que deben presentarse en todo hogar, pero con cierta restricción en cuanto al nivel de ingreso.  A grandes rasgos, las variables más importantes que identicamos son....CYNTHIA
  
 
 # Estadística descriptiva.

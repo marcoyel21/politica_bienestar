@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.17)  26 JAN 2021 02:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.17)  26 JAN 2021 18:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -651,18 +651,23 @@ been already used, duplicate ignored
                    \relax 
 l.135 \newpage
                [1]
-Overfull \hbox (2.73898pt too wide) in paragraph at lines 151--157
-[]\T1/lmr/m/n/10.95 Para abor-dar la in-ves-ti-ga-ción, se ex-plo-ra-ron las va
--ria-bles dis-po-ni-bles en las ba-ses de da-tos per-ti-nen-tes
+Overfull \hbox (18.19275pt too wide) in paragraph at lines 151--156
+\T1/lmr/m/n/10.95 ca-rac-te-ri-za-ción de es-te gru-po; en se-gun-do lu-gar, te
+-nien-do una ru-ta se ex-plo-ra-ron las va-ria-bles dis-po-ni-bles
  []
 
-<tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf, id=42, 469.755pt x 325.215pt
->
-File: tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type pdf)
-<use tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf  used
- on input line 171.
-(pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
+
+Overfull \hbox (17.39899pt too wide) in paragraph at lines 157--164
+[]\T1/lmr/m/n/10.95 Posteriormente, se es-ti-mó un mo-de-lo lo-gis-ti-co don-de
+ nues-tra va-ria-ble in-de-pen-dien-te son las va-ria-bles que
+ []
+
+
+Overfull \hbox (24.10152pt too wide) in paragraph at lines 157--164
+\T1/lmr/m/n/10.95 con ``In-gre-so'',``Salud'',"Seguridad So-cial``,''Localidad`
+`,''Educación``,''Alimentacion``,''Energia``,''Servicios
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -671,84 +676,72 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[2 <./tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf>]
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-81.
+[2]
+<tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf, id=53, 469.755pt x 325.215pt
+>
+File: tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type pdf)
+<use tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf>
+Package pdftex.def Info: tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf  used
+ on input line 204.
+(pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
+14.
 (/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-81.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
+14.
 (/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-181.
+214.
 (/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-181.
+214.
 (/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 181.
+(Font)              <10.95> on input line 214.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 181.
+(Font)              <8> on input line 214.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 181.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 181
+(Font)              <6> on input line 214.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 214
 .
 (/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 181
+LaTeX Font Info:    Trying to load font information for U+msb on input line 214
 .
 (/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 186.
+(Font)              <9> on input line 219.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 186.
+(Font)              <5> on input line 219.
 
-Overfull \hbox (10.00758pt too wide) in paragraph at lines 178--187
+Overfull \hbox (10.00758pt too wide) in paragraph at lines 211--220
 []\T1/lmr/m/n/10.95 Asimismo, pa-ra ver con más de-ta-lle la re-la-ción en-tre 
 los cua-dran-tes con va-ria-bles de in-te-rés di-co-tó-mi-cas
  []
 
 
-Overfull \hbox (9.27808pt too wide) in paragraph at lines 178--187
+Overfull \hbox (9.27808pt too wide) in paragraph at lines 211--220
 \T1/lmr/m/n/10.95 (in-di-ca-do-res de ca-ren-cias y ac-ce-sos), ge-ne-ra-mos gr
 á-fi-cos de ba-rras mos-tran-do al por-cen-ta-je de per-so-nas
  []
 
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-88.
-(/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-<tarea_2_files/figure-latex/unnamed-chunk-2-1.pdf, id=58, 469.755pt x 325.215pt
+<tarea_2_files/figure-latex/unnamed-chunk-2-1.pdf, id=55, 469.755pt x 325.215pt
 >
 File: tarea_2_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
 <use tarea_2_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: tarea_2_files/figure-latex/unnamed-chunk-2-1.pdf  used
- on input line 192.
-(pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
-<tarea_2_files/figure-latex/unnamed-chunk-2-2.pdf, id=59, 469.755pt x 325.215pt
->
-File: tarea_2_files/figure-latex/unnamed-chunk-2-2.pdf Graphic file (type pdf)
-<use tarea_2_files/figure-latex/unnamed-chunk-2-2.pdf>
-Package pdftex.def Info: tarea_2_files/figure-latex/unnamed-chunk-2-2.pdf  used
- on input line 198.
-(pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
-<tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf, id=60, 469.755pt x 325.215pt
->
-File: tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf Graphic file (type pdf)
-<use tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf>
-Package pdftex.def Info: tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf  used
- on input line 204.
+ on input line 221.
 (pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -758,29 +751,52 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[3 <./tarea_2_files/figure-latex/unnamed-chunk-2-1.pdf> <./tarea_2_files/figure
--latex/unnamed-chunk-2-2.pdf>]
-<tarea_2_files/figure-latex/unnamed-chunk-2-4.pdf, id=80, 469.755pt x 325.215pt
+[3 <./tarea_2_files/figure-latex/unnamed-chunk-1-1.pdf>]
+<tarea_2_files/figure-latex/unnamed-chunk-2-2.pdf, id=71, 469.755pt x 325.215pt
+>
+File: tarea_2_files/figure-latex/unnamed-chunk-2-2.pdf Graphic file (type pdf)
+<use tarea_2_files/figure-latex/unnamed-chunk-2-2.pdf>
+Package pdftex.def Info: tarea_2_files/figure-latex/unnamed-chunk-2-2.pdf  used
+ on input line 223.
+(pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
+<tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf, id=72, 469.755pt x 325.215pt
+>
+File: tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf Graphic file (type pdf)
+<use tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf>
+Package pdftex.def Info: tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf  used
+ on input line 225.
+(pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
+<tarea_2_files/figure-latex/unnamed-chunk-2-4.pdf, id=73, 469.755pt x 325.215pt
 >
 File: tarea_2_files/figure-latex/unnamed-chunk-2-4.pdf Graphic file (type pdf)
 <use tarea_2_files/figure-latex/unnamed-chunk-2-4.pdf>
 Package pdftex.def Info: tarea_2_files/figure-latex/unnamed-chunk-2-4.pdf  used
- on input line 210.
+ on input line 227.
 (pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
 
-Overfull \hbox (7.57022pt too wide) in paragraph at lines 234--242
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[4 <./tarea_2_files/figure-latex/unnamed-chunk-2-1.pdf> <./tarea_2_files/figure
+-latex/unnamed-chunk-2-2.pdf> <./tarea_2_files/figure-latex/unnamed-chunk-2-3.p
+df>]
+Overfull \hbox (7.57022pt too wide) in paragraph at lines 250--258
 []\T1/lmr/m/n/10.95 Finalmente, se reali-zó un aná-li-sis de co-rre-la-cio-nes 
 en-tre la per-te-nen-cia a es-ta ``cla-se me-dia'' (vul-ne-ra-ble
  []
 
 
-Overfull \hbox (7.75693pt too wide) in paragraph at lines 234--242
+Overfull \hbox (7.75693pt too wide) in paragraph at lines 250--258
 \T1/lmr/m/n/10.95 en in-gre-sos pe-ro no en ca-ren-cias por de-re-chos so-cia-l
 es) y va-ria-bles que se con-si-de-ra-ron re-la-cio-na-das con
  []
 
 
-Overfull \hbox (53.10959pt too wide) in paragraph at lines 234--242
+Overfull \hbox (53.10959pt too wide) in paragraph at lines 250--258
 \T1/lmr/m/n/10.95 es-ta si-tua-ción, co-mo re-la-cio-na-das a con-tar con un se
 -gu-ro mé-di-co (di-rec-ta o in-di-rec-ta-men-te), as-pec-tos geo-grá-fi-cos
  []
@@ -793,8 +809,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[4 <./tarea_2_files/figure-latex/unnamed-chunk-2-3.pdf> <./tarea_2_files/figure
--latex/unnamed-chunk-2-4.pdf>]
+[5 <./tarea_2_files/figure-latex/unnamed-chunk-2-4.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -806,7 +824,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[5]
+[6]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
+59.
+(/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Overfull \hbox (7.36848pt too wide) in paragraph at lines 376--383
+[]\T1/lmr/m/n/10.95 Este gru-po es una frac-ción pe-que-ña de la po-bla-ción me
+-xi-ca-na, com-pues-ta so-lo del 7$ $%. Sin em-bar-go, no
+ []
+
+
+Overfull \hbox (7.78706pt too wide) in paragraph at lines 376--383
+\T1/lmr/m/n/10.95 de-be ser des-de-ña-da en la pla-nea-ción y eje-cu-ción de lo
+s pro-gra-mas so-cia-les, usual-men-te con-cen-tra-dos en
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -815,7 +849,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[6] (./tarea_2.aux
+[7]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[8] (./tarea_2.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
@@ -823,34 +866,34 @@ LaTeX Info: Redefining \% on input line 25.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `tarea_2.out' has not changed.
-(rerunfilecheck)             Checksum: 751E93BB1321331CC2E8E90727B36333;592.
+(rerunfilecheck)             Checksum: F744898B1D72776B83F81960C711F927;784.
  ) 
 Here is how much of TeX's memory you used:
- 14923 strings out of 481234
- 220882 string characters out of 5913670
- 544766 words of memory out of 5000000
- 31567 multiletter control sequences out of 15000+600000
- 459561 words of font info for 68 fonts, out of 8000000 for 9000
+ 14926 strings out of 481234
+ 221245 string characters out of 5913670
+ 545819 words of memory out of 5000000
+ 31566 multiletter control sequences out of 15000+600000
+ 459607 words of font info for 68 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 71i,12n,74p,569b,415s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/Users/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/
-Users/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/
-Users/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/
-Users/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</User
-s/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></User
-s/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></User
-s/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></Use
-rs/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Use
-rs/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></User
-s/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/
-marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/ma
-rcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/marc
-oyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/marc
-oyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on tarea_2.pdf (7 pages, 312908 bytes).
+ 71i,11n,74p,569b,415s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/Users/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{
+/Users/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Use
+rs/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Use
+rs/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Use
+rs/marcoyel21/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</Users/m
+arcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/m
+arcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/m
+arcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></Users/
+marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/
+marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/m
+arcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/mar
+coyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/marco
+yel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/marcoye
+l21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on tarea_2.pdf (9 pages, 292903 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 130 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 177 PDF objects out of 1000 (max. 8388607)
+ 145 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
+ 74 words of extra memory for PDF output out of 10000 (max. 10000000)
 

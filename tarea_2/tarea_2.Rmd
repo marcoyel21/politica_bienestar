@@ -105,36 +105,34 @@ data<-read_csv("muestra_idd.csv")
 
 El propósito de esta tarea es desarrollar un nuevo índice (con base en el trabajo existente del CONEVAL) que pueda focalizar a un grupo específico de la clase media: aquellos que solamente tienen pobreza de ingresos y que no presentan ninguna de las carencias que el CONEVAL incluye en su índice. Sin duda, este grupo es sumamente interesante y presenta un reto en cuanto a la focalización debido a dos razones: en primer lugar, debido a que es la población más pequeña dentro de los cuadrantes previamente delimitados por el CONEVAL; en segundo lugar, porque es un grupo con características que se podrían conceptualizar como contradictorias. 
 
-Para abordar la investigación, se exploraron las variables disponibles en las bases de datos pertinentes y se llevó a cabo una revisión breve de literatura acerca de la caracterización de este grupo. Esto con el fin de tener tanto una perspectiva estadística pero también teórica del grupo. Se realizó una breve síntesis de ambos hallazgos con el fin de obtener la selección de variables final. 
+Para abordar la investigación, primero se realizará una breve revisión de literatura acerca de la caracterización de este grupo; en segundo lugar, teniendo una ruta se exploraron las variables disponibles en las bases de datos pertinentes. Esto con el fin de tener tanto una perspectiva estadística pero también teórica del grupo. 
+
+Posteriormente, se estimó un modelo logistico donde nuestra variable independiente son las variables que encontramos pertinentes para focalizar a este grupo, a grandes rasgos son variables relacionadas con "Ingreso","Salud"," Seguridad Social","Localidad","Educación","Alimentacion","Energia","Servicios básicos", “Vivienda". Por último, se realizó una comparación con la clasificación realizada por el CONEVAL. 
+
+Cabe mencionar que para el análisis estadístico y estimación del modelo usamos una muestra aleatoria identificamente distribuida de tamaño 200,000 de la base de datos creada por el coneval "pobreza_18.csv". Esto debido al peso que tiene la base de datos una vez expandida por el factor de expansión.
+
+# Revisión literaria
 
 Según la literatura consultada, la clase media mexicana es un concepto muy elástico porque no hay un acuerdo generalizado para definirla y, por lo tanto, existe un grado de discrecionalidad al plantear investigaciones en torno a este concpeto. Su magnitud contempla a personas con ingresos muy distintos, es decir, con un amplio margen: una persona de clase media puede ser aquella que satisface sus necesidades mínimas, mientras que otra puede pertenecer a un sector relativamente acomodado en el que no solamente puede satisfacer sus necesidades básicas, sino además, tener un estilo de vida más elevado. 
 
 Es por ello que la determinación de la clase media abarca una cuestión más allá de los criterios basados en ingresos, también deben tomarse en cuenta los rasgos distintivos de esta clase particular y tomar en consideración para cualquier análisis el hecho de que puede ser abordada desde distintos ángulos.
 
-Como se señaló, en la elaboración de este índice nos enfocamos en aquella población con ingresos bajos pero sin carencias sociales, es por eso que varias de nuestras variables corresponden a los indicadores de carencias: carencia de rezago educativo, alimenticio, de servicios de combustible, de acceso a servicios de salud, de servicios básicos de la vivienda, así como de calidad y espacios de la vivienda. Además, al hablar de falta de carencias, implica que este grupo tiene acceso a seguridad social, la cual es una variable considerada en el análisis.
-
-Asimismo, la localidad se consideró como un buen indicador de este grupo en particular de clase media, toda vez que, acorde a la revisión de la literatura -lo cual fue corroborado posteriormente con nuestros resultados-, las clases medias se localizan mayormente en las zonas urbanas (si bien es posible que no haya causalidad, la correlación es positiva).
-
-Esto es, para la selección de varibles se tomaron en cuenta aquellas no ligadas a la subsistencia, sino que estuvieran en un ámbito por encima del consumo de bienes y servicios básicos que deben presentarse en todo hogar, pero con cierta restricción en cuanto al nivel de ingreso. 
-
-Posteriormente, se estimó un modelo logistico donde nuestra variable independiente es una variable dicotómica que indica la pertenencia al cuadrante 3, nuestra población objetivo, mientras que las regresoras fueron "Ingreso","Salud"," Seguridad Social","Localidad","Educación","Alimentacion","Energia","Servicios básicos", “Vivienda". 
-
-Por último, se realizó una comparación con la clasificación realizada por el CONEVAL. 
+Para la selección de varibles se tomaron en cuenta aquellas no ligadas a la subsistencia, sino que estuvieran en un ámbito por encima del consumo de bienes y servicios básicos que deben presentarse en todo hogar, pero con cierta restricción en cuanto al nivel de ingreso. Por ejemplo, XXX dice que blabla; por ootr lado XXXX dice que blabla...
+ 
 
 # Estadística descriptiva.
 
-En primer lugar exploraremos el nivel de ingresos de este grupo. Para ello, realizamos un gráfico de caja y brazos para comparar los ingresos monetarios de los hogares de los cuatro cuadrantes.
+En cuanto al análisis estadístico, en primer lugar exploraremos el nivel de ingresos de este grupo. Para ello, realizamos un gráfico de caja y brazos para comparar los ingresos monetarios de los hogares de los cuatro cuadrantes.
 
-```{r, out.width= "60%",fig.align = 'center'}
+```{r, out.width= "60%",fig.align = 'center',message=FALSE,warning=FALSE}
 ggplot(data,aes(x=as.factor(cuadrantes), y=ing_mon, fill=as.factor(cuadrantes))) +
   geom_boxplot() +
-  scale_fill_viridis(discrete = TRUE, alpha=0.6, option="A") +
   theme(
     legend.position="none",
     plot.title = element_text(size=11)
   ) +
   ggtitle("Ingreso monetario de los hogares por Cuadrante") +
-  ylim(0,35000)
+  ylim(0,35000)+ theme_economist() + scale_fill_economist()
 ```
 
 Esta gráfica es muy reveladora porque muestra que el promedio del ingreso monetario del grupo 3 es menor al del grupo 2. Es decir que a pesar de las carencias de los hogares en el grupo dos, estos hogares tienen un mayor ingreso monetario en promedio.
@@ -143,21 +141,20 @@ Asimismo, para ver con más detalle la relación entre los cuadrantes con variab
 
 ```{r, out.width= "60%",fig.align = 'center'}
 
-data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(s_salud)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Servicios médicos",x="Cuadrante", y="%")
-data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(jef_ss)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Acceso a seguro social por jefatura",x="Cuadrante", y="%")
-data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(ss_dir)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Acceso directo a seguro social",x="Cuadrante", y="%")
-data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(tam_loc)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Tamaño de localidad",x="Cuadrante", y="%")
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(s_salud)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Servicios médicos",x="Cuadrante", y="%")+ theme_economist() + scale_fill_economist()
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(jef_ss)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Acceso a seguro social por jefatura",x="Cuadrante", y="%")+ theme_economist() + scale_fill_economist()
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(ss_dir)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Acceso directo a seguro social",x="Cuadrante", y="%")+ theme_economist() + scale_fill_economist()
+data %>% ggplot(aes(x=factor(cuadrantes),fill=factor(tam_loc)))+geom_bar(position = "fill")+scale_y_continuous(name="%",labels=scales::percent)+labs(title="Tamaño de localidad",x="Cuadrante", y="%")+ theme_economist() + scale_fill_economist()
 
 ```
 
 En resumen, algunos aspectos que notamos del cuadrante 3 respecto a los otros son:
 
-* Habitan en localidades grandes y en general el patrón del tamaño de localidades se asemeja mucho al del cuadrante más rico en lugar de al de los cuadrantes 1 y 2. #cambiosam(la variable esta alrevez , 1 a 4 va de mayor a menor tamaño (yase, se mamaron))
+* Habitan en localidades grandes y en general el patrón del tamaño de localidades se asemeja mucho al del cuadrante más rico en lugar de al de los cuadrantes 1 y 2. 
 * Antecedido por el cuadrante 1, tienen el mayor promedio de integrantes del hogar (4.1)
 * No cuentan con carencias educativas ni de salud, y junto con el cuadrante 4 tienen la mayor proporción de acceso a servicios médicos. 
 * La inseguridad alimentaria no es 0 pero es baja (respecto a los cuadrantes 1 y 2).
 *Tienen el menor promedio de ingreso per cápita y del hogar.
-
 
 Finalmente, se realizó un análisis de correlaciones entre la pertenencia a esta "clase media" (vulnerable en ingresos pero no en carencias por derechos sociales) y variables que se consideraron relacionadas con esta situación, como relacionadas a contar con un seguro médico (directa o indirectamente), aspectos geográficos (tamaño de localidad, estado, entorno urbano y rural), económicos (ser parte de la PEA), ingreso del hogar, y carencias de combustible, educación, servicios básicos del hogar, etc. 
 
@@ -185,9 +182,12 @@ kable(t(data.frame(A,B,C,D,E,F,G,H,I)),booktabs=T, row.names = NA,
 
 ```
 
+Como se señaló, en la elaboración de este índice nos enfocamos en aquella población con ingresos bajos pero sin carencias sociales, es por eso que varias de nuestras variables corresponden a los indicadores de carencias: carencia de rezago educativo, alimenticio, de servicios de combustible, de acceso a servicios de salud, de servicios básicos de la vivienda, así como de calidad y espacios de la vivienda. Además, al hablar de falta de carencias, implica que este grupo tiene acceso a seguridad social, la cual es una variable considerada en el análisis. Asimismo, la localidad se consideró como un buen indicador de este grupo en particular de clase media, toda vez que, acorde a la revisión de la literatura -lo cual fue corroborado posteriormente con nuestros resultados-, las clases medias se localizan mayormente en las zonas urbanas (si bien es posible que no haya causalidad, la correlación es positiva).
+
+
 Asimismo, con dichas variables procedimos a estimar el respectivo modelo logístico
 
-$$ln(\frac{P(X)}{1-P(X)}) = \beta_0+\beta_1A+\beta_2B+\beta_3C+\beta_4D+\beta_5E+\beta_6F+\beta_7G+\beta_8H+\beta_9I$$
+$$ln(\frac{P(X)}{1-P(X)}) = \beta_0+\beta_1A+\beta_2B+\beta_3C+\beta_4D_1+\beta_5D_2+\beta_6D_3+\beta_7E+\beta_8F+\beta_9G+\beta_{10}H+\beta_{11}I$$
 
 Para probar el nivel de focalización, comparo la precisión de mi modelo con base en la clasificación del CONEVAL.
 
@@ -214,6 +214,7 @@ confusion.glm <- function(data, model) {
 
 
 ```
+
 # Comparación.
 
 Finalmente, realizamos una comparación de la focalización que logra nuestro indice comparando con la clasificación original del CONEVAL.
@@ -241,14 +242,14 @@ kable(tabla_2,booktabs=T,
 
 ```
 
+En cuanto al primer cuadro, la matriz de confusión podemos notar que en realidad focalizamos muy bien pues tenemos un error de tipo I y de tipo II muy pequeños. Como podemos notar, de los 12, 624 hogares del grupo 3 de la muestra de tamaño 200,000 (6.31%) logramos focalizar a 12,520, y solo perdimos 104 hogares, una cifra mínima considerando lo difícil que es focalizar a este grupo. Por otro lado, debido a este esfuerzo, clasificamos erroneamente como grupo 3 a 1,539 hogares (que son del resto de los grupos)
+
+
 # Conclusiones.
 
 La población que se estudió, la perteneciente al cuadrante 3 de la clasificación de pobreza del CONEVAL, tiene una pobreza por ingresos, pero no por derechos sociales. En el primer aspecto se asemeja al 1° grupo, en lo segundo llega a niveles parecidos a los del 4°. Es difícil ubicarlos como clase baja, media, o alta, pero dadas sus características la clase media es más adecuada: es una población mayoritariamente urbana, con acceso a servicios de salud y sin rezago educativa, algo de lo que el cuadrante 1 no se puede jactar.
 
-Para comparar el índice propuesto con el del CONEVAL se optó por un logit. Este tenía como variable dependiente a una dummy que indicaba la pertenencia a este cuadrante (1) con la no pertenencia, usando a los otros indicadores como regresoras. 
-
-Dado lo que encontramos, el índice propuesto hace una focalización bastante acertada, ya que se aproxima a la del CONEVAL. Esto se puede observar en la matriz de confusión, ya que la coincidencia de clasificación de personas del cuadrante 3 vs. de otros cuadrantes es casi 100% acertada. 
-
+Para comparar el índice propuesto con el del CONEVAL se optó por un modelo logístico Este tenía como variable dependiente a una dummy que indicaba la pertenencia a este cuadrante (1) con la no pertenencia, usando a los otros indicadores como regresoras. Nos separamos del indice tradicional por usar variables un poco menos relacionadas con la pobreza absoluta y más con un perfil particular del hogar urbano.Dado lo que encontramos, el índice propuesto hace una focalización bastante acertada, ya que se aproxima a la del CONEVAL. Esto se puede observar en la matriz de confusión y en la tabla de focalización. 
 
 Este grupo es una fracción pequeña de la población mexicana, compuesta solo del 7%. Sin embargo, no debe ser desdeñada en la planeación y ejecución de los programas sociales, usualmente concentrados en atacar los niveles más fuertes de pobreza. Aunque cuenten con acceso a servicios básicos de salud, educación, y servicios básicos de vivienda, cuentan con un grado leve de inseguridad alimentaria, ingreso per cápita y familiar muy bajo, y el 48% es parte de la PNEA. 
 

@@ -117,7 +117,9 @@ Según la literatura consultada, la clase media mexicana es un concepto muy elá
 
 Es por ello que la determinación de la clase media abarca una cuestión más allá de los criterios basados en ingresos, también deben tomarse en cuenta los rasgos distintivos de esta clase particular y tomar en consideración para cualquier análisis el hecho de que puede ser abordada desde distintos ángulos.
 
-Para la selección de varibles se tomaron en cuenta aquellas no ligadas a la subsistencia, sino que estuvieran en un ámbito por encima del consumo de bienes y servicios básicos que deben presentarse en todo hogar, pero con cierta restricción en cuanto al nivel de ingreso.  A grandes rasgos, las variables más importantes que identicamos son....CYNTHIA
+Para la selección de varibles se tomaron en cuenta aquellas no ligadas a la subsistencia, sino que estuvieran en un ámbito por encima del consumo de bienes y servicios básicos que deben presentarse en todo hogar, pero con cierta restricción en cuanto al nivel de ingreso. A grandes rasgos, las variables más importantes que resaltan para la elaboración de un índie de la clase media, se identificaron a través de la revisión de distintos estudios. De acuerdo con mediciones efectuadas por el INEGI [@MediciónINEGI] tres cuartas partes de los millones de hogares y personas que conforman la clase media, se ubican en el ámbito urbano; es decir, el 75% de este estrato social, por tanto, la localidad resulta una variable de interés.
+
+Asimismo, en ese estudio [@MediciónINEGI] se destaca que los hogares clasificados como clase media gastan alrededor de 4400 pesos al trimestre en el consumo de alimentos y bebidas fuera del hogar, por lo que es posible desprender que no tienen carencia alimentaria. Además, es factible que el hogar de clase media lo encabece alguien que cuente al menos, con educación media superior [@MediciónINEGI], de manera que también la educación es una variable con poder discriminante para la clase media. 
  
 
 # Estadística descriptiva.

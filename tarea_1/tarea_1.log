@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.17)  22 JAN 2021 13:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.1.17)  26 JAN 2021 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -648,17 +648,6 @@ been already used, duplicate ignored
                    \relax 
 l.135 \newpage
                [1]
-Overfull \hbox (1.2783pt too wide) in paragraph at lines 170--173
-[]\T1/lmr/m/n/10.95 Finalmente, en cuan-to a la ter-cer pre-gun-ta so-bre PPP, 
-no ne-ce-sa-ria-men-te por-que en es-tos mé-to-dos de
- []
-
-
-Overfull \hbox (41.79033pt too wide) in paragraph at lines 170--173
-\T1/lmr/m/n/10.95 com-pa-ra-ción se pro-po-ne la com-pa-ra-ción con bie-nes si-
-mi-la-res aun-que no sean co-mer-cia-dos in-ter-na-cio-nal-men-te. 
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -723,7 +712,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3]
-<tarea_1_files/figure-latex/unnamed-chunk-1-1.pdf, id=73, 469.755pt x 325.215pt
+<tarea_1_files/figure-latex/unnamed-chunk-1-1.pdf, id=67, 469.755pt x 325.215pt
 >
 File: tarea_1_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type pdf)
 <use tarea_1_files/figure-latex/unnamed-chunk-1-1.pdf>
@@ -777,19 +766,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [5 <./tarea_1_files/figure-latex/unnamed-chunk-1-1.pdf>]
-Overfull \hbox (4.41982pt too wide) in paragraph at lines 318--323
+Overfull \hbox (4.41982pt too wide) in paragraph at lines 316--321
 \T1/lmr/m/n/10.95 se-xual y de-re-chos re-pro-duc-ti-vos efec-ti-vos. Fi-nal-me
 n-te, se po-dría de-ber tam-bién fac-to-res es-truc-tu-ra-les,
  []
 
 
-Overfull \hbox (4.08311pt too wide) in paragraph at lines 331--336
+Overfull \hbox (4.08311pt too wide) in paragraph at lines 329--334
 \T1/lmr/m/n/10.95 al-to in-gre-so tan-to en paí-ses po-bres co-mo en paí-ses ri
 -cos. Asi-mis-mo, exis-ten poí-ses pre-do-mi-nan-te-men-te
  []
 
 
-Overfull \hbox (17.15692pt too wide) in paragraph at lines 331--336
+Overfull \hbox (17.15692pt too wide) in paragraph at lines 329--334
 \T1/lmr/m/n/10.95 ru-ra-les de in-gre-so al-to, co-mo Nue-va Ze-lan-da, y paí-s
 es pre-do-mi-nan-te-men-te ur-ba-nos de in-gre-so ba-jo, co-mo
  []
@@ -807,13 +796,13 @@ LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
 Package rerunfilecheck Info: File `tarea_1.out' has not changed.
-(rerunfilecheck)             Checksum: AFA9F27EA43C82C6BFBE06ACDFE42D06;485.
+(rerunfilecheck)             Checksum: 13CC5EDF2604BF170531F6DAE96F5410;386.
  ) 
 Here is how much of TeX's memory you used:
- 14882 strings out of 481234
- 218972 string characters out of 5913670
- 554761 words of memory out of 5000000
- 31526 multiletter control sequences out of 15000+600000
+ 14878 strings out of 481234
+ 218926 string characters out of 5913670
+ 554727 words of memory out of 5000000
+ 31524 multiletter control sequences out of 15000+600000
  479823 words of font info for 84 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  71i,12n,74p,569b,480s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -829,10 +818,10 @@ ers/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Use
 rs/marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users
 /marcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr9.pfb></Users/m
 arcoyel21/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
-Output written on tarea_1.pdf (7 pages, 199660 bytes).
+Output written on tarea_1.pdf (7 pages, 199402 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 115 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 131 PDF objects out of 1000 (max. 8388607)
+ 109 compressed objects within 2 object streams
+ 22 named destinations out of 1000 (max. 500000)
+ 54 words of extra memory for PDF output out of 10000 (max. 10000000)
 

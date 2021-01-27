@@ -274,7 +274,7 @@ Este grupo es una fracción pequeña de la población mexicana, compuesta solo d
 
 # Parte II. Medios de verificación
 
-En esta sección contestamos la segunda parte de la tarea con base en la información investigada sobre políticas públicas y su focalización. Optamos por políticas contemporáneas como por ejemplo Jóvenes construyendo el futuro[@construyendo], el Programa para el Bienestar de las Personas con Discapacidad[@discapacidad], Sembrando vidar[@sembrando], Jóvenes escribiendo el futuro[@jovenes]y el programa de Créditos a la palabra[@creditos].
+En esta sección contestamos la segunda parte de la tarea con base en la información investigada sobre políticas públicas y su focalización. Optamos por políticas contemporáneas como por ejemplo *Jóvenes construyendo el futuro*[@construyendo], el *Programa para el Bienestar de las Personas con Discapacidad*[@discapacidad], *Sembrando vida*[@sembrando], *Jóvenes escribiendo el futur*o[@jovenes]y el programa de *Créditos a la palabra*[@creditos].
 
 \newpage
 

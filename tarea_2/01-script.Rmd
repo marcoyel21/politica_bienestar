@@ -1,9 +1,13 @@
 ---
 output:
-  pdf_document: default
-geometry: margin=1in
+  pdf_document:
+    latex_engine: xelatex
+  geometry: margin=1in
 fontsize: 11pt
+bibliography: tarea_politica_bienestar.bib
+csl: "mi_chicago.csl"
 header-includes :
+  \usepackage{pdflscape}
   \usepackage{geometry}
   \usepackage{graphicx}
   \tolerance=1
@@ -17,6 +21,7 @@ header-includes :
   \pagestyle{fancy}
   \fancyhead[L]{Maestría en Economía Aplicada}
   \fancyhead[R]{ITAM}
+
 ---
 \begin{titlepage}
 \begin{center}
@@ -101,7 +106,9 @@ data<-read_csv("muestra_idd.csv")
 
 ```
 
-# Metodología.
+# Parte I. Indice
+
+## Metodología.
 
 El propósito de esta tarea es desarrollar un nuevo índice (con base en el trabajo existente del CONEVAL) que pueda focalizar a un grupo específico de la clase media: aquellos que solamente tienen pobreza de ingresos y que no presentan ninguna de las carencias que el CONEVAL incluye en su índice. Sin duda, este grupo es sumamente interesante y presenta un reto en cuanto a la focalización debido a dos razones: en primer lugar, debido a que es la población más pequeña dentro de los cuadrantes previamente delimitados por el CONEVAL; en segundo lugar, porque es un grupo con características que se podrían conceptualizar como contradictorias. 
 
@@ -111,7 +118,7 @@ Posteriormente, se estimó un modelo logistico donde nuestra variable independie
 
 Cabe mencionar que para el análisis estadístico y estimación del modelo usamos una muestra aleatoria identificamente distribuida de tamaño 200,000 de la base de datos creada por el coneval "pobreza_18.csv". Esto debido al peso que tiene la base de datos una vez expandida por el factor de expansión.
 
-# Revisión literaria
+## Revisión literaria
 
 Según la literatura consultada, la clase media mexicana es un concepto muy elástico[@Lopez-Calva2012] porque no hay un acuerdo generalizado para definirla y, por lo tanto, existe un grado de discrecionalidad al plantear investigaciones en torno a este concepto. Su magnitud contempla a personas con ingresos muy distintos, es decir, con un amplio margen: una persona de clase media puede ser aquella que satisface sus necesidades mínimas, mientras que otra puede pertenecer a un sector relativamente acomodado en el que no solamente puede satisfacer sus necesidades básicas, sino además, tener un estilo de vida más elevado. 
 
@@ -121,13 +128,16 @@ Para la selección de varibles se tomaron en cuenta aquellas no ligadas a la sub
 
 De acuerdo con mediciones efectuadas por el INEGI [@INEGI2010] tres cuartas partes de los millones de hogares y personas que conforman la clase media, se ubican en el ámbito urbano; es decir, el 75% de este estrato social, por tanto, la localidad resulta una variable de interés. Como refuerzo a lo anterior, en [@boniolo2015] se estipula que el territorio determina el acceso a diferentes oportunidades, estilos de vida, instituciones educativas, entre otros.
 
-Por otro lado, en el estudio [@INEGI2010] se destaca que los hogares clasificados como clase media gastan alrededor de 4400 pesos al trimestre en el consumo de alimentos y bebidas fuera del hogar, por lo que es posible desprender que no tienen carencia alimentaria. Además, es factible que el hogar de clase media lo encabece alguien que cuente al menos, con educación media superior [@INEGI]2010, de manera que también la educación es una variable con poder discriminante para la clase media. 
+Por otro lado, en el estudio [@INEGI2010] se destaca que los hogares clasificados como clase media gastan alrededor de 4400 pesos al trimestre en el consumo de alimentos y bebidas fuera del hogar, por lo que es posible
+desprender que no tienen carencia alimentaria. Además, es factible que el hogar de clase media lo encabece alguien que cuente al menos, con educación media superior [@INEGI2010], de manera que también la educación es una variable con poder discriminante para la clase media. 
 
 Ahora bien, de acuerdo con una investigación efectuada en el Centro de Estudios Espinosa Yglesias [@CEYY], para la determinación de criterios que acoten la clase en media en México, se requiere que se considere no sólo el ingreso per cápita sino también distintas variables indicativas del nivel de vida de las familias, tales como el nivel de escolaridad, es decir, la educación; de hecho, en esta investigación se señala que los integrantes de la “nueva clase media” cuentan con alto capital humano pero baja riqueza relativa. 
 
 En cuanto a la calidad de la vivienda, en [@boniolo2015] se especifica que las condiciones socio-habitacionales de cada hogar son deetrminantes de su estrato social y que el grado de habitabilidad depende de la construcción, el mantenimiento y mejoramiento del interior y la estructura del inmueble que están a cargo del propietario o de quienes lo usan. Asimismo, se resalta que es de interés las condiciones de vida en las que viven las personas, esto es, los serivicios básicos con los que cuentan.
 
-# Estadística descriptiva.
+ 
+
+## Estadística descriptiva.
 
 En cuanto al análisis estadístico, en primer lugar exploraremos el nivel de ingresos de este grupo. Para ello, realizamos un gráfico de caja y brazos para comparar los ingresos monetarios de los hogares de los cuatro cuadrantes.
 
@@ -166,7 +176,7 @@ En resumen, algunos aspectos que notamos del cuadrante 3 respecto a los otros so
 Finalmente, se realizó un análisis de correlaciones entre la pertenencia a esta "clase media" (vulnerable en ingresos pero no en carencias por derechos sociales) y variables que se consideraron relacionadas con esta situación, como relacionadas a contar con un seguro médico (directa o indirectamente), aspectos geográficos (tamaño de localidad, estado, entorno urbano y rural), económicos (ser parte de la PEA), ingreso del hogar, y carencias de combustible, educación, servicios básicos del hogar, etc. 
 
 
-# Modelo y Resultados.
+## Modelo y Resultados.
 
 Con base en el análisis estadístico y la revisión de literatura, propusimos un nuevo índice compuesto por las siguientes variables dicotómicas y una categórica (localidad):
 
@@ -222,7 +232,7 @@ confusion.glm <- function(data, model) {
 
 ```
 
-# Comparación.
+## Comparación.
 
 Finalmente, realizamos una comparación de la focalización que logra nuestro indice comparando con la clasificación original del CONEVAL.
 
@@ -252,7 +262,7 @@ kable(tabla_2,booktabs=T,
 En cuanto al primer cuadro, la matriz de confusión podemos notar que en realidad focalizamos muy bien pues tenemos un error de tipo I y de tipo II muy pequeños. Como podemos notar, de los 12, 624 hogares del grupo 3 de la muestra de tamaño 200,000 (6.31%) logramos focalizar a 12,520, y solo perdimos 104 hogares, una cifra mínima considerando lo difícil que es focalizar a este grupo. Por otro lado, debido a este esfuerzo, clasificamos erroneamente como grupo 3 a 1,539 hogares (que son del resto de los grupos)
 
 
-# Conclusiones.
+## Conclusiones.
 
 La población que se estudió, la perteneciente al cuadrante 3 de la clasificación de pobreza del CONEVAL, tiene una pobreza por ingresos, pero no por derechos sociales. En el primer aspecto se asemeja al 1° grupo, en lo segundo llega a niveles parecidos a los del 4°. Es difícil ubicarlos como clase baja, media, o alta, pero dadas sus características la clase media es más adecuada: es una población mayoritariamente urbana, con acceso a servicios de salud y sin rezago educativa, algo de lo que el cuadrante 1 no se puede jactar.
 
@@ -260,6 +270,41 @@ Para comparar el índice propuesto con el del CONEVAL se optó por un modelo log
 
 Este grupo es una fracción pequeña de la población mexicana, compuesta solo del 7%. Sin embargo, no debe ser desdeñada en la planeación y ejecución de los programas sociales, usualmente concentrados en atacar los niveles más fuertes de pobreza. Aunque cuenten con acceso a servicios básicos de salud, educación, y servicios básicos de vivienda, cuentan con un grado leve de inseguridad alimentaria, ingreso per cápita y familiar muy bajo, y el 48% es parte de la PNEA. 
 
+\newpage
+
+# Parte II. Medios de verificación
+
+En esta sección contestamos la segunda parte de la tarea con base en la información investigada sobre políticas públicas y su focalización. Optamos por políticas contemporáneas como por ejemplo Jóvenes construyendo el futuro[@construyendo], el Programa para el Bienestar de las Personas con Discapacidad[@discapacidad], Sembrando vidar[@sembrando], Jóvenes escribiendo el futuro[@jovenes]y el programa de Créditos a la palabra[@creditos].
+
+\newpage
+
+\begin{landscape}
 
 
+
+```{r longwide, results="asis"}
+
+A<-c("Jóvenes construyendo el futuro (Programa de la Secretaria del Trabajo y Previsión Social)","Comprobación de medios directa","Jóvenes de 18 a 29 años que no estudian y no trabajan al momento de incorporación del programa","Nacional aunque se da prioridad a zonas indígenas, de mayor grado de marginación y de altos índices de violencia","") 
+B<-c("Programa para el Bienestar de las Personas con Discapacidad (Programa de la Secretaría del Bienestar)","Para efectos de comprobación, los benficiarios deberán, personalmente o a través de su adulto auxiliar, proporcionar la documentación con la que se acredite el cumplimiento de los requisitos de acceso y los datos que le sean requeridos, durante el cotejo de los datos. Entre otros requisitos: Documento que acredite la discapacidad permanente, emitido por alguna institución pública del sector de salud federal, estatal o municipal.","Niños, jóvenes con discapacidad permanente de cero a 29 años; personas indígenas de 30 a 64 años de edad, adultos con Discapacidad Permanente de 30 a 67 años de edad","Zonas de población mayoritariamente indígena, zonas con mayor marginación o zonas con altos índices de violencia",""
+) 
+
+C<-c("Sembrando vida (Programa de la Secretaria del Trabajo y Previsión Social)","","Sujetos agrarios mayores de edad que habitan en localidades rurales, cuyo ingreso es inferior a la línea de bienestar rural","Propietarios o poseedores de 2.5 hectáreas disponibles para ser trabajadas en un proyecto agroforestal.","") 
+
+D<-c("Jóvenes escribiendo el futuro (Programa de la Secretaría de Educación Pública)","","Alumnos inscritos en alguna Institución Pública de Educación Superior, que tengan hasta 29 años cumplidos al 31 de diciembre del año en curso y se encuentren en condiciones de pobreza,","","") 
+
+E<-c("Créditos a la palabra (Programa de la Secretaría del Bienestar)","","","", "Para empresas familiares de personas registradas en el Censo del Bienestar") 
+
+
+kable(t(data.frame(A,B,C,D,E)),booktabs=T, col.names = c(
+"Programas","Medios de Vida","Demográfica","Geográfica", "Autofocalización"),longtable=T)%>%
+  column_spec(2:6, width = "16em")%>%
+  column_spec(1, width = "1em")%>% 
+  kable_styling(latex_options = c("repeat_header"), font_size = 7)%>%
+ row_spec(1:5, hline_after = T)
+```
+
+
+\end{landscape} 
+
+# Referencias
 

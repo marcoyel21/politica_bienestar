@@ -113,7 +113,7 @@ Cabe mencionar que para el análisis estadístico y estimación del modelo usamo
 
 # Revisión literaria
 
-Según la literatura consultada, la clase media mexicana es un concepto muy elástico porque no hay un acuerdo generalizado para definirla y, por lo tanto, existe un grado de discrecionalidad al plantear investigaciones en torno a este concpeto. Su magnitud contempla a personas con ingresos muy distintos, es decir, con un amplio margen: una persona de clase media puede ser aquella que satisface sus necesidades mínimas, mientras que otra puede pertenecer a un sector relativamente acomodado en el que no solamente puede satisfacer sus necesidades básicas, sino además, tener un estilo de vida más elevado. 
+Según la literatura consultada, la clase media mexicana es un concepto muy elástico[Lopez-Calva2012] porque no hay un acuerdo generalizado para definirla y, por lo tanto, existe un grado de discrecionalidad al plantear investigaciones en torno a este concepto. Su magnitud contempla a personas con ingresos muy distintos, es decir, con un amplio margen: una persona de clase media puede ser aquella que satisface sus necesidades mínimas, mientras que otra puede pertenecer a un sector relativamente acomodado en el que no solamente puede satisfacer sus necesidades básicas, sino además, tener un estilo de vida más elevado. 
 
 Es por ello que la determinación de la clase media abarca una cuestión más allá de los criterios basados en ingresos, también deben tomarse en cuenta los rasgos distintivos de esta clase particular y tomar en consideración para cualquier análisis el hecho de que puede ser abordada desde distintos ángulos.
 

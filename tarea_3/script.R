@@ -39,9 +39,6 @@ data_2<- data_2%>%
 
 #Parte III: modelaje
 
-install.packages("plm")
-library(plm)
-
 # Modelo 2: Efectos fijos
 
 
@@ -91,7 +88,9 @@ summary(efectos_fijos_region_2)
 
 # Finalmente, si solo dejamos un efecto fijo para el tiempo y usamos region en lugar de un efecto fijo para cada país, obtenemos un modelo con la R^2 más alta (aunque sigue siendo diminuta)
 
-
+#CONCLUSION MODELOS EFECTOS FIJOS:
+# Definitivamente un efecto fijo por el tiempo no es necesario; en cambio podemos optar por un efecto fijo para cada país. Asimismo la variable región otorga mejor r^2 que el efecto fijo de pais
+# En resumen, la variable que debe acompañar a gini es region sin efectos fijos para tiempo ni para país-
 
 # Modelo 3: Efectos aleatorios
 

@@ -30,20 +30,18 @@ ols_A <- lm(lnc  ~ lnrp+lnrpn+lnrdi,
 ols_with_D <- lm(lnc  ~ lnrp+lnrpn+lnrdi+factor(yr), 
             data = data)
 
-ols_Z_and_D <- lm(lnc  ~ lnrp+lnrpn+lnrdi+factor(yr)+factor(state), 
+ols_Z_and_D <- lm(lnc  ~ lnrp+lnrpn+lnrdi+factor(yr)+lnpop16, 
             data = data)
 
-within <- plm( lnc  ~ lnrp+lnrpn+lnrdi, 
+within <- plm( lnc  ~ lnrp+lnrpn+lnrdi+factor(yr), 
                              data = data,
                              index = c("state", "yr"), 
-                             model = "within",
-                             effect = "twoways")
+                             model = "within")
 
-random <- plm( lnc  ~ lnrp+lnrpn+lnrdi, 
+random <- plm( lnc  ~ lnrp+lnrpn+lnrdi+factor(yr), 
           data = data,
           index = c("state", "yr"), 
-          model = "random",
-          effect = "individual")
+          model = "random")
 
 stargazer(ols_A, ols_with_D, ols_Z_and_D, within, random, title="Results",type="html", out="test.html", out.header=TRUE,
           column.sep.width = "3pt", 
@@ -56,32 +54,30 @@ stargazer(ols_A, ols_with_D, ols_Z_and_D, within, random, title="Results",type="
 # Modelos Short Run
 
 ```{r, results='asis', message=F}
-#Modelo 1: OLS
 
-ols_A <- lm(lnc  ~ lag(lnc)+lnrp+lnrpn+lnrdi, 
+
+ols_A <- lm(lnc  ~ lncl+lnrp+lnrpn+lnrdi, 
             data = data)
 
-ols_with_D <- lm(lnc  ~ lag(lnc)+lnrp+lnrpn+lnrdi+factor(yr), 
+ols_with_D <- lm(lnc  ~ lncl+lnrp+lnrpn+lnrdi+factor(yr), 
             data = data)
 
-ols_Z_and_D <- lm(lnc  ~ lag(lnc)+lnrp+lnrpn+lnrdi+factor(yr)+factor(state), 
+ols_Z_and_D <- lm(lnc  ~ lncl+lnrp+lnrpn+lnrdi+factor(yr)+lnpop16, 
             data = data)
 
-within <- plm( lnc  ~ lag(lnc)+lnrp+lnrpn+lnrdi+lnpop16, 
+within <- plm( lnc  ~ lncl+lnrp+lnrpn+lnrdi+factor(yr), 
                              data = data,
                              index = c("state", "yr"), 
-                             model = "within",
-                             effect = "twoways")
+                             model = "within")
 
-random <- plm( lnc  ~ lag(lnc)+lnrp+lnrpn+lnrdi+lnpop16, 
+random <- plm( lnc  ~ lncl+lnrp+lnrpn+lnrdi+factor(yr), 
           data = data,
           index = c("state", "yr"), 
-          model = "random",
-          effect = "individual")
+          model = "random")
 
 stargazer(ols_A, ols_with_D, ols_Z_and_D, within, random, title="Results",type="html", out="test.html", out.header=TRUE,
           column.sep.width = "3pt", 
-          font.size = "small" ,column.labels = c("OLS", "OLS con D","OLS con D y Z","Efectos fijos", "Efectos aleatorios")
+          font.size = "small",  column.labels = c("OLS", "OLS con D","OLS con D y Z","Efectos fijos", "Efectos aleatorios") 
 
 )
 

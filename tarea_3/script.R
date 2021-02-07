@@ -2,6 +2,7 @@ library(readstata13)
 library(readxl)
 library(readr)
 library(dplyr)
+library(plm)
 
 #Bases de datos del Penn
 wpt<-read.dta13("https://www.rug.nl/ggdc/docs/pwt100.dta")
@@ -16,7 +17,7 @@ names(wb_gini)[length(names(wb_gini))]<-"gini"
 filter<-as.data.frame(summary(factor(wb_gini$Code)))
 a<-row.names(filter) #Este es el vector de países con más observaciones
 wb_gini_2<-wb_gini%>% filter(Code %in% a)%>% filter(Year > 1989)
-wpt_2<-wpt %>% select(country,countrycode,year,rgdpe,rgdpo,pop)%>% filter(countrycode %in% a)%>% filter(year > 1989)%>% filter(year < 2016)
+wpt_2<-wpt %>% select(country,countrycode,year,rgdpe,rgdpo,pop,labsh,avh,hc,csh_i,csh_g)%>% filter(countrycode %in% a)%>% filter(year > 1989)%>% filter(year < 2016)
 # Junto los datasets
 #data es los datos sin la imputación
 data <- left_join( wpt_2, wb_gini_2,
@@ -27,7 +28,7 @@ data <- left_join( wpt_2, wb_gini_2,
 write.csv(data,"data.csv")
 #Ahora junto la base final, 
 clean<-read.csv("clean.csv")
-data_2 <- left_join( wpt_2, clean,
+data_2 <- left_join( wpt_2, clean_2,
                    by = c("countrycode"="countrycode", "year"="year"))  #Esta es la base de datos final
 
 data_2<- data_2%>% 
@@ -39,58 +40,121 @@ data_2<- data_2%>%
 
 #Parte III: modelaje
 
-# Modelo 2: Efectos fijos
+# Modelo 2: Sencillo
 
+pooled <- plm( growth  ~ palma_ratio, 
+                             data = data_2,
+                             index = c("countrycode", "year"), 
+                             model = "pooling")
 
-
-efectos_fijos_tiempo <- plm( growth  ~ gini, 
-                      data = data_2,
-                      index = c("countrycode", "year"), 
-                      model = "within",
-                      effect = "time")
-
-efectos_fijos_pais <- plm( growth  ~ gini, 
+efectos_fijos_individual <- plm( growth  ~ palma_ratio, 
                       data = data_2,
                       index = c("countrycode", "year"), 
                       model = "within",
                       effect = "individual")
 
-efectos_fijos_ambos <- plm( growth  ~ gini, 
+efectos_fijos_two_ways <- plm( growth  ~ palma_ratio, 
                            data = data_2,
                            index = c("countrycode", "year"), 
                            model = "within",
                            effect = "twoways")
-summary(efectos_fijos_tiempo)
-summary(efectos_fijos_pais)
-summary(efectos_fijos_ambos)
 
 
-# De entrada en el modelo más sencillo de efectos fijos ya sabemos que el gini está correlacionado de manera negativa con el crecimiento.
-# Aunque la r^2 es demasiado baja, el coeficiente es negativo y es estadisticamente significativo a más del 99%
+summary(pooled)
+efectos_fijos_individual
+efectos_fijos_two_ways
 
-#En cuanto a efectos fijos, el modelo que contempla efectos fijos para cada país tuvo la R^2 más alta; por el contrario, el modelo que contemplo solo efecto fijo para el tiempo tuvo la más baja
 
-efectos_fijos_region <- plm( growth  ~ gini+region, 
-                            data = data_2,
-                            index = c("countrycode", "year"), 
-                            model = "within",
-                            effect = "individual")
-summary(efectos_fijos_region)
+# Modelos más region
 
-#Es interesante que si agregamos la variable de region al modelo de efectos fijos que ya contemplaba al país individual, en realidad no cambia NADA del modelo.
 
-efectos_fijos_region_2 <- plm( growth  ~ gini+region, 
-                             data = data_2,
-                             index = c("countrycode", "year"), 
-                             model = "within",
-                             effect = "time")
-summary(efectos_fijos_region_2)
+pooled <- plm( growth  ~ gini+region, 
+               data = data_2,
+               index = c("countrycode", "year"), 
+               model = "pooling")
 
-# Finalmente, si solo dejamos un efecto fijo para el tiempo y usamos region en lugar de un efecto fijo para cada país, obtenemos un modelo con la R^2 más alta (aunque sigue siendo diminuta)
+efectos_fijos_individual <- plm( growth  ~ gini+region, 
+                                 data = data_2,
+                                 index = c("countrycode", "year"), 
+                                 model = "within",
+                                 effect = "individual")
 
-#CONCLUSION MODELOS EFECTOS FIJOS:
-# Definitivamente un efecto fijo por el tiempo no es necesario; en cambio podemos optar por un efecto fijo para cada país. Asimismo la variable región otorga mejor r^2 que el efecto fijo de pais
-# En resumen, la variable que debe acompañar a gini es region sin efectos fijos para tiempo ni para país-
+efectos_fijos_two_ways <- plm( growth  ~ gini+region, 
+                               data = data_2,
+                               index = c("countrycode", "year"), 
+                               model = "within",
+                               effect = "twoways")
 
-# Modelo 3: Efectos aleatorios
+pooled
+efectos_fijos_individual
+efectos_fijos_two_ways
 
+
+
+
+# Modelos más csh_i
+
+
+pooled <- plm( growth  ~ gini+csh_i, 
+               data = data_2,
+               index = c("countrycode", "year"), 
+               model = "pooling")
+
+efectos_fijos_individual <- plm( growth  ~ gini+csh_i, 
+                                 data = data_2,
+                                 index = c("countrycode", "year"), 
+                                 model = "within",
+                                 effect = "individual")
+
+efectos_fijos_two_ways <- plm( growth  ~ gini+csh_i, 
+                               data = data_2,
+                               index = c("countrycode", "year"), 
+                               model = "within",
+                               effect = "twoways")
+
+pooled
+efectos_fijos_individual
+efectos_fijos_two_ways
+
+# Modelos más labsh
+
+
+pooled <- plm( growth  ~ gini+labsh, 
+               data = data_2,
+               index = c("countrycode", "year"), 
+               model = "pooling")
+
+efectos_fijos_individual <- plm( growth  ~ gini+labsh, 
+                                 data = data_2,
+                                 index = c("countrycode", "year"), 
+                                 model = "within",
+                                 effect = "individual")
+
+efectos_fijos_two_ways <- plm( growth  ~ gini+labsh, 
+                               data = data_2,
+                               index = c("countrycode", "year"), 
+                               model = "within",
+                               effect = "twoways")
+pooled
+efectos_fijos_individual
+efectos_fijos_two_ways
+
+# Modelos más csh_g
+
+
+pooled <- plm( growth  ~ gini+csh_g, 
+               data = data_2,
+               index = c("countrycode", "year"), 
+               model = "pooling")
+
+efectos_fijos_individual <- plm( growth  ~ gini+csh_g, 
+                                 data = data_2,
+                                 index = c("countrycode", "year"), 
+                                 model = "within",
+                                 effect = "individual")
+
+efectos_fijos_two_ways <- plm( growth  ~ gini+csh_g, 
+                               data = data_2,
+                               index = c("countrycode", "year"), 
+                               model = "within",
+                               effect = "twoways")

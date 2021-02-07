@@ -1,0 +1,213 @@
+---
+output:
+  pdf_document:
+    latex_engine: xelatex
+  geometry: margin=1in
+fontsize: 11pt
+header-includes :
+  \usepackage{pdflscape}
+  \usepackage{geometry}
+  \usepackage{graphicx}
+  \tolerance=1
+  \hyphenpenalty=10000
+  \hbadness=10000
+  \linespread{1.3}
+  \usepackage[justification=centering, font=bf, labelsep=period, skip=5pt]{caption} 
+  \usepackage{titling}
+  \usepackage[spanish]{babel}
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhead[L]{Maestría en Economía Aplicada}
+  \fancyhead[R]{ITAM}
+
+---
+\begin{titlepage}
+\begin{center}
+
+\textsc{\Large Instituto Tecnológico Autónomo de México}\\[2em]
+
+\textbf{\LARGE Bienestar y Política Social}\\[2em]
+
+
+\textsc{\LARGE }\\[1em]
+
+
+\textsc{\large Tarea 3 }\\[1em]
+
+\textsc{\LARGE }\\[1em]
+
+\textsc{\large }\\[1em]
+\textsc{\LARGE }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\large }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\LARGE Dra. Araceli Ortega Díaz}\\[1em]
+
+\textsc{\LARGE }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\LARGE Marco Antonio Ramos Juárez}\\[1em]
+
+\textsc{\large 142244}\\[1em]
+
+\textsc{\LARGE Mayra Samantha Cervantes Bravo}\\[1em]
+
+\textsc{\large 141371}\\[1em]
+
+\textsc{\LARGE Cynthia Raquel Valdivia Tirado }\\[1em]
+
+\textsc{\large 81358}\\[1em]
+
+\end{center}
+
+\vspace*{\fill}
+\textsc{Ciudad de México \hspace*{\fill} 2021}
+
+\end{titlepage}
+
+
+\newpage
+
+
+\tableofcontents
+
+\newpage
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.pos = 'H')
+library(stargazer)
+library(plm)
+library(dplyr)
+library(readr)
+library(readstata13)
+```
+
+# Instrucciones ARACELY
+
+•Tomar la base original de PWT y una base de desigualdad,
+
+•Correr varias regresiones entre desigualdad y crecimiento económico, y elegir las dos que usted podría defender teórica y econométricamente.
+
+•En 3 o 4  páginas describir brevemente:
+
+•que teoría está utilizando, 
+•su modelo empírico, 
+•tabla de resultados, y 
+•conclusiones sobre la relación entre la desigualdad del ingreso y el crecimiento económico. •Puede decidir no usar el coeficiente de Gini y usar otro indicador de desigualdad. 
+
+
+# Instrucciones CYNTHIA
+
+Falta marco teorico de la relacion entre desigualdad y crecimiento. En particular nosotros encontramos que la relacion es ambigua y que depende de las variables de control.
+
+Falta marco teorico de la relacion entre gasto publico y desigualdad. La maestra toco este tema en la clase, y la variable funciona muy bien
+
+
+# Introducción
+
+En esta tarea analizaremos la relación entre desigualdad y crecimiento económico desde un punto de vista teórico pero también econométrico. Asimismo, exploraremos el efecto que tiene el gasto público en la desigualdad y el crecimiento. En este sentido, en la primera parte expondremos un marco teórico muy breve acompañado de un modelo econométrico donde la variable independiente es el coeficiente de Gini y la variable dependiente el crecimiento del PIB per capita. En la segunda parte, extenderemos el análisis para incluir el gasto público (como porcentaje del PIB) en los modelos. Finalmente, se hará una breve conclusión de los hallazgos.
+
+# Relación entre crecimiento y desigualdad
+
+## Argumentos teoricos
+
+CYNTHIA
+
+## Argumentos econométricos
+
+En primer lugar para cuantificar la relación entre crecimiento y la desigualdad, realizamos una serie de modelos muy simples donde vemos el efecto que tiene el coeficiente de Gini como única variable independiente frente al PIB per Capita. Para esta tarea descargamos los datos de las *World Penn Tables* y los combinamos con una base de datos limpiada con los coeficientes de gini del Banco Mundial. Debido a la disponibilidad de datos, se decidió usar solo información de 98 países desde 1990 hasta 2015. De esta manera obtenemos una base de datos perfectamente balanceada. 
+
+
+```{r}
+wpt<-read.dta13("https://www.rug.nl/ggdc/docs/pwt100.dta")
+wb_gini<-read.csv("wb_gini.csv")
+names(wb_gini)[length(names(wb_gini))]<-"gini" 
+filter<-as.data.frame(summary(factor(wb_gini$Code)))
+a<-row.names(filter)
+wpt_2<-wpt %>% select(country,countrycode,year,rgdpe,rgdpo,pop,labsh,avh,hc,csh_i,csh_g)%>% filter(countrycode %in% a)%>% filter(year > 1989)%>% filter(year < 2016)
+clean<-read.csv("clean.csv")
+data_2 <- left_join( wpt_2, clean,
+                   by = c("countrycode"="countrycode", "year"="year"))
+# Creo una variable de creimiento del pib per capita
+data_2<- data_2%>% mutate(y=rgdpe/pop)%>% 
+  group_by(countrycode) %>%
+  mutate(growth_pc = c(NA,diff(y))/lag(y, 1))%>% 
+  mutate(growth = c(NA,diff(rgdpe))/lag(rgdpe, 1))
+```
+
+Posteriormente estimamos 3 modelos: uno mediante una regresión *poooled*, otro mediante un modelo de efectos fijos individuales y otro con efectos fijos en *twoways*.
+
+```{r, results='asis', message= FALSE }
+A <- plm( growth_pc  ~ gini, 
+                             data = data_2,
+                             index = c("countrycode", "year"), 
+                             model = "pooling")
+
+B <- plm( growth_pc  ~ gini, 
+                      data = data_2,
+                      index = c("countrycode", "year"), 
+                      model = "within",
+                      effect = "individual")
+
+C <- plm( growth_pc  ~ gini, 
+                           data = data_2,
+                           index = c("countrycode", "year"), 
+                           model = "within",
+                           effect = "twoways")
+stargazer(A,B,C, title="Results",type="latex",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)"), out.header=FALSE,
+          column.sep.width = "3pt", 
+          font.size = "small")
+
+```
+
+Lo primero que podemos observar gracias a la $R^2$ es que el coeficiente de Gini explica muy poco la varianza en el crecimiento del PIB per capita. Sin embargo vemos que hay una mejora sustancial si planteamos un modelo de efectos fijos frente a una regresión *pooled*. 
+
+
+# Modelos con % del PIB en gasto gubernamental
+
+## Defensa Teorica
+CYNTHIA
+
+Creemos que una variable que puede mejorar los modelo y a la vez modificar el $\beta$ del coeficiente de Gini es el porcentaje del PIB que se compone por gasto gubernamental. Esto debido a que existe una relacion XXXXXXXXXXXX 
+
+## Defensa Econométrica
+
+A continuación se muestran los mismos modelos previamente mostrados pero ahora con la nueva variable.
+
+```{r, results='asis', message= FALSE }
+
+
+K <- plm( growth  ~ gini+csh_g, 
+               data = data_2,
+               index = c("countrycode", "year"), 
+               model = "pooling")
+
+L <- plm( growth  ~ gini+csh_g, 
+                                 data = data_2,
+                                 index = c("countrycode", "year"), 
+                                 model = "within",
+                                 effect = "individual")
+
+M <- plm( growth  ~ gini+csh_g, 
+                               data = data_2,
+                               index = c("countrycode", "year"), 
+                               model = "within",
+                               effect = "twoways")
+
+
+
+stargazer(K,L,M, title="Results",type="latex",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)"), out.header=FALSE,
+          column.sep.width = "3pt", 
+          font.size = "small")
+```
+
+Como podemos observar, los tres modelos mejoraron sustancialemnte al agregar la nueva variable (medido a través de la $R^2$ y la $R^2$ ajustada). Asimismo, los $\beta$ coeficientes del coeficiente de Gini ahora son negativos y con una magnitud menor debido a la relación entre las variables,como lo habíamos previsto.
+
+
+# Conclusiones
+
+En conclusión, la relación entre el crecimiento y la desigualdad no es tan clara ni en la teoría ni en los datos. En este sentido, pudimos observar que el coeficiente de Gini tenía muy poco valor explicativo (medido a través de las $R^2$) además que el signo del coeficiente que obtuvimos en los modelos de una sola variable no era claro pues en el modelo *pooled* es positivo y en los demás es negativo. Sin embargo, al agregar el gasto del gobierno, la $R^2$ aumento de manera sustancial a la par que fijó el signo del $\beta$ del coeficiente de gini como negativo, es decir que, controlando por el gasto del gobierno, a mayor desigualdad menor crecimiento.
+
+Finalmente algo muy importante es que los resultados dependen totalmente de la especificación del modelo de regresión así como de las variables que usemos como control. Esto sugiere que en este tema la relación no es tan inmediata y que se requiere de más trabajo análitico, teórico y tal vez hasta en la calidad de los datos.
+

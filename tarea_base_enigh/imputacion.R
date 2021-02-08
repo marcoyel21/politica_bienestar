@@ -2,17 +2,16 @@ library(mice)
 
 data<- read.csv("C:/Users/maira bravo/Documents/gastospersona2.csv")
 
-#df sin categóricas ycon info faltante
+#df sin categÃ³ricas ycon info faltante
 
-data.mis <- subset(data, select = -c(frec_rem,tipo_gasto,mes_dia,
-                                     forma_pag1,forma_pag2,forma_pag3))
+data.mis <- subset(data, select = -c(folioviv,clave,foliohog,numren,frec_rem,tipo_gasto,mes_dia,forma_pag1,forma_pag2,forma_pag3))
 
 #pattern de NA
 
 md.pattern(data.mis)
 
 
-### imputacion con Predictive mean matching y MICE. m es número de imputaciones, método es PMM 
+### imputacion con Predictive mean matching y MICE. m es nÃºmero de imputaciones, mÃ©todo es PMM 
 
 imputed_Data <- mice(data.mis, m=5, maxit = 50, method = 'pmm', seed = 500)
 summary(imputed_Data)

@@ -83,7 +83,7 @@ library(readr)
 library(readstata13)
 ```
 
-# Instrucciones ARACELY
+# Instrucciones ARACELI
 
 •Tomar la base original de PWT y una base de desigualdad,
 

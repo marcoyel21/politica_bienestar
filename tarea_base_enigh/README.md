@@ -1,1 +1,1 @@
-esta es el código para hacer la imputación. Ya pude mergear los bienes 1 y 2, pero no estoy pudiendo con el 3 (que es el resto de los bienes). Chance porque está muy grande. Voy a seguir intentando y les aviso
+esta es el código para hacer la imputación. se hizo por separado para cada categoría, luego las mergee. si quieren saber más del método en google hay mucha documentación. Los artículos son de A243-247 y B001 a B007

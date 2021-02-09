@@ -16,3 +16,6 @@ data_imp<- data%>%
 #imputo los valores
 data<-merge(data,data_imp, by = "ubica_geo")
 data<-total%>%mutate(precio_vivienda=ifelse(vivienda>0,vivienda,precio_vivienda_promedio))
+data$precio_vivienda[is.na(data$precio_vivienda)] <- mean(data$precio_vivienda,na.rm = T)
+
+write.csv("data.csv")

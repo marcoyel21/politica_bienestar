@@ -1,0 +1,1 @@
+esta es el código para hacer la imputación. Ya pude mergear los bienes 1 y 2, pero no estoy pudiendo con el 3 (que es el resto de los bienes). Chance porque está muy grande. Voy a seguir intentando y les aviso

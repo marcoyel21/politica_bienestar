@@ -126,7 +126,7 @@ com_transp<-rbind(data.1,data.2)
 base_completa_imp<-rbind(com_transp,data.3)
 
 #exportar
-write_xlsx(completeData,"C:/Users/maira bravo/Downloads/enigh_imputados_final.xlsx")
+write_xlsx(base_completa_imp,"C:/Users/maira bravo/Downloads/enigh_imputados_final.xlsx")
 
 
 

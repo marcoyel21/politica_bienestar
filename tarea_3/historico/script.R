@@ -158,3 +158,42 @@ efectos_fijos_two_ways <- plm( growth  ~ gini+csh_g,
                                index = c("countrycode", "year"), 
                                model = "within",
                                effect = "twoways")
+
+
+a<-read_xlsx("clean_penn_unu.xlsx")
+summary(factor(a$income_group))
+a<-a%>% mutate(inc_high= ifelse(income_group=="high",1,0),inc_low=ifelse(income_group=="low",1,0),inc_med=ifelse(income_group=="lower_middle"|income_group=="upper_middle",1,0))
+        
+        
+ # NUeva
+ 
+ 
+data_2 <- left_join( wpt_2, a,
+                      by = c("countrycode"="countrycode", "year"="year"))  #Esta es la base de datos final
+ 
+data_2<- data_2%>% 
+   group_by(countrycode) %>%
+   mutate(growth = c(NA,diff(rgdpe))/lag(rgdpe, 1))
+ 
+ 
+
+pooled <- plm( growth  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
+               data = data_2,
+               index = c("countrycode", "year"), 
+               model = "pooling")
+
+efectos_fijos_individual <- plm( growth  ~ gini+I(gini*inc_med), 
+                                 data = data_2,
+                                 index = c("countrycode", "year"), 
+                                 model = "within",
+                                 effect = "individual")
+
+efectos_fijos_two_ways <- plm( growth  ~ gini+I(gini*inc_med), 
+                               data = data_2,
+                               index = c("countrycode", "year"), 
+                               model = "within",
+                               effect = "twoways")
+
+summary(efectos_fijos_individual)
+
+summary(efectos_fijos_two_ways)

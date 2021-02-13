@@ -87,6 +87,7 @@ library(readstata13)
 library(readxl)
 library(broom)
 library(purrr)
+library(kableExtra)
 
 ```
 
@@ -182,6 +183,7 @@ p2<-pFtest(C,A)
 Pruebas<-c("OLS vs FE individual", "OLS vs FE two-way")
 P.value<-c("0.0000", "0.0000")
 dataf<-data.frame(Pruebas, P.value, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T) %>% kable_styling(position = "center")
 
 ```
 Se realizó una prueba F para efectos individuales, donde *Ho* es que el modelo MCO o *pooled* es mejor que el de efectos fijos. Dado que rechazamos en el caso de efectos individuales y *two-way*, efectos fijos es preferible que *pooled* en este caso. 
@@ -220,6 +222,7 @@ En estos modelos podemos notar que el efecto de la desigualdad es negativo para 
 Esto corrobora y contrasta la teoría de Barro. Por un lado, nuestros hallazgos son congruentes con su hipótesis de que la desigualdad incentiva al crecimiento en países ricos. Sin embargo, en países pobres no vemos una relación tan clara contrario a la hipótesis de que en estos países el efecto sería negativo. Esto podría deberse a que tal vez Barro se refería a los países de ingreso medio mas que a los de ingreso bajo (pues estos ni siquiera habrían despegado económicamente o a que tal vez en lugar de una curva de Kuznets la forma funcional sea una curva en forma de S).
 
 ## Pruebas de hipótesis
+
 ```{r, results='asis', message= FALSE }
 #Prueba FE vs OLS
 #individuales
@@ -234,7 +237,7 @@ p4<-plmtest(B, c("time"), type=("bp"))
 Pruebas<-c("OLS vs FE individual", "OLS vs FE two-way","EF tiempo")
 P.value<-c("0.0000", "0.0000", "0.0000")
 dataf<-data.frame(Pruebas, P.value, stringsAsFactors=TRUE)
-
+kable(dataf, booktabs=T) %>% kable_styling(position = "center")
 ```
 En esta sección, se realizó de nuevo la prueba del modelo MCO contra *pooled*, y de nuevo se rechazó Ho a favor de efectos fijos. Adicionalmente, se hizo una prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo, donde Ho es que no se necesitan efectos de tiempo fijos. Esta prueba solo es permitida en el modelo de efectos individuales. Al rechazar concluimos que es necesario controlar por tiempo en el modelo de efectos fijos individuales.
 

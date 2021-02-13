@@ -85,6 +85,8 @@ library(dplyr)
 library(readr)
 library(readstata13)
 library(readxl)
+library(broom)
+library(purrr)
 
 ```
 
@@ -104,24 +106,21 @@ library(readxl)
 
 # Introducción
 
-En esta tarea analizaremos la relación entre desigualdad y crecimiento económico desde un punto de vista teórico pero también econométrico. Asimismo, exploraremos el efecto que tiene el nivel de ingreso de los países en la desigualdad y el crecimiento. En este sentido, en la primera parte expondremos un marco teórico muy breve acompañado de un modelo econométrico donde la variable independiente es el coeficiente de Gini y la variable dependiente el crecimiento del PIB per capita. En la segunda parte, extenderemos el análisis para incluir el nivel de ingreso (alto, mediano o bajo ) en los modelos. Finalmente, se hará una breve conclusión de los hallazgos.
+En esta tarea analizaremos la relación entre desigualdad y crecimiento económico desde un punto de vista teórico pero también econométrico. Asimismo, exploraremos el efecto que tiene el nivel de ingreso de los países en la desigualdad y el crecimiento. En este sentido, en la primera parte expondremos un marco teórico muy breve acompañado de un modelo econométrico donde la variable independiente es el coeficiente de Gini y la variable dependiente el crecimiento del PIB per capita. Posteriormente, se realizarán pruebas de hipótesis para determinar si se debe utilizar un modelo *pooled* o de efectos fijos, así como si se debe controlar por el tiempo. En la segunda parte, extenderemos el análisis para incluir el nivel de ingreso (alto, mediano o bajo ) en los modelos, con las mismas pruebas de hipótesis. Finalmente, se hará una breve conclusión de los hallazgos.
 
 # Relación entre crecimiento, desigualdad y nivel de ingreso
 
 ## Argumentos teoricos
 
-La relación entre crecimiento y desigualdad es un tema muy contencioso en la economía pues existe tanto evidencia tanto teórica como empírica que sostiene que la relación es negativa como positiva[@Boushey2014]. 
+La relación entre crecimiento y desigualdad es un tema muy contencioso en la economía, pues existe evidencia teórica y empírica que encuentra que la relación es tanto negativa como positiva[@Boushey2014]. 
 
-Desde un punto de vista teórico, Robert Barro, sostiene que existe una curva de Kuznets que relaciona al crecimiento con la desigualdad: mientras que al principio del desarrollo económico la desigualdad tiende a crecer,esta eventualmente decrece con la maduración de la economía. Aunque, como reconoce el premio nobel, la relación entre ambas variables es modesta [@Barro2000].
+Desde un punto de vista teórico, el economista Robert Barro sostiene que existe una curva de Kuznets que relaciona al crecimiento con la desigualdad: mientras que al principio del desarrollo económico la desigualdad tiende a crecer, esta eventualmente decrece con la maduración de la economía. Sin embargo, como reconoce el premio Nobel, la relación entre ambas variables es modesta [@Barro2000].
 
-Asimismo, Robert Barro argumenta que el crecimiento podría estar determinado por el nivel de desarrollo de un país. En los países pobres, la desigualdad inhibe el crecimiento, mientras que en los países ricos, la desigualdad promueve el crecimiento. Por esta razón consideramos que para evaluar el efecto de la desigualdad en el crecimiento, forzozamente necesitamos evaluar en conjunto con el nivel de ingreso.
-
-
+Asimismo, Barro argumenta que el crecimiento podría estar determinado por el nivel de desarrollo de un país. En los países pobres, la desigualdad inhibe el crecimiento, mientras que en los países ricos, la desigualdad promueve el crecimiento. Por esta razón consideramos que para evaluar el efecto de la desigualdad en el crecimiento, forzozamente necesitamos evaluar en conjunto con el nivel de ingreso.
 
 ## Argumentos econométricos
 
-En primer lugar para cuantificar la relación entre crecimiento y la desigualdad, realizamos una serie de modelos muy simples donde vemos el efecto que tiene el coeficiente de Gini como única variable independiente frente al crecimiento del PIB per Capita. Para esta tarea descargamos los datos de las *World Penn Tables* y los combinamos con una base de datos limpiada con los coeficientes de gini del Banco Mundial. Debido a la disponibilidad de datos, se decidió usar solo información de 98 países desde 1990 hasta 2015. De esta manera obtenemos una base de datos perfectamente balanceada. 
-
+En primer lugar para cuantificar la relación entre crecimiento y la desigualdad, realizamos una serie de modelos sencillos donde vemos el efecto que tiene el coeficiente de Gini como única variable independiente frente al crecimiento del PIB per Capita. Para esta tarea descargamos los datos de las *World Penn Tables* y los combinamos con una base de datos limpiada con los coeficientes de Gini del Banco Mundial. Debido a la disponibilidad de datos, se decidió usar solo información de 98 países desde 1990 hasta 2015. De esta manera obtenemos una base de datos perfectamente balanceada. 
 
 ```{r}
 wpt<-read.dta13("https://www.rug.nl/ggdc/docs/pwt100.dta")
@@ -147,8 +146,6 @@ data_2<- data_2%>% mutate(y=rgdpe/pop)%>%
  
 ```
 
-
-
 ```{r, results='asis', message= FALSE }
 A <- plm( growth_pc  ~ gini, 
                              data = data_2,
@@ -170,17 +167,25 @@ stargazer(A,B,C, title="Modelos univariados",type="latex",column.labels = c("Poo
           font.size = "small")
 ```
 
-A primera vista podemos notar que la relación entre el crecimiento y la desigualdad no es tan clara. En este sentido, pudimos observar que el coeficiente de Gini tenía muy poco valor explicativo (medido a través de las $R^2$) además que el signo del coeficiente que obtuvimos en los modelos de una sola variable no era claro pues en el modelo *pooled* es positivo y en los demás es negativo.
+A simple vista podemos notar que la relación entre el crecimiento y la desigualdad no es tan clara. En este sentido, pudimos observar que el coeficiente de Gini tenía muy poco valor explicativo (medido a través de las $R^2$) además que el signo del coeficiente que obtuvimos en los modelos de una sola variable no era claro pues en el modelo *pooled* es positivo y en los demás es negativo.
 
 ## Pruebas de hipótesis
 
-(SAM tabla con prueba de hipotesis sobre los 3 modelos anteriores)
-(SAM breve parrafo explicando los hallazgos)
+```{r, results='asis', message= FALSE }
+#Prueba FE vs OLS
+#individuales
+p1<-pFtest(B,A)
+#two way
+p2<-pFtest(C,A)
+
+tab <- map_df(list(p1,p2), tidy)
+tab[c("p.value")]
+```
+Se realizó una prueba F para efectos individuales, donde *Ho* es que el modelo MCO o *pooled* es mejor que el de efectos fijos. Dado que rechazamos en el caso de efectos individuales y *two-way*, efectos fijos es preferible que *pooled* en este caso. 
 
 # Modelos con nivel de ingreso
 
-En segundo lugar, realizaremos el mismo ejercicio pero ahora controlando por el nivel de ingreso de los países (alto, medio y bajo)
-
+En segundo lugar, realizaremos el mismo ejercicio pero ahora controlando por el nivel de ingreso de los países (alto, medio y bajo).
 
 ## Defensa Econométrica
 
@@ -207,21 +212,46 @@ stargazer(A,B,C, title="Modelos multivariados",type="latex",column.labels = c("P
           font.size = "small")
 ```
 
-En estos modelos podemos notar que el efecto de la desigualdad es evidentemente negativo para los países que no pertenecen ni al grupo de ingreso alto ni al de bajo, es decir a los de en medio. Por el contrario, el efecto de la desigualdad es positivo con el crecimiento para los países de ingreso y ambivalente para los países de ingreso bajo.
+En estos modelos podemos notar que el efecto de la desigualdad es negativo para los países que no pertenecen ni al grupo de ingreso alto ni al de bajo, es decir, a los de en medio. Por el contrario, el efecto de la desigualdad es positivo con el crecimiento para los países de ingreso alto y ambivalente para los países de ingreso bajo.
 
-Esto corrobora y contrasta la teoría de Barro. Por un lado, nuestros hallazgos son congruentes con su hipótesis de que la desigualdad incentiva al crecimiento en países ricos. Sin embargo, en países pobres no vemos una relación tan clara contrario a la hipótesis de que en estos países el efecto sería negativo. Esto podría deberse a que tal vez Barro se refería a los países de ingreso medio mas que a los de ingreso bajo (pues estos ni siquiera habrían despegado económicamente o a que tal vez en lugar de una curva de kuznets la forma funcional sea una curva en forma de s)
+Esto corrobora y contrasta la teoría de Barro. Por un lado, nuestros hallazgos son congruentes con su hipótesis de que la desigualdad incentiva al crecimiento en países ricos. Sin embargo, en países pobres no vemos una relación tan clara contrario a la hipótesis de que en estos países el efecto sería negativo. Esto podría deberse a que tal vez Barro se refería a los países de ingreso medio mas que a los de ingreso bajo (pues estos ni siquiera habrían despegado económicamente o a que tal vez en lugar de una curva de Kuznets la forma funcional sea una curva en forma de S).
 
 ## Pruebas de hipótesis
-(SAM: tabla con prueba de hipotesis sobre los 3 modelos anteriores)
-(SAM: breve parrafo explicando los hallazgos)
+```{r, results='asis', message= FALSE }
+#Prueba FE vs OLS
+#individuales
+p1<-pFtest(B,A)
+#two way
+p2<-pFtest(C,A)
+#Prueba Breusch- Pagan efectos de tiempo
+p3<-plmtest(B, c("time"), type=("bp"))
+p4<-plmtest(B, c("time"), type=("bp"))
+
+tab <- map_df(list(p1, p2,p3), tidy)
+tab[c("p.value")]
+```
+En esta sección, se realizó de nuevo la prueba del modelo MCO contra *pooled*, y de nuevo se rechazó Ho a favor de efectos fijos. Adicionalmente, se hizo una prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo, donde Ho es que no se necesitan efectos de tiempo fijos. Esta prueba solo es permitida en el modelo de efectos individuales. Al rechazar concluimos que es necesario controlar por tiempo en el modelo de efectos fijos individuales.
 
 # Modelo final
 
-(SAM: aquí propón el modelo final)
+```{r, results='asis', message= FALSE }
+
+B <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low)+factor(year), 
+                      data = data_2,
+                      index = c("countrycode", "year"), 
+                      model = "within",
+                      effect = "individual")
+
+stargazer(B, title="Modelo multivariado",type="latex",column.labels = c("Efectos Fijos (individuales)"), header=FALSE,
+          column.sep.width = "3pt", 
+          font.size = "small")
+```
+Nuestro modelo final propuesto es el de efectos fijos individuales controlando por la variable tiempo. En este podemos notar una mejora drástica en la capacidad explicativa del modelo, reflejada en la $R^2$. Los resultados señalan que el coeficiente de Gini tiene una relación negativa significativa sobre el crecimiento per cápita, y como mencionamos anteriormente, la interacción de los países de ingreso bajo y alto con el Gini una relación positiva, coherente con la teoría de Barro.  
+
 
 # Conclusiones
 
-En conclusión, la relación entre el crecimiento y la desigualdad no es tan clara ni en la teoría ni en los datos. En este sentido, pudimos observar que el coeficiente de Gini tenía muy poco valor explicativo (medido a través de las $R^2$) además que el signo del coeficiente que obtuvimos en los modelos de una sola variable no era claro pues en el modelo *pooled* es positivo y en los demás es negativo. Sin embargo, al controlar por nivel de ingreso de los países el signo del $\beta$ quedo anclado a cada nivel de ingreso: positivo para los ingresos más altos y bajos y negativo para los ingresos medios.	
+En conclusión, la relación entre el crecimiento y la desigualdad varía según el modelo que se está utilizando, así como en la teoría. En este sentido, pudimos observar que en el modelo simple, el coeficiente de Gini tenía muy poco valor explicativo (medido a través de las $R^2$), además que el signo del coeficiente no era claro pues en el modelo *pooled* es positivo y en los demás es negativo. Sin embargo, al controlar por nivel de ingreso de los países y tiempo el signo del $\beta$ quedo anclado a cada nivel de ingreso: positivo para los ingresos más altos y bajos y negativo para los ingresos medios.	
 
 Finalmente algo muy importante es que los resultados dependen totalmente de la especificación del modelo de regresión así como de las variables que usemos como control. Esto no es un hallazgo nuevo pues diversos autores sostienen que tanto la especificación como la calidad de los datos han hecho que las conclusiones en este tema sean ambivalentes[@Boushey2014]. Esto sugiere que en este tema la relación no es tan inmediata y que se requiere de más trabajo análitico, teórico y tal vez hasta en la calidad de los datos.
 

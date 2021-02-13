@@ -31,7 +31,6 @@ data_2<- data_2%>% mutate(y=rgdpe/pop)%>%
   group_by(countrycode) %>%
   mutate(growth_pc = c(NA,diff(y))/lag(y, 1))%>% 
   mutate(growth = c(NA,diff(rgdpe))/lag(rgdpe, 1))
-View(data_2)
 #data_2 es la base final
 
 #Heterogeneidad
@@ -245,17 +244,54 @@ pFtest(B,mundlak)
 
 #Rechazamos que efectos aleatorios sea mejor que fijos
 
+##########Pruebas con las nuevas variables 
+
+K <- plm( growth  ~ gini+csh_g, 
+          data = data_2,
+          index = c("countrycode", "year"), 
+          model = "pooling")
+L <- plm( growth  ~ gini+csh_g, 
+          data = data_2,
+          index = c("countrycode", "year"), 
+          model = "within",
+          effect = "individual")
+M <- plm( growth  ~ gini+csh_g, 
+          data = data_2,
+          index = c("countrycode", "year"), 
+          model = "within",
+          effect = "twoways")
+stargazer(K,L,M, title="Results",type="text",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)"), out.header=FALSE,
+          column.sep.width = "3pt", 
+          font.size = "small")
+
+fixed.time<-plm(growth_pc ~ gini +csh_g+ factor(year), data=data_2, index=c("country",
+                                                                      "year"), model="within")
 
 
+#Efectos fijos de tiempo vs L
+
+pFtest(fixed.time,L)
+
+#Rechazamos al 1% -> Ho es que no hay efectos de tiempo significativos
+
+#Esto significa que hay que agregarlo al modelo
 
 
+L.1 <- plm( growth  ~ gini+csh_g+ factor(year), 
+          data = data_2,
+          index = c("countrycode", "year"), 
+          model = "within",
+          effect = "individual")
 
+M.1 <- plm( growth  ~ gini+csh_g, 
+          data = data_2,
+          index = c("countrycode", "year"), 
+          model = "within",
+          effect = "twoways")
 
-
-
-
-
-
+stargazer(L,M,L.1,M.1, title="Results",type="text",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)"), out.header=FALSE,
+          column.sep.width = "3pt", 
+          font.size = "small")
 
 
 

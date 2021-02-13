@@ -23,7 +23,8 @@ names(wb_gini)[length(names(wb_gini))]<-"gini"
 filter<-as.data.frame(summary(factor(wb_gini$Code)))
 a<-row.names(filter)
 wpt_2<-wpt %>% select(country,countrycode,year,rgdpe,rgdpo,pop,labsh,avh,hc,csh_i,csh_g)%>% filter(countrycode %in% a)%>% filter(year > 1989)%>% filter(year < 2016)
-clean<-read.csv("clean_2.csv")
+#clean<-read.csv("clean_2.csv")
+clean<-read.csv("clean.csv")
 data_2 <- left_join( wpt_2, clean,
                      by = c("countrycode"="countrycode", "year"="year"))
 # Creo una variable de creimiento del pib per capita
@@ -35,10 +36,10 @@ data_2<- data_2%>% mutate(y=rgdpe/pop)%>%
 
 #Heterogeneidad
 
-plotmeans(growth_pc~countrycode,main="Heterogeneidad en países",data=data_2)
+plotmeans(growth_pc~countrycode,main="Heterogeneidad en paÃ­ses",data=data_2)
 plotmeans(growth~year,main="Heterogeneidad en el tiempo",data=data_2)
 
-##Regresión OLS: homogeneidad en el tiempo
+##RegresiÃ³n OLS: homogeneidad en el tiempo
 
 ols1 <-lm(growth_pc ~ gini, data=data_2)
 summary(ols1)
@@ -63,7 +64,7 @@ gg <- ggplot(data_22, aes(x=gini, y=growth, col=country)) +
 plot(gg)
 
 
-#Duda. por qué sale el coeficiente igual pero R2 diferente pero con plm no...
+#Duda. por quÃ© sale el coeficiente igual pero R2 diferente pero con plm no...
 
 B <- plm( growth_pc  ~ gini, 
           data = data_2,
@@ -75,7 +76,7 @@ B <- plm( growth_pc  ~ gini,
 
 mtable(ols1,ef.lsdv)
 
-#Interceptos de cada país
+#Interceptos de cada paÃ­s
 
 fixef(B)
 
@@ -85,7 +86,7 @@ pFtest(B,A)
 
 #Donde Ho es que OLS mejor que FE
 
-#ya que el p-value es muy pequeño y rechazamos, efectos fijos es mejor
+#ya que el p-value es muy pequeÃ±o y rechazamos, efectos fijos es mejor
 
 
 #Efectos aleatorios/GLS
@@ -106,7 +107,7 @@ phtest (B,B.aleat)
 
 #Prueba Breusch-Pagan: EA vs pooled-----------
 
-#Ho: varianzas de país a país es cero, o no diferencia significativa entre países -> no efecto panel
+#Ho: varianzas de paÃ­s a paÃ­s es cero, o no diferencia significativa entre paÃ­ses -> no efecto panel
 
 plmtest(A, type=c("bp"))
 
@@ -133,17 +134,17 @@ pFtest(fixed.time,B)
 
 ## Otras pruebas ----------
 ##Prueba de dependencia transversal
-#Hacemos una prueba Breusch Pagan al modelo EF donde Ho es que residuales entre países no están correlacionados. 
+#Hacemos una prueba Breusch Pagan al modelo EF donde Ho es que residuales entre paÃ­ses no estÃ¡n correlacionados. 
 
 pcdtest(B, test = c("lm"))
 
-#Rechazamos que no hay dependencia, sí la hay. Esto puede sesgar a los estimadores (?)
+#Rechazamos que no hay dependencia, sÃ­ la hay. Esto puede sesgar a los estimadores (?)
 
-## Test de correlación serial Breusch-Godfrey/Wooldridge
+## Test de correlaciÃ³n serial Breusch-Godfrey/Wooldridge
 
 pbgtest(B)
 
-#Rechazamos al 1%: sí hay correlación serial
+#Rechazamos al 1%: sÃ­ hay correlaciÃ³n serial
 
 ## Prueba Breusch Pagan para heteroscedasticidad
 
@@ -154,7 +155,7 @@ bptest(growth_pc ~ gini + factor(country), data = data_2, studentize=F)
 #Rechazamos al 1% -> presencia de heteroscedasticidad
 
 ##Controlamos la heteroscedasticidad en efectos fijos. Se sugiere el estimador "Arellano", ya que hay presencia de heteroscedasticidad
-#y correlación serial.
+#y correlaciÃ³n serial.
 
 coeftest(B, vcovHC(B, method = "arellano"))
 
@@ -197,17 +198,17 @@ plmtest(C, c("time"), type=("bp"))
 
 ## Otras pruebas ----------
 ##Prueba de dependencia transversal
-#Hacemos una prueba Breusch Pagan al modelo EF donde Ho es que residuales entre países no están correlacionados. 
+#Hacemos una prueba Breusch Pagan al modelo EF donde Ho es que residuales entre paÃ­ses no estÃ¡n correlacionados. 
 
 pcdtest(C, test = c("lm"))
 
-#Rechazamos que no hay dependencia, sí la hay. Esto puede sesgar a los estimadores (?)
+#Rechazamos que no hay dependencia, sÃ­ la hay. Esto puede sesgar a los estimadores (?)
 
-## Test de correlación serial Breusch-Godfrey/Wooldridge
+## Test de correlaciÃ³n serial Breusch-Godfrey/Wooldridge
 
 pbgtest(C)
 
-#Rechazamos al 1%: sí hay correlación serial
+#Rechazamos al 1%: sÃ­ hay correlaciÃ³n serial
 
 ## Prueba Breusch Pagan para heteroscedasticidad
 
@@ -218,7 +219,7 @@ bptest(growth_pc ~ gini + factor(country), data = data_2, studentize=F)
 #Rechazamos al 1% -> presencia de heteroscedasticidad
 
 ##Controlamos la heteroscedasticidad en efectos fijos. Se sugiere el estimador "Arellano", ya que hay presencia de heteroscedasticidad
-#y correlación serial.
+#y correlaciÃ³n serial.
 
 coeftest(C, vcovHC(C, method = "arellano"))
 
@@ -236,7 +237,7 @@ data_2 %>%
   group_by(country, year) %>%
   summarise(mean(gini))
 
-#correr regresión con la variable de la media con RE
+#correr regresiÃ³n con la variable de la media con RE
 
 mundlak <- plm(growth_pc ~ gini, data=data_2, index=c("country", "year"), model="random")
 

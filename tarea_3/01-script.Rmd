@@ -178,8 +178,15 @@ p1<-pFtest(B,A)
 #two way
 p2<-pFtest(C,A)
 
+#Marco, no sé cómo cambiar los row names en este                  
 tab <- map_df(list(p1,p2), tidy)
 tab[c("p.value")]
+
+#y aquí los column names 
+
+df1 <- list(df1 = data.frame(b = c("OLS vs FE individual", "OLS vs FE two-way"), c = c("0.000", "0.000")))
+df<-as_tibble(df1)
+df %>% rename ("Prueba"=df1$b,"p-value"=df1$c)
 ```
 Se realizó una prueba F para efectos individuales, donde *Ho* es que el modelo MCO o *pooled* es mejor que el de efectos fijos. Dado que rechazamos en el caso de efectos individuales y *two-way*, efectos fijos es preferible que *pooled* en este caso. 
 
@@ -229,6 +236,11 @@ p4<-plmtest(B, c("time"), type=("bp"))
 
 tab <- map_df(list(p1, p2,p3), tidy)
 tab[c("p.value")]
+
+df1 <- list(df1 = data.frame(b = c("OLS vs FE individual", "OLS vs FE two-way", "EF tiempo), c = c("0.000", "0.000",)))
+df<-as_tibble(df1)
+df %>% rename ("Prueba"=df1$b,"p-value"=df1$c)
+
 ```
 En esta sección, se realizó de nuevo la prueba del modelo MCO contra *pooled*, y de nuevo se rechazó Ho a favor de efectos fijos. Adicionalmente, se hizo una prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo, donde Ho es que no se necesitan efectos de tiempo fijos. Esta prueba solo es permitida en el modelo de efectos individuales. Al rechazar concluimos que es necesario controlar por tiempo en el modelo de efectos fijos individuales.
 

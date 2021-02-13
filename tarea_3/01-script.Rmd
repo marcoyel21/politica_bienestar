@@ -4,6 +4,8 @@ output:
     latex_engine: xelatex
   geometry: margin=1in
 fontsize: 11pt
+bibliography: tarea_politica_bienestar.bib
+csl: "mi_chicago.csl"
 header-includes :
   \usepackage{pdflscape}
   \usepackage{geometry}
@@ -19,6 +21,7 @@ header-includes :
   \pagestyle{fancy}
   \fancyhead[L]{Maestría en Economía Aplicada}
   \fancyhead[R]{ITAM}
+   \usepackage{float}
 
 ---
 \begin{titlepage}
@@ -81,6 +84,8 @@ library(plm)
 library(dplyr)
 library(readr)
 library(readstata13)
+library(readxl)
+
 ```
 
 # Instrucciones ARACELI
@@ -97,26 +102,25 @@ library(readstata13)
 •conclusiones sobre la relación entre la desigualdad del ingreso y el crecimiento económico. •Puede decidir no usar el coeficiente de Gini y usar otro indicador de desigualdad. 
 
 
-# Instrucciones CYNTHIA
-
-Falta marco teorico de la relacion entre desigualdad y crecimiento. En particular nosotros encontramos que la relacion es ambigua y que depende de las variables de control.
-
-Falta marco teorico de la relacion entre gasto publico y desigualdad. La maestra toco este tema en la clase, y la variable funciona muy bien
-
-
 # Introducción
 
-En esta tarea analizaremos la relación entre desigualdad y crecimiento económico desde un punto de vista teórico pero también econométrico. Asimismo, exploraremos el efecto que tiene el gasto público en la desigualdad y el crecimiento. En este sentido, en la primera parte expondremos un marco teórico muy breve acompañado de un modelo econométrico donde la variable independiente es el coeficiente de Gini y la variable dependiente el crecimiento del PIB per capita. En la segunda parte, extenderemos el análisis para incluir el gasto público (como porcentaje del PIB) en los modelos. Finalmente, se hará una breve conclusión de los hallazgos.
+En esta tarea analizaremos la relación entre desigualdad y crecimiento económico desde un punto de vista teórico pero también econométrico. Asimismo, exploraremos el efecto que tiene el nivel de ingreso de los países en la desigualdad y el crecimiento. En este sentido, en la primera parte expondremos un marco teórico muy breve acompañado de un modelo econométrico donde la variable independiente es el coeficiente de Gini y la variable dependiente el crecimiento del PIB per capita. En la segunda parte, extenderemos el análisis para incluir el nivel de ingreso (alto, mediano o bajo ) en los modelos. Finalmente, se hará una breve conclusión de los hallazgos.
 
-# Relación entre crecimiento y desigualdad
+# Relación entre crecimiento, desigualdad y nivel de ingreso
 
 ## Argumentos teoricos
 
-CYNTHIA
+La relación entre crecimiento y desigualdad es un tema muy contencioso en la economía pues existe tanto evidencia tanto teórica como empírica que sostiene que la relación es negativa como positiva[@Boushey2014]. 
+
+Desde un punto de vista teórico, Robert Barro, sostiene que existe una curva de Kuznets que relaciona al crecimiento con la desigualdad: mientras que al principio del desarrollo económico la desigualdad tiende a crecer,esta eventualmente decrece con la maduración de la economía. Aunque, como reconoce el premio nobel, la relación entre ambas variables es modesta [@Barro2000].
+
+Asimismo, Robert Barro argumenta que el crecimiento podría estar determinado por el nivel de desarrollo de un país. En los países pobres, la desigualdad inhibe el crecimiento, mientras que en los países ricos, la desigualdad promueve el crecimiento. Por esta razón consideramos que para evaluar el efecto de la desigualdad en el crecimiento, forzozamente necesitamos evaluar en conjunto con el nivel de ingreso.
+
+
 
 ## Argumentos econométricos
 
-En primer lugar para cuantificar la relación entre crecimiento y la desigualdad, realizamos una serie de modelos muy simples donde vemos el efecto que tiene el coeficiente de Gini como única variable independiente frente al PIB per Capita. Para esta tarea descargamos los datos de las *World Penn Tables* y los combinamos con una base de datos limpiada con los coeficientes de gini del Banco Mundial. Debido a la disponibilidad de datos, se decidió usar solo información de 98 países desde 1990 hasta 2015. De esta manera obtenemos una base de datos perfectamente balanceada. 
+En primer lugar para cuantificar la relación entre crecimiento y la desigualdad, realizamos una serie de modelos muy simples donde vemos el efecto que tiene el coeficiente de Gini como única variable independiente frente al crecimiento del PIB per Capita. Para esta tarea descargamos los datos de las *World Penn Tables* y los combinamos con una base de datos limpiada con los coeficientes de gini del Banco Mundial. Debido a la disponibilidad de datos, se decidió usar solo información de 98 países desde 1990 hasta 2015. De esta manera obtenemos una base de datos perfectamente balanceada. 
 
 
 ```{r}
@@ -126,19 +130,24 @@ names(wb_gini)[length(names(wb_gini))]<-"gini"
 filter<-as.data.frame(summary(factor(wb_gini$Code)))
 a<-row.names(filter)
 wpt_2<-wpt %>% select(country,countrycode,year,rgdpe,rgdpo,pop,labsh,avh,hc,csh_i,csh_g)%>% filter(countrycode %in% a)%>% filter(year > 1989)%>% filter(year < 2016)
-clean<-read.csv("clean.csv")
-data_2 <- left_join( wpt_2, clean,
-                   by = c("countrycode"="countrycode", "year"="year"))
-# Creo una variable de creimiento del pib per capita
+
+# Agrego la base de datos nueva
+a<-read_xlsx("clean_penn_unu.xlsx")
+a<-a%>% mutate(inc_high= ifelse(income_group=="high",1,0),inc_low=ifelse(income_group=="low",1,0),inc_med=ifelse(income_group=="lower_middle"|income_group=="upper_middle",1,0))
+ 
+ 
+data_2 <- left_join( wpt_2, a,
+                      by = c("countrycode"="countrycode", "year"="year"))  #Esta es la base
+ 
+
 data_2<- data_2%>% mutate(y=rgdpe/pop)%>% 
   group_by(countrycode) %>%
   mutate(growth_pc = c(NA,diff(y))/lag(y, 1))%>% 
   mutate(growth = c(NA,diff(rgdpe))/lag(rgdpe, 1))
+ 
 ```
 
-## Pruebas de Panel
 
-Estimamos cuatro modelos para determinar cuál es el más adecuado para representar al modelo base: uno mediante una regresión *pooled*, u *OLS*; otro mediante un modelo de efectos fijos individuales; otro con efectos fijos con *two-way errors*; y por último uno de efectos aleatorios.
 
 ```{r, results='asis', message= FALSE }
 A <- plm( growth_pc  ~ gini, 
@@ -155,75 +164,68 @@ C <- plm( growth_pc  ~ gini,
                            index = c("countrycode", "year"), 
                            model = "within",
                            effect = "twoways")
-D <- plm(growth_pc ~ gini, 
-         data=data_2, 
-         index=c("country", "year"), 
-         model="random")
 
-stargazer(A,B,C,D, title="Resultadoss",type="text",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)","Efectos aleatorios"), out.header=FALSE,
+stargazer(A,B,C, title="Modelos univariados",type="latex",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)"),header=FALSE,
           column.sep.width = "3pt", 
           font.size = "small")
 ```
 
-A simple vista, podemos observar que el coeficiente de Gini es significativo en los modelos *Within*, mientras que en los modelos *pooled* y de *efectos aleatorios* no lo son. 
+A primera vista podemos notar que la relación entre el crecimiento y la desigualdad no es tan clara. En este sentido, pudimos observar que el coeficiente de Gini tenía muy poco valor explicativo (medido a través de las $R^2$) además que el signo del coeficiente que obtuvimos en los modelos de una sola variable no era claro pues en el modelo *pooled* es positivo y en los demás es negativo.
 
-Para cerciorarnos de que este es el mejor modelo realizamos diversas pruebas, con los siguientes resultados:
+## Pruebas de hipótesis
 
+(SAM tabla con prueba de hipotesis sobre los 3 modelos anteriores)
+(SAM breve parrafo explicando los hallazgos)
 
-```{r}
+# Modelos con nivel de ingreso
 
-names<- c("Pooled vs EF", "Pooled vs EA: Breusch Pagan", "EF vs EA: Hausman","EF vs EA: Mundlak", "EF en el tiempo: Breusch Pagan")
-pval<- c("p-value")
-values<-c("")
+En segundo lugar, realizaremos el mismo ejercicio pero ahora controlando por el nivel de ingreso de los países (alto, medio y bajo)
 
-as.data.frame
-```
-```{r}
-library(broom)
-library(purrr)
-
-tab <- map_df(list(p1, p2, p3,p4,p5), tidy)
-tab[c("p.value")]
-
-```
-Los resultados señalan que se es preferible usar un modelo de efectos fijos contra aleatorios u homogéneos, así como que se debe controlar por la variable de tiempo, mostrado por la prueba Breusch-Pagan, cuya hipótesis nula es que no se los efectos de tiempo no son significativos. 
-
-
-# Modelos con % del PIB en gasto gubernamental y población
-
-## Defensa Teorica
-CYNTHIA
-
-Creemos que una variable que puede mejorar los modelo y a la vez modificar el $\beta$ del coeficiente de Gini es el porcentaje del PIB que se compone por gasto gubernamental. Esto debido a que existe una relacion XXXXXXXXXXXX 
 
 ## Defensa Econométrica
 
-Dado el resultado de las pruebas, agregamos a los modelos de efectos fijos, ahora controlando por tiempo. Esto no es posible en el modelo *two-way error*, el cual obtiene los mismos coeficientes para Gini, gasto del PIB gubernamental y población, pero con un R2 menor, por lo que lo quitamos. 
 
 ```{r, results='asis', message= FALSE }
 
-L <- plm( growth  ~ gini+csh_g+factor(year), 
-                                 data = data_2,
-                                 index = c("countrycode", "year"), 
-                                 model = "within",
-                                 effect = "individual")
+A <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
+                             data = data_2,
+                             index = c("countrycode", "year"), 
+                             model = "pooling")
+B <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
+                      data = data_2,
+                      index = c("countrycode", "year"), 
+                      model = "within",
+                      effect = "individual")
+C <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
+                           data = data_2,
+                           index = c("countrycode", "year"), 
+                           model = "within",
+                           effect = "twoways")
 
-O <- plm( growth  ~ gini+csh_g+pop+factor(year), 
-                                 data = data_2,
-                                 index = c("countrycode", "year"), 
-                                 model = "within",
-                                 effect = "individual")
-
-
-stargazer(L,O,title="Results",type="text",column.labels = c("Efectos Fijos (individuales)", "Efectos fijos (individuales)"), out.header=FALSE,
+stargazer(A,B,C, title="Modelos multivariados",type="latex",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)"), header=FALSE,
           column.sep.width = "3pt", 
           font.size = "small")
 ```
 
-Como podemos observar, los tres modelos mejoraron sustancialemnte al agregar las nueva variables de porcentaje de gasto gubernamental, población y tiempo (medido a través de la $R^2$ y la $R^2$ ajustada). Asimismo, los $\beta$ de Gini, gasto, y población son negativos y significativos. 
+En estos modelos podemos notar que el efecto de la desigualdad es evidentemente negativo para los países que no pertenecen ni al grupo de ingreso alto ni al de bajo, es decir a los de en medio. Por el contrario, el efecto de la desigualdad es positivo con el crecimiento para los países de ingreso y ambivalente para los países de ingreso bajo.
 
+Esto corrobora y contrasta la teoría de Barro. Por un lado, nuestros hallazgos son congruentes con su hipótesis de que la desigualdad incentiva al crecimiento en países ricos. Sin embargo, en países pobres no vemos una relación tan clara contrario a la hipótesis de que en estos países el efecto sería negativo. Esto podría deberse a que tal vez Barro se refería a los países de ingreso medio mas que a los de ingreso bajo (pues estos ni siquiera habrían despegado económicamente o a que tal vez en lugar de una curva de kuznets la forma funcional sea una curva en forma de s)
+
+## Pruebas de hipótesis
+(SAM: tabla con prueba de hipotesis sobre los 3 modelos anteriores)
+(SAM: breve parrafo explicando los hallazgos)
+
+# Modelo final
+
+(SAM: aquí propón el modelo final)
 
 # Conclusiones
 
+En conclusión, la relación entre el crecimiento y la desigualdad no es tan clara ni en la teoría ni en los datos. En este sentido, pudimos observar que el coeficiente de Gini tenía muy poco valor explicativo (medido a través de las $R^2$) además que el signo del coeficiente que obtuvimos en los modelos de una sola variable no era claro pues en el modelo *pooled* es positivo y en los demás es negativo. Sin embargo, al controlar por nivel de ingreso de los países el signo del $\beta$ quedo anclado a cada nivel de ingreso: positivo para los ingresos más altos y bajos y negativo para los ingresos medios.	
+
+Finalmente algo muy importante es que los resultados dependen totalmente de la especificación del modelo de regresión así como de las variables que usemos como control. Esto no es un hallazgo nuevo pues diversos autores sostienen que tanto la especificación como la calidad de los datos han hecho que las conclusiones en este tema sean ambivalentes[@Boushey2014]. Esto sugiere que en este tema la relación no es tan inmediata y que se requiere de más trabajo análitico, teórico y tal vez hasta en la calidad de los datos.
+
+\newpage
+# Referencias
 
 

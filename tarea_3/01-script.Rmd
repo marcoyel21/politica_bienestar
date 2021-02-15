@@ -91,27 +91,13 @@ library(kableExtra)
 
 ```
 
-# Instrucciones ARACELI
-
-•Tomar la base original de PWT y una base de desigualdad,
-
-•Correr varias regresiones entre desigualdad y crecimiento económico, y elegir las dos que usted podría defender teórica y econométricamente.
-
-•En 3 o 4  páginas describir brevemente:
-
-•que teoría está utilizando, 
-•su modelo empírico, 
-•tabla de resultados, y 
-•conclusiones sobre la relación entre la desigualdad del ingreso y el crecimiento económico. •Puede decidir no usar el coeficiente de Gini y usar otro indicador de desigualdad. 
-
-
 # Introducción
 
 En esta tarea analizaremos la relación entre desigualdad y crecimiento económico desde un punto de vista teórico pero también econométrico. Asimismo, exploraremos el efecto que tiene el nivel de ingreso de los países en la desigualdad y el crecimiento. En este sentido, en la primera parte expondremos un marco teórico muy breve acompañado de un modelo econométrico donde la variable independiente es el coeficiente de Gini y la variable dependiente el crecimiento del PIB per capita. Posteriormente, se realizarán pruebas de hipótesis para determinar si se debe utilizar un modelo *pooled* o de efectos fijos, así como si se debe controlar por el tiempo. En la segunda parte, extenderemos el análisis para incluir el nivel de ingreso (alto, mediano o bajo ) en los modelos, con las mismas pruebas de hipótesis. Finalmente, se hará una breve conclusión de los hallazgos.
 
 # Relación entre crecimiento, desigualdad y nivel de ingreso
 
-## Argumentos teoricos
+## Argumentos teóricos
 
 La relación entre crecimiento y desigualdad es un tema muy contencioso en la economía, pues existe evidencia teórica y empírica que encuentra que la relación es tanto negativa como positiva[@Boushey2014]. 
 
@@ -207,7 +193,7 @@ Dado que el modelo MCO o *pooled* podría generar estimadores sesgados si no se 
 
 En segunda instancia, se realiza una prueba para determinar si el modelo de efectos fijos o de efectos aleatorios es preferible. Realizamos una prueba de Hausman donde *Ho* es que los errores $u_{i}$ no están correlacionados con los regresores. Este sería el caso de un modelo con efectos aleatorios. Al rechazar *Ho* con un nivel de significancia de .0000 , se implica que los errores están correlacionados a los regresores, o que hay efectos fijos en el panel. 
 
-Por último, es necesario concluir si se deben incluir, además efectos fijos individuales, efectos fijos para el tiempo (*two-ways*). Esto se realiza con una prueba de multiplicadores lagrangianos Breusch-Pagan, en la que se determina si se debe incluir el término $lambda_{t}$, o efectos tiempo-específicos. *Ho* implica que hay variables con efectos específicos individuales, pero que no varían en el tiempo. Al rechazar *Ho* a un nivel del 0.000, concluimos que hay efectos de tiempo significativos. 
+Por último, es necesario concluir si se deben incluir, además efectos fijos individuales, efectos fijos en el tiempo (*two-ways*). Esto se realiza con una prueba de multiplicadores lagrangianos Breusch-Pagan, en la que se determina si se debe incluir el término $lambda_{t}$, o efectos tiempo-específicos. *Ho* implica que hay variables con efectos específicos individuales, pero no con efectos específicos en el tiempo. Al rechazar *Ho* a un nivel del 0.000, concluimos que hay efectos de tiempo significativos. 
 
 De estas pruebas concluimos que el modelo de efectos fijos es más adecuado que el de *pooled* y efectos aleatorios, a partir de las pruebas F y de Hausman, respectivamente; y que del modelo de efectos fijos individual al two-way el segundo es más adecuado, ya que se probó con el test de Breusch-Pagan que en la ecuación de efectos fijos:
 
@@ -277,7 +263,7 @@ dataf<-data.frame(Pruebas, P.value, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T) %>% kable_styling(position = "center")
 ```
 
-En esta sección, se realizó de nuevo la prueba del modelo de efectos fijos contra *pooled*, y de nuevo se rechazó Ho a favor del primero. Adicionalmente, se hizo una prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo fijos, donde Ho es que $\lambda_{t} \= 0$. Al rechazar, concluimos que es necesario controlar por tiempo en el modelo de efectos fijos individuales, optando por el modelo two-ways.
+En esta sección, se realizó de nuevo la prueba del modelo de efectos fijos contra *pooled*, y de nuevo se rechazó Ho a favor del primero. Adicionalmente, se hizo una prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo fijos, donde Ho es que $\lambda_{t} \= 0$. Al rechazar, concluimos que es necesario controlar por tiempo en el modelo de efectos fijos, optando por el modelo two-ways.
 
 # Modelo final
 
@@ -294,7 +280,7 @@ stargazer(E, title="Modelo multivariado",type="latex",mean.sd=TRUE,column.labels
 ```
 Las pruebas de hipótesis mostradas muestran la bondad de ajuste del modelo final, el within two-way, que incluye a la variable de tiempo ($\lambda_{t}$) en su estimación.
 
-Esta es la forma más eficiente de capturar los efectos fijos del panel, comparada con el modelo de *least squares dummy variables* o el modelo within individual incluyendo variables de tiempo[@Baltagi2013], ya que estos dan errores estándar incorrectos debido al número mayor de grados de libertad,  así como que la $R^2$ es correcta.[@Park2011]
+Esta es la forma más eficiente de capturar los efectos fijos del panel, comparada con el modelo de *least squares dummy variables* o el modelo within individual incluyendo variables de tiempo[@Baltagi2013], ya que estos dan errores estándar incorrectos debido al número mayor de grados de libertad,  así como que la $R^2$ es correcta[@Park2011]. La inclusión de $\lambda_{t}$ podría señalar eventos que sucedieron en el tiempo del panel que afectaron al crecimiento económico entre los países, como tratados de libre comercio o crisis económicas de los países.
 
 Los resultados señalan que el coeficiente de Gini tiene una relación negativa y significativa sobre el crecimiento económico per cápita, y como mencionamos anteriormente, que en los países pobres la desigualdad afecta al crecimiento económico, mientras que en los ricos existe una relación positiva entre ellas. 
 

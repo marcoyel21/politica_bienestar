@@ -152,41 +152,68 @@ A <- plm( growth_pc  ~ gini,
                              data = data_2,
                              index = c("countrycode", "year"), 
                              model = "pooling")
+
 B <- plm( growth_pc  ~ gini, 
                       data = data_2,
                       index = c("countrycode", "year"), 
                       model = "within",
                       effect = "individual")
-C <- plm( growth_pc  ~ gini, 
+
+c <- plm( growth_pc  ~ gini, 
+                      data = data_2,
+                      index = c("countrycode", "year"), 
+                      model = "within",
+                      effect = "twoways")
+
+D <- plm( growth_pc  ~ gini, 
                            data = data_2,
                            index = c("countrycode", "year"), 
-                           model = "within",
-                           effect = "twoways")
+                           model = "random")
 
-stargazer(A,B,C, title="Modelos univariados",type="latex",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)"),header=FALSE,
+stargazer(A,B,C,D, title="Modelos univariados",
+          type="text",
+          column.labels = c("Pooled",
+                            "Efectos Fijos (individuales)", 
+                            "Efectos Fijos (two-ways)",
+                            "Efectos Aleatorios"),
+          header=FALSE,
           column.sep.width = "3pt", 
           font.size = "small")
 ```
-
+#checar
 A simple vista podemos notar que la relación entre el crecimiento y la desigualdad no es tan clara. En este sentido, pudimos observar que el coeficiente de Gini tenía muy poco valor explicativo (medido a través de las $R^2$) además que el signo del coeficiente que obtuvimos en los modelos de una sola variable no era claro pues en el modelo *pooled* es positivo y en los demás es negativo.
 
 ## Pruebas de hipótesis
 
 ```{r, results='asis', message= FALSE }
-#Prueba FE vs OLS
-#individuales
-p1<-pFtest(B,A)
-#two way
-p2<-pFtest(C,A)
 
-#           
-Pruebas<-c("OLS vs FE individual", "OLS vs FE two-way")
-P.value<-c("0.0000", "0.0000")
+#Prueba FE vs OLS: individual
+p1<-pFtest(B,A)
+
+#Hausman
+p2<-phtest(B,C)
+
+#Prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo fijos
+p3<-plmtest(B, c("time"), type=("bp"))
+
+
+Pruebas<-c("Pooled vs EF individual", "EF vs EA: Hausman", "EF individuales vs two-way")
+P.value<-c("0.0000", "0.0000","0.0000")
 dataf<-data.frame(Pruebas, P.value, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T) %>% kable_styling(position = "center")
-
 ```
-Se realizó una prueba F para efectos individuales, donde *Ho* es que el modelo MCO o *pooled* es mejor que el de efectos fijos. Dado que rechazamos en el caso de efectos individuales y *two-way*, efectos fijos es preferible que *pooled* en este caso. 
+
+Dado que el modelo MCO o *pooled* podría generar estimadores sesgados si no se cumple con los supuestos de linearidad, exogeneidad, homoscedasticidad, y no multicolinealidad, se deben realizar pruebas para verificar que el efecto individual *$/u_i* no existe, o es igual a cero. Esto se realiza con una prueba F, donde *Ho* es que los efectos individuales, o errores (*$/u_i*) no son significativos. Dado que se rechaza a un nivel de significancia de .0000, podemos descartar el modelo *pooled*.
+
+En segunda instancia, se realiza una prueba para determinar si el modelo de efectos fijos o de efectos aleatorios es preferible. Realizamos una prueba de Hausman donde *Ho* es que los errores *$/u_i* no están correlacionados con los regresores. Este sería el caso de un modelo con efectos aleatorios. Al rechazar Ho con un nivel de significancia de .0000 , se implica que los errores están correlacionados a los regresores, o que hay efectos fijos en el panel. 
+
+Por último, es necesario concluir si se deben incluir, además de dummies para las entidades (efectos fijos individuales), dummies para el tiempo (efectos fijos *two-way*). Esto se realiza con una prueba de multiplicadores lagrangianos Breusch-Pagan, en la que se determina si se debe incluir el término *$/lambda_t*, o efectos tiempo-específicos. *Ho* implica que hay variables con efectos específicos individuales, pero que no varían en el tiempo. Al rechazar *Ho* a un nivel del 0.000, concluimos que hay efectos de tiempo significativos. 
+
+De estas pruebas concluimos que el modelo de efectos fijos es preferible antes que el de *pooled* y efectos aleatorios, de la prueba F y de Hausman, respectivamente; y que del modelo de efectos fiojs individual al two-way el segundo es más adecuado, ya que se probó con el test de Breusch-Pagan  que en la ecuación
+
+yit=xitβ+ci+uit+λt,
+
+λt/=0.
 
 # Modelos con nivel de ingreso
 
@@ -196,27 +223,34 @@ En segundo lugar, realizaremos el mismo ejercicio pero ahora controlando por el 
 
 
 ```{r, results='asis', message= FALSE }
-
 A <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
                              data = data_2,
                              index = c("countrycode", "year"), 
                              model = "pooling")
+
 B <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
                       data = data_2,
                       index = c("countrycode", "year"), 
                       model = "within",
                       effect = "individual")
+
 C <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
                            data = data_2,
                            index = c("countrycode", "year"), 
                            model = "within",
                            effect = "twoways")
 
-stargazer(A,B,C, title="Modelos multivariados",type="latex",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)"), header=FALSE,
+D <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
+                           data = data_2,
+                           index = c("countrycode", "year"), 
+                           model = "random")
+
+stargazer(A,B,C,D, title="Modelos multivariados",type="text",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)","Efectos aleatorios"), header=FALSE,
           column.sep.width = "3pt", 
           font.size = "small")
 ```
 
+#checar
 En estos modelos podemos notar que el efecto de la desigualdad es negativo para los países que no pertenecen ni al grupo de ingreso alto ni al de bajo, es decir, a los de en medio. Por el contrario, el efecto de la desigualdad es positivo con el crecimiento para los países de ingreso alto y ambivalente para los países de ingreso bajo.
 
 Esto corrobora y contrasta la teoría de Barro. Por un lado, nuestros hallazgos son congruentes con su hipótesis de que la desigualdad incentiva al crecimiento en países ricos. Sin embargo, en países pobres no vemos una relación tan clara contrario a la hipótesis de que en estos países el efecto sería negativo. Esto podría deberse a que tal vez Barro se refería a los países de ingreso medio mas que a los de ingreso bajo (pues estos ni siquiera habrían despegado económicamente o a que tal vez en lugar de una curva de Kuznets la forma funcional sea una curva en forma de S).
@@ -224,38 +258,41 @@ Esto corrobora y contrasta la teoría de Barro. Por un lado, nuestros hallazgos 
 ## Pruebas de hipótesis
 
 ```{r, results='asis', message= FALSE }
-#Prueba FE vs OLS
-#individuales
+
+#Prueba FE vs pooled: individuales
 p1<-pFtest(B,A)
-#two way
-p2<-pFtest(C,A)
-#Prueba Breusch- Pagan efectos de tiempo
+
+#Hausman
+p2<-phtest(C,D)
+
+#Prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo fijos
 p3<-plmtest(B, c("time"), type=("bp"))
-p4<-plmtest(B, c("time"), type=("bp"))
 
 #           
-Pruebas<-c("OLS vs FE individual", "OLS vs FE two-way","EF tiempo")
-P.value<-c("0.0000", "0.0000", "0.0000")
+Pruebas<-c("Pooled vs EF individual", "EF vs EA: Hausman", "EF individuales vs two-way")
+P.value<-c("0.0000", "0.0000","0.0000")
 dataf<-data.frame(Pruebas, P.value, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T) %>% kable_styling(position = "center")
 ```
-En esta sección, se realizó de nuevo la prueba del modelo MCO contra *pooled*, y de nuevo se rechazó Ho a favor de efectos fijos. Adicionalmente, se hizo una prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo, donde Ho es que no se necesitan efectos de tiempo fijos. Esta prueba solo es permitida en el modelo de efectos individuales. Al rechazar concluimos que es necesario controlar por tiempo en el modelo de efectos fijos individuales.
+
+En esta sección, se realizó de nuevo la prueba del modelo de efectos fijos contra *pooled*, y de nuevo se rechazó Ho a favor del primero. Adicionalmente, se hizo una prueba de multiplicador lagrangiano Breusch-Pagan para efectos de tiempo fijos, donde Ho es que λt=0. Al rechazar, concluimos que es necesario controlar por tiempo en el modelo de efectos fijos individuales, optando por el modelo two-way.
 
 # Modelo final
 
 ```{r, results='asis', message= FALSE }
-
-B <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low)+factor(year), 
+E <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low), 
                       data = data_2,
                       index = c("countrycode", "year"), 
                       model = "within",
-                      effect = "individual")
+                      effect = "twoways")
 
-stargazer(B, title="Modelo multivariado",type="latex",column.labels = c("Efectos Fijos (individuales)"), header=FALSE,
+stargazer(E, title="Modelo multivariado",type="text",column.labels = c("Efectos Fijos (two-way)"), header=FALSE,
           column.sep.width = "3pt", 
           font.size = "small")
 ```
-Nuestro modelo final propuesto es el de efectos fijos individuales controlando por la variable tiempo. En este podemos notar una mejora drástica en la capacidad explicativa del modelo, reflejada en la $R^2$. Los resultados señalan que el coeficiente de Gini tiene una relación negativa significativa sobre el crecimiento per cápita, y como mencionamos anteriormente, la interacción de los países de ingreso bajo y alto con el Gini una relación positiva, coherente con la teoría de Barro.  
+Las pruebas de hipótesis mostradas muestran la bondad de ajuste del modelo final, el within two-way, que incluye a la variable de tiempo (lambda_t) en su estimación. Esta es la forma más eficiente de capturar los efectos fijos del panel, comparada con el modelo de *least squares dummy variables* o el modelo within individual incluyendo variables de tiempo[@Baltagi2013], ya que estos dan errores estándar incorrectos debido al número mayor de grados de libertad,  así como que la $R^2$ es correcta.[@Park2011]
+
+Los resultados señalan que el coeficiente de Gini tiene una relación negativa y significativa sobre el crecimiento per cápita, y como mencionamos anteriormente, que la interacción entre los países de ingreso bajo y alto con el coeficiente de Gini tienen una relación positiva con la variable dependiente, coherente con la teoría de Barro.  
 
 
 # Conclusiones
@@ -266,5 +303,3 @@ Finalmente algo muy importante es que los resultados dependen totalmente de la e
 
 \newpage
 # Referencias
-
-

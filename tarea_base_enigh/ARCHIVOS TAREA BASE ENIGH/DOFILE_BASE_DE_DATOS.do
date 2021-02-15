@@ -29,3 +29,8 @@ save BASE1
 
 *Como los precios, tanto del huevo, como de la leche no varían significativamente entre los estados y municipios, se determinó utilizar estos precios promedio. 
 
+*Utilizamos como variable demográfica "est_socio" con la que se clasifica el hogar conforme a las características socioeconómicas de quienes las habitan y su equipamiento.  
+*1: Bajo
+*2: Medio bajo
+*3: Medio alto
+*4: Alto

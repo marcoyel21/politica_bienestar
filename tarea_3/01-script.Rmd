@@ -245,7 +245,7 @@ D <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low),
                            index = c("countrycode", "year"), 
                            model = "random")
 
-stargazer(A,B,C,D, title="Modelos multivariados",type="text",column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)","Efectos aleatorios"), header=FALSE,
+stargazer(A,B,C,D, title="Modelos multivariados",type="latex",mean.sd=TRUE,column.labels = c("Pooled","Efectos Fijos (individuales)", "Efectos fijos (twoways)","Efectos aleatorios"), header=FALSE,
           column.sep.width = "3pt", 
           font.size = "small")
 ```
@@ -288,7 +288,7 @@ E <- plm( growth_pc  ~ gini+I(gini*inc_high)+I(gini*inc_low),
                       model = "within",
                       effect = "twoways")
 
-stargazer(E, title="Modelo multivariado",type="text",column.labels = c("Efectos Fijos (two-way)"), header=FALSE,
+stargazer(E, title="Modelo multivariado",type="latex",mean.sd=TRUE,column.labels = c("Efectos Fijos (two-way)"), header=FALSE,
           column.sep.width = "3pt", 
           font.size = "small")
 ```
@@ -298,7 +298,7 @@ Esta es la forma más eficiente de capturar los efectos fijos del panel, compara
 
 Los resultados señalan que el coeficiente de Gini tiene una relación negativa y significativa sobre el crecimiento económico per cápita, y como mencionamos anteriormente, que en los países pobres la desigualdad afecta al crecimiento económico, mientras que en los ricos existe una relación positiva entre ellas. 
 
-Una teoría acorde a la de nuestros resultados es la *teoría de la acumulación de capital humano* que liga a la desigualda y al crecimiento económico: la desigualdad de ingresos deprime el desarrollo de habilidades de individuos cuyos padres tienen niveles bajos de educación, tanto en cantidad y calidad educativa. Mientras tanto, los resultados educativos de individuos más ricos no están afectados por la desigualdad. 
+Una teoría acorde a la de nuestros resultados es la *teoría de la acumulación de capital humano* que liga a la desigualda y al crecimiento económico: la desigualdad de ingresos deprime el desarrollo de habilidades de individuos cuyos padres tienen niveles bajos de educación, tanto en cantidad y calidad educativa. Mientras tanto, los resultados educativos de individuos más ricos no están afectados por la desigualdad. [@Cingano2014] 
 
 
 # Conclusiones
@@ -308,6 +308,8 @@ En conclusión, con los datos a nuestra disposición y bajo la especificación e
 Sin embargo, al introducir la variable de interacción entre desigualdad y nivel de ingreso, sucedieron dos cosas: por un lado, pudimos discernir el efecto de ella (la desigualdad) a través de la distribución del ingreso, observando que no afecta de forma igual a los diferentes países; por el otro, que la relación era ambigua y con poco poder explicativo, ya que, mientras que en los modelos within los países de ingresos altos y bajos tenían signo positivo del coeficiente respecto a los de ingresos medios, sucedía lo contrario en el modelo *pooled* y de efectos aleatorios.
  
 Para escoger un modelo "más adecuado" y ajustado a los datos, realizamos múltiples pruebas para evaluar la existencia de efectos fijos entre entidades, en el tiempo, y si existía correlación entre los errores de los países y las variables regresoras. Los resultados concluyeron que el modelo con mejor bondad de ajuste (más eficiente) era el de efectos fijos *two-ways* .
+
+Una conclusión a la que podemos llegar a partir de estos resultados es que las políticas para reducir la desigualdad son clave, sobre todo en países pobres, no solo para mejorar el aspecto social del país, si no para asegurar un crecimiento económico a largo plazo. Esto se podría lograr a través de impuestos y transferencias, lo cual no necesariamente dañaría al crecimiento. [@Cingano2014]
 
 Finalmente algo muy importante es que los resultados dependen totalmente de la especificación del modelo de regresión así como de las variables que usemos como control. Esto no es un hallazgo nuevo pues diversos autores sostienen que tanto la especificación como la calidad de los datos han hecho que las conclusiones en este tema sean ambivalentes[@Boushey2014]. Esto sugiere que en este tema la relación no es tan inmediata y que se requiere de más trabajo análitico y teórico, y posiblemente hasta en la calidad de los datos.
 

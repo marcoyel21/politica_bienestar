@@ -1,0 +1,206 @@
+---
+output:
+  pdf_document:
+    latex_engine: xelatex
+  geometry: margin=1in
+fontsize: 11pt
+header-includes :
+  \usepackage{pdflscape}
+  \usepackage{float}
+  \usepackage{geometry}
+  \usepackage{graphicx}
+  \tolerance=1
+  \hyphenpenalty=10000
+  \hbadness=10000
+  \linespread{1.3}
+  \usepackage[justification=centering, font=bf, labelsep=period, skip=5pt]{caption} 
+  \usepackage{titling}
+  \usepackage[spanish]{babel}
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhead[L]{Maestría en Economía Aplicada}
+  \fancyhead[R]{ITAM}
+
+---
+\begin{titlepage}
+\begin{center}
+
+\textsc{\Large Instituto Tecnológico Autónomo de México}\\[2em]
+
+\textbf{\LARGE Bienestar y Política Social}\\[2em]
+
+
+\textsc{\LARGE }\\[1em]
+
+
+\textsc{\large Tarea QUAIDS-AIDS}\\[1em]
+
+\textsc{\LARGE }\\[1em]
+
+\textsc{\large }\\[1em]
+\textsc{\LARGE }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\large }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\LARGE Dra. Araceli Ortega Díaz}\\[1em]
+
+\textsc{\LARGE }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\LARGE Marco Antonio Ramos Juárez}\\[1em]
+
+\textsc{\large 142244}\\[1em]
+
+\textsc{\LARGE Mayra Samantha Cervantes Bravo}\\[1em]
+
+\textsc{\large 141371}\\[1em]
+
+\textsc{\LARGE Cynthia Raquel Valdivia Tirado }\\[1em]
+
+\textsc{\large 81358}\\[1em]
+
+\end{center}
+
+\vspace*{\fill}
+\textsc{Ciudad de México \hspace*{\fill} 2021}
+
+\end{titlepage}
+
+
+\newpage
+
+
+\tableofcontents
+
+\newpage
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,fig.pos = 'H')
+
+#paquetes marco
+library(dplyr)
+library(readr)
+library(ggplot2)
+library("ggpubr")
+theme_set(
+  theme_bw() +
+    theme(legend.position = "top")
+  )
+```
+
+
+# nstrucciones 
+
++ Describir los artículos que eligieron usando una gráfica de sus proporciones de gasto contra el ingreso (o gasto total de la canasta de referencia que están analizando), y ver si son lineales o cuadráticos. Y elegir al menos una variable demográfica que define un comportamiento diferente (nivel de ingreso, región , sexo, grupo edad, etc.. , con una es suficiente)
++ Estimar los QUAIDS O AID, ¿son los parámetros , estadísticamente significativos?
++ Estimar la matriz de elasticidades precio compensadas y no compensadas, evaluadas en la media.
++ Estimar las elasticidades de ingreso.
++ Conclusión sobre sus estimaciones
+
+
+
+```{r}
+
+data<-read.csv("concentradohogar/concentradohogar.csv")
+#Precio de la leche: 18.72 pesos por litro
+#Para el precio promedio de la leche, se recabó información en el Sistema Nacional de Información e Integración de Mercados (SNIM) de la Secretaría de Economía; utilizando el precio promedio ponderado por población del litro de la leche pasteurizada vendida en tiendas el día 24 de julio de 2020 -la última actualización.
+#Vínculo: http://www.economia-sniim.gob.mx/nuevo/ 
+
+#Precio del huevo: 28.5 pesos por kilo
+#Para obtener el precio promedio del huevo, se promedió el precio frecuente del huevo blanco vendido al menudeo del 8 al 12 de febrero de 2021 obtenido del SNIM en el siguiente vínculo: http://www.economia-sniim.gob.mx/Nuevo/Home.aspx?opcion=/SNIIM-Pecuarios-Nacionales/MenAve.asp 
+
+#Como los precios, tanto del huevo, como de la leche no varían significativamente entre los estados y municipios, se determinó utilizar estos precios promedio. 
+
+#Utilizamos como variable demográfica "est_socio" con la que se clasifica el hogar conforme a las características socioeconómicas de quienes las habitan y su equipamiento.  
+#1: Bajo
+#2: Medio bajo
+#3: Medio alto
+#4: Alto
+data<-data%>% select(folioviv,foliohog,est_socio,alimentos,leche,huevo,gasto_mon,pescado,tam_loc)%>%
+  mutate(p_leche=18.72, q_leche=leche/18.72, p_huevos=28.5,q_huevos=huevo/28.5)
+
+A<-data%>%filter(est_socio==1)
+B<-data%>%filter(est_socio==2)
+C<-data%>%filter(est_socio==3)
+D<-data%>%filter(est_socio==4)
+
+
+
+```
+
+
+
+# Descripción de los artículos
+
+En las siguientes graficas mostramos la relación entre el logaritmo del gasto en alimentos frente al logaritmo del gasto en nuestros dos bienes: leche y huevo. Asimismo, para facilitar el análisis, graficamos también dos regresiones, una lineal (con amarillo) y una cuadrática (con rojo) para poder ver como se ajusta mejor a los datos.
+
+```{r, message=FALSE,fig.cap="Leche", out.width="100%", fig.align='center'}
+
+#grafico la relacion log gasto en alimentos vs log gasto en el bien condicionado a cada estrato social
+l1<-ggplot(A, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue")) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato bajo")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l2<-ggplot(B, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato medio bajo")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l3<-ggplot(C, aes(log(alimentos),log(leche)))+geom_point() +  theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue")) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato medio alto")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+l4<-ggplot(D, aes(log(alimentos),log(leche)))+geom_point() +  theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue")) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato alto")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+ggarrange(
+ l1,l2,l3,l4, labels = c("A", "B","C","D"),
+  common.legend = TRUE, legend = "bottom"
+  )
+
+
+
+```
+En cuanbto a la **figura 1**, en estas gráficas podemos ver la relación entre la proporcion que se gasta en leche con respecto al gasto en alimento. Cada gráfica representa un grupo de la variable est_socio, los dos paneles superiores indican a los estratos bajo y medio bajo y los dos paneles inferiores a los medio alto y alto.
+
+Lo que podemos notar esque en los paneles superiores, podría existir una relación cuadrática mientras que en los inferiores la relación es más plana, como un bien normal perfecto. Ahora, algo interesante es que las pendientes son más grandes en los paneles superieroes, y vemos que la dirección es la misma en los 4 paneles (aproximadamente hacia el cuadrante 12,8). Esto quiere decir que probablemente que las familias de la mitad más pobre están gastando ligeramente más proporción de su ingreso en leche que los estratos altos y que además, comienzan a hacer ese gasto desde un menor ingreso.
+
+```{r, message=  FALSE, fig.cap="Huevo", out.width="100%", fig.align='center'}
+
+#grafico la relacion log gasto en alimentos vs log gasto en el bien condicionado a cada estrato social
+
+l1<-ggplot(A, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue")) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato bajo")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l2<-ggplot(B, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato medio bajo")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l3<-ggplot(C, aes(log(alimentos),log(huevo)))+geom_point() +  theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue")) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato medio alto")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+l4<-ggplot(D, aes(log(alimentos),log(huevo)))+geom_point() +  theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue")) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato alto")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+ggarrange(
+ l1,l2,l3,l4, labels = c("A", "B","C","D"),
+  common.legend = TRUE, legend = "bottom"
+  )
+
+```
+
+
+En cuanto a la **figura 2**, el huevo, la relación es muy similar a la de la leche. Las pendientes de la relación logaritmo de gasto en alimentos contra logaritmo del gasto en huevo son mayores para los dos paneles superiores, la mitad más pobre. Por un lado observamos que las familias de la mitad más pobre comienzan un gasto en huevo desde menores ingresos y con una mayor proporción destinada al bien. Sin embargo, las diferencias son muy pequeñas y en general la relación es muy lineal para los 4 paneles, tal vez con una exepción para el panel B que muestra una  muy ligera tendencia cuadrática al principio.
+
+En conclusión de esta parte, aunque podemos notar algunos indicios leves de comportamiento cuadrático, sobretodo para los grupos pobres, en negeral la relación es lineal y por ello esperamos que los coeficientes de los terminos cuadráticos sean estadísticmanete insignificantes. Tal vez, condicionando por estrato, encontremos que hay terminos cuadráticos para los dos estratos más pobres.
+
+# Estimación QUADIS
+
+# Matriz de elasticidades
+
+# Estimación de las elasticidades ingreso
+
+# Conclusiones

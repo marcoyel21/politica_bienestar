@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.8)  15 FEB 2021 16:20
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.8)  15 FEB 2021 22:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -828,41 +828,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [1]
-File: 01-script_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf
-)
-<use 01-script_files/figure-latex/unnamed-chunk-2-1.pdf>
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[2]
-Overfull \hbox (2.90298pt too wide) in paragraph at lines 172--181
-[]\TU/lmr/m/n/10.95 Lo que podemos notar esque en los paneles superiores, podrí
-a existir una relación cuadrática mientras
- []
-
-
-Overfull \hbox (3.79845pt too wide) in paragraph at lines 172--181
-\TU/lmr/m/n/10.95 que en los inferiores la relación es más plana, como un bien 
-normal perfecto. Ahora, algo interesante es
- []
-
-
-Overfull \hbox (2.79353pt too wide) in paragraph at lines 172--181
-\TU/lmr/m/n/10.95 que las pendientes son más grandes en los paneles superieroes
-, y vemos que la dirección es la misma en
- []
-
-
-Overfull \hbox (3.46748pt too wide) in paragraph at lines 172--181
-\TU/lmr/m/n/10.95 los 4 paneles (aproximadamente hacia el cuadrante 12,8). Esto
- quiere decir que probablemente que las
- []
-
 File: 01-script_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf
 )
 <use 01-script_files/figure-latex/unnamed-chunk-3-1.pdf>
@@ -874,20 +839,55 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
+[2]
+Overfull \hbox (2.90298pt too wide) in paragraph at lines 176--185
+[]\TU/lmr/m/n/10.95 Lo que podemos notar esque en los paneles superiores, podrí
+a existir una relación cuadrática mientras
+ []
+
+
+Overfull \hbox (3.79845pt too wide) in paragraph at lines 176--185
+\TU/lmr/m/n/10.95 que en los inferiores la relación es más plana, como un bien 
+normal perfecto. Ahora, algo interesante es
+ []
+
+
+Overfull \hbox (2.79353pt too wide) in paragraph at lines 176--185
+\TU/lmr/m/n/10.95 que las pendientes son más grandes en los paneles superieroes
+, y vemos que la dirección es la misma en
+ []
+
+
+Overfull \hbox (3.46748pt too wide) in paragraph at lines 176--185
+\TU/lmr/m/n/10.95 los 4 paneles (aproximadamente hacia el cuadrante 12,8). Esto
+ quiere decir que probablemente que las
+ []
+
+File: 01-script_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf
+)
+<use 01-script_files/figure-latex/unnamed-chunk-4-1.pdf>
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
 [3]
-Overfull \hbox (20.91571pt too wide) in paragraph at lines 201--207
+Overfull \hbox (20.91571pt too wide) in paragraph at lines 205--211
 []\TU/lmr/m/n/10.95 En conclusión de esta parte, aunque podemos notar algunos i
 ndicios leves de comportamiento cuadrático,
  []
 
 
-Overfull \hbox (14.94803pt too wide) in paragraph at lines 201--207
+Overfull \hbox (14.94803pt too wide) in paragraph at lines 205--211
 \TU/lmr/m/n/10.95 sobretodo para los grupos pobres, en negeral la relación es l
 ineal y por ello esperamos que los coeficientes
  []
 
 
-Overfull \hbox (0.2384pt too wide) in paragraph at lines 201--207
+Overfull \hbox (0.2384pt too wide) in paragraph at lines 205--211
 \TU/lmr/m/n/10.95 de los terminos cuadráticos sean estadísticmanete insignifica
 ntes. Tal vez, condicionando por estrato,
  []
@@ -917,11 +917,11 @@ Package rerunfilecheck Info: File `01-script.out' has not changed.
 (rerunfilecheck)             Checksum: 56CD4B5475951C4D2E43DED22BD20B6F;961.
  ) 
 Here is how much of TeX's memory you used:
- 18622 strings out of 479196
- 328538 string characters out of 5873090
+ 18625 strings out of 479196
+ 328593 string characters out of 5873090
  803052 words of memory out of 5000000
- 37989 multiletter control sequences out of 15000+600000
- 404122 words of font info for 41 fonts, out of 8000000 for 9000
+ 37990 multiletter control sequences out of 15000+600000
+ 404130 words of font info for 42 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  98i,12n,122p,611b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
 

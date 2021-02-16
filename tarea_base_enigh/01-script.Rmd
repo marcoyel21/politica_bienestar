@@ -103,7 +103,7 @@ theme_set(
 
 ```{r}
 
-data<-read.csv("concentradohogar/concentradohogar.csv")
+original<-read.csv("concentradohogar/concentradohogar.csv")
 #Precio de la leche: 18.72 pesos por litro
 #Para el precio promedio de la leche, se recabó información en el Sistema Nacional de Información e Integración de Mercados (SNIM) de la Secretaría de Economía; utilizando el precio promedio ponderado por población del litro de la leche pasteurizada vendida en tiendas el día 24 de julio de 2020 -la última actualización.
 #Vínculo: http://www.economia-sniim.gob.mx/nuevo/ 
@@ -118,25 +118,76 @@ data<-read.csv("concentradohogar/concentradohogar.csv")
 #2: Medio bajo
 #3: Medio alto
 #4: Alto
-data<-data%>% 
+#______________________________________________________________________________
+#______________________________________________________________________________
+#DATA wranwilng para STATA (version A)
+data<-original%>% 
   select(folioviv,foliohog,est_socio,alimentos,leche,huevo)%>%
   mutate(p_leche=18.72,s_leche=leche/alimentos, q_leche=leche/18.72,
          p_huevo=28.5,q_huevos=huevo/28.5,s_huevo=huevo/alimentos,
-         p_other=1,q_other=1,s_other=(alimentos-leche-huevo)/alimentos)
+         q_other=1,s_other=(alimentos-leche-huevo)/alimentos, p_other=1/s_other)
 
 A<-data%>%filter(est_socio==1)
 B<-data%>%filter(est_socio==2)
 C<-data%>%filter(est_socio==3)
 D<-data%>%filter(est_socio==4)
 
-#DATA wranwilng para STATA
+
+
+#para correción de precios y shares de other
+data[mapply(is.infinite, data)] <- NA
 data[is.na(data)] <- 0
+data$p_other[data$p_other == 0] <- 1
+
+#Quito hogares que no gastaron nada en alimentos
 data<-data %>% filter(alimentos !=0)
+
+# Escribo la base
 write_csv(data,"stata.csv")
+
+
+#______________________________________________________________________________
+#______________________________________________________________________________
+
+#DATA wranwilng para STATA (version B)
+data_beta<-original%>% 
+  select(folioviv,foliohog,est_socio,leche,huevo,pescado)%>%
+  mutate(alimentos=(leche+huevo+pescado),
+         p_leche=18.72,s_leche=leche/alimentos, q_leche=leche/18.72,
+         p_huevo=28.5,q_huevo=huevo/28.5,s_huevo=huevo/alimentos,
+         p_pescado=40,q_pescado=pescado/40,s_pescado=pescado/alimentos)
+
+
+#para correción de precios y shares 
+data_beta[mapply(is.infinite, data_beta)] <- NA
+data_beta[is.na(data_beta)] <- 0
+
+#Quito hogares que no gastaron nada en alimentos
+data_beta<-data_beta %>% filter(alimentos !=0)
+
+# Escribo la base
+write_csv(data_beta,"stata_beta.csv")
+
+
+#______________________________________________________________________________
+#______________________________________________________________________________
+
+#DATA wranwilng para STATA (version c)
+data_beta<-original%>% 
+  select(folioviv,foliohog,est_socio,leche,huevo,pescado)%>%
+  mutate( p_leche=18.72, p_huevo=28.5)
+
+# Escribo la base
+write_csv(data_beta,"stata_c.csv")
 
 ```
 
+```{r}
+data_beta<-data_beta %>% mutate(is=paste(folioviv,foliohog))
 
+sum(as.numeric(duplicated(data_beta[,-1])))
+
+```
 
 # Descripción de los artículos
 

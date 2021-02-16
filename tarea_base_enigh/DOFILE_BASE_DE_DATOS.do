@@ -131,6 +131,24 @@ estat compensated if est_socio==1, atmeans
 matrix ingreso_bajo_comp=r(compelas)
 matrix list ingreso_bajo_comp
 
+*para ingreso medio bajo
+estat uncompensated if est_socio==2, atmeans
+matrix ingreso_mediobajo_uncomp= r(uncompelas)
+matrix list ingreso_mediobajo_uncomp
+ 
+estat compensated if est_socio==2, atmeans
+matrix ingreso_mediobajo_comp=r(compelas)
+matrix list ingreso_mediobajo_comp
+
+*Para ingreso medio alto
+estat uncompensated if est_socio==3, atmeans
+matrix ingreso_medioalto_uncomp= r(uncompelas)
+matrix list ingreso_medioalto_uncomp
+ 
+estat compensated if est_socio==3, atmeans
+matrix ingreso_medioalto_comp=r(compelas)
+matrix list ingreso_medioalto_comp
+
 *Para ingreso alto
 estat uncompensated if est_socio==4, atmeans
 matrix ingreso_alto_uncomp= r(uncompelas)

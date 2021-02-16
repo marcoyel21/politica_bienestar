@@ -46,7 +46,12 @@ tab stotal
 
 save BASETC
 
-* quaids
+
+*QUAIDS sin controles. No sé si poner. tendrían que ser análisis para cada una
+
+quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) nolog
+
+*QUAIDS con variable sociodemográfica
 
 quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) demographics(est_socio) nolog
 
@@ -54,7 +59,7 @@ quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(g
 
 predict what*
 
-*Elasticidades compensadas y no compensadas evaluadas en la media
+*Elasticidades compensadas y no compensadas evaluadas en la media. Matrices
 
 *Compensadas 
 
@@ -63,40 +68,19 @@ matrix compensadas=r(compelas)
 matrix list compensadas
 
 *No compensadas
+
 estat uncompensated,atmeans
 matrix uncompensadas=r(uncompelas)
 matrix list uncompensadas
 
 *Elasticidad ingreso
+
 estat expenditure,atmeans
 matrix ingreso=r(expelas)
 matrix list ingreso
 
-*Para reducir la granularidad en el estrato socioeconómico, reducimos el número de categorías de cuatro a 2, siendo ahora estrato bajo y medio-bajo 0 y medio-alto y alto 1
-gen est_socio2=1
-replace est_socio2=0 if est_socio==1|est_socio==2
+*Variables y resumen elasticidades
 
-*Y obtenemos las elasticidades segmentadas
-
-*LO QUE AGREGUÉ
-
-*QUAIDS sin controles 
-quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) nolog
-
-*Elasticidad no compensada
-estat uncompensated, atmeans
-matrix elasticidad_nocompensada=r(uncompelas)
-matrix list elasticidad_nocompensada
-
-*Elasticidad compensada
-estat compensated, atmeans
-matrix elasticidad_compensada=r(compelas)
-matrix list elasticidad_compensada
-
-*QUAIDS controlando por variable demográfica
-quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) demographics(est_socio) nolog
-
-predict what*
 estat expenditure m*
 sum m_1-m_3
 estat compensated ce*
@@ -104,7 +88,9 @@ sum ce_*
 estat uncompensated ue*
 sum ue_*
 
- *Para ingreso bajo
+*** Ahora generamos variables segmentando por estrato
+
+*Bajo
 estat expenditure mp* if est_socio==1
 sum mp_*
 estat compensated cep* if est_socio==1
@@ -112,7 +98,23 @@ sum cep_*
 estat uncompensated uep* if est_socio==1
 sum uep_*
 
- *Para ingreso alto
+*Medio-bajo
+estat expenditure mp* if est_socio==2
+sum mp_*
+estat compensated cep* if est_socio==2
+sum cep_*
+estat uncompensated uep* if est_socio==2
+sum uep_*
+
+*Medio-alto
+estat expenditure mp* if est_socio==3
+sum mp_*
+estat compensated cep* if est_socio==3
+sum cep_*
+estat uncompensated uep* if est_socio==3
+sum uep_*
+
+*Alto
 estat expenditure mnp* if est_socio==4
 sum mnp_*
 estat compensated cenp* if est_socio==4
@@ -120,43 +122,65 @@ sum cenp_*
 estat uncompensated uenp* if est_socio==4
 sum uenp_*
 
+**************
+*Matrices precio compensadas, no compensadas, e ingreso.
 *En la media
+
 *Para ingreso bajo
 
-estat uncompensated if est_socio==1, atmeans
-matrix ingreso_bajo_uncomp= r(uncompelas)
-matrix list ingreso_bajo_uncomp
- 
 estat compensated if est_socio==1, atmeans
-matrix ingreso_bajo_comp=r(compelas)
-matrix list ingreso_bajo_comp
+matrix bajo_comp=r(compelas)
+matrix list bajo_comp
 
-*para ingreso medio bajo
-estat uncompensated if est_socio==2, atmeans
-matrix ingreso_mediobajo_uncomp= r(uncompelas)
-matrix list ingreso_mediobajo_uncomp
+estat uncompensated if est_socio==1, atmeans
+matrix bajo_uncomp= r(uncompelas)
+matrix list bajo_uncomp
+
+estat expenditure if est_socio==1, atmeans
+matrix bajo_ingr= r(expelas)
+matrix list bajo_ingr
  
-estat compensated if est_socio==2, atmeans
-matrix ingreso_mediobajo_comp=r(compelas)
-matrix list ingreso_mediobajo_comp
+*para ingreso medio-bajo
 
-*Para ingreso medio alto
-estat uncompensated if est_socio==3, atmeans
-matrix ingreso_medioalto_uncomp= r(uncompelas)
-matrix list ingreso_medioalto_uncomp
+estat compensated if est_socio==2, atmeans
+matrix mediobajo_comp=r(compelas)
+matrix list mediobajo_comp
+
+estat uncompensated if est_socio==2, atmeans
+matrix mediobajo_uncomp= r(uncompelas)
+matrix list mediobajo_uncomp
+
+estat expenditure if est_socio==2, atmeans
+matrix mediobajo_ingr= r(expelas)
+matrix list mediobajo_ingr
+
+*Para ingreso medio-alto
  
 estat compensated if est_socio==3, atmeans
-matrix ingreso_medioalto_comp=r(compelas)
-matrix list ingreso_medioalto_comp
+matrix medioalto_comp=r(compelas)
+matrix list medioalto_comp
+
+estat uncompensated if est_socio==3, atmeans
+matrix medioalto_uncomp= r(uncompelas)
+matrix list medioalto_uncomp
+
+estat expenditure if est_socio==3, atmeans
+matrix medioalto_ingr= r(expelas)
+matrix list medioalto_ingr
 
 *Para ingreso alto
-estat uncompensated if est_socio==4, atmeans
-matrix ingreso_alto_uncomp= r(uncompelas)
-matrix list ingreso_alto_uncomp
 
 estat compensated if est_socio==4, atmeans
-matrix ingreso_alto_comp=r(compelas)
-matrix list ingreso_alto_comp
+matrix alto_comp=r(compelas)
+matrix list alto_comp
+
+estat uncompensated if est_socio==4, atmeans
+matrix alto_uncomp= r(uncompelas)
+matrix list alto_uncomp
+
+estat expenditure if est_socio==4, atmeans
+matrix alto_ingr= r(expelas)
+matrix list alto_ingr
 
 
 

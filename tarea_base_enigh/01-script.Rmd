@@ -151,48 +151,6 @@ data<-data %>% filter(alimentos !=0)
 # Escribo la base
 write_csv(data,"stata.csv")
 
-
-#______________________________________________________________________________
-#______________________________________________________________________________
-
-#DATA wranwilng para STATA (version B)
-data_beta<-original%>% 
-  select(folioviv,foliohog,est_socio,leche,huevo,pescado)%>%
-  mutate(alimentos=(leche+huevo+pescado),
-         p_leche=18.72,s_leche=leche/alimentos, q_leche=leche/18.72,
-         p_huevo=28.5,q_huevo=huevo/28.5,s_huevo=huevo/alimentos,
-         p_pescado=40,q_pescado=pescado/40,s_pescado=pescado/alimentos)
-
-
-#para correción de precios y shares 
-data_beta[mapply(is.infinite, data_beta)] <- NA
-data_beta[is.na(data_beta)] <- 0
-
-#Quito hogares que no gastaron nada en alimentos
-data_beta<-data_beta %>% filter(alimentos !=0)
-
-# Escribo la base
-write_csv(data_beta,"stata_beta.csv")
-
-
-#______________________________________________________________________________
-#______________________________________________________________________________
-
-#DATA wranwilng para STATA (version c)
-data_beta<-original%>% 
-  select(folioviv,foliohog,est_socio,leche,huevo,pescado)%>%
-  mutate( p_leche=18.72, p_huevo=28.5)
-
-# Escribo la base
-write_csv(data_beta,"stata_c.csv")
-
-```
-
-```{r}
-data_beta<-data_beta %>% mutate(is=paste(folioviv,foliohog))
-
-sum(as.numeric(duplicated(data_beta[,-1])))
-
 ```
 
 # Descripción de los artículos

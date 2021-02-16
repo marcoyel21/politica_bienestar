@@ -67,31 +67,41 @@ predict what*
 
 estat compensated if ebajo==1, atmeans
 matrix bajo_comp=r(compelas)
-matrix list bajo_comp
-
+eststo: matrix list bajo_comp
+esttab using 1.tex, se label title(Elasticidades precio compensadas para población de estrato bajo)
+eststo clear
 
 estat uncompensated if ebajo==1, atmeans
 matrix bajo_uncomp= r(uncompelas)
-matrix list bajo_uncomp
+eststo: matrix list bajo_uncomp
+esttab using 2.tex, se label title(Elasticidades precio no compensadas para población de estrato bajo)
+eststo clear
 
 estat expenditure if ebajo==1, atmeans
 matrix bajo_ingr= r(expelas)
-matrix list bajo_ingr
+eststo: matrix list bajo_ingr
+esttab using 3.tex, se label title(Elasticidades ingreso para población de estrato bajo)
+eststo clear
  
 *para ingreso alto
 
 estat compensated if ebajo==0, atmeans
 matrix alto_comp=r(compelas)
-matrix list alto_comp
+eststo: matrix list alto_comp
+esttab using 4.tex, se label title(Elasticidades precio compensadas para población de estrato alto)
+eststo clear
 
 estat uncompensated if ebajo==0, atmeans
 matrix alto_uncomp= r(uncompelas)
-matrix list alto_uncomp
+eststo: matrix list alto_uncomp
+esttab using 5.tex, se label title(Elasticidades precio no compensadas para población de estrato alto)
+eststo clear
 
 estat expenditure if ebajo==0, atmeans
 matrix alto_ingr= r(expelas)
-matrix list alto_ingr
-
+eststo: matrix list alto_ingr
+esttab using 5.tex, se label title(Elasticidades ingreso para población de estrato alto)
+eststo clear
 
 
 

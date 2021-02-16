@@ -127,16 +127,16 @@ matrix list bajo_ingr
 *para ingreso alto
 
 estat compensated if ebajo==0, atmeans
-matrix mediobajo_comp=r(compelas)
-matrix list mediobajo_comp
+matrix alto_comp=r(compelas)
+matrix list alto_comp
 
 estat uncompensated if ebajo==0, atmeans
-matrix mediobajo_uncomp= r(uncompelas)
-matrix list mediobajo_uncomp
+matrix alto_uncomp= r(uncompelas)
+matrix list alto_uncomp
 
 estat expenditure if ebajo==0, atmeans
-matrix mediobajo_ingr= r(expelas)
-matrix list mediobajo_ingr
+matrix alto_ingr= r(expelas)
+matrix list alto_ingr
 
 
 

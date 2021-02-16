@@ -11,31 +11,71 @@ rename leche gasto_leche
 rename huevo gasto_huevo
 rename alimentos gasto_alimentos
 
+* variables de precio constantes 
+
 gen pleche=18.72
 gen phuevo=28.5
 gen presto=30
+
+* variables de precio con distribución normal 
 
 replace pleche = rnormal(pleche)
 replace phuevo=rnormal(phuevo)
 replace presto=rnormal(presto)
 
+* gasto n=3
+
 gen gasto_resto=gasto_alimentos-gasto_leche-gasto_huevo
+
+* cantidad
 
 gen qleche=gasto_leche/pleche
 gen qhuevo=gasto_huevo/phuevo
 gen qresto=gasto_resto/presto
 
+* shares
+
 gen shuevo=gasto_huevo/gasto_alimentos
 gen sleche=gasto_leche/gasto_alimentos
 gen sresto=gasto_resto/gasto_alimentos 
+
+*suma shares
 
 egen stotal=rsum(s*)
 tab stotal
 
 save BASETC
 
+* quaids
+
 quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) demographics(est_socio) nolog
 
+*predicciones de shares de los tres bienes. 
+
+predict what*
+
+*Elasticidades compensadas y no compensadas evaluadas en la media
+
+*Compensadas 
+
+estat compensated,atmeans
+matrix compensadas=r(compelas)
+matrix list compensadas
+
+*No compensadas
+estat uncompensated,atmeans
+matrix uncompensadas=r(uncompelas)
+matrix list uncompensadas
+
+*Elasticidad ingreso
+estat expenditure,atmeans
+matrix ingreso=r(expelas)
+matrix list ingreso
+
+1 Bajo
+2 Medio bajo
+3 Medio alto
+4 Alto
 
 
 *Precio de la leche: 18.72 pesos por litro

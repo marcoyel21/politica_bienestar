@@ -19,6 +19,7 @@ gen qhuevo=gasto_huevo/phuevo
 
 save BASE1
 
+egen gt=rsum(g*)
 
 *Precio de la leche: 18.72 pesos por litro
 *Para el precio promedio de la leche, se recabó información en el Sistema Nacional de Información e Integración de Mercados (SNIM) de la Secretaría de Economía; utilizando el precio promedio ponderado por población del litro de la leche pasteurizada vendida en tiendas el día 24 de julio de 2020 -la última actualización.

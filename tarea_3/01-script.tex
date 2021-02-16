@@ -1,0 +1,538 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{pdflscape} \usepackage{geometry} \usepackage{graphicx} \tolerance=1 \hyphenpenalty=10000 \hbadness=10000 \linespread{1.3} \usepackage[justification=centering, font=bf, labelsep=period, skip=5pt]{caption} \usepackage{titling} \usepackage[spanish]{babel} \usepackage{fancyhdr} \pagestyle{fancy} \fancyhead[L]{Maestría en Economía Aplicada} \fancyhead[R]{ITAM} \usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+\textsc{\Large Instituto Tecnológico Autónomo de México}\\[2em]
+
+\textbf{\LARGE Bienestar y Política Social}\\[2em]
+
+
+\textsc{\LARGE }\\[1em]
+
+
+\textsc{\large Tarea 3 }\\[1em]
+
+\textsc{\LARGE }\\[1em]
+
+\textsc{\large }\\[1em]
+\textsc{\LARGE }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\large }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\LARGE Dra. Araceli Ortega Díaz}\\[1em]
+
+\textsc{\LARGE }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\LARGE Marco Antonio Ramos Juárez}\\[1em]
+
+\textsc{\large 142244}\\[1em]
+
+\textsc{\LARGE Mayra Samantha Cervantes Bravo}\\[1em]
+
+\textsc{\large 141371}\\[1em]
+
+\textsc{\LARGE Cynthia Raquel Valdivia Tirado }\\[1em]
+
+\textsc{\large 81358}\\[1em]
+
+\end{center}
+
+\vspace*{\fill}
+\textsc{Ciudad de México \hspace*{\fill} 2021}
+
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\hypertarget{introducciuxf3n}{%
+\section{Introducción}\label{introducciuxf3n}}
+
+En esta tarea analizaremos la relación entre desigualdad y crecimiento
+económico desde un punto de vista teórico pero también econométrico.
+Asimismo, exploraremos el efecto que tiene el nivel de ingreso de los
+países en la desigualdad y el crecimiento. En este sentido, en la
+primera parte expondremos un marco teórico muy breve acompañado de un
+modelo econométrico donde la variable independiente es el coeficiente de
+Gini y la variable dependiente el crecimiento del PIB per capita.
+Posteriormente, se realizarán pruebas de hipótesis para determinar si se
+debe utilizar un modelo \emph{pooled} o de efectos fijos, así como si se
+debe controlar por el tiempo. En la segunda parte, extenderemos el
+análisis para incluir el nivel de ingreso (alto, mediano o bajo ) en los
+modelos, con las mismas pruebas de hipótesis. Finalmente, se hará una
+breve conclusión de los hallazgos.
+
+\hypertarget{relaciuxf3n-entre-crecimiento-desigualdad-y-nivel-de-ingreso}{%
+\section{Relación entre crecimiento, desigualdad y nivel de
+ingreso}\label{relaciuxf3n-entre-crecimiento-desigualdad-y-nivel-de-ingreso}}
+
+\hypertarget{argumentos-teuxf3ricos}{%
+\subsection{Argumentos teóricos}\label{argumentos-teuxf3ricos}}
+
+La relación entre crecimiento y desigualdad es un tema muy contencioso
+en la economía, pues existe evidencia teórica y empírica que encuentra
+que la relación es tanto negativa como positiva.\footnote{Heather
+  Boushey y Carter C Price, {``{How Are Economic Inequality and Growth
+  Connected? A review of recent research}''}, \emph{Washington Center
+  for Equitable Growth}, núm. October 2014 (2014): 1--25,
+  \href{https://www.equitablegrowth.org}{www.equitablegrowth.org}.}
+
+Desde un punto de vista teórico, el economista Robert Barro sostiene que
+existe una curva de Kuznets que relaciona al crecimiento con la
+desigualdad: mientras que al principio del desarrollo económico la
+desigualdad tiende a crecer, esta eventualmente decrece con la
+maduración de la economía. Sin embargo, como reconoce el premio Nobel,
+la relación entre ambas variables es modesta.\footnote{Robert J. Barro,
+  {``{Inequality and growth in a panel of countries}''}, \emph{Journal
+  of Economic Growth}, 2000,
+  \url{https://doi.org/10.1023/A:1009850119329}.}
+
+Asimismo, Barro argumenta que el crecimiento podría estar determinado
+por el nivel de desarrollo de un país. En los países pobres, la
+desigualdad inhibe el crecimiento, mientras que en los países ricos, la
+desigualdad promueve el crecimiento. Por esta razón consideramos que
+para evaluar el efecto de la desigualdad en el crecimiento, forzozamente
+necesitamos evaluar en conjunto con el nivel de ingreso.
+
+\hypertarget{argumentos-economuxe9tricos}{%
+\subsection{Argumentos
+econométricos}\label{argumentos-economuxe9tricos}}
+
+En primer lugar para cuantificar la relación entre crecimiento y la
+desigualdad, realizamos una serie de modelos sencillos donde vemos el
+efecto que tiene el coeficiente de Gini como única variable
+independiente frente al crecimiento del PIB per Capita. Para esta tarea
+descargamos los datos de las \emph{World Penn Tables} y los combinamos
+con una base de datos limpiada con los coeficientes de Gini del Banco
+Mundial. Debido a la disponibilidad de datos, se decidió usar solo
+información de 98 países desde 1990 hasta 2015. De esta manera obtenemos
+una base de datos perfectamente balanceada.
+
+\hypertarget{modelos-univariados}{%
+\section{Modelos univariados}\label{modelos-univariados}}
+
+\begin{verbatim}
+                                              Dependent variable:                                     
+         ---------------------------------------------------------------------------------------------
+                                                   growth_pc                                          
+                Pooled        Efectos Fijos (individuales) Efectos Fijos (two-ways) Efectos Aleatorios
+                 (1)                      (2)                        (3)                   (4)        
+\end{verbatim}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.00}}@{}}
+\toprule
+\endhead
+gini -0.0001 -0.003*** -0.003*** -0.0003 (0.0002) (0.001) (0.001)
+(0.0002) \\ \addlinespace
+Constant 0.031*** 0.039*** (0.007) (0.009) \\ \addlinespace
+\bottomrule
+\end{longtable}
+
+Observations 2,416 2,416 2,416 2,416\\
+R2 0.0001 0.015 0.013 0.001\\
+Adjusted R2 -0.0004 -0.026 -0.039 0.0003\\
+F Statistic 0.142 (df = 1; 2414) 36.304*** (df = 1; 2317) 31.289*** (df
+= 1; 2293) 1.577\\
+==========================================================================================================
+Note: \emph{p\textless0.1; \textbf{p\textless0.05; }}p\textless0.01
+Podemos observar que el coeficiente de la variable Gini tiene signo
+negativo en los cuatro modelos, aunque en el modelo \emph{pooled} y de
+efectos aleatorios no tiene significancia estadística, mientras que en
+los modelos within con efectos individuales y two-ways sí.
+
+\hypertarget{pruebas-de-hipuxf3tesis}{%
+\subsection{Pruebas de hipótesis}\label{pruebas-de-hipuxf3tesis}}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+Pruebas & P.value\\
+\midrule
+Prueba F: Pooled vs EF individual & 0.0000\\
+Hausman: EF vs EA & 0.0000\\
+Breusch-Pagan: EF individuales vs two-way & 0.0000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Dado que el modelo MCO o \emph{pooled} podría generar estimadores
+sesgados si no se cumple con los supuestos de linealidad, exogeneidad,
+homocedasticidad, y no multicolinealidad, se deben realizar pruebas para
+verificar que el efecto individual \(u_{i}\) no existe, o es igual a
+cero. Esto se realiza con una prueba F, donde \emph{Ho} es que los
+efectos individuales, o errores \(u_{i}\) son iguales a cero. Dado que
+se rechaza a un nivel de significancia de .0000, podemos descartar el
+modelo \emph{pooled}.
+
+En segunda instancia, se realiza una prueba para determinar si el modelo
+de efectos fijos o de efectos aleatorios es preferible. Realizamos una
+prueba de Hausman donde \emph{Ho} es que los errores \(u_{i}\) no están
+correlacionados con los regresores. Este sería el caso de un modelo con
+efectos aleatorios. Al rechazar \emph{Ho} con un nivel de significancia
+de .0000 , se implica que los errores están correlacionados a los
+regresores, o que hay efectos fijos en el panel.
+
+Por último, es necesario concluir si se deben incluir, además efectos
+fijos individuales, efectos fijos en el tiempo (\emph{two-ways}). Esto
+se realiza con una prueba de multiplicadores lagrangianos Breusch-Pagan,
+en la que se determina si se debe incluir el término \(lambda_{t}\), o
+efectos tiempo-específicos. \emph{Ho} implica que hay variables con
+efectos específicos individuales, pero no con efectos específicos en el
+tiempo. Al rechazar \emph{Ho} a un nivel del 0.000, concluimos que hay
+efectos de tiempo significativos.
+
+De estas pruebas concluimos que el modelo de efectos fijos es más
+adecuado que el de \emph{pooled} y efectos aleatorios, a partir de las
+pruebas F y de Hausman, respectivamente; y que del modelo de efectos
+fijos individual al two-way el segundo es más adecuado, ya que se probó
+con el test de Breusch-Pagan que en la ecuación de efectos fijos:
+
+\[\y_{it}=x_{it}\beta+c_i+u_{it} +\lambda_{t}\],
+
+\$\lambda\_\{t\} \neq 0.
+
+\hypertarget{modelos-con-nivel-de-ingreso}{%
+\section{Modelos con nivel de
+ingreso}\label{modelos-con-nivel-de-ingreso}}
+
+En segundo lugar, realizaremos el mismo ejercicio pero ahora controlando
+por la interacción del nivel de ingreso de los países (alto, medio y
+bajo) con el coeficiente de Gini. Esta interacción captará si la
+desigualdad afecta a las colas de la distribución del ingreso de
+diferentes formas.
+
+\hypertarget{defensa-economuxe9trica}{%
+\subsection{Defensa Econométrica}\label{defensa-economuxe9trica}}
+
+\begin{table}[!htbp] \centering 
+  \caption{Modelos multivariados} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{3pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{4}{c}{growth\_pc} \\ 
+ & Pooled & Efectos Fijos (individuales) & Efectos fijos (twoways) & Efectos aleatorios \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ gini & $-$0.0001 & $-$0.005$^{***}$ & $-$0.004$^{***}$ & $-$0.0002 \\ 
+  & (0.0002) & (0.001) & (0.001) & (0.0002) \\ 
+  & & & & \\ 
+ I(gini \textasteriskcentered  inc\_high) & $-$0.0001 & 0.006$^{***}$ & 0.005$^{***}$ & $-$0.0002 \\ 
+  & (0.0001) & (0.002) & (0.002) & (0.0001) \\ 
+  & & & & \\ 
+ I(gini \textasteriskcentered  inc\_low) & $-$0.001$^{***}$ & 0.004$^{***}$ & 0.005$^{***}$ & $-$0.001$^{***}$ \\ 
+  & (0.0001) & (0.002) & (0.002) & (0.0002) \\ 
+  & & & & \\ 
+ Constant & 0.034$^{***}$ &  &  & 0.041$^{***}$ \\ 
+  & (0.008) &  &  & (0.009) \\ 
+  & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 2,416 & 2,416 & 2,416 & 2,416 \\ 
+R$^{2}$ & 0.008 & 0.023 & 0.021 & 0.006 \\ 
+Adjusted R$^{2}$ & 0.007 & $-$0.019 & $-$0.032 & 0.005 \\ 
+F Statistic & 6.886$^{***}$ (df = 3; 2412) & 18.094$^{***}$ (df = 3; 2315) & 16.020$^{***}$ (df = 3; 2291) & 14.568$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+En estos modelos podemos notar que el efecto de la desigualdad es
+negativo para los países que no pertenecen ni al grupo de ingreso alto
+ni al de bajo, es decir, a los de en medio. Por el contrario, el efecto
+de la desigualdad en los países de ingreso alto es positivo respecto a
+los países de ingreso medio, con un coeficiente mayor a cero. Sin
+embargo, este efecto en los países de ingresos bajos, aunque mayores a
+los de ingresos medios, no son positivos.
+
+Esto corrobora y contrasta la teoría de Barro. Por un lado, nuestros
+hallazgos son congruentes con su hipótesis de que la desigualdad
+incentiva al crecimiento económico en países ricos. Sin embargo, en
+países pobres no vemos una relación tan clara contrario a la hipótesis
+de que en estos países el efecto sería negativo: parece que la
+desigualdad es perjudicial para el crecimiento económico,
+particularmente en los países de ingresos medios.
+
+Esto podría deberse a que tal vez Barro se refería a los países de
+ingreso medio mas que a los de ingreso bajo (pues estos ni siquiera
+habrían despegado económicamente o a que tal vez en lugar de una curva
+de Kuznets la forma funcional sea una curva en forma de S).
+
+\hypertarget{pruebas-de-hipuxf3tesis-1}{%
+\subsection{Pruebas de hipótesis}\label{pruebas-de-hipuxf3tesis-1}}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+Pruebas & P.value\\
+\midrule
+Prueba F: Pooled vs EF individual & 0.0000\\
+Hausman: EF vs EA & 0.0000\\
+Breusch-Pagan: EF individuales vs two-way & 0.0000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+En esta sección, se realizó de nuevo la prueba del modelo de efectos
+fijos contra \emph{pooled}, y de nuevo se rechazó Ho a favor del
+primero. Adicionalmente, se hizo una prueba de multiplicador lagrangiano
+Breusch-Pagan para efectos de tiempo fijos, donde Ho es que
+\(\lambda_{t} \= 0\). Al rechazar, concluimos que es necesario controlar
+por tiempo en el modelo de efectos fijos, optando por el modelo
+two-ways.
+
+\hypertarget{modelo-final}{%
+\section{Modelo final}\label{modelo-final}}
+
+\begin{table}[!htbp] \centering 
+  \caption{Modelo multivariado} 
+  \label{} 
+\small 
+\begin{tabular}{@{\extracolsep{3pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & growth\_pc \\ 
+ & Efectos Fijos (two-way) \\ 
+\hline \\[-1.8ex] 
+ gini & $-$0.004$^{***}$ \\ 
+  & (0.001) \\ 
+  & \\ 
+ I(gini \textasteriskcentered  inc\_high) & 0.005$^{***}$ \\ 
+  & (0.002) \\ 
+  & \\ 
+ I(gini \textasteriskcentered  inc\_low) & 0.005$^{***}$ \\ 
+  & (0.002) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 2,416 \\ 
+R$^{2}$ & 0.021 \\ 
+Adjusted R$^{2}$ & $-$0.032 \\ 
+F Statistic & 16.020$^{***}$ (df = 3; 2291) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
+
+Las pruebas de hipótesis mostradas muestran la bondad de ajuste del
+modelo final, el within two-way, que incluye a la variable de tiempo
+(\(\lambda_{t}\)) en su estimación.
+
+Esta es la forma más eficiente de capturar los efectos fijos del panel,
+comparada con el modelo de \emph{least squares dummy variables} o el
+modelo within individual incluyendo variables de tiempo,\footnote{\textbf{Baltagi2013?}}
+ya que estos dan errores estándar incorrectos debido al número mayor de
+grados de libertad, así como que la \(R^2\) es correcta.\footnote{\textbf{Park2011?}}
+La inclusión de \(\lambda_{t}\) podría señalar eventos que sucedieron en
+el tiempo del panel que afectaron al crecimiento económico entre los
+países, como tratados de libre comercio o crisis económicas de los
+países.
+
+Los resultados señalan que el coeficiente de Gini tiene una relación
+negativa y significativa sobre el crecimiento económico per cápita, y
+como mencionamos anteriormente, que en los países pobres la desigualdad
+afecta al crecimiento económico, mientras que en los ricos existe una
+relación positiva entre ellas.
+
+Una teoría acorde a la de nuestros resultados es la \emph{teoría de la
+acumulación de capital humano} que liga a la desigualda y al crecimiento
+económico: la desigualdad de ingresos deprime el desarrollo de
+habilidades de individuos cuyos padres tienen niveles bajos de
+educación, tanto en cantidad y calidad educativa. Mientras tanto, los
+resultados educativos de individuos más ricos no están afectados por la
+desigualdad.\footnote{\textbf{Cingano2014?}}
+
+\hypertarget{conclusiones}{%
+\section{Conclusiones}\label{conclusiones}}
+
+En conclusión, con los datos a nuestra disposición y bajo la
+especificación elegida, la relación entre el crecimiento y la
+desigualdad fue la misma en los diferente modelos con la especificación
+más simple: el coeficiente de Gini tiene una relación negativa con el
+crecimiento económico per cápita. Sin embargo, perdía fuerza estadística
+en los modelos \emph{pooled} y de efectos aleatorios.
+
+Sin embargo, al introducir la variable de interacción entre desigualdad
+y nivel de ingreso, sucedieron dos cosas: por un lado, pudimos discernir
+el efecto de ella (la desigualdad) a través de la distribución del
+ingreso, observando que no afecta de forma igual a los diferentes
+países; por el otro, que la relación era ambigua y con poco poder
+explicativo, ya que, mientras que en los modelos within los países de
+ingresos altos y bajos tenían signo positivo del coeficiente respecto a
+los de ingresos medios, sucedía lo contrario en el modelo \emph{pooled}
+y de efectos aleatorios.
+
+Para escoger un modelo ``más adecuado'' y ajustado a los datos,
+realizamos múltiples pruebas para evaluar la existencia de efectos fijos
+entre entidades, en el tiempo, y si existía correlación entre los
+errores de los países y las variables regresoras. Los resultados
+concluyeron que el modelo con mejor bondad de ajuste (más eficiente) era
+el de efectos fijos \emph{two-ways} .
+
+Una conclusión a la que podemos llegar a partir de estos resultados es
+que las políticas para reducir la desigualdad son clave, sobre todo en
+países pobres, no solo para mejorar el aspecto social del país, si no
+para asegurar un crecimiento económico a largo plazo. Esto se podría
+lograr a través de impuestos y transferencias, lo cual no necesariamente
+dañaría al crecimiento.\footnote{\textbf{Cingano2014?}}
+
+Finalmente algo muy importante es que los resultados dependen totalmente
+de la especificación del modelo de regresión así como de las variables
+que usemos como control. Esto no es un hallazgo nuevo pues diversos
+autores sostienen que tanto la especificación como la calidad de los
+datos han hecho que las conclusiones en este tema sean
+ambivalentes.\footnote{Boushey y Price, {``{How Are Economic Inequality
+  and Growth Connected? A review of recent research}''}.} Esto sugiere
+que en este tema la relación no es tan inmediata y que se requiere de
+más trabajo análitico y teórico, y posiblemente hasta en la calidad de
+los datos.
+
+\newpage
+
+\hypertarget{referencias}{%
+\section*{Referencias}\label{referencias}}
+\addcontentsline{toc}{section}{Referencias}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-Barro2000}{}%
+Barro, Robert J. {``{Inequality and growth in a panel of countries}''}.
+\emph{Journal of Economic Growth}, 2000.
+\url{https://doi.org/10.1023/A:1009850119329}.
+
+\leavevmode\hypertarget{ref-Boushey2014}{}%
+Boushey, Heather, y Carter C Price. {``{How Are Economic Inequality and
+Growth Connected? A review of recent research}''}. \emph{Washington
+Center for Equitable Growth}, núm. October 2014 (2014): 1--25.
+\href{https://www.equitablegrowth.org}{www.equitablegrowth.org}.
+
+\end{CSLReferences}
+
+\end{document}

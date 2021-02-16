@@ -109,15 +109,21 @@ original<-read.csv("concentradohogar/concentradohogar.csv")
 #Vínculo: http://www.economia-sniim.gob.mx/nuevo/ 
 
 #Precio del huevo: 28.5 pesos por kilo
+
 #Para obtener el precio promedio del huevo, se promedió el precio frecuente del huevo blanco vendido al menudeo del 8 al 12 de febrero de 2021 obtenido del SNIM en el siguiente vínculo: http://www.economia-sniim.gob.mx/Nuevo/Home.aspx?opcion=/SNIIM-Pecuarios-Nacionales/MenAve.asp 
 
-#Como los precios, tanto del huevo, como de la leche no varían significativamente entre los estados y municipios, se determinó utilizar estos precios promedio. 
+#Como los precios tanto del huevo como de la leche no varían significativamente entre los estados y municipios, se determinó utilizar usar al precio promedio. 
 
-#Utilizamos como variable demográfica "est_socio" con la que se clasifica el hogar conforme a las características socioeconómicas de quienes las habitan y su equipamiento.  
+#Para el precio del resto de los bienes se promedió el precio de los demás productos de la canásta básica -exceptuando el de la leche y los huevos-. Se tomó como referencia la canasta básica dado que la leche y el huevo son productos de esa canasta. Los precios se obtuvieron de la página de la Secretaría de Desarrollo Económico, se eligió el de las tiendas de autoservicio por estar más estandarizado que el de mercados públicos o mercados sobre ruedas. Este precio promedió en $30 pesos.
+
+#Utilizamos como variable demográfica de estrato socioeconómico, "est_socio", que clasifica al hogar conforme al nivel de ingreso y status socioeconómico desus miembros.   
 #1: Bajo
 #2: Medio bajo
 #3: Medio alto
 #4: Alto
+
+Para obtener datos más contrastantes, redujimos la variable a una dicotómica para indicar a los hogares de estratos de la población bajos, que toma el valor de 1 si el hogar es de estrato bajo o medio-bajo, y 0 si es alto o medio-alto. 
+
 #______________________________________________________________________________
 #______________________________________________________________________________
 #DATA wranwilng para STATA (version A)
@@ -125,7 +131,7 @@ data<-original%>%
   select(folioviv,foliohog,est_socio,alimentos,leche,huevo)%>%
   mutate(p_leche=18.72,s_leche=leche/alimentos, q_leche=leche/18.72,
          p_huevo=28.5,q_huevos=huevo/28.5,s_huevo=huevo/alimentos,
-         q_other=1,s_other=(alimentos-leche-huevo)/alimentos, p_other=1/s_other)
+         q_other=30,s_other=(alimentos-leche-huevo)/alimentos, p_other=30/s_other)
 
 A<-data%>%filter(est_socio==1)
 B<-data%>%filter(est_socio==2)

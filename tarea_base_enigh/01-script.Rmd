@@ -118,15 +118,20 @@ data<-read.csv("concentradohogar/concentradohogar.csv")
 #2: Medio bajo
 #3: Medio alto
 #4: Alto
-data<-data%>% select(folioviv,foliohog,est_socio,alimentos,leche,huevo,gasto_mon,pescado,tam_loc)%>%
-  mutate(p_leche=18.72, q_leche=leche/18.72, p_huevos=28.5,q_huevos=huevo/28.5)
+data<-data%>% 
+  select(folioviv,foliohog,est_socio,alimentos,leche,huevo)%>%
+  mutate(p_leche=18.72,s_leche=leche/alimentos, q_leche=leche/18.72,
+         p_huevo=28.5,q_huevos=huevo/28.5,s_huevo=huevo/alimentos,
+         p_other=1,q_other=1,s_other=(alimentos-leche-huevo)/alimentos)
 
 A<-data%>%filter(est_socio==1)
 B<-data%>%filter(est_socio==2)
 C<-data%>%filter(est_socio==3)
 D<-data%>%filter(est_socio==4)
 
-
+#DATA wranwilng para STATA
+data[is.na(data)] <- 0
+write_csv(data,"stata.csv")
 
 ```
 

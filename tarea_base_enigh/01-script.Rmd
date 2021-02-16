@@ -126,12 +126,12 @@ Para obtener datos más contrastantes, redujimos la variable a una dicotómica p
 
 #______________________________________________________________________________
 #______________________________________________________________________________
-#DATA wranwilng para STATA (version A)
+#DATA wrangling para STATA (version A)
 data<-original%>% 
   select(folioviv,foliohog,est_socio,alimentos,leche,huevo)%>%
   mutate(p_leche=18.72,s_leche=leche/alimentos, q_leche=leche/18.72,
          p_huevo=28.5,q_huevos=huevo/28.5,s_huevo=huevo/alimentos,
-         q_other=30,s_other=(alimentos-leche-huevo)/alimentos, p_other=30/s_other)
+         p_other=30,other=(alimentos-leche-huevo),s_other=other/alimentos, q_other=other/30)
 
 A<-data%>%filter(est_socio==1)
 B<-data%>%filter(est_socio==2)

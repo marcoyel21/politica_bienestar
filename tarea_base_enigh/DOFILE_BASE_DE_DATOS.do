@@ -46,14 +46,14 @@ tab stotal
 
 save BASETC
 
+*vamos a hacer la variable sociodemográfica dicotómica
 
-*QUAIDS sin controles. No sé si poner. tendrían que ser análisis para cada una
-
-quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) nolog
+gen ebajo=1
+replace ebajo=0 if est_socio==3|est_socio==4
 
 *QUAIDS con variable sociodemográfica
 
-quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) demographics(est_socio) nolog
+quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) demographics(ebajo) nolog
 
 *predicciones de shares de los tres bienes. 
 
@@ -91,36 +91,20 @@ sum ue_*
 *** Ahora generamos variables segmentando por estrato
 
 *Bajo
-estat expenditure mp* if est_socio==1
+estat expenditure mp* if ebajo==1
 sum mp_*
-estat compensated cep* if est_socio==1
+estat compensated cep* if ebajo==1
 sum cep_*
-estat uncompensated uep* if est_socio==1
-sum uep_*
-
-*Medio-bajo
-estat expenditure mp* if est_socio==2
-sum mp_*
-estat compensated cep* if est_socio==2
-sum cep_*
-estat uncompensated uep* if est_socio==2
-sum uep_*
-
-*Medio-alto
-estat expenditure mp* if est_socio==3
-sum mp_*
-estat compensated cep* if est_socio==3
-sum cep_*
-estat uncompensated uep* if est_socio==3
+estat uncompensated uep* if ebajo==1
 sum uep_*
 
 *Alto
-estat expenditure mnp* if est_socio==4
-sum mnp_*
-estat compensated cenp* if est_socio==4
-sum cenp_*
-estat uncompensated uenp* if est_socio==4
-sum uenp_*
+estat expenditure mp* if ebajo==0
+sum mp_*
+estat compensated cep* if ebajo==0
+sum cep_*
+estat uncompensated uep* if ebajo==0
+sum uep_*
 
 **************
 *Matrices precio compensadas, no compensadas, e ingreso.
@@ -128,59 +112,31 @@ sum uenp_*
 
 *Para ingreso bajo
 
-estat compensated if est_socio==1, atmeans
+estat compensated if ebajo==1, atmeans
 matrix bajo_comp=r(compelas)
 matrix list bajo_comp
 
-estat uncompensated if est_socio==1, atmeans
+estat uncompensated if ebajo==1, atmeans
 matrix bajo_uncomp= r(uncompelas)
 matrix list bajo_uncomp
 
-estat expenditure if est_socio==1, atmeans
+estat expenditure if ebajo==1, atmeans
 matrix bajo_ingr= r(expelas)
 matrix list bajo_ingr
  
-*para ingreso medio-bajo
+*para ingreso alto
 
-estat compensated if est_socio==2, atmeans
+estat compensated if ebajo==0, atmeans
 matrix mediobajo_comp=r(compelas)
 matrix list mediobajo_comp
 
-estat uncompensated if est_socio==2, atmeans
+estat uncompensated if ebajo==0, atmeans
 matrix mediobajo_uncomp= r(uncompelas)
 matrix list mediobajo_uncomp
 
-estat expenditure if est_socio==2, atmeans
+estat expenditure if ebajo==0, atmeans
 matrix mediobajo_ingr= r(expelas)
 matrix list mediobajo_ingr
-
-*Para ingreso medio-alto
- 
-estat compensated if est_socio==3, atmeans
-matrix medioalto_comp=r(compelas)
-matrix list medioalto_comp
-
-estat uncompensated if est_socio==3, atmeans
-matrix medioalto_uncomp= r(uncompelas)
-matrix list medioalto_uncomp
-
-estat expenditure if est_socio==3, atmeans
-matrix medioalto_ingr= r(expelas)
-matrix list medioalto_ingr
-
-*Para ingreso alto
-
-estat compensated if est_socio==4, atmeans
-matrix alto_comp=r(compelas)
-matrix list alto_comp
-
-estat uncompensated if est_socio==4, atmeans
-matrix alto_uncomp= r(uncompelas)
-matrix list alto_uncomp
-
-estat expenditure if est_socio==4, atmeans
-matrix alto_ingr= r(expelas)
-matrix list alto_ingr
 
 
 

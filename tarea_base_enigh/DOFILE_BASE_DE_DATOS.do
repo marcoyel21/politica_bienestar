@@ -72,10 +72,14 @@ estat expenditure,atmeans
 matrix ingreso=r(expelas)
 matrix list ingreso
 
-1 Bajo
-2 Medio bajo
-3 Medio alto
-4 Alto
+*Para reducir la granularidad en el estrato socioeconómico, reducimos el número de categorías de cuatro a 2, siendo ahora estrato bajo y medio-bajo 0 y medio-alto y alto 1
+gen est_socio2=1
+replace est_socio2=0 if est_socio==1|est_socio==2
+
+*Y obtenemos las elasticidades segmentadas
+
+
+
 
 
 *Precio de la leche: 18.72 pesos por litro

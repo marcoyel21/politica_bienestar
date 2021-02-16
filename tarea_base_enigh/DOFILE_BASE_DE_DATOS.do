@@ -15,9 +15,9 @@ gen pleche=18.72
 gen phuevo=28.5
 gen presto=30
 
-replace pleche = rnormal(18.72)
-replace phuevo=rnormal(28.5)
-replace presto=rnormal(30)
+replace pleche = rnormal(pleche)
+replace phuevo=rnormal(phuevo)
+replace presto=rnormal(presto)
 
 gen gasto_resto=gasto_alimentos-gasto_leche-gasto_huevo
 

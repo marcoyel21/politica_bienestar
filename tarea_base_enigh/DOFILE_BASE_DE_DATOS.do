@@ -59,53 +59,6 @@ quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(g
 
 predict what*
 
-*Elasticidades compensadas y no compensadas evaluadas en la media. Matrices
-
-*Compensadas 
-
-estat compensated,atmeans
-matrix compensadas=r(compelas)
-matrix list compensadas
-
-*No compensadas
-
-estat uncompensated,atmeans
-matrix uncompensadas=r(uncompelas)
-matrix list uncompensadas
-
-*Elasticidad ingreso
-
-estat expenditure,atmeans
-matrix ingreso=r(expelas)
-matrix list ingreso
-
-*Variables y resumen elasticidades
-
-estat expenditure m*
-sum m_1-m_3
-estat compensated ce*
-sum ce_*
-estat uncompensated ue*
-sum ue_*
-
-*** Ahora generamos variables segmentando por estrato
-
-*Bajo
-estat expenditure mp* if ebajo==1
-sum mp_*
-estat compensated cep* if ebajo==1
-sum cep_*
-estat uncompensated uep* if ebajo==1
-sum uep_*
-
-*Alto
-estat expenditure mp* if ebajo==0
-sum mp_*
-estat compensated cep* if ebajo==0
-sum cep_*
-estat uncompensated uep* if ebajo==0
-sum uep_*
-
 **************
 *Matrices precio compensadas, no compensadas, e ingreso.
 *En la media
@@ -115,6 +68,7 @@ sum uep_*
 estat compensated if ebajo==1, atmeans
 matrix bajo_comp=r(compelas)
 matrix list bajo_comp
+
 
 estat uncompensated if ebajo==1, atmeans
 matrix bajo_uncomp= r(uncompelas)

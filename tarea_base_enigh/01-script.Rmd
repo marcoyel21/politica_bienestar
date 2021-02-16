@@ -254,10 +254,569 @@ En cuanto a la **figura 2**, el huevo, la relación es muy similar a la de la le
 
 En conclusión de esta parte, aunque podemos notar algunos indicios leves de comportamiento cuadrático, sobretodo para los grupos pobres, en negeral la relación es lineal y por ello esperamos que los coeficientes de los terminos cuadráticos sean estadísticmanete insignificantes. Tal vez, condicionando por estrato, encontremos que hay terminos cuadráticos para los dos estratos más pobres.
 
-# Estimación QUADIS
+# Estimación QUAIDS
 
-# Matriz de elasticidades
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Modelo QUAIDS con variable sociodemográfica}
+\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{} \\
+\hline
+alpha               &                     \\
+alpha\_1             &      -0.110\sym{***}\\
+                    &   (0.00911)         \\
+[1em]
+alpha\_2             &    -0.00340         \\
+                    &    (0.0166)         \\
+[1em]
+alpha\_3             &       1.113\sym{***}\\
+                    &    (0.0190)         \\
+\hline
+beta                &                     \\
+beta\_1              &     -0.0528\sym{***}\\
+                    &   (0.00373)         \\
+[1em]
+beta\_2              &     -0.0269\sym{***}\\
+                    &   (0.00675)         \\
+[1em]
+beta\_3              &      0.0798\sym{***}\\
+                    &   (0.00783)         \\
+\hline
+gamma               &                     \\
+gamma\_1\_1           &     0.00315         \\
+                    &   (0.00847)         \\
+[1em]
+gamma\_2\_1           &     0.00825         \\
+                    &   (0.00607)         \\
+[1em]
+gamma\_3\_1           &     -0.0114         \\
+                    &   (0.00875)         \\
+[1em]
+gamma\_2\_2           &     0.00123         \\
+                    &    (0.0112)         \\
+[1em]
+gamma\_3\_2           &    -0.00949         \\
+                    &    (0.0121)         \\
+[1em]
+gamma\_3\_3           &      0.0209         \\
+                    &    (0.0161)         \\
+\hline
+lambda              &                     \\
+lambda\_1            &    -0.00441\sym{***}\\
+                    &  (0.000406)         \\
+[1em]
+lambda\_2            &    -0.00111         \\
+                    &  (0.000708)         \\
+[1em]
+lambda\_3            &     0.00551\sym{***}\\
+                    &  (0.000842)         \\
+\hline
+eta                 &                     \\
+eta\_ebajo\_1         &   -0.000375         \\
+                    &  (0.000362)         \\
+[1em]
+eta\_ebajo\_2         &     0.00339\sym{***}\\
+                    &  (0.000468)         \\
+[1em]
+eta\_ebajo\_3         &    -0.00302\sym{***}\\
+                    &  (0.000726)         \\
+\hline
+rho                 &                     \\
+rho\_ebajo           &       0.275\sym{*}  \\
+                    &     (0.124)         \\
+\hline
+Observations        &       16296         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
+
+# Matriz de elasticidades precio
+
+##Compensadas, estrato ingresos bajo
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Elasticidades precio compensadas para población de ingreso bajo}
+\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{} \\
+\hline
+alpha               &                     \\
+alpha\_1             &      -0.110\sym{***}\\
+                    &   (0.00911)         \\
+[1em]
+alpha\_2             &    -0.00340         \\
+                    &    (0.0166)         \\
+[1em]
+alpha\_3             &       1.113\sym{***}\\
+                    &    (0.0190)         \\
+\hline
+beta                &                     \\
+beta\_1              &     -0.0528\sym{***}\\
+                    &   (0.00373)         \\
+[1em]
+beta\_2              &     -0.0269\sym{***}\\
+                    &   (0.00675)         \\
+[1em]
+beta\_3              &      0.0798\sym{***}\\
+                    &   (0.00783)         \\
+\hline
+gamma               &                     \\
+gamma\_1\_1           &     0.00315         \\
+                    &   (0.00847)         \\
+[1em]
+gamma\_2\_1           &     0.00825         \\
+                    &   (0.00607)         \\
+[1em]
+gamma\_3\_1           &     -0.0114         \\
+                    &   (0.00875)         \\
+[1em]
+gamma\_2\_2           &     0.00123         \\
+                    &    (0.0112)         \\
+[1em]
+gamma\_3\_2           &    -0.00949         \\
+                    &    (0.0121)         \\
+[1em]
+gamma\_3\_3           &      0.0209         \\
+                    &    (0.0161)         \\
+\hline
+lambda              &                     \\
+lambda\_1            &    -0.00441\sym{***}\\
+                    &  (0.000406)         \\
+[1em]
+lambda\_2            &    -0.00111         \\
+                    &  (0.000708)         \\
+[1em]
+lambda\_3            &     0.00551\sym{***}\\
+                    &  (0.000842)         \\
+\hline
+eta                 &                     \\
+eta\_ebajo\_1         &   -0.000375         \\
+                    &  (0.000362)         \\
+[1em]
+eta\_ebajo\_2         &     0.00339\sym{***}\\
+                    &  (0.000468)         \\
+[1em]
+eta\_ebajo\_3         &    -0.00302\sym{***}\\
+                    &  (0.000726)         \\
+\hline
+rho                 &                     \\
+rho\_ebajo           &       0.275\sym{*}  \\
+                    &     (0.124)         \\
+\hline
+Observations        &       16296         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
+
+#Compensadas, población ingreso alto
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Elasticidades precio compensadas para población de ingreso alto}
+\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{} \\
+\hline
+alpha               &                     \\
+alpha\_1             &      -0.110\sym{***}\\
+                    &   (0.00911)         \\
+[1em]
+alpha\_2             &    -0.00340         \\
+                    &    (0.0166)         \\
+[1em]
+alpha\_3             &       1.113\sym{***}\\
+                    &    (0.0190)         \\
+\hline
+beta                &                     \\
+beta\_1              &     -0.0528\sym{***}\\
+                    &   (0.00373)         \\
+[1em]
+beta\_2              &     -0.0269\sym{***}\\
+                    &   (0.00675)         \\
+[1em]
+beta\_3              &      0.0798\sym{***}\\
+                    &   (0.00783)         \\
+\hline
+gamma               &                     \\
+gamma\_1\_1           &     0.00315         \\
+                    &   (0.00847)         \\
+[1em]
+gamma\_2\_1           &     0.00825         \\
+                    &   (0.00607)         \\
+[1em]
+gamma\_3\_1           &     -0.0114         \\
+                    &   (0.00875)         \\
+[1em]
+gamma\_2\_2           &     0.00123         \\
+                    &    (0.0112)         \\
+[1em]
+gamma\_3\_2           &    -0.00949         \\
+                    &    (0.0121)         \\
+[1em]
+gamma\_3\_3           &      0.0209         \\
+                    &    (0.0161)         \\
+\hline
+lambda              &                     \\
+lambda\_1            &    -0.00441\sym{***}\\
+                    &  (0.000406)         \\
+[1em]
+lambda\_2            &    -0.00111         \\
+                    &  (0.000708)         \\
+[1em]
+lambda\_3            &     0.00551\sym{***}\\
+                    &  (0.000842)         \\
+\hline
+eta                 &                     \\
+eta\_ebajo\_1         &   -0.000375         \\
+                    &  (0.000362)         \\
+[1em]
+eta\_ebajo\_2         &     0.00339\sym{***}\\
+                    &  (0.000468)         \\
+[1em]
+eta\_ebajo\_3         &    -0.00302\sym{***}\\
+                    &  (0.000726)         \\
+\hline
+rho                 &                     \\
+rho\_ebajo           &       0.275\sym{*}  \\
+                    &     (0.124)         \\
+\hline
+Observations        &       16296         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
+
+
+##No compensadas, población ingreso bajo
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Elasticidades precio no compensadas para población de ingreso bajo}
+\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{} \\
+\hline
+alpha               &                     \\
+alpha\_1             &      -0.110\sym{***}\\
+                    &   (0.00911)         \\
+[1em]
+alpha\_2             &    -0.00340         \\
+                    &    (0.0166)         \\
+[1em]
+alpha\_3             &       1.113\sym{***}\\
+                    &    (0.0190)         \\
+\hline
+beta                &                     \\
+beta\_1              &     -0.0528\sym{***}\\
+                    &   (0.00373)         \\
+[1em]
+beta\_2              &     -0.0269\sym{***}\\
+                    &   (0.00675)         \\
+[1em]
+beta\_3              &      0.0798\sym{***}\\
+                    &   (0.00783)         \\
+\hline
+gamma               &                     \\
+gamma\_1\_1           &     0.00315         \\
+                    &   (0.00847)         \\
+[1em]
+gamma\_2\_1           &     0.00825         \\
+                    &   (0.00607)         \\
+[1em]
+gamma\_3\_1           &     -0.0114         \\
+                    &   (0.00875)         \\
+[1em]
+gamma\_2\_2           &     0.00123         \\
+                    &    (0.0112)         \\
+[1em]
+gamma\_3\_2           &    -0.00949         \\
+                    &    (0.0121)         \\
+[1em]
+gamma\_3\_3           &      0.0209         \\
+                    &    (0.0161)         \\
+\hline
+lambda              &                     \\
+lambda\_1            &    -0.00441\sym{***}\\
+                    &  (0.000406)         \\
+[1em]
+lambda\_2            &    -0.00111         \\
+                    &  (0.000708)         \\
+[1em]
+lambda\_3            &     0.00551\sym{***}\\
+                    &  (0.000842)         \\
+\hline
+eta                 &                     \\
+eta\_ebajo\_1         &   -0.000375         \\
+                    &  (0.000362)         \\
+[1em]
+eta\_ebajo\_2         &     0.00339\sym{***}\\
+                    &  (0.000468)         \\
+[1em]
+eta\_ebajo\_3         &    -0.00302\sym{***}\\
+                    &  (0.000726)         \\
+\hline
+rho                 &                     \\
+rho\_ebajo           &       0.275\sym{*}  \\
+                    &     (0.124)         \\
+\hline
+Observations        &       16296         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
+
+##No compensadas, población de ingreso alto 
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Elasticidades precio no compensadas para población de ingreso alto}
+\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{} \\
+\hline
+alpha               &                     \\
+alpha\_1             &      -0.110\sym{***}\\
+                    &   (0.00911)         \\
+[1em]
+alpha\_2             &    -0.00340         \\
+                    &    (0.0166)         \\
+[1em]
+alpha\_3             &       1.113\sym{***}\\
+                    &    (0.0190)         \\
+\hline
+beta                &                     \\
+beta\_1              &     -0.0528\sym{***}\\
+                    &   (0.00373)         \\
+[1em]
+beta\_2              &     -0.0269\sym{***}\\
+                    &   (0.00675)         \\
+[1em]
+beta\_3              &      0.0798\sym{***}\\
+                    &   (0.00783)         \\
+\hline
+gamma               &                     \\
+gamma\_1\_1           &     0.00315         \\
+                    &   (0.00847)         \\
+[1em]
+gamma\_2\_1           &     0.00825         \\
+                    &   (0.00607)         \\
+[1em]
+gamma\_3\_1           &     -0.0114         \\
+                    &   (0.00875)         \\
+[1em]
+gamma\_2\_2           &     0.00123         \\
+                    &    (0.0112)         \\
+[1em]
+gamma\_3\_2           &    -0.00949         \\
+                    &    (0.0121)         \\
+[1em]
+gamma\_3\_3           &      0.0209         \\
+                    &    (0.0161)         \\
+\hline
+lambda              &                     \\
+lambda\_1            &    -0.00441\sym{***}\\
+                    &  (0.000406)         \\
+[1em]
+lambda\_2            &    -0.00111         \\
+                    &  (0.000708)         \\
+[1em]
+lambda\_3            &     0.00551\sym{***}\\
+                    &  (0.000842)         \\
+\hline
+eta                 &                     \\
+eta\_ebajo\_1         &   -0.000375         \\
+                    &  (0.000362)         \\
+[1em]
+eta\_ebajo\_2         &     0.00339\sym{***}\\
+                    &  (0.000468)         \\
+[1em]
+eta\_ebajo\_3         &    -0.00302\sym{***}\\
+                    &  (0.000726)         \\
+\hline
+rho                 &                     \\
+rho\_ebajo           &       0.275\sym{*}  \\
+                    &     (0.124)         \\
+\hline
+Observations        &       16296         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
 
 # Estimación de las elasticidades ingreso
+
+## Elasticidades ingreso para población de ingreso bajo
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Elasticidades ingreso para población de ingreso bajo}
+\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{} \\
+\hline
+alpha               &                     \\
+alpha\_1             &      -0.110\sym{***}\\
+                    &   (0.00911)         \\
+[1em]
+alpha\_2             &    -0.00340         \\
+                    &    (0.0166)         \\
+[1em]
+alpha\_3             &       1.113\sym{***}\\
+                    &    (0.0190)         \\
+\hline
+beta                &                     \\
+beta\_1              &     -0.0528\sym{***}\\
+                    &   (0.00373)         \\
+[1em]
+beta\_2              &     -0.0269\sym{***}\\
+                    &   (0.00675)         \\
+[1em]
+beta\_3              &      0.0798\sym{***}\\
+                    &   (0.00783)         \\
+\hline
+gamma               &                     \\
+gamma\_1\_1           &     0.00315         \\
+                    &   (0.00847)         \\
+[1em]
+gamma\_2\_1           &     0.00825         \\
+                    &   (0.00607)         \\
+[1em]
+gamma\_3\_1           &     -0.0114         \\
+                    &   (0.00875)         \\
+[1em]
+gamma\_2\_2           &     0.00123         \\
+                    &    (0.0112)         \\
+[1em]
+gamma\_3\_2           &    -0.00949         \\
+                    &    (0.0121)         \\
+[1em]
+gamma\_3\_3           &      0.0209         \\
+                    &    (0.0161)         \\
+\hline
+lambda              &                     \\
+lambda\_1            &    -0.00441\sym{***}\\
+                    &  (0.000406)         \\
+[1em]
+lambda\_2            &    -0.00111         \\
+                    &  (0.000708)         \\
+[1em]
+lambda\_3            &     0.00551\sym{***}\\
+                    &  (0.000842)         \\
+\hline
+eta                 &                     \\
+eta\_ebajo\_1         &   -0.000375         \\
+                    &  (0.000362)         \\
+[1em]
+eta\_ebajo\_2         &     0.00339\sym{***}\\
+                    &  (0.000468)         \\
+[1em]
+eta\_ebajo\_3         &    -0.00302\sym{***}\\
+                    &  (0.000726)         \\
+\hline
+rho                 &                     \\
+rho\_ebajo           &       0.275\sym{*}  \\
+                    &     (0.124)         \\
+\hline
+Observations        &       16296         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
+
+##Elasticidades ingreso para población de ingreso alto
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Elasticidades ingreso para población de ingreso alto}
+\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{} \\
+\hline
+alpha               &                     \\
+alpha\_1             &      -0.110\sym{***}\\
+                    &   (0.00911)         \\
+[1em]
+alpha\_2             &    -0.00340         \\
+                    &    (0.0166)         \\
+[1em]
+alpha\_3             &       1.113\sym{***}\\
+                    &    (0.0190)         \\
+\hline
+beta                &                     \\
+beta\_1              &     -0.0528\sym{***}\\
+                    &   (0.00373)         \\
+[1em]
+beta\_2              &     -0.0269\sym{***}\\
+                    &   (0.00675)         \\
+[1em]
+beta\_3              &      0.0798\sym{***}\\
+                    &   (0.00783)         \\
+\hline
+gamma               &                     \\
+gamma\_1\_1           &     0.00315         \\
+                    &   (0.00847)         \\
+[1em]
+gamma\_2\_1           &     0.00825         \\
+                    &   (0.00607)         \\
+[1em]
+gamma\_3\_1           &     -0.0114         \\
+                    &   (0.00875)         \\
+[1em]
+gamma\_2\_2           &     0.00123         \\
+                    &    (0.0112)         \\
+[1em]
+gamma\_3\_2           &    -0.00949         \\
+                    &    (0.0121)         \\
+[1em]
+gamma\_3\_3           &      0.0209         \\
+                    &    (0.0161)         \\
+\hline
+lambda              &                     \\
+lambda\_1            &    -0.00441\sym{***}\\
+                    &  (0.000406)         \\
+[1em]
+lambda\_2            &    -0.00111         \\
+                    &  (0.000708)         \\
+[1em]
+lambda\_3            &     0.00551\sym{***}\\
+                    &  (0.000842)         \\
+\hline
+eta                 &                     \\
+eta\_ebajo\_1         &   -0.000375         \\
+                    &  (0.000362)         \\
+[1em]
+eta\_ebajo\_2         &     0.00339\sym{***}\\
+                    &  (0.000468)         \\
+[1em]
+eta\_ebajo\_3         &    -0.00302\sym{***}\\
+                    &  (0.000726)         \\
+\hline
+rho                 &                     \\
+rho\_ebajo           &       0.275\sym{*}  \\
+                    &     (0.124)         \\
+\hline
+Observations        &       16296         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
 
 # Conclusiones

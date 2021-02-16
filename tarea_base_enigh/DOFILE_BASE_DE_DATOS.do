@@ -5,7 +5,7 @@ merge using "/Users/cynthiavaldivia/Desktop/MAESTRIA_ECONOMIA_APLICADA/BIENESTAR
 
 save BASE
 
-keep folioviv foliohog clave est_socio alimentos leche huevo
+keep folioviv foliohog est_socio alimentos leche huevo
 
 rename leche gasto_leche
 rename huevo gasto_huevo
@@ -78,6 +78,67 @@ replace est_socio2=0 if est_socio==1|est_socio==2
 
 *Y obtenemos las elasticidades segmentadas
 
+*LO QUE AGREGUÉ
+
+*QUAIDS sin controles 
+quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) nolog
+
+*Elasticidad no compensada
+estat uncompensated, atmeans
+matrix elasticidad_nocompensada=r(uncompelas)
+matrix list elasticidad_nocompensada
+
+*Elasticidad compensada
+estat compensated, atmeans
+matrix elasticidad_compensada=r(compelas)
+matrix list elasticidad_compensada
+
+*QUAIDS controlando por variable demográfica
+quaids shuevo sleche sresto, anot(10) prices(phuevo pleche presto) expenditure(gasto_alimentos) demographics(est_socio) nolog
+
+predict what*
+estat expenditure m*
+sum m_1-m_3
+estat compensated ce*
+sum ce_*
+estat uncompensated ue*
+sum ue_*
+
+ *Para ingreso bajo
+estat expenditure mp* if est_socio==1
+sum mp_*
+estat compensated cep* if est_socio==1
+sum cep_*
+estat uncompensated uep* if est_socio==1
+sum uep_*
+
+ *Para ingreso alto
+estat expenditure mnp* if est_socio==4
+sum mnp_*
+estat compensated cenp* if est_socio==4
+sum cenp_*
+estat uncompensated uenp* if est_socio==4
+sum uenp_*
+
+*En la media
+*Para ingreso bajo
+
+estat uncompensated if est_socio==1, atmeans
+matrix ingreso_bajo_uncomp= r(uncompelas)
+matrix list ingreso_bajo_uncomp
+ 
+estat compensated if est_socio==1, atmeans
+matrix ingreso_bajo_comp=r(compelas)
+matrix list ingreso_bajo_comp
+
+*Para ingreso alto
+estat uncompensated if est_socio==4, atmeans
+matrix ingreso_alto_uncomp= r(uncompelas)
+matrix list ingreso_alto_uncomp
+
+estat compensated if est_socio==4, atmeans
+matrix ingreso_alto_comp=r(compelas)
+matrix list ingreso_alto_comp
 
 
 
@@ -115,7 +176,7 @@ replace est_socio2=0 if est_socio==1|est_socio==2
 *15. Harina de trigo
 *16. Chocolate
 *17. Galletas marías, de animales y saladas
-*18. Lentejas:17 pesos
+*18. Lentejas
 *19. Jabon de lavandería
 *20. Jabón de tocador
 *21. Papel higiénico

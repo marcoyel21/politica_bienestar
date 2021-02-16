@@ -131,6 +131,7 @@ D<-data%>%filter(est_socio==4)
 
 #DATA wranwilng para STATA
 data[is.na(data)] <- 0
+data<-data %>% filter(alimentos !=0)
 write_csv(data,"stata.csv")
 
 ```

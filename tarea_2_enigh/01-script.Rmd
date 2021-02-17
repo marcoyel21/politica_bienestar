@@ -153,7 +153,7 @@ Los bienes que elegimos para nuestro análisis son huevo y leche (y resto de los
 
 Los precios de la leche se obtuvieron del Sistema Nacional de Información e Integración de Mercados (SNIM), utilizando el precio promedio ponderado por población del litro de la leche pasteurizada vendida en tiendas desde julio del 2020. Se realizó lo mismo para el huevo, pero usando precios al menudeo de febrero del 2021. 
 
-Para el precio del resto de los bienes se promedió el precio de los demás productos de la canásta básica -exceptuando el de la leche y los huevos-. Los precios se obtuvieron de la página de la Secretaría de Desarrollo Económico, se eligió el de las tiendas de autoservicio por estar más estandarizado que el de mercados públicos o mercados sobre ruedas. Este precio promedió en $30 pesos.
+Para el precio del resto de los bienes se promedió el precio de los demás productos de la canásta básica -exceptuando el de la leche y los huevos-. Los precios se obtuvieron de la página de la Secretaría de Desarrollo Económico, se eligió el de las tiendas de autoservicio por estar más estandarizado que el de mercados públicos o mercados sobre ruedas. Este precio promedió en $30 pesos. Para agregar variabilidad a los precios, que son las regresoras, y poder realizar la regresión correctamente, los valores de precios finales para los tres bienes se distribuyeron de forma normal alrededor de su valor promeido. 
 
 Utilizamos como variable demográfica la de estrato socioeconómico, que clasifica al hogar conforme a características de sus integrantes y el status físico de los hogares. Los estratos son:
 1. Bajo
@@ -318,7 +318,7 @@ La elasticidad compensada nos informa el cambio porcentual de la demanda de un b
 
 **Estrato bajo**
 
-\begin{table}[htbp]
+\begin{table}[htbp]\centering
 \caption{Elasticidades precio compensadas de estrato bajo}
 \begin{tabular}{|l|l|l|l|}\hline  
  & c1  & c2  & c3  \\ \hline  
@@ -338,10 +338,10 @@ Notamos una muy ligera relación de complementariedad entre ambos bienes: un aum
 \begin{table}[htbp]\centering
 \caption{Elasticidades precio compensadas para población de estrato alto}
 \begin{tabular}{|l|l|l|l|}\hline  
- & c1  & c2  & c3  \\ \hline  
-r1 & -.50473891 & -.04620437 & .55094327 \\ \hline 
-r2 & -.01511411 & -1.0176577 & 1.0327718 \\ \hline 
-r3 & .01834685 & .10352078 & -.12186763 \\ \hline 
+ & H  & L  & O  \\ \hline  
+H & -.50473891 & -.04620437 & .55094327 \\ \hline 
+L & -.01511411 & -1.0176577 & 1.0327718 \\ \hline 
+O & .01834685 & .10352078 & -.12186763 \\ \hline 
   \end{tabular}
 \end{table}
 
@@ -354,29 +354,28 @@ El comportamiento de las elasticidades precio propias del huevo y la leche es mu
 \begin{table}[htbp]\centering
 \caption{Elasticidades precio no compensadas de estrato bajo}
 \begin{tabular}{|l|l|l|l|}\hline  
- & c1  & c2  & c3  \\ \hline  
-r1 & -.63526989 & -.0701485 & .04967663 \\ \hline 
-r2 & -.03885403 & -1.0967968 & .30006606 \\ \hline 
-r3 & -.01192506 & .01187285 & -1.0296776 \\ \hline 
+ & H  & L  & O  \\ \hline  
+H & -.63526989 & -.0701485 & .04967663 \\ \hline 
+L & -.03885403 & -1.0967968 & .30006606 \\ \hline 
+O & -.01192506 & .01187285 & -1.0296776 \\ \hline 
   \end{tabular}
 \end{table}
 
-Notamos que mientras que las elasticidades precio propias no cambian respecto a las elasticidades compensadas, existen diferencias en la elasticidad del consumo la leche por un cambio de precio en el huevo , siendo  este efecto casi 0 en el caso de la elasticidad compensada y aumentando .031 puntos porcentuales en el caso de las no compensadas, señalando un efecto ingreso mayor al efecto sustitución en esta relación. Por otro lado, la elasticidad del consumo del huevo por un cambio de precio en la leche tiene una diferencia de .06 puntos porcentuales, señalando un efecto ingreso del doble de tamaño que en el caso de la leche y casi 7 veces mayor al efecto sustitución. 
-
+Notamos que mientras que las elasticidades precio propias no cambian respecto a las elasticidades compensadas, existen diferencias en la elasticidad del consumo la leche por un cambio de precio en el huevo, la cual es casi  0 en el caso de la elasticidad compensada. Este efecto se ve más marcado en la elasticidad del huevo respecto a un cambio en el precio de la leche. Esto es debido a la inclusión del término del efecto ingreso en las elasticidades. 
 
 **Estrato alto**
 
 \begin{table}[htbp]\centering
 \caption{Elasticidades precio no compensadas para estrato bajo}
 \begin{tabular}{|l|l|l|l|}\hline  
- & c1  & c2  & c3  \\ \hline  
-r1 & -.51780354 & -.08546297 & .15918173 \\ \hline 
-r2 & -.03867816 & -1.0884665 & .32617061 \\ \hline 
-r3 & -.01220455 & .01171533 & -1.0379942 \\ \hline 
+ & H  & L  & O  \\ \hline  
+H & -.51780354 & -.08546297 & .15918173 \\ \hline 
+L & -.03867816 & -1.0884665 & .32617061 \\ \hline 
+O & -.01220455 & .01171533 & -1.0379942 \\ \hline 
   \end{tabular}
 \end{table}
 
-Mientras que la elasticidad propia del huevo no cambia mucho respecto a la compensada, la elasticidad no compensada propia de la leche es .07 puntos porcentuales mayor que la compensada, señalando al efecto ingreso. Se mantiene la magnitud del efecto ingreso en las elasticidades cruzadas de huevo y leche y viceversa en aproximadamente la misma proporción que los ingresos bajos.
+Mientras que la elasticidad propia del huevo no cambia mucho respecto a la compensada, la elasticidad no compensada propia de la leche es mayor que la compensada, señalando al efecto ingreso. Se mantiene la magnitud del efecto ingreso en las elasticidades cruzadas de huevo y leche y viceversa en aproximadamente la misma proporción que los ingresos bajos.
 
 ## Elasticidades ingreso
 
@@ -385,8 +384,8 @@ Mientras que la elasticidad propia del huevo no cambia mucho respecto a la compe
 \begin{table}[htbp]\centering
 \caption{Elasticidades ingreso de estrato bajo}
 \begin{tabular}{|l|l|l|l|}\hline  
- & c1  & c2  & c3  \\ \hline  
-r1 & .65574176 & .83558475 & 1.0297298 \\ \hline 
+ & H & L  & O  \\ \hline  
+EI & .65574176 & .83558475 & 1.0297298 \\ \hline 
   \end{tabular}
 \end{table}
 Las elasticidades ingreso de los bienes (huevo y leche, respectivamente) son .65 y .83, indicando que el consumo de la leche es más responsivo a cambios en el ingreso.
@@ -397,8 +396,8 @@ Las elasticidades ingreso de los bienes (huevo y leche, respectivamente) son .65
 \begin{table}[htbp]\centering
 \caption{Elasticidades ingreso de estrato alto}
 \begin{tabular}{|l|l|l|l|}\hline  
- & c1  & c2  & c3  \\ \hline  
-r1 & .44408479 & .80097409 & 1.0384834 \\ \hline 
+ & H  & L  & O  \\ \hline  
+EI & .44408479 & .80097409 & 1.0384834 \\ \hline 
   \end{tabular}
 \end{table}
 

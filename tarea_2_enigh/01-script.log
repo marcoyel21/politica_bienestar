@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.8)  16 FEB 2021 22:54
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.8)  16 FEB 2021 23:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -856,14 +856,23 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [1]
-Overfull \hbox (3.22662pt too wide) in paragraph at lines 159--165
+Overfull \hbox (3.22662pt too wide) in paragraph at lines 159--168
 \TU/lmr/m/n/10.95 básica -exceptuando el de la leche y los huevos-. Los precios
  se obtuvieron de la página de la Secretaría
  []
 
-File: 01-script_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf
-)
-<use 01-script_files/figure-latex/unnamed-chunk-2-1.pdf>
+
+Overfull \hbox (11.73114pt too wide) in paragraph at lines 159--168
+\TU/lmr/m/n/10.95 agregar variabilidad a los precios, que son las regresoras, y
+ poder realizar la regresión correctamente, los
+ []
+
+
+Overfull \hbox (40.63548pt too wide) in paragraph at lines 159--168
+\TU/lmr/m/n/10.95 valores de precios finales para los tres bienes se distribuye
+ron de forma normal alrededor de su valor promedio. 
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -873,25 +882,29 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [2]
-Overfull \hbox (2.90298pt too wide) in paragraph at lines 192--201
+File: 01-script_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf
+)
+<use 01-script_files/figure-latex/unnamed-chunk-2-1.pdf>
+
+Overfull \hbox (2.90298pt too wide) in paragraph at lines 195--204
 []\TU/lmr/m/n/10.95 Lo que podemos notar esque en los paneles superiores, podrí
 a existir una relación cuadrática mientras
  []
 
 
-Overfull \hbox (3.18524pt too wide) in paragraph at lines 192--201
+Overfull \hbox (3.18524pt too wide) in paragraph at lines 195--204
 \TU/lmr/m/n/10.95 que en los inferiores la relación es más lineal, como un bien
  normal perfecto. Ahora, algo interesante es
  []
 
 
-Overfull \hbox (2.79353pt too wide) in paragraph at lines 192--201
+Overfull \hbox (2.79353pt too wide) in paragraph at lines 195--204
 \TU/lmr/m/n/10.95 que las pendientes son más grandes en los paneles superieroes
 , y vemos que la dirección es la misma en
  []
 
 
-Overfull \hbox (3.46748pt too wide) in paragraph at lines 192--201
+Overfull \hbox (3.46748pt too wide) in paragraph at lines 195--204
 \TU/lmr/m/n/10.95 los 4 paneles (aproximadamente hacia el cuadrante 12,8). Esto
  quiere decir que probablemente que las
  []
@@ -908,43 +921,43 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3]
-Overfull \hbox (20.91571pt too wide) in paragraph at lines 221--230
+Overfull \hbox (20.91571pt too wide) in paragraph at lines 224--233
 []\TU/lmr/m/n/10.95 En conclusión de esta parte, aunque podemos notar algunos i
 ndicios leves de comportamiento cuadrático,
  []
 
 
-Overfull \hbox (17.83505pt too wide) in paragraph at lines 221--230
+Overfull \hbox (17.83505pt too wide) in paragraph at lines 224--233
 \TU/lmr/m/n/10.95 coeficientes de los terminos cuadráticos sean estadísticmanet
 e insignificantes. Tal vez, condicionando por
  []
 
 
-Overfull \hbox (12.5353pt too wide) in paragraph at lines 221--230
+Overfull \hbox (12.5353pt too wide) in paragraph at lines 224--233
 \TU/lmr/m/n/10.95 estrato, encontremos que hay terminos cuadráticos para los do
 s estratos más pobres. Para verificar esto,
  []
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 309.
+(Font)              scaled to size 9.0pt on input line 312.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 309.
+(Font)              scaled to size 6.0pt on input line 312.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 309.
+(Font)              scaled to size 5.0pt on input line 312.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.00082pt on input line 309.
+(Font)              scaled to size 9.00082pt on input line 312.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 309.
+(Font)              scaled to size 6.00055pt on input line 312.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 309.
+(Font)              scaled to size 5.00046pt on input line 312.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.99904pt on input line 309.
+(Font)              scaled to size 8.99904pt on input line 312.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 309.
+(Font)              scaled to size 5.99936pt on input line 312.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 309.
+(Font)              scaled to size 4.99947pt on input line 312.
 
-Overfull \hbox (2.80687pt too wide) in paragraph at lines 312--317
+Overfull \hbox (2.80687pt too wide) in paragraph at lines 315--320
 []\TU/lmr/m/n/10.95 Podemos notar que todos los parámetros del primer bien, o s
 ea el huevo, son significativos, incluyendo
  []
@@ -976,15 +989,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6]
-Overfull \hbox (6.65884pt too wide) in paragraph at lines 429--435
+Overfull \hbox (6.65884pt too wide) in paragraph at lines 429--434
 []\TU/lmr/m/n/10.95 Mientras que la elasticidad propia del huevo no cambia much
 o respecto a la compensada, la elasticidad
  []
 
 
-Overfull \hbox (20.97656pt too wide) in paragraph at lines 429--435
-\TU/lmr/m/n/10.95 al efecto ingreso. Se mantiene la magnitud del efecto ingreso
- en las elasticidades cruzadas de huevo y leche
+Overfull \hbox (11.50604pt too wide) in paragraph at lines 429--434
+\TU/lmr/m/n/10.95 no compensada propia de la leche es mayor que la compensada, 
+señalando al efecto ingreso. Se mantiene
+ []
+
+
+Overfull \hbox (35.90508pt too wide) in paragraph at lines 429--434
+\TU/lmr/m/n/10.95 la magnitud del efecto ingreso en las elasticidades cruzadas 
+de huevo y leche y viceversa en aproximadamente
  []
 
 

@@ -33,7 +33,7 @@ header-includes :
 \textsc{\LARGE }\\[1em]
 
 
-\textsc{\large Tarea QUAIDS-AIDS}\\[1em]
+\textsc{\large Tarea 2 QUAIDS-AIDS}\\[1em]
 
 \textsc{\LARGE }\\[1em]
 

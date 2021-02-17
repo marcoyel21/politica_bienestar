@@ -91,9 +91,9 @@ library(kableExtra)
 
 # Introducción
 
-En esta tarea analizaremos la relación entre desigualdad y crecimiento económico desde un punto de vista teórico tanto como econométrico. El objetivo es explorar el efecto que tiene sobre el crecimiento económico per cápita de los países la desigualdad, medida con el coeficiente de Gini. Mas no analizaremos su efecto aislado: buscamos encontrar información que señale que la desigualdad tiene un efecto diferenciado en la variable dependiente según el nivel de ingreso de los países.  
+En el presente trabajo se analizará la relación entre desigualdad y crecimiento económico desde un punto de vista teórico tanto como econométrico. El objetivo es explorar el efecto que tiene sobre el crecimiento económico per cápita de los países la desigualdad, medida con el coeficiente de Gini. Mas no analizaremos su efecto aislado: buscamos encontrar información que señale si la desigualdad tiene un efecto diferenciado en la variable dependiente según el nivel de ingreso de los países.  
 
-En primera instancia, expondremos un marco teórico muy breve acompañado de un modelo econométrico donde la única variable independiente es el coeficiente de Gini y la variable dependiente es el crecimiento del PIB per cápita. Posteriormente, se realizarán pruebas de hipótesis para determinar si se debe utilizar un modelo *pooled* o de efectos fijos, así como si se debe usar un modelo de efectos fijos *two-ways*. En la segunda parte, extenderemos el modelo inicial para incluir al nivel de ingreso (alto, medio o bajo) en los modelos, usando las mismas pruebas de hipótesis. Finalmente, se hará una breve conclusión de los hallazgos.
+En primera instancia, expondremos un marco teórico muy breve acompañado de un modelos econométricos de panel donde la única variable independiente es el coeficiente de Gini y la variable dependiente es el crecimiento del PIB per cápita. Posteriormente, se realizarán pruebas de hipótesis para determinar si se debe utilizar un modelo *pooled*, de efectos fijos, o aleatorio, así como si se deben incorporar efectos de tiempo fijos (con un modelo within de dos componentes del error, al cual llamaremos *two-way*). En la segunda parte, extenderemos los modelo iniciales para incluir a la interacción de  nivel de ingreso (alto, medio o bajo) con desigualdad, los cuales serán sometidos a las mismas pruebas de hipótesis. Finalmente, se hará una breve conclusión de los hallazgos.
 
 # Relación entre crecimiento, desigualdad y nivel de ingreso
 
@@ -101,9 +101,7 @@ En primera instancia, expondremos un marco teórico muy breve acompañado de un 
 
 La relación entre crecimiento y desigualdad es un tema muy contencioso en la economía, pues existe evidencia teórica y empírica que encuentra que la relación puede ser, dependiendo de los controles y del modelo que se está usando, negativa o positiva: no hay una relación determinada. [@Boushey2014]
 
-Desde un punto de vista teórico, el economista Robert Barro sostiene que esta relación se comporta según la curva de Kuznets: en un punto inicial, o bajo de crecimiento, al comenzar el desarrollo económico la desigualdad tiende a crecer. Sin embargo, esta comienza a decrecer con la maduración de la economía. Mas, como reconoce el premio Nobel, la relación entre ambas variables es modesta [@Barro2000].
-
-Barro argumenta que el crecimiento podría estar determinado por el nivel de desarrollo de un país. En los países pobres, la desigualdad inhibe el crecimiento, mientras que en los países ricos, la desigualdad promueve el crecimiento. Por esta razón, consideramos que para evaluar el efecto de la desigualdad en el crecimiento, forzozamente necesitamos evaluar en conjunto con el nivel de ingreso.
+Desde un punto de vista teórico, el economista Robert Barro sostiene que esta relación se comporta como una curva, particularmente la propuesta por Simon Kuznets: en un punto inicial, o bajo de nivel económico, al comenzar su crecimiento la desigualdad tiende a crecer. Sin embargo, esta comienza a decrecer con la maduración de la economía. Mas, como reconoce el premio Nobel, la relación entre ambas variables es modesta [@Barro2000]. Entonces, según el mismo autor, en los países pobres, la desigualdad inhibe el crecimiento, mientras que en los países ricos, la desigualdad promueve el crecimiento. Por esta razón, consideramos que para evaluar el efecto de la desigualdad enla variable dependiente, forzozamente necesitamos evaluarla en conjunto con el nivel de ingreso.
 
 ## Argumentos econométricos
 
@@ -189,19 +187,19 @@ dataf<-data.frame(Pruebas, P.value, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T) %>% kable_styling(position = "center")
 ```
 
-Dado que el modelo MCO o *pooled* podría generar estimadores sesgados si no se cumple con los supuestos de linealidad, exogeneidad, homocedasticidad, y no multicolinealidad, se deben realizar pruebas para verificar que el efecto individual $u_{i}$ es igual a cero. Esto se realiza con una prueba F, donde *Ho* es que los efectos individuales, o errores $u_{i}$ son iguales a cero. Dado que se rechaza a un nivel de significancia de .0000, podemos descartar que haya homogeneidad entre los países, o el modelo *pooled*.
+Dado que el modelo MCO o *pooled*, que implica no se necesita controlar para los efectos individuales de los países, o que no hay heterogeneidad entre ellos, podría generar estimadores sesgados si no se cumple con los supuestos de linealidad, exogeneidad, homocedasticidad, y no multicolinealidad, se deben realizar pruebas para verificar que el efecto individual $u_{i}$ es igual a cero. Esto se realiza con una prueba F, donde *Ho* es que los efectos individuales, o errores $u_{i}$ son iguales a cero. Dado que se rechaza a un nivel de significancia de .0000, podemos descartar que haya homogeneidad entre los países.
 
-En segunda instancia, se realiza una prueba para determinar si el modelo de efectos fijos o de efectos aleatorios es preferible. Realizamos una prueba de Hausman donde *Ho* es que los errores $u_{i}$ no están correlacionados con los regresores. Este sería el caso de un modelo con efectos aleatorios. Al rechazar *Ho* con un nivel de significancia de .0000 , se implica que los errores están correlacionados a los regresores, o que hay efectos fijos en el panel. 
+En segunda instancia, se realiza una prueba para determinar si el modelo de efectos fijos o de efectos aleatorios es preferible. Realizamos una prueba de Hausman donde *Ho* es que los errores $u_{i}$ no están correlacionados con las variables regresoras. Este sería el caso de un modelo con efectos aleatorios. Al rechazar *Ho* con un nivel de significancia de .0000 , se implica que los errores están correlacionados a los regresores, o que hay efectos fijos en el panel. 
 
-Por último, es necesario concluir si se deben incluir, además de efectos fijos individuales, efectos fijos en el tiempo (*two-ways*). Esto se realiza con una prueba de multiplicadores lagrangianos Breusch-Pagan, en la que se determina si se debe incluir el término $lambda_{t}$, o efectos tiempo-específicos. *Ho* implica que hay variables con efectos específicos individuales, pero no con efectos específicos en el tiempo, lo que indicaría que el modelo de efectos fijos con efectos individuales es suficiente. Al rechazar *Ho* a un nivel del 0.000, concluimos que hay efectos de tiempo significativos. 
+Por último, es necesario concluir si se deben incluir, además de efectos fijos individuales, efectos fijos en el tiempo (*two-way*). Esto se realiza con una prueba de multiplicadores lagrangianos Breusch-Pagan, en la que se determina si se debe incluir el término $lambda_{t}$, o efectos tiempo-específicos. *Ho* implica que hay variables con efectos específicos individuales, pero no con efectos específicos en el tiempo, lo que indicaría que el modelo de efectos fijos con efectos individuales es suficiente. Al rechazar *Ho* a un nivel del 0.000, concluimos que hay efectos de tiempo significativos. 
 
 De estas pruebas concluimos que el modelo de efectos fijos es más adecuado que el de *pooled* y efectos aleatorios, a partir de las pruebas F y de Hausman, respectivamente; y que del modelo de efectos fijos individual al two-way el segundo es más adecuado, ya que se probó con el test de Breusch-Pagan que en la ecuación de efectos fijos:
 
 $$y_{it}=x_{it}\beta+c_i+u_{it} +\lambda_{t}$$,
 
-$\lambda_{t} \neq 0.
+$\lambda_{t} \neq 0.$
 
-# Modelos con nivel de ingreso
+# Modelos con nivel de ingreso y desigualdad
 
 En segundo lugar, realizaremos el mismo ejercicio pero ahora controlando por la interacción del nivel de ingreso de los países (alto, medio y bajo) con el coeficiente de Gini. Esta interacción captará si la desigualdad afecta a las colas de la distribución del ingreso de diferentes formas. 
 
@@ -260,7 +258,7 @@ dataf<-data.frame(Pruebas, P.value, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T) %>% kable_styling(position = "center")
 ```
 
-En esta sección, se realizó de nuevo la prueba del modelo de efectos fijos contra *pooled*, y de nuevo se rechazó Ho a favor del primero, así como en la prueba de Hausman. Adicionalmente, se hizo una prueba de multiplicadores lagrangianos Breusch-Pagan para efectos de tiempo fijos, donde Ho es que $\lambda_{t} \= 0$. Al rechazar, concluimos que es necesario controlar por tiempo en el modelo de efectos fijos, optando por el modelo *two-ways*.
+En esta sección, se realizó de nuevo la prueba del modelo de efectos fijos contra *pooled*, y de nuevo se rechazó Ho a favor del primero, así como en la prueba de Hausman. Adicionalmente, se hizo una prueba de multiplicadores lagrangianos Breusch-Pagan para efectos de tiempo fijos, donde Ho es que $\lambda_{t}= 0$. Al rechazar, concluimos que es necesario controlar por tiempo en el modelo de efectos fijos, optando por el modelo *two-ways*.
 
 # Modelo final
 

@@ -834,7 +834,7 @@ Los resultados estimados en esta tarea indican que la leche y el huevo, aunque a
 
 En cuanto a las elasticidades precio, notamos que las elasticidades eran inelásticas y que tenían una complementariedad débil entre ellas. Esto era de esperarse, al ser dos productos básicos del mexicano promedio. 
 
-#Referencias
+# Referencias
 
 Banks, J. , Blundell, R. , and Lewbel, A. 1997. Quadratic Engel curves and consumer demand. Review of Economics and Statistics 79: 527–539.
 

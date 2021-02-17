@@ -120,7 +120,7 @@ original<-read.csv("concentradohogar/concentradohogar.csv")
 #3: Medio alto
 #4: Alto
 
-Para obtener datos más contrastantes, redujimos la variable a una dicotómica para indicar a los hogares de estratos de la población bajos, que toma el valor de 1 si el hogar es de estrato bajo o medio-bajo, y 0 si es alto o medio-alto. 
+#Para obtener datos más contrastantes, redujimos la variable a una dicotómica para indicar a los hogares de estratos de la población bajos, que toma el valor de 1 si el hogar es de estrato bajo o medio-bajo, y 0 si es alto o medio-alto. 
 
 #______________________________________________________________________________
 #______________________________________________________________________________
@@ -296,7 +296,7 @@ Observations        &       16296         \\
 \end{tabular}
 \end{table}
 
-Podemos notar que todos los parámetros del primer bien, o sea el huevo, son significativos, incluyendo a $\lambda$. No todos los parámetros de leche, sin embargo, son significativos: solo el de $\alfa$ lo es. Esto podría indicar que la proporción del gasto de este bien contra el ingreso es más bien lineal. 
+Podemos notar que todos los parámetros del primer bien, o sea el huevo, son significativos, incluyendo a $\lambda$. No todos los parámetros de leche, sin embargo, son significativos: solo el de $\alpha$ lo es. Esto podría indicar que la proporción del gasto de este bien contra el ingreso es más bien lineal. 
 
 Las  $\lambda_(p)$ señalan el efecto de las curvas de Engel cuadráticas en las proporciones del gasto. Si son significativas, significa que rechazamos que sean igual a cero, o sea, que la relación no es lineal.  
 

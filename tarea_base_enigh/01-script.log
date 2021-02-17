@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.8)  15 FEB 2021 22:12
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.8)  16 FEB 2021 18:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -815,7 +815,35 @@ LaTeX Info: Redefining \% on input line 69.
 ] (./01-script.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 7.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 7.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 7
+.
+(/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.95099pt on input line 7.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.66568pt on input line 7.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.4755pt on input line 7.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 10.94882pt on input line 7.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.66417pt on input line 7.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.47441pt on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 7.
+(/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 7.
+(/Users/marcoyel21/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+))
 \tf@toc=\write4
 \openout4 = `01-script.toc'.
 
@@ -828,6 +856,41 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [1]
+File: 01-script_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf
+)
+<use 01-script_files/figure-latex/unnamed-chunk-2-1.pdf>
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[2]
+Overfull \hbox (2.90298pt too wide) in paragraph at lines 172--181
+[]\TU/lmr/m/n/10.95 Lo que podemos notar esque en los paneles superiores, podrí
+a existir una relación cuadrática mientras
+ []
+
+
+Overfull \hbox (3.79845pt too wide) in paragraph at lines 172--181
+\TU/lmr/m/n/10.95 que en los inferiores la relación es más plana, como un bien 
+normal perfecto. Ahora, algo interesante es
+ []
+
+
+Overfull \hbox (2.79353pt too wide) in paragraph at lines 172--181
+\TU/lmr/m/n/10.95 que las pendientes son más grandes en los paneles superieroes
+, y vemos que la dirección es la misma en
+ []
+
+
+Overfull \hbox (3.46748pt too wide) in paragraph at lines 172--181
+\TU/lmr/m/n/10.95 los 4 paneles (aproximadamente hacia el cuadrante 12,8). Esto
+ quiere decir que probablemente que las
+ []
+
 File: 01-script_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf
 )
 <use 01-script_files/figure-latex/unnamed-chunk-3-1.pdf>
@@ -839,57 +902,55 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[2]
-Overfull \hbox (2.90298pt too wide) in paragraph at lines 176--185
-[]\TU/lmr/m/n/10.95 Lo que podemos notar esque en los paneles superiores, podrí
-a existir una relación cuadrática mientras
- []
-
-
-Overfull \hbox (3.79845pt too wide) in paragraph at lines 176--185
-\TU/lmr/m/n/10.95 que en los inferiores la relación es más plana, como un bien 
-normal perfecto. Ahora, algo interesante es
- []
-
-
-Overfull \hbox (2.79353pt too wide) in paragraph at lines 176--185
-\TU/lmr/m/n/10.95 que las pendientes son más grandes en los paneles superieroes
-, y vemos que la dirección es la misma en
- []
-
-
-Overfull \hbox (3.46748pt too wide) in paragraph at lines 176--185
-\TU/lmr/m/n/10.95 los 4 paneles (aproximadamente hacia el cuadrante 12,8). Esto
- quiere decir que probablemente que las
- []
-
-File: 01-script_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf
-)
-<use 01-script_files/figure-latex/unnamed-chunk-4-1.pdf>
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
 [3]
-Overfull \hbox (20.91571pt too wide) in paragraph at lines 205--211
+Overfull \hbox (20.91571pt too wide) in paragraph at lines 201--207
 []\TU/lmr/m/n/10.95 En conclusión de esta parte, aunque podemos notar algunos i
 ndicios leves de comportamiento cuadrático,
  []
 
 
-Overfull \hbox (14.94803pt too wide) in paragraph at lines 205--211
+Overfull \hbox (14.94803pt too wide) in paragraph at lines 201--207
 \TU/lmr/m/n/10.95 sobretodo para los grupos pobres, en negeral la relación es l
 ineal y por ello esperamos que los coeficientes
  []
 
 
-Overfull \hbox (0.2384pt too wide) in paragraph at lines 205--211
+Overfull \hbox (0.2384pt too wide) in paragraph at lines 201--207
 \TU/lmr/m/n/10.95 de los terminos cuadráticos sean estadísticmanete insignifica
 ntes. Tal vez, condicionando por estrato,
+ []
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 9.0pt on input line 285.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 285.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.0pt on input line 285.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 9.00082pt on input line 285.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.00055pt on input line 285.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.00046pt on input line 285.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.99904pt on input line 285.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.99936pt on input line 285.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 4.99947pt on input line 285.
+
+LaTeX Warning: Float too large for page by 388.52106pt on input line 287.
+
+
+Overfull \hbox (2.80687pt too wide) in paragraph at lines 289--294
+[]\TU/lmr/m/n/10.95 Podemos notar que todos los parámetros del primer bien, o s
+ea el huevo, son significativos, incluyendo
+ []
+
+
+Overfull \hbox (24.52678pt too wide) in paragraph at lines 289--294
+\TU/lmr/m/n/10.95 a $[]$. No todos los parámetros de leche, sin embargo, son si
+gnificativos: solo el de $[]$ lo es. Esto podría indicar
  []
 
 
@@ -909,20 +970,142 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[5] (./01-script.aux
+[5]
+Overfull \hbox (0.1314pt too wide) in paragraph at lines 310--317
+[]\TU/lmr/m/n/10.95 La elasticidad compensada nos informa del cambio porcentual
+ de la demanda de un bien en respuesta
+ []
+
+
+Overfull \hbox (15.98355pt too wide) in paragraph at lines 310--317
+\TU/lmr/m/n/10.95 la demanda de un bien por cambio de 1$ $% en el precio del pr
+ecio propio o de otro bien) pero incorporando
+ []
+
+
+LaTeX Warning: Float too large for page by 388.52106pt on input line 398.
+
+
+LaTeX Warning: Float too large for page by 388.52106pt on input line 491.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[6]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[7]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[8]
+
+LaTeX Warning: Float too large for page by 388.52106pt on input line 580.
+
+
+LaTeX Warning: Float too large for page by 388.52106pt on input line 671.
+
+
+Overfull \hbox (6.65884pt too wide) in paragraph at lines 673--679
+[]\TU/lmr/m/n/10.95 Mientras que la elasticidad propia del huevo no cambia much
+o respecto a la compensada, la elasticidad
+ []
+
+
+Overfull \hbox (20.97656pt too wide) in paragraph at lines 673--679
+\TU/lmr/m/n/10.95 al efecto ingreso. Se mantiene la magnitud del efecto ingreso
+ en las elasticidades cruzadas de huevo y leche
+ []
+
+
+LaTeX Warning: Float too large for page by 388.52106pt on input line 770.
+
+
+LaTeX Warning: Float too large for page by 388.52106pt on input line 854.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[9]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[10]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[11]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[12]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[13]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[14] (./01-script.aux
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 )
 Package rerunfilecheck Info: File `01-script.out' has not changed.
-(rerunfilecheck)             Checksum: 56CD4B5475951C4D2E43DED22BD20B6F;961.
+(rerunfilecheck)             Checksum: 995F540E5D01AF8046F3FC77ED4D367D;1343.
  ) 
 Here is how much of TeX's memory you used:
- 18625 strings out of 479196
- 328593 string characters out of 5873090
- 803052 words of memory out of 5000000
- 37990 multiletter control sequences out of 15000+600000
- 404130 words of font info for 42 fonts, out of 8000000 for 9000
+ 18725 strings out of 479196
+ 331551 string characters out of 5873090
+ 833141 words of memory out of 5000000
+ 38049 multiletter control sequences out of 15000+600000
+ 409878 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,12n,122p,611b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,11n,122p,611b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 01-script.pdf (6 pages).
+Output written on 01-script.pdf (15 pages).

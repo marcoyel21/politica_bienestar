@@ -157,7 +157,12 @@ Los precios de la leche se obtuvieron del Sistema Nacional de Información e Int
 
 Para el precio del resto de los bienes se promedió el precio de los demás productos de la canásta básica -exceptuando el de la leche y los huevos-. Los precios se obtuvieron de la página de la Secretaría de Desarrollo Económico, se eligió el de las tiendas de autoservicio por estar más estandarizado que el de mercados públicos o mercados sobre ruedas. Este precio promedió en $30 pesos.
 
-Utilizamos como variable demográfica la de estrato socioeconómico, que clasifica al hogar conforme a características de sus integrantes y el status físico de los hogares. Para obtener datos más contrastantes, redujimos la variable a una dicotómica para indicar a los hogares de estratos de la población bajos, que toma el valor de 1 si el hogar es de estrato bajo o medio-bajo, y 0 si es alto o medio-alto.
+Utilizamos como variable demográfica la de estrato socioeconómico, que clasifica al hogar conforme a características de sus integrantes y el status físico de los hogares. Los estratos son:
+1. Bajo
+2. Medio bajo
+3. Medio alto
+4. Alto
+
 
 En las siguientes graficas mostramos la relación entre el logaritmo del gasto en alimentos frente al logaritmo del gasto en nuestros dos bienes: leche y huevo. Asimismo, para facilitar el análisis, graficamos también dos regresiones, una lineal (con amarillo) y una cuadrática (con rojo) para poder ver como se ajusta mejor a los datos.
 
@@ -219,7 +224,7 @@ ggarrange(
 
 En cuanto a la **figura 2**, el huevo, la relación es muy similar a la de la leche. Las pendientes de la relación logaritmo de gasto en alimentos contra logaritmo del gasto en huevo son mayores para los dos paneles superiores, la mitad más pobre. Por un lado observamos que las familias de la mitad más pobre comienzan un gasto en huevo desde menores ingresos y con una mayor proporción destinada al bien. Sin embargo, las diferencias son muy pequeñas y en general la relación es muy lineal para los 4 paneles, tal vez con una exepción para el panel B que muestra una  muy ligera tendencia cuadrática al principio.
 
-En conclusión de esta parte, aunque podemos notar algunos indicios leves de comportamiento cuadrático, sobretodo para los grupos pobres, en negeral la relación es lineal y por ello esperamos que los coeficientes de los terminos cuadráticos sean estadísticmanete insignificantes. Tal vez, condicionando por estrato, encontremos que hay terminos cuadráticos para los dos estratos más pobres.
+En conclusión de esta parte, aunque podemos notar algunos indicios leves de comportamiento cuadrático, sobretodo para los grupos pobres, en negeral la relación es lineal y por ello esperamos que los coeficientes de los terminos cuadráticos sean estadísticmanete insignificantes. Tal vez, condicionando por estrato, encontremos que hay terminos cuadráticos para los dos estratos más pobres. Para verificar esto, agrupamos a los dos grupos más bajos y más altos en una variable dicotómica, que toma el valor de 1 si el hogar es de estrato bajo o medio-bajo, y 0 si es alto o medio-alto.
 
 # Estimación QUAIDS
 

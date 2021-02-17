@@ -296,7 +296,20 @@ Observations        &       16296         \\
 \end{tabular}
 \end{table}
 
+Podemos notar que todos los parámetros del primer bien, o sea el huevo, son significativos, incluyendo a $\lambda$. No todos los parámetros de leche, sin embargo, son significativos: solo el de $\alfa$ lo es. Esto podría indicar que la proporción del gasto de este bien contra el ingreso es más bien lineal. 
+
+Las  $\lambda_(p)$ señalan el efecto de las curvas de Engel cuadráticas en las proporciones del gasto. Si son significativas, significa que rechazamos que sean igual a cero, o sea, que la relación no es lineal.  
+
+El huevo, al no poder rechazar que tiene una curva de Engel cuadrática, podría señalar que es un bien de lujo en niveles de ingreso bajos y un bien necesario en niveles de ingreso alto. 
+
+En cuanto a la variable sociodemográfica, ser de estrato bajo está relacionado de forma significativa y negativa al consumo de leche. 
+
 # Matriz de elasticidades precio
+
+La elasticidad compensada nos informa del cambio porcentual de la demanda de un bien en respuesta a un cambio de 1% en el precio, ceteris paribus. Este coeficiente mide solo el efecto del precio, o sustitución. La elasticidad no compensada, por otro lado, señala lo mismo (cambio porcentual en la demanda de un bien por cambio de 1% en el precio del precio propio o de otro bien) pero incorporando al efecto ingreso, además del de sustitución.
+
+Notamos que todas las elasticidades precio propias son negativas. 
+
 
 ##Compensadas, estrato ingresos bajo
 
@@ -378,6 +391,11 @@ Observations        &       16296         \\
 \end{tabular}
 \end{table}
 
+La elasticidad pp de los huevos es de -.61, mientras que la pp de la leche es de -1.03. Esto implica que un incremente de 1% en el precio, en este grupo habrá una disminución de la demanda en .61% y en 1.03%, respectivamente. Esto implica que el huevo es más inelástico que la leche; esta tiene una elasticidad prácticamente unitaria.
+
+Notamos una muy ligera relación de complementariedad entre ambos bienes: un aumento de 1% en el precio del huevo cambia en -.017% el consumo de la leche, mientras que un aumento del 1% en el precio de la leche disminuye en .007% el consumo del huevo: aunque hay una muy ligera relación de complementariedad, sus consumos parecen ser independientes, sonre todo el consumo del huevo. 
+
+
 #Compensadas, población ingreso alto
 
 \begin{table}[htbp]\centering
@@ -458,6 +476,7 @@ Observations        &       16296         \\
 \end{tabular}
 \end{table}
 
+El comportamiento de las elasticidades precio propias del huevo y la leche es muy parecido al del estrato bajo, con elasticidades del -.5% y -1.02%, respectivamente. Sin embargo, las elasticidades precio cruzadas son de -.015% en el aumento del precio del huevo respecto al consumo de leche y -.047% en el precio de la leche respecto al huevo. Esto es una diferencia de .04 puntos porcentuales en la elasticidad del precio del huevo contra la leche entre el estrato alto y el bajo: la leche es ligeramente más complemento que independiente.
 
 ##No compensadas, población ingreso bajo
 
@@ -539,6 +558,8 @@ Observations        &       16296         \\
 \end{tabular}
 \end{table}
 
+Notamos que mientras que las elasticidades precio propias no cambian respecto a las elasticidades compensadas, existen diferencias en la elasticidad del consumo la leche por un cambio de precio en el huevo , siendo  este efecto casi 0 en el caso de la elasticidad compensada y aumentando .031 pp en el caso de las no compensadas, señalando un efecto ingreso mayor al efecto sustitución en esta relación. Por otro lado, la elasticidad del consumo del huevo por un cambio de precio en la leche tiene una diferencia de .06 puntos porcentuales, señalando un efecto ingreso del doble de tamaño que en el caso de la leche y casi 7 veces mayor al efecto sustitución. 
+
 ##No compensadas, población de ingreso alto 
 
 \begin{table}[htbp]\centering
@@ -619,7 +640,11 @@ Observations        &       16296         \\
 \end{tabular}
 \end{table}
 
+Mientras que la elasticidad propia del huevo no cambia mucho respecto a la compensada, la elasticidad no compensada propia de la leche es .07 puntos porcentuales mayor que la compensada, señalando al efecto ingreso. Se mantiene la magnitud del efecto ingreso en las elasticidades cruzadas de huevo y leche y viceversa en aproximadamente la misma proporción que los ingresos bajos. 
+
 # Estimación de las elasticidades ingreso
+
+La elasticidad ingreso señala cómo cambia el consumo de un bien al cambiar el ingreso. Si es mayor a 1, señala un bien de lujo; si es igual a 1, que es un bien unitario o proporcional al ingreso; entre cero y uno son normales; si es cero implica que la demanda es independiente al ingreso, y si es negativa que se trata de un bien inferior. 
 
 ## Elasticidades ingreso para población de ingreso bajo
 
@@ -701,6 +726,8 @@ Observations        &       16296         \\
 \end{tabular}
 \end{table}
 
+Las elasticidades ingreso de los bienes (huevo y leche, respectivamente) son .65 y .83, indicando que el consumo de la leche es más responsivo a cambios en el ingreso.
+
 ##Elasticidades ingreso para población de estrato alto
 
 \begin{table}[htbp]\centering
@@ -781,9 +808,18 @@ Observations        &       16296         \\
 \end{tabular}
 \end{table}
 
+Las elasticidades ingreso de los bienes (huevo y leche, respectivamente) son .44 y .80. Esto es un cambio bastante alto en el consumo del huevo comparado con el estrato bajo: se acerca más al cero, o sea, que a mayor ingreso se vuelve más "necesario". 
+
 # Conclusiones
 Determinar el valor de las elasticidades de demanda es importante, en particular, para estimar el impacto que las políticas públicas pueden tener sobre los precios de los productos y servicios que los hogares consumen y así discernir los distintos efectos para los agentes económicos.  
 
-Los resultados estimados en esta tarea indican que los valores de las elasticidades precio de la demanda son coherentes dado que acorde con sus elasticidades, la leche y huevo constituyen bienes normales, aunque son bienes de primera necesidad sobre todo para los estratos socio-económicos más pobres. 
 
-La variable sociodemográfica que se utilizó para controlar las preferencias de los hogares es la de estado socioeconómico dado que ésta puede influir en el patrón de consumo de las personas. 
+Los resultados estimados en esta tarea indican que los valores de las elasticidades precio de la demanda son coherentes dado que acorde con sus elasticidades, la leche y huevo constituyen bienes normales, el consumo del huevose mostró más "necesario" o cerca a la independencia al ingreso, en los estratos de ingreso altos. 
+
+Como señalan Banks, Blundell y Lebwell, que la proporción del gasto de un bien sea cuadrática con respecto al ingreso señala que los diferentes grupos de ingreso no se comportan igual respecto al bien: si la curva es cóncava, implica que para las personas de menor ingreso el bien es un lujo y para los de mayor ingreso un bien necesario.
+
+La variable sociodemográfica que se utilizó para controlar las preferencias de los hogares es la de estado socioeconómico dado que ésta puede influir en el patrón de consumo de las personas. Esto, junto con la determinación de relaciones cuadráticas, muestra las ventajas de utilizar al modelo QUAIDS para las estimaciones de demanda.
+
+
+
+

@@ -1,1 +1,0 @@
-Hola, el doc de pruebas panel tiene las pruebas de hausman, breusch pagan, y mundlak (y unas F) para escoger entre modelo pooled (ols) y Ef, EF y Ea, Ea y pooled, si hay efectos de tiempo. Esto para EF individual y two way. Falta probar con los otros modelos e incorporar el tiempo. 

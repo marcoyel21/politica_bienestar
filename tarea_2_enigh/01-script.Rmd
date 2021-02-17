@@ -1,0 +1,421 @@
+---
+output:
+  pdf_document:
+    latex_engine: xelatex
+  geometry: margin=1in
+fontsize: 11pt
+header-includes :
+  \usepackage{pdflscape}
+  \usepackage{float}
+  \usepackage{geometry}
+  \usepackage{graphicx}
+  \tolerance=1
+  \hyphenpenalty=10000
+  \hbadness=10000
+  \linespread{1.3}
+  \usepackage[justification=centering, font=bf, labelsep=period, skip=5pt]{caption} 
+  \usepackage{titling}
+  \usepackage[spanish]{babel}
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhead[L]{Maestría en Economía Aplicada}
+  \fancyhead[R]{ITAM}
+
+---
+\begin{titlepage}
+\begin{center}
+
+\textsc{\Large Instituto Tecnológico Autónomo de México}\\[2em]
+
+\textbf{\LARGE Bienestar y Política Social}\\[2em]
+
+
+\textsc{\LARGE }\\[1em]
+
+
+\textsc{\large Tarea QUAIDS-AIDS}\\[1em]
+
+\textsc{\LARGE }\\[1em]
+
+\textsc{\large }\\[1em]
+\textsc{\LARGE }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\large }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\LARGE Dra. Araceli Ortega Díaz}\\[1em]
+
+\textsc{\LARGE }\\[1em]
+\textsc{\LARGE }\\[1em]
+
+\textsc{\LARGE Marco Antonio Ramos Juárez}\\[1em]
+
+\textsc{\large 142244}\\[1em]
+
+\textsc{\LARGE Mayra Samantha Cervantes Bravo}\\[1em]
+
+\textsc{\large 141371}\\[1em]
+
+\textsc{\LARGE Cynthia Raquel Valdivia Tirado }\\[1em]
+
+\textsc{\large 81358}\\[1em]
+
+\end{center}
+
+\vspace*{\fill}
+\textsc{Ciudad de México \hspace*{\fill} 2021}
+
+\end{titlepage}
+
+
+\newpage
+
+
+\tableofcontents
+
+\newpage
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,fig.pos = 'H')
+
+#paquetes marco
+library(dplyr)
+library(readr)
+library(ggplot2)
+library("ggpubr")
+theme_set(
+  theme_bw() +
+    theme(legend.position = "top")
+  )
+```
+
+
+# Introducción
+
+El presente trabajo busca estimar un sistema de demanda de alimentos para México, utilizando los datos agregados sobre el consumo de los hogares de la ENIGH 2018. Existen múltiples modelos para denotar la relación gasto total y la proporción del ingreso de los bienes. Nosotros buscamos determinar si un modelo QUAIDS (*Quadratic Almost Ideal Demand System*) es adecuado para los bienes que elegimos: huevo y leche. Este modelo no limita a los bienes a ser normales al ingreso, si no que permite que pasen de ser necesarios a lujos, o viceversa, según el nivel de ingreso. Asimismo, permite utilizar variables sociodemográficas en la estimación, lo cual es de gran utilidad si nuestra hipótesis es que diferentes grupos de la población consumen de manera diferente.
+
+En primera instancia, describiremos los artículos que seleccionamos y se proporcionarán gráficas para ver su relación con el gasto total en alimentos. Posteriormente, se generará la estimación con el modelo QUAIDS, así como las matrices de elasticidades de precio y de ingreso. Finalizaremos con una breve conclusión. 
+
+```{r}
+
+original<-read.csv("concentradohogar/concentradohogar.csv")
+#Precio de la leche: 18.72 pesos por litro
+
+#Vínculo: http://www.economia-sniim.gob.mx/nuevo/ 
+
+#Precio del huevo: 28.5 pesos por kilo
+
+#Para obtener el precio promedio del huevo, se promedió el precio frecuente del huevo blanco vendido al menudeo del 8 al 12 de febrero de 2021 obtenido del SNIM en el siguiente vínculo: http://www.economia-sniim.gob.mx/Nuevo/Home.aspx?opcion=/SNIIM-Pecuarios-Nacionales/MenAve.asp 
+
+#Como los precios tanto del huevo como de la leche no varían significativamente entre los estados y municipios, se determinó utilizar usar al precio promedio. 
+
+#Para el precio del resto de los bienes se promedió el precio de los demás productos de la canásta básica -exceptuando el de la leche y los huevos-. Se tomó como referencia la canasta básica dado que la leche y el huevo son productos de esa canasta. Los precios se obtuvieron de la página de la Secretaría de Desarrollo Económico, se eligió el de las tiendas de autoservicio por estar más estandarizado que el de mercados públicos o mercados sobre ruedas. Este precio promedió en $30 pesos.
+
+#Utilizamos como variable demográfica de estrato socioeconómico, "est_socio", que clasifica al hogar conforme al nivel de ingreso y status socioeconómico desus miembros.   
+#1: Bajo
+#2: Medio bajo
+#3: Medio alto
+#4: Alto
+
+#Para obtener datos más contrastantes, redujimos la variable a una dicotómica para indicar a los hogares de estratos de la población bajos, que toma el valor de 1 si el hogar es de estrato bajo o medio-bajo, y 0 si es alto o medio-alto. 
+
+#______________________________________________________________________________
+#______________________________________________________________________________
+#DATA wrangling para STATA (version A)
+data<-original%>% 
+  select(folioviv,foliohog,est_socio,alimentos,leche,huevo)%>%
+  mutate(p_leche=18.72,s_leche=leche/alimentos, q_leche=leche/18.72,
+         p_huevo=28.5,q_huevos=huevo/28.5,s_huevo=huevo/alimentos,
+         p_other=30,other=(alimentos-leche-huevo),s_other=other/alimentos, q_other=other/30)
+
+A<-data%>%filter(est_socio==1)
+B<-data%>%filter(est_socio==2)
+C<-data%>%filter(est_socio==3)
+D<-data%>%filter(est_socio==4)
+
+#para correción de precios y shares de other
+data[mapply(is.infinite, data)] <- NA
+data[is.na(data)] <- 0
+data$p_other[data$p_other == 0] <- 1
+
+#Quito hogares que no gastaron nada en alimentos
+data<-data %>% filter(alimentos !=0)
+
+# Escribo la base
+write_csv(data,"stata.csv")
+
+```
+
+# Descripción de los artículos
+
+Los bienes que elegimos para nuestro análisis son huevo y leche (y resto de los alimentos). Esto debido a que sus precios son más o menos simialres en zonas geográficas, por lo que la imputación de los precios podría ser menos sesgada y (más sencilla) que en otros bienes. 
+
+Los precios de la leche se obtuvieron del Sistema Nacional de Información e Integración de Mercados (SNIM), utilizando el precio promedio ponderado por población del litro de la leche pasteurizada vendida en tiendas desde julio del 2020. Se realizó lo mismo para el huevo, pero usando precios al menudeo de febrero del 2021. 
+
+Para el precio del resto de los bienes se promedió el precio de los demás productos de la canásta básica -exceptuando el de la leche y los huevos-. Los precios se obtuvieron de la página de la Secretaría de Desarrollo Económico, se eligió el de las tiendas de autoservicio por estar más estandarizado que el de mercados públicos o mercados sobre ruedas. Este precio promedió en $30 pesos.
+
+Utilizamos como variable demográfica la de estrato socioeconómico, que clasifica al hogar conforme a características de sus integrantes y el status físico de los hogares. Los estratos son:
+1. Bajo
+2. Medio bajo
+3. Medio alto
+4. Alto
+
+En las siguientes graficas mostramos la relación entre el logaritmo del gasto en alimentos frente al logaritmo del gasto en nuestros dos bienes: leche y huevo. Asimismo, para facilitar el análisis, graficamos también dos regresiones, una lineal (con amarillo) y una cuadrática (con rojo) para poder ver cuál se ajusta mejor a los datos.
+
+```{r, message=FALSE,fig.cap="Leche", out.width="100%", fig.align='center'}
+
+#grafico la relacion log gasto en alimentos vs log gasto en el bien condicionado a cada estrato social
+l1<-ggplot(A, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue")) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato bajo")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+  
+l2<-ggplot(B, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato medio bajo")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+  
+l3<-ggplot(C, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato medio alto")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+  
+l4<-ggplot(D, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato alto")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+ggarrange(
+ l1,l2,l3,l4, labels = c("A", "B","C","D"),
+  common.legend = TRUE, legend = "bottom"
+  )
+
+```
+
+En cuanbto a la **figura 1**, en estos paneles podemos ver la relación entre la proporcion que se gasta en leche con respecto al gasto en alimento. Cada gráfica representa un grupo de la variable *est_socio*, los dos paneles superiores indican a los estratos bajo y medio bajo y los dos paneles inferiores a los medio alto y alto.
+
+Lo que podemos notar esque en los paneles superiores, podría existir una relación cuadrática mientras que en los inferiores la relación es más lineal, como un bien normal perfecto. Ahora, algo interesante es que las pendientes son más grandes en los paneles superieroes, y vemos que la dirección es la misma en los 4 paneles (aproximadamente hacia el cuadrante 12,8). Esto quiere decir que probablemente que las familias de la mitad más pobre están gastando ligeramente más proporción de su ingreso en leche que los estratos altos y que además, comienzan a hacer ese gasto desde un menor ingreso.
+
+```{r, message=  FALSE, fig.cap="Huevo", out.width="100%", fig.align='center'}
+
+#grafico la relacion log gasto en alimentos vs log gasto en el bien condicionado a cada estrato social
+
+l1<-ggplot(A, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue")) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato bajo")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l2<-ggplot(B, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato medio bajo")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l3<-ggplot(B, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato medio alto")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l4<-ggplot(B, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato alto")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+ggarrange(
+ l1,l2,l3,l4, labels = c("A", "B","C","D"),
+  common.legend = TRUE, legend = "bottom"
+  )
+
+```
+
+En cuanto a la **figura 2**, el huevo, la relación es muy similar a la de la leche. Las pendientes de la relación logaritmo de gasto en alimentos contra logaritmo del gasto en huevo son mayores para los dos paneles superiores, la mitad más pobre. Por un lado observamos que las familias de la mitad más pobre comienzan un gasto en huevo desde menores ingresos y con una mayor proporción destinada al bien. Sin embargo, las diferencias son muy pequeñas y en general la relación es muy lineal para los 4 paneles, tal vez con una exepción para el panel B que muestra una  muy ligera tendencia cuadrática al principio.
+
+En conclusión de esta parte, aunque podemos notar algunos indicios leves de comportamiento cuadrático, sobretodo para los dos grupos pobres, en general la relación es lineal y por ello esperamos que los coeficientes de los terminos cuadráticos sean estadísticmanete insignificantes. Tal vez, condicionando por estrato, encontremos que hay terminos cuadráticos para los dos estratos más pobres. Para verificar esto, agrupamos a los dos grupos más bajos y más altos en una variable dicotómica, que toma el valor de 1 si el hogar es de estrato bajo o medio-bajo, y 0 si es alto o medio-alto.
+
+# Estimación QUAIDS
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Modelo QUAIDS con variable sociodemográfica}
+\scalebox{0.6}{\begin{tabular}{l*{1}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}\\
+                    &\multicolumn{1}{c}{} \\
+\hline
+alpha               &                     \\
+alpha\_1             &      -0.110\sym{***}\\
+                    &   (0.00911)         \\
+[1em]
+alpha\_2             &    -0.00340         \\
+                    &    (0.0166)         \\
+[1em]
+alpha\_3             &       1.113\sym{***}\\
+                    &    (0.0190)         \\
+\hline
+beta                &                     \\
+beta\_1              &     -0.0528\sym{***}\\
+                    &   (0.00373)         \\
+[1em]
+beta\_2              &     -0.0269\sym{***}\\
+                    &   (0.00675)         \\
+[1em]
+beta\_3              &      0.0798\sym{***}\\
+                    &   (0.00783)         \\
+\hline
+gamma               &                     \\
+gamma\_1\_1           &     0.00315         \\
+                    &   (0.00847)         \\
+[1em]
+gamma\_2\_1           &     0.00825         \\
+                    &   (0.00607)         \\
+[1em]
+gamma\_3\_1           &     -0.0114         \\
+                    &   (0.00875)         \\
+[1em]
+gamma\_2\_2           &     0.00123         \\
+                    &    (0.0112)         \\
+[1em]
+gamma\_3\_2           &    -0.00949         \\
+                    &    (0.0121)         \\
+[1em]
+gamma\_3\_3           &      0.0209         \\
+                    &    (0.0161)         \\
+\hline
+lambda              &                     \\
+lambda\_1            &    -0.00441\sym{***}\\
+                    &  (0.000406)         \\
+[1em]
+lambda\_2            &    -0.00111         \\
+                    &  (0.000708)         \\
+[1em]
+lambda\_3            &     0.00551\sym{***}\\
+                    &  (0.000842)         \\
+\hline
+eta                 &                     \\
+eta\_ebajo\_1         &   -0.000375         \\
+                    &  (0.000362)         \\
+[1em]
+eta\_ebajo\_2         &     0.00339\sym{***}\\
+                    &  (0.000468)         \\
+[1em]
+eta\_ebajo\_3         &    -0.00302\sym{***}\\
+                    &  (0.000726)         \\
+\hline
+rho                 &                     \\
+rho\_ebajo           &       0.275\sym{*}  \\
+                    &     (0.124)         \\
+\hline
+Observations        &       16296         \\
+\hline\hline
+\multicolumn{2}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{2}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}}
+\end{table}
+
+Podemos notar que todos los parámetros del primer bien, o sea el huevo, son significativos, incluyendo a $\lambda(p)$. No todos los parámetros de leche, sin embargo, son significativos: solo el de $\alpha$ lo es. Esto podría indicar que la proporción del gasto de este bien contra el ingreso es más bien lineal. 
+
+Las  $\lambda(p)$ señalan el efecto de las curvas de Engel cuadráticas en las proporciones del gasto. Si son significativas, significa que rechazamos que sean igual a cero, en otras palabras, que la relación sería no lineal.  
+
+En cuanto al huevo, al no poder rechazar que tiene una curva de Engel cuadrática, se podría señalar que es un bien de lujo en niveles de ingreso bajos y un bien necesario en niveles de ingreso alto. En cuanto a la variable sociodemográfica, ser de estrato bajo está relacionado de forma significativa y negativa al consumo de leche. 
+
+# Estimación de elasticidades precio
+
+La elasticidad compensada nos informa el cambio porcentual de la demanda de un bien *ceteris paribus* en respuesta a un cambio de 1% en el precio. Este coeficiente mide solo el efecto del precio, o sustitución. La elasticidad no compensada, por otro lado, señala lo mismo (cambio porcentual en la demanda de un bien por cambio de 1% en el precio del precio propio o de otro bien) pero incorporando al efecto ingreso, además del de sustitución. En nuestro caso, notamos que todas las elasticidades precio propias son negativas. 
+
+
+## Compensadas
+
+**Estrato bajo**
+
+\begin{table}[htbp]
+\caption{Elasticidades precio compensadas de estrato bajo}
+\begin{tabular}{|l|l|l|l|}\hline  
+ & c1  & c2  & c3  \\ \hline  
+r1 & -.61071187 & -.01704037 & .62775224 \\ \hline 
+r2 & -.00756075 & -1.0291233 & 1.036684 \\ \hline 
+r3 & .0266391 & .09527003 & -.12190914 \\ \hline 
+  \end{tabular}
+\end{table}
+
+La elasticidad pp de los huevos es de -.61, mientras que la pp de la leche es de -1.03. Esto implica que un incremente de 1% en el precio, en este grupo habrá una disminución de la demanda en .61% y en 1.03%, respectivamente. Esto implica que el huevo es más inelástico que la leche; esta tiene una elasticidad prácticamente unitaria.
+
+Notamos una muy ligera relación de complementariedad entre ambos bienes: un aumento de 1% en el precio del huevo cambia en -.017% el consumo de la leche, mientras que un aumento del 1% en el precio de la leche disminuye en .007% el consumo del huevo: aunque hay una muy ligera relación de complementariedad, sus consumos parecen ser independientes, sonre todo el consumo del huevo. 
+
+
+**Estrato alto**
+
+\begin{table}[htbp]\centering
+\caption{Elasticidades precio compensadas para población de estrato alto}
+\begin{tabular}{|l|l|l|l|}\hline  
+ & c1  & c2  & c3  \\ \hline  
+r1 & -.50473891 & -.04620437 & .55094327 \\ \hline 
+r2 & -.01511411 & -1.0176577 & 1.0327718 \\ \hline 
+r3 & .01834685 & .10352078 & -.12186763 \\ \hline 
+  \end{tabular}
+\end{table}
+
+El comportamiento de las elasticidades precio propias del huevo y la leche es muy parecido al del estrato bajo, con elasticidades del -.5% y -1.02%, respectivamente. Sin embargo, las elasticidades precio cruzadas son de -.015% en el aumento del precio del huevo respecto al consumo de leche y -.047% en el precio de la leche respecto al huevo. Esto es una diferencia de .04 puntos porcentuales en la elasticidad del precio del huevo contra la leche entre el estrato alto y el bajo: la leche es ligeramente más complemento que independiente.
+
+## No compensadas
+
+**Estrato bajo**
+
+\begin{table}[htbp]\centering
+\caption{Elasticidades precio no compensadas de estrato bajo}
+\begin{tabular}{|l|l|l|l|}\hline  
+ & c1  & c2  & c3  \\ \hline  
+r1 & -.63526989 & -.0701485 & .04967663 \\ \hline 
+r2 & -.03885403 & -1.0967968 & .30006606 \\ \hline 
+r3 & -.01192506 & .01187285 & -1.0296776 \\ \hline 
+  \end{tabular}
+\end{table}
+
+Notamos que mientras que las elasticidades precio propias no cambian respecto a las elasticidades compensadas, existen diferencias en la elasticidad del consumo la leche por un cambio de precio en el huevo , siendo  este efecto casi 0 en el caso de la elasticidad compensada y aumentando .031 puntos porcentuales en el caso de las no compensadas, señalando un efecto ingreso mayor al efecto sustitución en esta relación. Por otro lado, la elasticidad del consumo del huevo por un cambio de precio en la leche tiene una diferencia de .06 puntos porcentuales, señalando un efecto ingreso del doble de tamaño que en el caso de la leche y casi 7 veces mayor al efecto sustitución. 
+
+
+**Estrato alto**
+
+\begin{table}[htbp]\centering
+\caption{Elasticidades precio no compensadas para estrato bajo}
+\begin{tabular}{|l|l|l|l|}\hline  
+ & c1  & c2  & c3  \\ \hline  
+r1 & -.51780354 & -.08546297 & .15918173 \\ \hline 
+r2 & -.03867816 & -1.0884665 & .32617061 \\ \hline 
+r3 & -.01220455 & .01171533 & -1.0379942 \\ \hline 
+  \end{tabular}
+\end{table}
+
+Mientras que la elasticidad propia del huevo no cambia mucho respecto a la compensada, la elasticidad no compensada propia de la leche es .07 puntos porcentuales mayor que la compensada, señalando al efecto ingreso. Se mantiene la magnitud del efecto ingreso en las elasticidades cruzadas de huevo y leche y viceversa en aproximadamente la misma proporción que los ingresos bajos.
+
+## Elasticidades ingreso
+
+**Estrato bajo**
+
+\begin{table}[htbp]\centering
+\caption{Elasticidades ingreso de estrato bajo}
+\begin{tabular}{|l|l|l|l|}\hline  
+ & c1  & c2  & c3  \\ \hline  
+r1 & .65574176 & .83558475 & 1.0297298 \\ \hline 
+  \end{tabular}
+\end{table}
+Las elasticidades ingreso de los bienes (huevo y leche, respectivamente) son .65 y .83, indicando que el consumo de la leche es más responsivo a cambios en el ingreso.
+
+
+**Estrato alto**
+
+\begin{table}[htbp]\centering
+\caption{Elasticidades ingreso de estrato alto}
+\begin{tabular}{|l|l|l|l|}\hline  
+ & c1  & c2  & c3  \\ \hline  
+r1 & .44408479 & .80097409 & 1.0384834 \\ \hline 
+  \end{tabular}
+\end{table}
+
+
+Las elasticidades ingreso de los bienes (huevo y leche, respectivamente) son .44 y .80. Esto es un cambio bastante alto en el consumo del huevo comparado con el estrato bajo: se acerca más al cero, o sea, que a mayor ingreso se vuelve más "necesario". 
+
+# Conclusiones
+
+Determinar el valor de las elasticidades de demanda es importante, en particular, para estimar el impacto que las políticas públicas pueden tener sobre los precios de los productos y servicios que los hogares consumen y así discernir los distintos efectos para los agentes económicos.  
+
+Los resultados estimados en esta tarea indican que la leche y el huevo, aunque ambos normales, no lo son de la misma forma: el consumo del huevo mostró un comportamiento cuadrático respecto al gasto total, portándose más "necesario" o cerca a la independencia al ingreso en los estratos de ingreso altos.  Como señalan Banks, Blundell y Lewbel, que la proporción del gasto de un bien sea cuadrática con respecto al ingreso señala que los diferentes grupos de ingreso no se comportan igual respecto al bien: si la curva es cóncava, implica que para las personas de menor ingreso el bien es un lujo y para los de mayor ingreso un bien necesario.
+
+En cuanto a las elasticidades precio, notamos que las elasticidades eran inelásticas y que tenían una complementariedad débil entre ellas. Esto era de esperarse, al ser dos productos básicos de la canasta de consumo del mexicano promedio. 
+
+\newpage
+# Referencias
+
+Banks, J. , Blundell, R. , and Lewbel, A. 1997. Quadratic Engel curves and consumer demand. Review of Economics and Statistics 79: 527–539.
+
+

@@ -1,1 +1,0 @@
-esta es el código para hacer la imputación. se hizo por separado para cada categoría, luego las mergee. si quieren saber más del método en google hay mucha documentación. Los artículos son de A243-247 y B001 a B007

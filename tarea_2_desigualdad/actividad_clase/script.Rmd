@@ -1,0 +1,84 @@
+---
+title: "Actividad de clase"
+author: "Marco Antonio Ramos"
+date: "2/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+Esta es la activdad de la clase. Por alguna razón no me salen los coeficientes exactos, creo que en la clase me perdí y no tome nota de todas las variables que se usaron para Z.
+
+# Construcción de Modelos Long Run
+```{r, results='asis', message=F}
+library(readstata13)
+library(stargazer)
+library(plm)
+library(dplyr)
+#Bases de datos del Penn
+data<-read.dta13("cigarretdata.dta")
+
+data<-data %>% mutate(lnpop16=log(pop16))
+
+#Modelo 1: OLS
+
+ols_A <- lm(lnc  ~ lnrp+lnrpn+lnrdi, 
+            data = data)
+
+ols_with_D <- lm(lnc  ~ lnrp+lnrpn+lnrdi+factor(yr), 
+            data = data)
+
+ols_Z_and_D <- lm(lnc  ~ lnrp+lnrpn+lnrdi+factor(yr)+lnpop16, 
+            data = data)
+
+within <- plm( lnc  ~ lnrp+lnrpn+lnrdi+factor(yr), 
+                             data = data,
+                             index = c("state", "yr"), 
+                             model = "within")
+
+random <- plm( lnc  ~ lnrp+lnrpn+lnrdi+factor(yr), 
+          data = data,
+          index = c("state", "yr"), 
+          model = "random")
+
+stargazer(ols_A, ols_with_D, ols_Z_and_D, within, random, title="Results",type="html", out="test.html", out.header=TRUE,
+          column.sep.width = "3pt", 
+          font.size = "small",  column.labels = c("OLS", "OLS con D","OLS con D y Z","Efectos fijos", "Efectos aleatorios") 
+
+)
+
+```
+
+# Modelos Short Run
+
+```{r, results='asis', message=F}
+
+
+ols_A <- lm(lnc  ~ lncl+lnrp+lnrpn+lnrdi, 
+            data = data)
+
+ols_with_D <- lm(lnc  ~ lncl+lnrp+lnrpn+lnrdi+factor(yr), 
+            data = data)
+
+ols_Z_and_D <- lm(lnc  ~ lncl+lnrp+lnrpn+lnrdi+factor(yr)+lnpop16, 
+            data = data)
+
+within <- plm( lnc  ~ lncl+lnrp+lnrpn+lnrdi+factor(yr), 
+                             data = data,
+                             index = c("state", "yr"), 
+                             model = "within")
+
+random <- plm( lnc  ~ lncl+lnrp+lnrpn+lnrdi+factor(yr), 
+          data = data,
+          index = c("state", "yr"), 
+          model = "random")
+
+stargazer(ols_A, ols_with_D, ols_Z_and_D, within, random, title="Results",type="html", out="test.html", out.header=TRUE,
+          column.sep.width = "3pt", 
+          font.size = "small",  column.labels = c("OLS", "OLS con D","OLS con D y Z","Efectos fijos", "Efectos aleatorios") 
+
+)
+
+```

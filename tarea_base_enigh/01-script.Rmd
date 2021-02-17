@@ -782,3 +782,8 @@ Observations        &       16296         \\
 \end{table}
 
 # Conclusiones
+Determinar el valor de las elasticidades de demanda es importante, en particular, para estimar el impacto que las políticas públicas pueden tener sobre los precios de los productos y servicios que los hogares consumen y así discernir los distintos efectos para los agentes económicos.  
+
+Los resultados estimados en esta tarea indican que los valores de las elasticidades precio de la demanda son coherentes dado que acorde con sus elasticidades, la leche y huevo constituyen bienes normales, aunque son bienes de primera necesidad sobre todo para los estratos socio-económicos más pobres. 
+
+La variable sociodemográfica que se utilizó para controlar las preferencias de los hogares es la de estado socioeconómico dado que ésta puede influir en el patrón de consumo de las personas. 

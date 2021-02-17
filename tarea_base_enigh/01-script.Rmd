@@ -131,8 +131,10 @@ data<-original%>%
          p_huevo=28.5,q_huevos=huevo/28.5,s_huevo=huevo/alimentos,
          p_other=30,other=(alimentos-leche-huevo),s_other=other/alimentos, q_other=other/30)
 
-A<-data%>%filter(est_socio==1 & est_socio==2)
-B<-data%>%filter(est_socio==3 & est_socio==4)
+A<-data%>%filter(est_socio==1)
+B<-data%>%filter(est_socio==2)
+C<-data%>%filter(est_socio==3)
+D<-data%>%filter(est_socio==4)
 
 #para correción de precios y shares de other
 data[mapply(is.infinite, data)] <- NA
@@ -166,12 +168,19 @@ l1<-ggplot(A, aes(log(alimentos),log(leche)))+geom_point() + theme(text = elemen
   stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
   stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
   
-l2<-ggplot(B, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato alto")+
+l2<-ggplot(B, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato medio bajo")+
   stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
   stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
-
+  
+l3<-ggplot(C, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato medio alto")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+  
+l4<-ggplot(D, aes(log(alimentos),log(leche)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en leche)")+ ggtitle("Estrato alto")+
+  stat_smooth(aes(y = log(leche)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(leche)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
 ggarrange(
- l1,l2,l3,l4, labels = c("A", "B"),
+ l1,l2,l3,l4, labels = c("A", "B","C","D"),
   common.legend = TRUE, legend = "bottom"
   )
 
@@ -188,12 +197,20 @@ l1<-ggplot(A, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = elemen
   stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
   stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
 
-l2<-ggplot(B, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato alto")+
+l2<-ggplot(B, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato medio bajo")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l3<-ggplot(B, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato medio alto")+
+  stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
+  stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
+
+l4<-ggplot(B, aes(log(alimentos),log(huevo)))+geom_point() + theme(text = element_text(size=10), panel.background = element_rect(fill = "lightblue"),axis.title.x = element_blank()) +  labs(y="log(gasto en alimentos)", x = "log(gasto en huevo)")+ ggtitle("Estrato alto")+
   stat_smooth(aes(y = log(huevo)),method = "lm", size = 1,color = "yellow",se=F) +
   stat_smooth(aes(y = log(huevo)),method = "lm", formula = y ~ x + I(x^2), size = 1, color = "red",se=F)+ xlim(4, 13) + ylim(3,10)
 
 ggarrange(
- l1,l2,l3,l4, labels = c("A", "B"),
+ l1,l2,l3,l4, labels = c("A", "B","C","D"),
   common.legend = TRUE, legend = "bottom"
   )
 

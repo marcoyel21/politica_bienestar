@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.8)  16 FEB 2021 18:52
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2021.2.8)  16 FEB 2021 21:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1010,35 +1010,41 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [1]
-Overfull \hbox (20.75143pt too wide) in paragraph at lines 168--178
+Overfull \hbox (29.38004pt too wide) in paragraph at lines 169--181
 []\TU/lmr/m/n/10.95 En primera instancia, expondremos un marco teórico muy brev
-e acompañado de un modelo econométrico
+e acompañado de un modelos econométricos
  []
 
 
-Overfull \hbox (14.14743pt too wide) in paragraph at lines 168--178
-\TU/lmr/m/n/10.95 donde la única variable independiente es el coeficiente de Gi
-ni y la variable dependiente es el crecimiento
+Overfull \hbox (11.63617pt too wide) in paragraph at lines 169--181
+\TU/lmr/m/n/10.95 es el crecimiento del PIB per cápita. Posteriormente, se real
+izarán pruebas de hipótesis para determinar
+ []
+
+
+Overfull \hbox (0.61569pt too wide) in paragraph at lines 169--181
+\TU/lmr/m/n/10.95 nivel de ingreso (alto, medio o bajo) con desigualdad, los cu
+ales serán sometidos a las mismas pruebas
  []
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 194.
+(Font)              scaled to size 9.0pt on input line 197.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 194.
+(Font)              scaled to size 6.0pt on input line 197.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 194.
+(Font)              scaled to size 5.0pt on input line 197.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 9.00082pt on input line 194.
+(Font)              scaled to size 9.00082pt on input line 197.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 194.
+(Font)              scaled to size 6.00055pt on input line 197.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.00046pt on input line 194.
+(Font)              scaled to size 5.00046pt on input line 197.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.99904pt on input line 194.
+(Font)              scaled to size 8.99904pt on input line 197.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 194.
+(Font)              scaled to size 5.99936pt on input line 197.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 4.99947pt on input line 194.
+(Font)              scaled to size 4.99947pt on input line 197.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1049,19 +1055,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [2]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 230.
+(Font)              scaled to size 10.0pt on input line 231.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 230.
+(Font)              scaled to size 7.0pt on input line 231.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.00092pt on input line 230.
+(Font)              scaled to size 10.00092pt on input line 231.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.00064pt on input line 230.
+(Font)              scaled to size 7.00064pt on input line 231.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 9.99893pt on input line 230.
+(Font)              scaled to size 9.99893pt on input line 231.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.99925pt on input line 230.
+(Font)              scaled to size 6.99925pt on input line 231.
 
-Overfull \hbox (46.435pt too wide) in paragraph at lines 230--254
+Overfull \hbox (46.435pt too wide) in paragraph at lines 231--255
  [][] 
  []
 
@@ -1074,8 +1080,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [3]
-Missing character: There is no 𝜆 in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ≠ in font [lmroman10-regular]:mapping=tex-text;!
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1085,7 +1089,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [4]
-Overfull \hbox (70.39499pt too wide) in paragraph at lines 334--364
+Overfull \hbox (70.39499pt too wide) in paragraph at lines 337--367
  [][] 
  []
 
@@ -1098,12 +1102,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [5]
-
-LaTeX Warning: Command \= invalid in math mode on input line 406.
-
-Missing character: There is no ̄ in font lmmi10!
-
-Overfull \hbox (9.9pt too wide) in paragraph at lines 462--467
+Overfull \hbox (9.9pt too wide) in paragraph at lines 465--470
 \TU/lmr/m/n/10.95 negativa y significativa sobre el crecimiento económico per c
 ápita, y como mencionamos anteriormente,
  []
@@ -1160,13 +1159,13 @@ LaTeX Info: Redefining \% on input line 25.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `01-script.out' has not changed.
-(rerunfilecheck)             Checksum: 07C9067519B6168024EB78AC3F950253;1799.
+(rerunfilecheck)             Checksum: 373DCC62C149F8645BCE31CC874B839C;1875.
  ) 
 Here is how much of TeX's memory you used:
- 20295 strings out of 479196
- 354434 string characters out of 5873090
- 847350 words of memory out of 5000000
- 39547 multiletter control sequences out of 15000+600000
+ 20298 strings out of 479196
+ 354493 string characters out of 5873090
+ 847364 words of memory out of 5000000
+ 39550 multiletter control sequences out of 15000+600000
  411967 words of font info for 98 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  98i,11n,122p,611b,473s stack positions out of 5000i,500n,10000p,200000b,80000s

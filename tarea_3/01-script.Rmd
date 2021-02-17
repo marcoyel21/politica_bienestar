@@ -197,7 +197,7 @@ Por último, es necesario concluir si se deben incluir, además de efectos fijos
 
 De estas pruebas concluimos que el modelo de efectos fijos es más adecuado que el de *pooled* y efectos aleatorios, a partir de las pruebas F y de Hausman, respectivamente; y que del modelo de efectos fijos individual al two-way el segundo es más adecuado, ya que se probó con el test de Breusch-Pagan que en la ecuación de efectos fijos:
 
-$$\y_{it}=x_{it}\beta+c_i+u_{it} +\lambda_{t}$$,
+$$y_{it}=x_{it}\beta+c_i+u_{it} +\lambda_{t}$$,
 
 $\lambda_{t} \neq 0.
 

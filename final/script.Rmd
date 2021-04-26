@@ -25,11 +25,23 @@ planea_19 <- planea_19[-c(1:7),]
 
 
 ---
+## Cuadro bibliografía 
 
-#Proposito
 
-Ligar acceso a internet con mejores calis
+--- 
+## Justificación relevancia para el tema
 
+
+---
+## Aportación del trabajo (hipótesis)
+
+
+
+
+
+---
+
+## Descriptivas
 
 # Pasos
 

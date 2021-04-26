@@ -47,9 +47,22 @@ kbl(text_tbl, booktabs = T) %>%
 kable_styling(full_width = F) %>%
 column_spec(2, width = "30em")
 
+en su ejemplo hay 10
+
+1. Badasyan & Silva (2012). International Journal of Education Economics and Development. (Brasil). PSM en año antes y año después de la reforma. standardized Portuguese and mathematics tests that students in all public schools take in the 8th grade. 
 
 --- 
 ## Justificación relevancia para el tema
+
+El presente trabajo busca entender las repercusiones de la baja o nula conectividad en los hogares de los estudiantes en su desempeño académico. Asimismo, se busca analizar cómo las diferentes tipos de conectividad en el hogar(banda ancha o celular) están relacionados a diferentes resultados. 
+
+La desigualdad en el ingreso y la pobreza pueden explicar la baja demanda de Internet o banda ancha en el hogar, así como condiciones geográficas: las personas de localidades pequeñas y rurales, por ejemplo, pueden no tener acceso a Internet de banda ancha, o tal vez de ni un tipo de servicio de telecomunicaciones. Sin embargo, es posible que de tener acceso a ella, las personas sí adquirirían Internet en el hogar...
+
+precios, reforma
+
+
+*nota: quello este lo hace en rurales
+*badasyan lo hace en urbana
 
 México tiene una brecha digital considerable, el cual es un reto difícil de sobrellevar dadas fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas. (cita Ovando). Se encuentra en el X lugar de technological readiness. Chile, por ejemplo, se encuentra en X (World Economic Forum, checar). 
 
@@ -60,11 +73,15 @@ Entre varios cambios establecidos por la recién establecida
 
 La demanda del mercado mexicano tiene barreras a la adopción de internet, como tasas de pobreza altas y acceso desigual a servicios de educación, salud, y vivienda. (Ovando) La ENDUTIH reporta que la principal razón para no adoptarla (55.2%) es por falta de recursos económicos. 
 
+explicar que es por localidades
+
 uso del internet
 
 los esfuerzos por aumentar el acceso a internet en las escuelas puede aumentar la magnitud del desempeño de los estudiantes si se implementan políticas que aumenten el acceso a Internet en los hogares, así como en las escuelas.
 
+Se podría argumentar que el uso de celular es un sustituto de la banda ancha en el hogar. Ellos, probablemente, tengan puntuaciones más bajas, posiblemente debido al menor tamaño de las pantallas, la velocidad, el acceosa distintos tipos de contenido y el costo. 
 
+El acceso a Internet es menos común en 
 
 ---
 ## Aportación del trabajo (hipótesis)
@@ -77,6 +94,7 @@ Se utilizará por primera vez la base generada en el Censo del 2020, la de Princ
 
 Esperaríamos  que las localidades que tienen mayores proporciones de viviendas con acceso a Internet tengan mejores resultados en la evaluación, controlando por covariables relacionadas a los hogares y a la localidad.  
 
+Si controlamos por características relacionadas con la desigualdad de las localidades (por ejemplo, tamaño, entorno, porcentaje de viviendas con drenaje, etc.), podremos diferenciar las disparidades en los resultados de las evaluaciones del de estas características de la localidad. 
 
 
 ---

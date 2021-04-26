@@ -11,6 +11,7 @@ library(readr)
 library(stargazer)
 library(dplyr)
 library(ggplot2)
+library(kableExtra)
 censo<-read.csv("censo.csv")#censo es el nombre de la base de datos que bajan de aqui https://www.inegi.org.mx/contenidos/programas/ccpv/iter/zip/iter2020/iter_nalcsv20.zip
 planea_15<-read_xlsx("PLANEA_2015.xlsx")
 planea_19<-read_xlsx("PLANEA_2019.xlsx")

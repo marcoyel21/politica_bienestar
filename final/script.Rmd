@@ -1,0 +1,208 @@
+---
+title: archivo de trabajo
+author: John Doe
+date: March 22, 2005
+output: html_document
+---
+
+```{r}
+library(readxl)
+library(readr)
+library(stargazer)
+library(dplyr)
+library(ggplot2)
+censo<-read.csv("censo.csv")#censo es el nombre de la base de datos que bajan de aqui https://www.inegi.org.mx/contenidos/programas/ccpv/iter/zip/iter2020/iter_nalcsv20.zip
+planea_15<-read_xlsx("PLANEA_2015.xlsx")
+planea_19<-read_xlsx("PLANEA_2019.xlsx")
+
+#limpieza
+planea_15 <- planea_15[-c(1:2),]
+planea_19 <- planea_19[-c(1:7),]
+```
+
+#Proposito
+
+Ligar acceso a internet con mejores calis
+
+
+# Pasos
+
+A) Encontrar acceso a internet (y variables que propuso sam) en censo a nivel localidad
+```{r}
+#convierto variables de interes a numéricas
+names<-c('VIVTOT','TVIVPAR','VIVPAR_HAB', #localidad
+         'VPH_INTER','VPH_PC') #internet y laptop
+
+for (i in names){
+    censo[[i]] <- as.numeric(censo[[i]])
+}
+
+
+#creo la base de datos de interes
+censo_localidad<-censo %>% 
+  select(NOM_ENT,NOM_MUN,NOM_LOC,     #localidad           
+         VIVTOT,TVIVPAR,VIVPAR_HAB,       # vivienda
+         VPH_INTER,VPH_PC)   %>%    # internet y laptop
+        mutate(internet=VPH_INTER*100/VIVTOT,
+               lap=VPH_PC*100/VIVTOT)
+#cambio todo a mayus
+censo_localidad <- as.data.frame(t(apply(censo_localidad,1,toupper)))
+  
+```
+
+B) Encontrar calis (o mas bien distribucion de calis en planea) a nivel localidad
+
+
+```{r}
+#Para planea 19
+
+#convierto variables de interes a numéricas
+
+names<-c('...23','...24','...25','...26', #calis esp
+         '...35','...36','...37','...38') #calis mate
+
+for (i in names){
+    planea_19[[i]] <- as.numeric(planea_19[[i]])
+}
+
+
+#creo la base de datos de interes
+
+planea_localidad<-planea_19 %>% 
+  select(...2,...6,...7,                  # son entidad, municipio y loc
+         ...23,...24,...25,...26,       # son % de calis de español
+         ...35,...36,...37,...38)   %>% # son % de calis de mate
+  group_by(...2,...6,...7) %>%
+  summarize(esp_1 = mean(...23), 
+            esp_II= mean(...24),
+            esp_1II = mean(...25), 
+            esp_IV= mean(...26),
+            mat_1 = mean(...35), 
+            mat_II= mean(...36),
+            mat_1II = mean(...37), 
+            mat_IV= mean(...38),) %>%
+  mutate(top_50_esp=esp_1II+esp_IV,
+         top_50_mat=mat_1II+mat_IV) #convierto a mi variable de interes (porcentaje de niños en la mejor mitad)
+
+#cambio todo a mayus
+planea_localidad <- as.data.frame(t(apply(planea_localidad,1,toupper)))
+  
+
+#cambio nombres
+
+names(planea_localidad)[names(planea_localidad) == "...2"] <- "NOM_ENT"
+names(planea_localidad)[names(planea_localidad) == "...6"] <- "NOM_MUN"
+names(planea_localidad)[names(planea_localidad) == "...7"] <- "NOM_LOC"
+
+
+```
+
+C) Hacer regresion
+
+```{r}
+#creo la base de datos
+data<-as.data.frame(merge(planea_localidad,censo_localidad, by= c("NOM_ENT","NOM_MUN","NOM_LOC"))) %>% na.omit()
+#perdimos muchas obervaciones por la codificacion
+
+#convierto variables de interes a numéricas
+names<-c("esp_1","esp_II","esp_1II","esp_IV",    
+         "mat_1","mat_II","mat_1II","mat_IV",
+         "top_50_esp","top_50_mat",
+         "VIVTOT", "TVIVPAR","VIVPAR_HAB","VPH_INTER","VPH_PC",
+         "internet","lap" )  
+for (i in names){
+    data[[i]] <- as.numeric(data[[i]])
+}
+
+a<-lm(top_50_mat~internet,data)
+b<-lm(top_50_mat~lap,data)
+c<-lm(top_50_esp~internet,data)
+d<-lm(top_50_esp~lap,data)
+
+stargazer(a,b,c,d,type="text")
+
+````
+
+# Overlap
+
+```{r}
+
+data<-data%>% mutate(dummy_internet=ifelse(internet>1,1,0),
+                     dummy_lap=ifelse(lap>1,1,0))
+
+data$dummy_internet<-as.factor(data$dummy_internet)   
+data$dummy_lap<-as.factor(data$dummy_lap) 
+ data %>%
+  ggplot( aes(x=top_50_mat, fill=dummy_internet)) +
+    geom_histogram( color="#e9ecef", alpha=0.2, position = 'identity') +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) 
+ 
+  data %>%
+  ggplot( aes(x=top_50_mat, fill=dummy_lap)) +
+    geom_histogram( color="#e9ecef", alpha=0.2, position = 'identity') +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) 
+  
+ data %>%
+  ggplot( aes(x=top_50_esp, fill=dummy_internet)) +
+    geom_histogram( color="#e9ecef", alpha=0.2, position = 'identity') +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) 
+ 
+  data %>%
+  ggplot( aes(x=top_50_esp, fill=dummy_lap)) +
+    geom_histogram( color="#e9ecef", alpha=0.2, position = 'identity') +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) 
+  
+  
+```
+
+
+# Estadistica descriptiva
+```{r}
+#ya tenemos la base de datos preliminar y podemos poner cualquier estadistica descriptiva
+
+
+#para datos comunidades con internet
+stargazer((data[data$dummy_internet==1,]),type="text")
+
+#para datos comunidades sin internet
+stargazer((data[data$dummy_internet==0,]),type="text")
+
+
+#para datos comunidades con lap
+stargazer((data[data$dummy_lap==1,]),type="text")
+
+#para datos comunidades sin lap
+stargazer((data[data$dummy_lap==0,]),type="text")
+
+```
+
+# Comentarios
+
+Buenas noticias:
+
++ tenemos info desagregada por localidad
+
++ Las bases de planea se prestan para un matching entre escuelas o localidads o municipios con y sin internet (en propencity o en acceso real)
+
+
+Malas noticias:
+
++ No podemos hacer un dif and dif o algo de serie de tiempo porque el censo es de hecho ex post y solo tenemos un censo, no hay info intermedia entre ambas planeas.
+
++ Debido a esto solo podemos usar un planea (preferiblemente el mas cercano al censo)
+
+
+Por trabajar:
+
++ Definir bien nuestra Y (por lo pronto yo propuse orcentaje de niños en la mitad mas alta porque no estan las calis perse)
+
++ Definir bien nuestro T (por lo pronto yo propuse una dummy de internet y otra dummy de lap pero se puede mejorar)
+
++ Mejorar el filtro de comunidades porque al final solo nos quedaron 9046 localidades que hicieron el empate textual(esto se puede deber a mala codificacion entre inegi y planea)
+
++ Decidir que hacer con las comunidades tan pequeñas que solo tienen pocas casas y en consecuenica tienen NA en lap e internet.
+
+
+
+
+

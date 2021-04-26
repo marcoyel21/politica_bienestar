@@ -23,6 +23,7 @@ planea_19 <- planea_19[-c(1:7),]
 ---
 ## Tema
 
+Causalidad del acceso a Internet en el desempeño escolar de los estudiantes mexicanos.
 
 ---
 ## Cuadro bibliografía 
@@ -31,11 +32,22 @@ planea_19 <- planea_19[-c(1:7),]
 --- 
 ## Justificación relevancia para el tema
 
+La Reforma en telecomunicaciones implementada en el 2013
+
+uso del internet
+
+los esfuerzos por aumentar el acceso a internet en las escuelas puede aumentar la magnitud del desempeño de los estudiantes si se implementan políticas que aumenten el acceso a Internet en los hogares, así como en las escuelas.
 
 ---
 ## Aportación del trabajo (hipótesis)
 
+El trabajo examinará el efecto de acceso a Intenet a nivel localidad en el desempeño escolar de estudiantes utilizando los datos que provee el gobierno de la evaluación Planea, la cual se aplica a alumnos de 3° de secundaria en los ámbitos de Matemáticas y Lenguaje en el año 2019. 
 
+Se utilizará el método *propensity score matching* para evaluar el impacto del internet en las localidades en los resultados de las pruebas, controlando por variables como nivel de marginación, entorno rural, tipo de escuela
+
+Se utilizará por primera vez la base generada en el Censo del 2020, la de Principales resultados por localidad (ITER). Esta base cuenta con 
+
+Esperaríamos  que las localidades que tienen mayores proporciones de viviendas con acceso a Internet tengan mejores resultados en la evaluación, controlando por covariables relacionadas a los hogares y a la localidad.  
 
 
 

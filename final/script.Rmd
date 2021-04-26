@@ -32,11 +32,20 @@ Causalidad del acceso a Internet en el desempeño escolar de los estudiantes mex
 --- 
 ## Justificación relevancia para el tema
 
-La Reforma en telecomunicaciones implementada en el 2013
+México tiene una brecha digital considerable, el cual es un reto difícil de sobrellevar dadas fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas. (cita Ovando). Se encuentra en el X lugar de technological readiness. Chile, por ejemplo, se encuentra en X (World Economic Forum, checar). 
+
+La Reforma en telecomunicaciones del 2013 fue llevada a cabo en un contexto en el que el mercado de telecomunicaciones en México, desde los 90s, estaba altamente concentrado, resultando en falta de competencia, calidad de servicios baja, precios altos, y una penetración de banda ancha baja, en relación a países comparables en América Latina. (Noll).
+
+Entre varios cambios establecidos por la recién establecida 
+
+
+La demanda del mercado mexicano tiene barreras a la adopción de internet, como tasas de pobreza altas y acceso desigual a servicios de educación, salud, y vivienda. (Ovando) La ENDUTIH reporta que la principal razón para no adoptarla (55.2%) es por falta de recursos económicos. 
 
 uso del internet
 
 los esfuerzos por aumentar el acceso a internet en las escuelas puede aumentar la magnitud del desempeño de los estudiantes si se implementan políticas que aumenten el acceso a Internet en los hogares, así como en las escuelas.
+
+
 
 ---
 ## Aportación del trabajo (hipótesis)

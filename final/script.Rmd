@@ -42,10 +42,12 @@ encabezados:
 
 
 text_tbl <- data.frame(
-Estudio (datos) = c("", "", ""),
-Metodología = c(),
-Variable resultado= c(),
-Coeficientes relevantes= c())
+Estudio (datos) = c("Badasyan & Silva. (2012)","Bessone, Dahis, Ho. (2020)", "Malamud, Cueto, Cristia, Beuermann. (2019)","Vigdor & Ladd. (2010)","Belo, Ferreira, Felang. (2014)", "Fairlie & Robinson. (2013)","Grimes & Townsend. (2017)"),
+Población estudiada=c("Alumnos 3° de secundaria de escuelas públicas urbanas. Pruebas estandarizada (Prova Brasil), reusltados en Matemáticas y portugués. Brasil. (2007, 2009)","PProva Brasil de alumnos de 5° y 3° de secundaria de 5,570 municipalidades. Brasil. (2007, 2009, 2011,
+2013, 2015, 2017)","Niños de 3° y 5° en escuelas públicas de bajo desempeño. Lima, Perú. (2011-2013)","Estudiantes de escuelas públicas de 5°-2° de secundaria en Matemáticas y lectura. Carolina del Norte. (2000-2005)","Escuelas secundarias. Portugal. (2005-2009)","Estudiantes de 6-10 de 15 escuelas. (California)","Alumnos hasta 2° de secundaria en prueba nacional estandarizada. Nueva Zelanda. (2012-2016)")
+Metodología = c("PSM en año antes y año después de la reforma","*Two way fixed effects* y diff in diff no paramétrico","RCT, regresión","Efectos fijos"," Primeras diferencias con efectos fijos","RCT, regresión", "Diff in diff con EF individuales y de tiempo"),
+Variable resultado= c("Desempeño prueba estandarizada nacional","Desempeño prueba estandarizada nacional","Habilidades digitales, cognitivas, y académicas","Desempeño prueba estandarizada","Desempeño prueba estandarizada nacional","Desempeño en tareas", "Desempeño prueba estandarizada nacional"),
+Coeficientes relevantes= c("ATT: +, * ", "0","Habilidades digitales: XO test (1.00 SD), PC test (.21 SD), Internet test (.33 SD), Índice digital (.53 SD). Resultados académicos: 0", "-1% y -1.3% SD en Mate y Lectura", ".78 SD", "0", "1% SD para los que estaban en la media nacional o por encima de ella. " )
 
 kbl(text_tbl, booktabs = T) %>%
 kable_styling(full_width = F) %>%

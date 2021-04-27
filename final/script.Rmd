@@ -12,7 +12,12 @@ library(stargazer)
 library(dplyr)
 library(ggplot2)
 library(kableExtra)
-censo<-read.csv("censo.csv")#censo es el nombre de la base de datos que bajan de aqui https://www.inegi.org.mx/contenidos/programas/ccpv/iter/zip/iter2020/iter_nalcsv20.zip
+
+#Ahora no tienen que descargar nada, todo es automatico :)
+temp <- tempfile()
+download.file("https://www.inegi.org.mx/contenidos/programas/ccpv/iter/zip/iter2020/iter_nalcsv20.zip",temp)
+censo<-read.csv(unz(temp,"ITER_NALCSV20.csv"))
+unlink(temp)
 planea_15<-read_xlsx("PLANEA_2015.xlsx")
 planea_19<-read_xlsx("PLANEA_2019.xlsx")
 

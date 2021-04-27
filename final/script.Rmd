@@ -29,12 +29,12 @@ planea_19 <- planea_19[-c(1:7),]
 ---
 ## Tema
 
-Causalidad del acceso a Internet en el desempeño escolar de los estudiantes mexicanos.
+Causalidad del acceso a Internet en el hogar en el desempeño escolar (reflejado en la evaluación estandarizada nacional *Planea*) de los estudiantes mexicanos.
 
 ---
 ## Cuadro bibliografía 
 
-Se elaboró un cuadro de resumen bibliográfico mostrando los efectos del acceso a Internet en a nivel celular, hogar, o escuela en variables dependientes relacionadas al desempeño educativo de estudiantes, principalmente de secundaria. Es importante recalcar que, en México, aunque se ha medido el efecto de la Reforma en Telecomunicaciones en variables relacionadas con ingreso, no se ha analizado su efecto en la educación. 
+Se elaboró un cuadro de resumen bibliográfico mostrando los efectos del acceso a Internet a nivel celular, hogar, o escuela en variables dependientes relacionadas al desempeño educativo de estudiantes, principalmente de secundaria. Es importante recalcar que, en México, aunque se ha medido el efecto de la Reforma en Telecomunicaciones en variables relacionadas con ingreso, no se ha analizado su efecto en la educación. 
 
 text_tbl <- data.frame(
 Estudio (datos) = c("Badasyan & Silva. (2012)","Bessone, Dahis, Ho. (2020)", "Malamud, Cueto, Cristia, Beuermann. (2019)","Vigdor & Ladd. (2010)","Belo, Ferreira, Felang. (2014)", "Fairlie & Robinson. (2013)","Grimes & Townsend. (2017)"),
@@ -50,43 +50,26 @@ kable_styling(full_width = F) %>%
 column_spec(2, width = "30em")
 
 --- 
-## Justificación relevancia para el tema
-
-El presente trabajo busca entender las repercusiones de la baja o nula conectividad en los hogares de los estudiantes en su desempeño académico. Asimismo, se busca analizar cómo las diferentes tipos de conectividad en el hogar(banda ancha o celular) están relacionados a diferentes resultados. 
-
-La desigualdad en el ingreso y la pobreza pueden explicar la baja demanda de Internet o banda ancha en el hogar, así como condiciones geográficas: las personas de localidades pequeñas y rurales, por ejemplo, pueden no tener acceso a Internet de banda ancha, o tal vez de ni un tipo de servicio de telecomunicaciones. Sin embargo, es posible que de tener acceso a ella, las personas sí adquirirían Internet en el hogar...
-
-precios, reforma
-
+## Justificación - relevancia del tema
 
 *nota: quello este lo hace en rurales
 *badasyan lo hace en urbana
 
-México tiene una brecha digital considerable, el cual es un reto difícil de sobrellevar dadas fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas. (cita Ovando). Se encuentra en el X lugar de technological readiness. Chile, por ejemplo, se encuentra en X (World Economic Forum, checar). 
+México tiene como algunas de sus características un bajo nivel de calidad educativo y una baja penetración de telecomunicaciones, relativo a otros países de ingresos comparables. México tiene una brecha digital considerable, el cual es un reto difícil de sobrellevar dadas fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas. (cita Ovando). Se encuentra en el X lugar de technological readiness. Chile, por ejemplo, se encuentra en X (World Economic Forum, checar). 
 
-La Reforma en telecomunicaciones del 2013 fue llevada a cabo en un contexto en el que el mercado de telecomunicaciones en México, desde los 90s, estaba altamente concentrado, resultando en falta de competencia, calidad de servicios baja, precios altos, y una penetración de banda ancha baja, en relación a países comparables en América Latina. (Noll).
+Es claro que hay correlación de una baja conectividad y el desempeño escolar, por ejemplo, debido a covariables de las localidades donde se encuentran las personas, como entorno, zona geográfica, y nivel de marginación. ¿Pero qué tanto del desempeño está causado por el acceso a Internet?
 
-Entre varios cambios establecidos por la recién establecida 
+Este tema ha sido investigado de forma parecida (mismas variables explicativas, misma variable de resultado) en diferentes países, los cuales explotan las pruebas estandarizadas nacionales, y tratan a reformas relacionadas con el aumento de cobertura del Internet en sus países como experimentos naturales. Sin embargo, esto no se ha hecho en México. 
+
+Este evento que causa mayor cobertura en los estudios utilizados anteriormente, en el caso de México, es la Reforma en telecomunicaciones del 2013. Esta fue llevada a cabo en un contexto en el que el mercado de telecomunicaciones en México, desde los 90s, estaba altamente concentrado, resultando en falta de competencia, calidad de servicios baja, precios altos, y una penetración de banda ancha baja, en relación a países comparables en América Latina. (Noll). En ella, el acceso a Internet se consagró como un derecho constitucional. Particularmente, la regulación asimétrica introducida buscó "emparejar" a la participación de los otros competidores respecto a la del preponderante (Telmex en el caso de telefonía), estableciendo  las bases para garantizar una mayor competitividad en la oferta de los servicios de telecomunicaciones, por lo que hoy en día se cuenta con más competencia y precios más bajos, así como una mejora en la calidad de los servicios y aumentar la cobertura de Internet.   Asimismo, se implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil sitios y espacios públicos del país. El acceso a Internet se brinda a cada uno de los estados de la República Mexicana a través de los llamados “Puntos, México Conectado”, que se encuentran ubicados en varios sitios y espacios públicos como escuelas, bibliotecas, hospitales y centros comunitarios a nivel federal, estatal y municipal.
 
 
-La demanda del mercado mexicano tiene barreras a la adopción de internet, como tasas de pobreza altas y acceso desigual a servicios de educación, salud, y vivienda. (Ovando) La ENDUTIH reporta que la principal razón para no adoptarla (55.2%) es por falta de recursos económicos. 
-
-explicar que es por localidades
-
-uso del internet
-
-los esfuerzos por aumentar el acceso a internet en las escuelas puede aumentar la magnitud del desempeño de los estudiantes si se implementan políticas que aumenten el acceso a Internet en los hogares, así como en las escuelas.
-
-Se podría argumentar que el uso de celular es un sustituto de la banda ancha en el hogar. Ellos, probablemente, tengan puntuaciones más bajas, posiblemente debido al menor tamaño de las pantallas, la velocidad, el acceosa distintos tipos de contenido y el costo. 
+explicar que es por localidades, algo de las bases
 
 El acceso a Internet es menos común en .. (Mora-Rivera, García-Mora)
 
 JUSTIFICACIÓN CYNTHIA:
-El 10 de junio de 2013 se promulgó la Reforma en Telecomunicaciones, gracias a la cual el acceso a Internet se consagró en la Carta Magna como un derecho constitucional. La importancia de esta Reforma radica en que Internet juega un papel de “habilitador de otros derechos fundamentales” como el derecho a la información, a la privacidad y el derecho de acceso a las Tecnologías de la Información y de la Comunicación (TICs).
 
-Como instrumento para cumplir con este derecho de acceso al servicio de Internet de banda ancha, se implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil sitios y espacios públicos del país. El acceso a Internet se brinda a cada uno de los estados de la República Mexicana a través de los llamados “Puntos, México Conectado”, que se encuentran ubicados en varios sitios y espacios públicos como escuelas, bibliotecas, hospitales y centros comunitarios a nivel federal, estatal y municipal.
-
-Además fue a partir de esta Reforma que se establecieron las bases para garantizar una mayor competitividad en la oferta de los servicios de telecomunicaciones, por lo que hoy en día se cuenta con más competencia y precios más bajos. Es así que la Reforma realizada en 2013 en el sector de las telecomunicaciones en México claramente estaba enfocada a promover una efectiva competencia, como base para lograr mejor calidad en los servicios y la mejora de precios en beneficio de los consumidores.
 
 En suma, la Refoma, al mejorar las condiciones de competencia, permitió a México, ampliar el proceso de universalización de Internet, y escalar en el índice de accesibilidad a Internet: según el índice de accesibilidad de la OECD, en 2012, el 26% de los hogares mexicanos tenían acceso a internet y en 2019, 56.4%, es decir, un aumento mayor al doble.
 
@@ -110,6 +93,10 @@ the impact of Internet access on poverty reduction, as determined by our study, 
 
 ---
 ## Aportación del trabajo (hipótesis)
+
+los esfuerzos por aumentar el acceso a internet en las escuelas puede aumentar la magnitud del desempeño de los estudiantes si se implementan políticas que aumenten el acceso a Internet en los hogares, así como en las escuelas.
+
+Se podría argumentar que el uso de celular es un sustituto de la banda ancha en el hogar. Ellos, probablemente, tengan puntuaciones más bajas, posiblemente debido al menor tamaño de las pantallas, la velocidad, el acceosa distintos tipos de contenido y el costo. 
 
 El trabajo examinará el efecto de acceso a Intenet a nivel localidad en el desempeño escolar de estudiantes utilizando los datos que provee el gobierno de la evaluación Planea, la cual se aplica a alumnos de 3° de secundaria en los ámbitos de Matemáticas y Lenguaje en el año 2019. 
 

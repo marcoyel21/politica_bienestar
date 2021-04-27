@@ -49,7 +49,11 @@ column_spec(2, width = "30em")
 
 en su ejemplo hay 10
 
-1. Badasyan & Silva (2012). International Journal of Education Economics and Development. (Brasil). PSM en año antes y año después de la reforma. standardized Portuguese and mathematics tests that students in all public schools take in the 8th grade. 
+1. Badasyan & Silva (2012). International Journal of Education Economics and Development. (Brasil). PSM en año antes y año después de la reforma. standardized Portuguese and mathematics tests that students in all public schools take in the 8th grade. TOT: +, ***
+2. Bessone, Dahis, Ho. (2020). The Impact of 3G Mobile Internet on Educational
+Outcomes in Brazil. MIT. Two way fixed effects y non parametric diff in diff. 10 años de Brasil (Prova Brasil) que es cada 2 años. en TWFE. El coeficiente es 0. 
+3. Malamud, Cueto, Cristia, Beuermann. (2019) Journal of development economics. Peru. We compare children who were randomly chosen to receive laptops with high-speed internet
+access to (i) those who did not receive laptops and (ii) those who only received laptops without internet. Regresión en experimento aleatorizado ie Estimador de Neyman=? en digital skills, cognitive skills, y academic skills. Laptop + internet significativos en digital skills, ie XO test (1.00), PC test(.21), Internet test(.33), digital skills index (.53), no en resultados de matemáticas, reading, ni academic achievement index, ni en grades, ni en teachers perceptions (del estudiante).  Resultados en desviaciones estándar
 
 --- 
 ## Justificación relevancia para el tema

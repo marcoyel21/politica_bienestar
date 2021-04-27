@@ -52,7 +52,7 @@ column_spec(2, width = "30em")
 --- 
 ## Justificación - relevancia del tema
 
-México tiene como algunas de sus características un bajo nivel de calidad educativo y una baja penetración de telecomunicaciones, relativo a otros países de ingresos comparables. México tiene una brecha digital considerable, el cual es un reto difícil de sobrellevar dadas fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas. (cita Ovando). Se encuentra en el X lugar de technological readiness. Chile, por ejemplo, se encuentra en X (World Economic Forum, checar). 
+México tiene, como algunas de sus características, un bajo nivel de calidad educativo (en las pruebas Pisa del 2018, México ocupó las posiciones 53/77, 61/78, y 57/76 en Ciencias, Habilidad Lectora, y Matemáticas, respectivamente, así como una nula mejoría en Habilidad Lectora y en Ciencias desde el 2000), y una baja penetración de telecomunicaciones, relativo a otros países de ingresos comparables. México tiene una brecha digital considerable, el cual es un reto difícil de sobrellevar dadas fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas. (cita Ovando). Se encuentra en el X lugar de technological readiness. Chile, por ejemplo, se encuentra en X (World Economic Forum, checar). 
 
 Se ha puesto poca atención en las repercusiones de una baja o pobre conectividad en el desempeño escolar en el entorno rural del país. Estudios previos (quello) demuestran que hay disparidades muy marcadas entre alumnos con conectividad en su hogar y los que no tienen acceso a ella o solo a través de su celular. Esta disparidad se conoce en la literatura como “homework gap” (Reisdorf, Yankelevich, Shapiro, & Dutton, 2019).
 

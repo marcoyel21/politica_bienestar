@@ -65,18 +65,13 @@ Este evento que causa mayor cobertura en los estudios utilizados anteriormente, 
 
 En suma, la Refoma, al mejorar las condiciones de competencia, permitió a México, ampliar el proceso de universalización de Internet, y escalar en el índice de accesibilidad a Internet: según el índice de accesibilidad de la OECD, en 2012, el 26% de los hogares mexicanos tenían acceso a internet y en 2019, 56.4%, es decir, un aumento mayor al doble. Sin embargo, el entorno rural se encuentra en particular desventaja: su adopción es de 39%, mientras que en el entorno urbano es de 71.2%. 
 
-explicar que es por localidades, algo de las bases
-
+Por último, el nivel alto de desagregación de los datos de la prueba de Planea y del censo de la INEGI, que en su última versión proveyó por primera vez una base de Principales resultados por localidad, permite que se haga un *match* entre estas dos bases y se use el método cuasi-experimental de *propensity score matching* para 
 El acceso a Internet es menos común en .. (Mora-Rivera, García-Mora)
 
 ---
 ## Aportación del trabajo (hipótesis)
 
-Dado ese contexto, el objetivo general de este trabajo es analizar el impacto que ha tenido la Reforma en Telecomunicaciones, con el Programa “México Conectado” en el desempeño educativo; lo anterior, a través del aumento de acceso a Internet que se detonó con esta Reforma. La relevancia de este trabajo consiste en poder determinar si un mayor acceso a internet en los hogares ha contribuido a elevar el nivel educativo de los estudiantes, partiendo de la premisa de que el acceso a Internet puede mejorar la calidad de la educación en muchas maneras, incrementando las oportunidades de aprendizaje y reduciendo la brecha digital.
-
-los esfuerzos por aumentar el acceso a internet en las escuelas puede aumentar la magnitud del desempeño de los estudiantes si se implementan políticas que aumenten el acceso a Internet en los hogares, así como en las escuelas.
-
-Se podría argumentar que el uso de celular es un sustituto de la banda ancha en el hogar. Ellos, probablemente, tengan puntuaciones más bajas, posiblemente debido al menor tamaño de las pantallas, la velocidad, el acceosa distintos tipos de contenido y el costo. 
+Dado ese contexto, el objetivo general de este trabajo es analizar el impacto que ha tenido la Reforma en Telecomunicaciones en el desempeño educativo; lo anterior, a través del aumento de acceso a Internet que se detonó con esta Reforma, debido a mecanismos como un mayor acceso a Internet por el programa "México Conectado", u otros relacionados con el aumento de la competencia del sector, como precios más bajos o mayor cobertura. El presente trabajo determinará si un mayor acceso a internet en los hogares ha contribuido a elevar el desempeño educativo de los estudiantes, partiendo de la premisa de que el acceso a Internet puede mejorar la calidad de la educación en muchas maneras (por ejemplo, usando el internet para consultas o para realizar tareas), incrementando las oportunidades de aprendizaje y reduciendo la brecha digital.
 
 El trabajo examinará el efecto de acceso a Intenet a nivel localidad en el desempeño escolar de estudiantes utilizando los datos que provee el gobierno de la evaluación Planea, la cual se aplica a alumnos de 3° de secundaria en los ámbitos de Matemáticas y Lenguaje en el año 2019. 
 

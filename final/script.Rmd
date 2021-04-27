@@ -83,6 +83,18 @@ Se podría argumentar que el uso de celular es un sustituto de la banda ancha en
 
 El acceso a Internet es menos común en .. (Mora-Rivera, García-Mora)
 
+JUSTIFICACIÓN CYNTHIA:
+El 10 de junio de 2013 se promulgó la Reforma en Telecomunicaciones, gracias a la cual el acceso a Internet se consagró en la Carta Magna como un derecho constitucional. La importancia de esta Reforma radica en que Internet juega un papel de “habilitador de otros derechos fundamentales” como el derecho a la información, a la privacidad y el derecho de acceso a las Tecnologías de la Información y de la Comunicación (TICs).
+
+Como instrumento para cumplir con este derecho de acceso al servicio de Internet de banda ancha, se implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil sitios y espacios públicos del país. El acceso a Internet se brinda a cada uno de los estados de la República Mexicana a través de los llamados “Puntos, México Conectado”, que se encuentran ubicados en varios sitios y espacios públicos como escuelas, bibliotecas, hospitales y centros comunitarios a nivel federal, estatal y municipal.
+
+Además fue a partir de esta Reforma que se establecieron las bases para garantizar una mayor competitividad en la oferta de los servicios de telecomunicaciones, por lo que hoy en día se cuenta con más competencia y precios más bajos. Es así que la Reforma realizada en 2013 en el sector de las telecomunicaciones en México claramente estaba enfocada a promover una efectiva competencia, como base para lograr mejor calidad en los servicios y la mejora de precios en beneficio de los consumidores.
+
+En suma, la Refoma, al mejorar las condiciones de competencia, permitió a México, ampliar el proceso de universalización de Internet, y escalar en el índice de accesibilidad a Internet: según el índice de accesibilidad de la OECD, en 2012, el 26% de los hogares mexicanos tenían acceso a internet y en 2019, 56.4%, es decir, un aumento mayor al doble.
+
+Dado ese contexto, el objetivo general de este trabajo es analizar el impacto que ha tenido la Reforma en Telecomunicaciones, con el Programa “México Conectado” en el desempeño educativo; lo anterior, a través del aumento de acceso a Internet que se detonó con esta Reforma. La relevancia de este trabajo consiste en poder determinar si un mayor acceso a internet en los hogares ha contribuido a elevar el nivel educativo de los estudiantes, partiendo de la premisa de que el acceso a Internet puede mejorar la calidad de la educación en muchas maneras, incrementando las oportunidades de aprendizaje y reduciendo la brecha digital.
+
+
 ---
 ## Aportación del trabajo (hipótesis)
 
@@ -95,6 +107,11 @@ Se utilizará por primera vez la base generada en el Censo del 2020, la de Princ
 Esperaríamos  que las localidades que tienen mayores proporciones de viviendas con acceso a Internet tengan mejores resultados en la evaluación, controlando por covariables relacionadas a los hogares y a la localidad.  
 
 Si controlamos por características relacionadas con la desigualdad de las localidades (por ejemplo, tamaño, entorno, porcentaje de viviendas con drenaje, etc.), podremos diferenciar las disparidades en los resultados de las evaluaciones del de estas características de la localidad. 
+
+CONTRIBUCION DEL TRABAJO CYNTHIA:
+La contribución de este trabajo es reflejar la importancia de la Reforma, en el acceso a internet y con ello su impacto en el ámbito educativo, ya que, como lo refiriera el propio Senado de la República en su Boletín plublicado en 2016, el panorama existente antes de la Reforma de 2013, mostraba, por una parte, una limitada participación económica de las telecomunicaciones en el Producto Interno Bruto y, por la otra, el dominio del mercado por una sola empresa, lo que daba por resultado un espacio carente de competencia, que, entre otras cuestiones, derivaba en servicios caros y por tanto inaccesibles para gran parte de la población mexicana, sobre todo, para la más vulnerable económicamente. 
+
+Además, a raíz de la pandemia del COVID-19, se ha puesto aún más en evidencia la necesidad del acceso a Internet y de medios tecnológicos, como computadoras, tabletas, televisiones, entre otros, como vehículos del aprendizaje y motor en la continuidad de la educación en todos los niveles. En consecuencia, hoy más que nunca resulta importante efectuar la valuación de esta política -la Reforma en telecomunicaciones de 2013, a través del programa “México Conectado”- y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora en su implementación. 
 
 
 ---

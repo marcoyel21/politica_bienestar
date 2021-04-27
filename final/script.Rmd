@@ -34,40 +34,20 @@ Causalidad del acceso a Internet en el desempeño escolar de los estudiantes mex
 ---
 ## Cuadro bibliografía 
 
-encabezados: 
-1. study (data). Autores, año, pob de estudio (geografica)
-2. metodología  estimación
-3. tipo de Y
-4. Valores de los coeficientes relevantes con significancia
-
+Se elaboró un cuadro de resumen bibliográfico mostrando los efectos del acceso a Internet en a nivel celular, hogar, o escuela en variables dependientes relacionadas al desempeño educativo de estudiantes, principalmente de secundaria. Es importante recalcar que, en México, aunque se ha medido el efecto de la Reforma en Telecomunicaciones en variables relacionadas con ingreso, no se ha analizado su efecto en la educación. 
 
 text_tbl <- data.frame(
 Estudio (datos) = c("Badasyan & Silva. (2012)","Bessone, Dahis, Ho. (2020)", "Malamud, Cueto, Cristia, Beuermann. (2019)","Vigdor & Ladd. (2010)","Belo, Ferreira, Felang. (2014)", "Fairlie & Robinson. (2013)","Grimes & Townsend. (2017)"),
-Población estudiada=c("Alumnos 3° de secundaria de escuelas públicas urbanas. Pruebas estandarizada (Prova Brasil), reusltados en Matemáticas y portugués. Brasil. (2007, 2009)","PProva Brasil de alumnos de 5° y 3° de secundaria de 5,570 municipalidades. Brasil. (2007, 2009, 2011,
+Población estudiada=c("Alumnos 3° de secundaria de escuelas públicas urbanas. Pruebas estandarizada (Prova Brasil), reusltados en Matemáticas y portugués. Brasil. (2007, 2009)","Prova Brasil de alumnos de 5° y 3° de secundaria de 5,570 municipalidades. Brasil. (2007, 2009, 2011,
 2013, 2015, 2017)","Niños de 3° y 5° en escuelas públicas de bajo desempeño. Lima, Perú. (2011-2013)","Estudiantes de escuelas públicas de 5°-2° de secundaria en Matemáticas y lectura. Carolina del Norte. (2000-2005)","Escuelas secundarias. Portugal. (2005-2009)","Estudiantes de 6-10 de 15 escuelas. (California)","Alumnos hasta 2° de secundaria en prueba nacional estandarizada. Nueva Zelanda. (2012-2016)")
 Metodología = c("PSM en año antes y año después de la reforma","*Two way fixed effects* y diff in diff no paramétrico","RCT, regresión","Efectos fijos"," Primeras diferencias con efectos fijos","RCT, regresión", "Diff in diff con EF individuales y de tiempo"),
+Tipo de acceso= c("Hogar y escuela (cuatro categorías)", "3G celular", "Hogar, junto con dispositivos (ie laptops)", "Escuelas", 
 Variable resultado= c("Desempeño prueba estandarizada nacional","Desempeño prueba estandarizada nacional","Habilidades digitales, cognitivas, y académicas","Desempeño prueba estandarizada","Desempeño prueba estandarizada nacional","Desempeño en tareas", "Desempeño prueba estandarizada nacional"),
-Coeficientes relevantes= c("ATT: +, * ", "0","Habilidades digitales: XO test (1.00 SD), PC test (.21 SD), Internet test (.33 SD), Índice digital (.53 SD). Resultados académicos: 0", "-1% y -1.3% SD en Mate y Lectura", ".78 SD", "0", "1% SD para los que estaban en la media nacional o por encima de ella. " )
+Coeficientes relevantes= c("ATT: +, * ", "0","Habilidades digitales: XO test (1.00 SD), PC test (.21 SD), Internet test (.33 SD), Índice digital (.53 SD). Resultados académicos: 0", "-1% y -1.3% SD en Mate y Lectura", ".78 SD", "0", "1% SD para los que estaban en la media nacional o por encima de ella." )
 
 kbl(text_tbl, booktabs = T) %>%
 kable_styling(full_width = F) %>%
 column_spec(2, width = "30em")
-
-
-
-en su ejemplo hay 10
-
-1. Badasyan & Silva (2012). International Journal of Education Economics and Development. (Brasil). PSM en año antes y año después de la reforma. standardized Portuguese and mathematics tests that students in all public schools take in the 8th grade. TOT: +, ***
-2. Bessone, Dahis, Ho. (2020). The Impact of 3G Mobile Internet on Educational
-Outcomes in Brazil. MIT. Two way fixed effects y non parametric diff in diff. 10 años de Brasil (Prova Brasil) que es cada 2 años. en TWFE. El coeficiente es 0. 
-3. Malamud, Cueto, Cristia, Beuermann. (2019) Journal of development economics. Peru. We compare children who were randomly chosen to receive laptops with high-speed internet
-access to (i) those who did not receive laptops and (ii) those who only received laptops without internet. Regresión en experimento aleatorizado ie Estimador de Neyman=? en digital skills, cognitive skills, y academic skills. Laptop + internet significativos en digital skills, ie XO test (1.00), PC test(.21), Internet test(.33), digital skills index (.53), no en resultados de matemáticas, reading, ni academic achievement index, ni en grades, ni en teachers perceptions (del estudiante).  Resultados en desviaciones estándar. (ATT)
-4. Vigdor & Ladd. Economic Inquiry. 2010. North Carolina. Home computer access. estudiantes de 5 y 8, en mate y lectura. Efectos fijos -1% y -1.3% SD en math y reading. 
-5. Belo, Ferreira, Felang. 2014. Middle schools de portugal. Broadband in School: Impact on Student Performance. Management science. broadband to schools on students'
-performance. Primeras diferencias con efectos fijos. grades reduce 0.78 of a standard deviation,
-6. Fairlie, Robinson, 2013.EXPERIMENTAL EVIDENCE ON THE EFFECTS OF HOME COMPUTERS ON
-ACADEMIC ACHIEVEMENT AMONG SCHOOLCHILDREN . Home computers. American Economic Journal: Applied Economics. RCT de dar laptops gratis. no correlación con pasar más tiempo en tarea, en entreggar a tiempo
-7. Diff in diff con EF y de tiempo. Efecto de fibra en SD de la evaluación nacional. 1% SD en los que estban en la media nacional o arriba de ella. 1.814 SD para niños y 1.26 para niñas
 
 --- 
 ## Justificación relevancia para el tema

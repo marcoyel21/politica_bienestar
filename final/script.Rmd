@@ -52,10 +52,9 @@ column_spec(2, width = "30em")
 --- 
 ## Justificación - relevancia del tema
 
-*nota: quello este lo hace en rurales
-*badasyan lo hace en urbana
-
 México tiene como algunas de sus características un bajo nivel de calidad educativo y una baja penetración de telecomunicaciones, relativo a otros países de ingresos comparables. México tiene una brecha digital considerable, el cual es un reto difícil de sobrellevar dadas fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas. (cita Ovando). Se encuentra en el X lugar de technological readiness. Chile, por ejemplo, se encuentra en X (World Economic Forum, checar). 
+
+Se ha puesto poca atención en las repercusiones de una baja o pobre conectividad en el desempeño escolar en el entorno rural del país. Estudios previos (quello) demuestran que hay disparidades muy marcadas entre alumnos con conectividad en su hogar y los que no tienen acceso a ella o solo a través de su celular. Esta disparidad se conoce en la literatura como “homework gap” (Reisdorf, Yankelevich, Shapiro, & Dutton, 2019).
 
 Es claro que hay correlación de una baja conectividad y el desempeño escolar, por ejemplo, debido a covariables de las localidades donde se encuentran las personas, como entorno, zona geográfica, y nivel de marginación. ¿Pero qué tanto del desempeño está causado por el acceso a Internet?
 
@@ -65,8 +64,11 @@ Este evento que causa mayor cobertura en los estudios utilizados anteriormente, 
 
 En suma, la Refoma, al mejorar las condiciones de competencia, permitió a México, ampliar el proceso de universalización de Internet, y escalar en el índice de accesibilidad a Internet: según el índice de accesibilidad de la OECD, en 2012, el 26% de los hogares mexicanos tenían acceso a internet y en 2019, 56.4%, es decir, un aumento mayor al doble. Sin embargo, el entorno rural se encuentra en particular desventaja: su adopción es de 39%, mientras que en el entorno urbano es de 71.2%. 
 
-Por último, el nivel alto de desagregación de los datos de la prueba de Planea y del censo de la INEGI, que en su última versión proveyó por primera vez una base de Principales resultados por localidad, permite que se haga un *match* entre estas dos bases y se use el método cuasi-experimental de *propensity score matching* para 
-El acceso a Internet es menos común en .. (Mora-Rivera, García-Mora)
+Por último, el nivel alto de desagregación de los datos de la prueba de Planea y del censo de la INEGI, con su base de Principales resultados por localidad (ITER), permiten que se haga un *match* entre estas dos bases y se use el método cuasi-experimental de *propensity score matching* para encontrar el efecto de tratamiento del acceso a Internet en comunidades rurales. Esto tendrá implicaciones relevantes en cuanto a política pública nacional. 
+
+La contribución de este trabajo es reflejar la importancia de la Reforma, en el acceso a internet y con ello su impacto en el ámbito educativo, ya que, como lo refiriera el propio Senado de la República en su Boletín plublicado en 2016, el panorama existente antes de la Reforma de 2013, mostraba, por una parte, una limitada participación económica de las telecomunicaciones en el Producto Interno Bruto y, por la otra, el dominio del mercado por una sola empresa, lo que daba por resultado un espacio carente de competencia, que, entre otras cuestiones, derivaba en servicios caros y por tanto inaccesibles para gran parte de la población mexicana, sobre todo, para la más vulnerable económicamente. 
+
+Además, a raíz de la pandemia del COVID-19, se ha puesto aún más en evidencia la necesidad del acceso a Internet y de medios tecnológicos, como computadoras, tabletas, televisiones, entre otros, como vehículos del aprendizaje y motor en la continuidad de la educación en todos los niveles. En consecuencia, hoy más que nunca resulta importante efectuar la valuación de esta política -la Reforma en telecomunicaciones de 2013, a través del programa “México Conectado”- y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora en su implementación. 
 
 ---
 ## Aportación del trabajo (hipótesis)
@@ -82,12 +84,6 @@ Se utilizará por primera vez la base generada en el Censo del 2020, la de Princ
 Esperaríamos  que las localidades que tienen mayores proporciones de viviendas con acceso a Internet tengan mejores resultados en la evaluación, controlando por covariables relacionadas a los hogares y a la localidad.  
 
 Si controlamos por características relacionadas con la desigualdad de las localidades (por ejemplo, tamaño, entorno, porcentaje de viviendas con drenaje, etc.), podremos diferenciar las disparidades en los resultados de las evaluaciones del de estas características de la localidad. 
-
-CONTRIBUCION DEL TRABAJO CYNTHIA:
-La contribución de este trabajo es reflejar la importancia de la Reforma, en el acceso a internet y con ello su impacto en el ámbito educativo, ya que, como lo refiriera el propio Senado de la República en su Boletín plublicado en 2016, el panorama existente antes de la Reforma de 2013, mostraba, por una parte, una limitada participación económica de las telecomunicaciones en el Producto Interno Bruto y, por la otra, el dominio del mercado por una sola empresa, lo que daba por resultado un espacio carente de competencia, que, entre otras cuestiones, derivaba en servicios caros y por tanto inaccesibles para gran parte de la población mexicana, sobre todo, para la más vulnerable económicamente. 
-
-Además, a raíz de la pandemia del COVID-19, se ha puesto aún más en evidencia la necesidad del acceso a Internet y de medios tecnológicos, como computadoras, tabletas, televisiones, entre otros, como vehículos del aprendizaje y motor en la continuidad de la educación en todos los niveles. En consecuencia, hoy más que nunca resulta importante efectuar la valuación de esta política -la Reforma en telecomunicaciones de 2013, a través del programa “México Conectado”- y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora en su implementación. 
-
 
 ---
 

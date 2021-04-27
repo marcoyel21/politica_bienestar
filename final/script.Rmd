@@ -59,7 +59,7 @@ access to (i) those who did not receive laptops and (ii) those who only received
 performance. Primeras diferencias con efectos fijos. grades reduce 0.78 of a standard deviation,
 6. Fairlie, Robinson, 2013.EXPERIMENTAL EVIDENCE ON THE EFFECTS OF HOME COMPUTERS ON
 ACADEMIC ACHIEVEMENT AMONG SCHOOLCHILDREN . Home computers. American Economic Journal: Applied Economics. RCT de dar laptops gratis. no correlación con pasar más tiempo en tarea, en entreggar a tiempo
-
+7. Diff in diff con EF y de tiempo. Efecto de fibra en SD de la evaluación nacional. 1% SD en los que estban en la media nacional o arriba de ella. 1.814 SD para niños y 1.26 para niñas
 
 --- 
 ## Justificación relevancia para el tema

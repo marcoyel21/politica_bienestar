@@ -40,17 +40,18 @@ encabezados:
 3. tipo de Y
 4. Valores de los coeficientes relevantes con significancia
 
+
 text_tbl <- data.frame(
-Items = c("Item 1", "Item 2", "Item 3"),
-Features = c(
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tempor ex. Morbi malesuada sagittis turpis, at venenatis nisl luctus a. ",
-"In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit varius, posuere risus et, cursus augue. Duis eleifend aliquam ante, a aliquet ex tincidunt in. ",
-"Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi. Aliquam molestie erat et sollicitudin venenatis. In ac lacus at velit scelerisque mattis. "
-)
-)
+Estudio (datos) = c("", "", ""),
+Metodología = c(),
+Variable resultado= c(),
+Coeficientes relevantes= c())
+
 kbl(text_tbl, booktabs = T) %>%
 kable_styling(full_width = F) %>%
 column_spec(2, width = "30em")
+
+
 
 en su ejemplo hay 10
 

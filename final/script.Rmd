@@ -98,6 +98,18 @@ En suma, la Refoma, al mejorar las condiciones de competencia, permitió a Méxi
 
 Dado ese contexto, el objetivo general de este trabajo es analizar el impacto que ha tenido la Reforma en Telecomunicaciones, con el Programa “México Conectado” en el desempeño educativo; lo anterior, a través del aumento de acceso a Internet que se detonó con esta Reforma. La relevancia de este trabajo consiste en poder determinar si un mayor acceso a internet en los hogares ha contribuido a elevar el nivel educativo de los estudiantes, partiendo de la premisa de que el acceso a Internet puede mejorar la calidad de la educación en muchas maneras, incrementando las oportunidades de aprendizaje y reduciendo la brecha digital.
 
+Furthermore, the specific conditions affecting the Mexican telecommunications sector over the past years
+have represented an additional barrier to these households gaining Internet access (Cave & Mariscal, 2020; Ayala, Chapa, García, &
+Hibert, 2018).1 Until 2013, Mexico’s telecommunications sector was concentrated in a single dominant firm (Ovando & Olivera,
+2018). This market concentration, in conjunction with high connectivity costs and weak regulating agencies, explain why in 2017
+Mexico’s Internet penetration rate was only 63.9% (ITU, 2017). Approximately 50% of households lack access to an Internet service at
+home, yet the rural sector shows a clear disadvantage in terms of Internet access; the rate of Internet adoption in Mexico’s rural sector
+was 39%, while for the urban sector this percentage increased to 71.2%
+
+Although in recent years the greatest penetration of ICT in Mexico has been through mobile telephones,3 most of the effects on the
+dimensions of poverty, such as educational backwardness, access to medical services, and access to basic housing services, may be
+linked in their majority to the increased investments in infrastructure to improve Internet access beyond the individual level, as in the
+case of mobile telephones.
 
 ---
 ## Aportación del trabajo (hipótesis)

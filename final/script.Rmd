@@ -54,7 +54,7 @@ Se ha puesto poca atención en las repercusiones de una baja o pobre conectivida
 
 El evento que causaría mayor acceso en los hogares del país, y que podría tener un efecto en el desempeño escolar, fue la Reforma en Telecomunicaciones del 2013. Esta fue llevada a cabo en un contexto en el que el mercado de telecomunicaciones en México, desde los 90s, estaba altamente concentrado, resultando en una falta de competencia, calidad de servicios baja, precios altos, y una penetración de banda ancha baja, en relación a países comparables en América Latina. ((Noll, 2012). En ella, el acceso a Internet se consagró como un derecho constitucional. Particularmente, se implementó una regulación asimétrica para "emparejar" a la participación de los otros competidores respecto a la del preponderante (Telmex en el caso de telefonía), estableciendo  las bases para garantizar una mayor competitividad en la oferta de los servicios de telecomunicaciones. Hoy en día, hay una mayor competencia y precios más bajos (Ovando & Oliveria, 2017), así como una mejora en la calidad de los servicios y una mayor cobertura de Internet. Asimismo, se implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil sitios y espacios públicos del país. El acceso a Internet se brinda a cada uno de los estados de la República Mexicana a través de los llamados “Puntos, México Conectado”, que se encuentran ubicados en varios sitios y espacios públicos como escuelas, bibliotecas, hospitales y centros comunitarios a nivel federal, estatal y municipal.
 
-En suma, la Refoma, al mejorar las condiciones de competencia, permitió a México, ampliar el proceso de universalización de Internet, y escalar en el índice de accesibilidad a Internet: según el índice de accesibilidad de la OECD, en 2012, el 26% de los hogares mexicanos tenían acceso a internet y en 2019, 56.4%, es decir, un aumento mayor al doble. Sin embargo, el entorno rural se encuentra en particular desventaja: su adopción es de 39%, mientras que en el entorno urbano es de 71.2%. 
+En suma, la Refoma, al mejorar las condiciones de competencia, permitió a México, ampliar el proceso de universalización de Internet, y escalar en el índice de accesibilidad a Internet: según el índice de accesibilidad de la OECD, en 2012, el 26% de los hogares mexicanos tenían acceso a internet y en 2019, 56.4%, es decir, un aumento mayor al doble. Sin embargo, el entorno rural se encuentra en particular desventaja: su adopción es de 39%, mientras que en el entorno urbano es de 71.2%. (Mora-Rivera & García-Mora, 2021)
 
 Por esto, nuestro trabajo primero consistirá en determinar cuánto si existió un aumento de la adopción de Internet en los hogares debido a la Reforma, y después estimar cuánto afectó este acceso a Internet a los resultados de las evaluaciones de la prueba estandarizada nacional Planea. El alto nivel de desagregación de las bases tanto de Planea como del censo, con su base de *Principales resultados por localidad (ITER)* (2010 y 2020), nos permitirá, en primera instancia, realizar una estimación de tipo *diff-in-diff* para ver el efecto de la reforma en la adopción a Internet y después un *propensity score matching* para encontrar el efecto de tratamiento del acceso a Internet en comunidades rurales y urbanasp. Esto tendrá implicaciones relevantes en cuanto a política pública nacional. 
 
@@ -200,4 +200,37 @@ Finalmente, evaluamos la relación entre el nivel de acceso a internet y a equip
 ```{r, results='asis'}
 stargazer(a,b,c,d,header=FALSE)
 ```
+
+## Referencias
+
+Belo, R., Ferreira, P., & Telang, R. (2014). Broadband in school: Impact on student performance. Management Science, 60(2), 265-282.
+
+Bessone, P., Dahis, R., & Ho, L. (2020). The Impact of 3G Mobile Internet on Educational
+Outcomes in Brazil. MIT. Disponible en: http://economics.mit.edu/files/20877
+
+Fairlie, R. W., & Robinson, J. (2013). Experimental evidence on the effects of home computers on academic achievement among schoolchildren. American Economic Journal: Applied Economics, 5(3), 211-40.
+
+Grimes, A., & Townsend, W. (2018). Effects of (ultra-fast) fibre broadband on student achievement. Information Economics and Policy, 44, 8-15.
+
+Hampton, K., Fernandez, L., Robertson, C., & Bauer, J. M. (2020). Broadband and student performance gaps. Available at SSRN 3614074.
+
+Malamud, O., Cueto, S., Cristia, J., & Beuermann, D. W. (2019). Do children benefit from internet access? Experimental evidence from Peru. Journal of Development Economics, 138, 41-56.
+
+Mora-Rivera, J., & García-Mora, F. (2021). Internet access and poverty reduction: Evidence from rural and urban Mexico. Telecommunications Policy, 45(2), 102076.
+
+Ovando, C., & Olivera, E. (2018). Was household internet adoption driven by the reform? Evaluation of the 2013 telecommunication reform in Mexico. Telecommunications Policy, 42(9), 700-714.
+
+Silva, S. J., Milkman, M. I., & Badasyan, N. (2014, March). The impact of Brazil’s' Broadband at School Program'on student achievement. In 2014 TPRC Conference Paper.
+
+Vigdor, J. L., Ladd, H. F., & Martinez, E. (2014). Scaling the digital divide: Home computer technology and student achievement. Economic Inquiry, 52(3), 1103-1119.
+
+
+
+
+
+
+
+
+
+
 

@@ -174,6 +174,27 @@ names(planea_localidad)[names(planea_localidad) == "...2"] <- "NOM_ENT"
 names(planea_localidad)[names(planea_localidad) == "...6"] <- "NOM_MUN"
 names(planea_localidad)[names(planea_localidad) == "...7"] <- "NOM_LOC"
 
+# Ahora para planea 2010
+
+planea_localidad10<-planea_10 %>% 
+  select(NOM_ENT,NOM_MUN,NOM_LOC,                  # son entidad, municipio y loc
+         POR_N1_ESP_3,POR_N2_ESP_3,POR_N3_ESP_3,POR_N4_ESP_3,       # son % de calis de español
+         POR_N1_MAT_3,POR_N2_MAT_3,POR_N3_MAT_3,POR_N4_MAT_3)   %>% # son % de calis de mate
+  group_by(NOM_ENT,NOM_MUN,NOM_LOC) %>%
+  summarize(esp_1 = mean(POR_N1_ESP_3), 
+            esp_II= mean(POR_N2_ESP_3),
+            esp_1II = mean(POR_N3_ESP_3), 
+            esp_IV= mean(POR_N4_ESP_3),
+            mat_1 = mean(POR_N1_MAT_3), 
+            mat_II= mean(POR_N2_MAT_3),
+            mat_1II = mean(POR_N3_MAT_3), 
+            mat_IV= mean(POR_N4_MAT_3),) %>%
+  mutate(top_50_esp10=esp_1II+esp_IV,
+         top_50_mat10=mat_1II+mat_IV) #convierto a mi variable de interes (porcentaje de niños en la mejor mitad)
+
+#cambio todo a mayus
+planea_localidad10 <- as.data.frame(t(apply(planea_localidad10,1,toupper)))
+
 
 ```
 

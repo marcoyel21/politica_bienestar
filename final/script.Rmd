@@ -128,6 +128,12 @@ censo_localidad10<-censo_10 %>%
 #cambio todo a mayus
 censo_localidad10 <- as.data.frame(t(apply(censo_localidad10,1,toupper)))
   
+# cambio nombres
+
+names(censo_localidad10)[names(censo_localidad10) == "Entidad"] <- "NOM_ENT"
+names(censo_localidad10)[names(censo_localidad10) == "Municipio"] <- "NOM_MUN"
+names(censo_localidad10)[names(censo_localidad10) == "Localidad"] <- "NOM_LOC"  
+  
 ```
 
 
@@ -220,6 +226,29 @@ a<-lm(top_50_mat~internet,data)
 b<-lm(top_50_mat~lap,data)
 c<-lm(top_50_esp~internet,data)
 d<-lm(top_50_esp~lap,data)
+
+#Ahora para el 2010
+#base de datos del 2010
+data2<-as.data.frame(merge(planea_localidad10,censo_localidad10, by= c("NOM_ENT","NOM_MUN","NOM_LOC"))) %>% na.omit()
+
+#convierto variables de interes a numéricas
+names<-c("esp_1","esp_II","esp_1II","esp_IV",    
+         "mat_1","mat_II","mat_1II","mat_IV",
+         "top_50_esp","top_50_mat",
+         "VIVTOT", "TVIVPAR","VIVPAR_HAB","VPH_INTER","VPH_PC",
+         "internet","lap" )  
+for (i in names){
+  data2[[i]] <- as.numeric(data2[[i]])
+}
+
+a<-lm(top_50_mat10~internet,data2)
+b<-lm(top_50_mat10~lap,data2)
+c<-lm(top_50_esp10~internet,data2)
+d<-lm(top_50_esp10~lap,data2)
+
+
+
+
 
 ```
 

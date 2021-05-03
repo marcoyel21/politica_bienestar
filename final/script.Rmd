@@ -246,11 +246,93 @@ b<-lm(top_50_mat10~lap,data2)
 c<-lm(top_50_esp10~internet,data2)
 d<-lm(top_50_esp10~lap,data2)
 
+```
+
+```{r}
+#Parte del merge de los censos
+
+temp <- tempfile()
+download.file("https://www.inegi.org.mx/contenidos/programas/ccpv/iter/zip/iter2020/iter_nalcsv20.zip",temp)
+censo<-read.csv(unz(temp,"ITER_NALCSV20.csv"))
+unlink(temp)
+
+censo_10<-read.csv("censo2010.csv")
+
+#AQUI ESTOY INTENTANDO HACER A ENTIDAD, MUN, Y LOC (LAS CLAVES) NUMÉRICAS, PERO NO ME DEJA
+
+names<-c('ENTIDAD','MUN','LOC', #CLAVES
+         'VIVTOT','TVIVPAR','VIVPAR_HAB', #localidad
+         'VPH_INTER','VPH_PC') #internet y laptop
+for (i in names){
+  censo[[i]] <- as.numeric(censo[[i]])
+}
+
+#METO LAS CLAVE
+censo_localidad<-censo %>% 
+  select(ENTIDAD,MUN,LOC, 
+         NOM_ENT,NOM_MUN,NOM_LOC,     #localidad           
+         VIVTOT,TVIVPAR,VIVPAR_HAB,       # vivienda
+         VPH_INTER,VPH_PC)   %>%    # internet y laptop
+  mutate(internet=VPH_INTER*100/VIVTOT,
+         lap=VPH_PC*100/VIVTOT)
+#cambio todo a mayus
+censo_localidad <- as.data.frame(t(apply(censo_localidad,1,toupper)))
+
+#LO MISMO PARA 2010
+names2<-c('ClaveEnt','ClaveLoc','ClaveMun','vivtot','tvivpar','vivparhab', #localidad
+          'vph_inter','vph_pc') #internet y laptop
+for (i in names2){
+  censo_10[[i]] <- as.numeric(censo_10[[i]])
+}
+
+#AQUÍ TAMBIÉN LAS METO
+censo_localidad10<-censo_10 %>% 
+  select(Entidad,Municipio,Localidad,ClaveEnt,ClaveLoc,ClaveMun,     #localidades y sus claves           
+         vivtot,tvivpar,vivpar_hab,       # vivienda
+         vph_inter,vph_pc)   %>%    # internet y laptop
+  mutate(internet=vph_inter*100/vivtot,
+         lap=vph_pc*100/vivtot)
+
+#cambio todo a mayus
+censo_localidad10 <- as.data.frame(t(apply(censo_localidad10,1,toupper)))
+
+# cambio nombres. 2010
+names(censo_localidad10)[names(censo_localidad10) == "Entidad"] <- "NOM_ENT"
+names(censo_localidad10)[names(censo_localidad10) == "Municipio"] <- "NOM_MUN"
+names(censo_localidad10)[names(censo_localidad10) == "Localidad"] <- "NOM_LOC"
+
+#DE LA DEL 2020.
+names(censo_localidad)[names(censo_localidad) == "ENTIDAD"] <- "CLAVE_ENT"
+names(censo_localidad)[names(censo_localidad) == "MUN"] <- "CLAVE_MUN"
+names(censo_localidad)[names(censo_localidad) == "LOC"] <- "CLAVE_LOC"
+
+#TRANSFORMAR A NUMÉRICO
+as.numeric(censo_localidad$CLAVE_MUN)
+as.numeric(censo_localidad$CLAVE_LOC)
+as.numeric(censo_localidad$CLAVE_ENT)
+as.numeric(censo_localidad10$ClaveEnt)
+as.numeric(censo_localidad10$ClaveMun)
+as.numeric(censo_localidad10$ClaveLoc)
+
+#HACER LO DE LOS DÍGITOS
+
+mutate(CLAVE_MUN=sprintf("%04d",censo_localidad$CLAVE_MUN))
+mutate(CLAVE_LOC=sprintf("%08d",censo_localidad$CLAVE_LOC))
+mutate(CLAVE_MUN10=sprintf("%04d",censo_localidad10$ClaveMun))
+mutate(CLAVE_LOC10=sprintf("%08d",censo_localidad10$ClaveLoc))
+
+names(censo_localidad10)[names(censo_localidad10) == "ClaveEnt"] <- "CLAVE_ENT10"
 
 
+#PASTE. 
+censo_localidad %>% mutate(CLAVE_LOCAL=paste(CLAVE_ENT,CLAVE_MUN,CLAVE_LOC,sep = ""))
+censo_localidad10 %>% mutate(CLAVE_LOCAL10=paste(CLAVE_ENT10,CLAVE_MUN10,CLAVE_LOC10,sep = ""))
 
 
 ```
+
+
+
 
 
 ## Variables de interés

@@ -11,9 +11,10 @@ En el del 2020 son: "ENTIDAD", "MUN", "LOC"
 En el script (en el último chunk) cambié el código para incluir a estas variables, lo intenté convertir a numérico, y hacer lo de los dígitos. Cuando hago los select me sale de error:
 
 Column ENTIDAD doesnt exist
+
 Column ClaveEnt doesnt exist
 
-estas son las primeras columnas de cada base.
+estas son las primeras columnas de cada base. intentér cambiar esto leyendo los CSV con fileEncoding="UTF-8-BOM" y nada :(
 
 
 y cuando los intento hacer numéricos:

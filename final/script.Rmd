@@ -29,6 +29,11 @@ planea_19<-read_xlsx("PLANEA_2019.xlsx")
 #limpieza
 planea_15 <- planea_15[-c(1:2),]
 planea_19 <- planea_19[-c(1:7),]
+
+#Ahora datos del 2010
+censo_10<-read.csv("censo2010.csv")
+planea_10<-read.csv("ENLACE_sec_2010.csv")
+
 ```
 
 \tableofcontents
@@ -103,6 +108,25 @@ censo_localidad<-censo %>%
                lap=VPH_PC*100/VIVTOT)
 #cambio todo a mayus
 censo_localidad <- as.data.frame(t(apply(censo_localidad,1,toupper)))
+
+#Para censo del 2010
+
+names2<-c('vivtot','tvivpar','vivparhab', #localidad
+         'vph_inter','vph_pc') #internet y laptop
+for (i in names2){
+  censo_10[[i]] <- as.numeric(censo_10[[i]])
+}
+
+#creo la base de datos de interes
+censo_localidad10<-censo_10 %>% 
+  select(Entidad,Municipio,Localidad,     #localidad           
+         vivtot,tvivpar,vivpar_hab,       # vivienda
+         vph_inter,vph_pc)   %>%    # internet y laptop
+  mutate(internet=vph_inter*100/vivtot,
+         lap=vph_pc*100/vivtot)
+ 
+#cambio todo a mayus
+censo_localidad10 <- as.data.frame(t(apply(censo_localidad10,1,toupper)))
   
 ```
 

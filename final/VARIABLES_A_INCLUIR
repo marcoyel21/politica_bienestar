@@ -15,9 +15,52 @@ de Planea (están en la de 2019, la del 2010 solo tiene grado marginación pero 
 
 *Nota en la de 2019 estaría ideal quitar la primera fila 
 
-Censo:
+-------------
 
-* 
+Censos:
+
+*EDUCACIÓN, ECONÓMICO, POB INDÍGENA, SALUD. en general son caracts de la población no determinadas por la reforma, y que pueden ser explicativas para la cobertura y para los outcomes en educación
+
+
+* PHOG_IND/POBTOT. Población en hogares censales indígenas/Pob total 
+
+* P12A14NOA/ P12A14  . población de 12-14 años que no va a la escuela / total de esta población
+
+*P15YM_SE/POBTOT. Población de 15 años y más sin escolaridad. 
+
+*GRAPROES/POBTOT . grado promedio de escolaridad
+
+* POCUPADA/POBTOT. Población de 12 años y más ocupada
+
+* PSINDER /POBTOT. Población sin afiliación a servicios de salud. 
+
+* HOGARES/POBTOT . Hogares censales/población. Para ver densidad? a menor "densidad" menos outcomes educativos, ya que está densidad está relacionada a más cosas?
+
+* HOGJEF_F/HOGARES . Hogares censales donde la persona de referencia es mujer. puede estar relacionado a outcomes de los nilis
+
+
+* TENERNCIA DE TICS
+
+* VPH_PC/TVIVPAR. laptop, compu, tablet
+* VPH_CEL/TVIVPAR. celular
+* VPH_INTER/TVIVPAR. internet
+* VPH_SPMVPI/TVIVPAR . paga por servicios de streaming. importante como proxy de tener internet en el celuar. esto lo recomendó araceli
+* VPH_SINCINT . sin computadora y sin internet. en línea con el anterior
+
+
+
+** CARACTERÍSTICAS DE LOS HOGARES DE LA LOCALIDAD (WEALTH)
+
+* (PRO_OCUP_C >2.5) . Promedio de ocupantes por cuarto en viviendas particulares habitadas > A 2.5 (hacinamiento) 
+* 1 si > 2.5, 0 <=2.5 . Esto indicaría si la localidad tiene en promedio hacinamiento
+
+* VPH_PISOTI/TVIVPAR. % casas c piso de tierra
+* VPH_S_ELEC/TVIVPAR . % casas SIN electricidad
+* VPH_AGUAFV/TVIVPAR . % casas SIN agua entubada
+* VPH_NODREN/TVIVPAR .  % casas sin drenaje
+* VPH_REFRI/TVIVPAR. % casas con refri
+
+
 
 
 

@@ -31,7 +31,7 @@ planea_15 <- planea_15[-c(1:2),]
 planea_19 <- planea_19[-c(1:7),]
 
 #Ahora datos del 2010
-censo_10<-read.csv("censo2010.csv")
+censo_10<-read.csv("http://ri.uaemex.mx/bitstream/handle/20.500.11799/58449/03%20Censo%20de%20poblaci%c3%b3n%20por%20localidades%202010.csv?sequence=2&isAllowed=y")
 planea_10<-read.csv("ENLACE_sec_2010.csv")
 
 ```
@@ -43,9 +43,9 @@ planea_10<-read.csv("ENLACE_sec_2010.csv")
 #________________________
 
 #Preparacion
-censo_10$ENTIDAD<-as.numeric(censo_10$ENTIDAD)
-censo_10$MUN<-as.numeric(censo_10$MUN)
-censo_10$LOC<-as.numeric(censo_10$LOC)
+censo$ENTIDAD<-as.numeric(censo$ENTIDAD)
+censo$MUN<-as.numeric(censo$MUN)
+censo$LOC<-as.numeric(censo$LOC)
 
 #Creo indice INEGI
 
@@ -56,18 +56,14 @@ censo<-censo%>%mutate(MUN=sprintf("%03d",censo$MUN),
               mutate(INEGI=paste(a,LOC,sep=""))
 
 #Preparacion
-censo_10$ENTIDAD<-as.numeric(censo_10$ENTIDAD)
-censo_10$MUN<-as.numeric(censo_10$MUN)
-censo_10$LOC<-as.numeric(censo_10$LOC)
+censo_10$ClaveLoc<-as.numeric(censo_10$ClaveLoc)
+
 
 
 #Creo indice INEGI
-censo_10<-censo_10%>%mutate(MUN=sprintf("%03d",censo_10$MUN),
-                      ENT=sprintf("%02d",censo_10$ENTIDAD),
-                      LOC=sprintf("%04d",censo_10$LOC)) %>% 
-              mutate(a=paste(ENT,MUN,sep=""))%>% 
-              mutate(INEGI=paste(a,LOC,sep=""))
+censo_10<-censo_10%>%mutate(INEGI=sprintf("%09d",censo_10$ClaveLoc))
 
+                        
 #MERGE
 #Aqui seria buena idea filtrar antes pero en fin... como sea más agusto :)
 censos<-merge(censo_10,censo, by= "INEGI")

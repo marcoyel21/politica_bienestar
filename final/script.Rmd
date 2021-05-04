@@ -17,6 +17,8 @@ library(stargazer)
 library(dplyr)
 library(ggplot2)
 library(kableExtra)
+library(Jmisc)
+
 
 #Ahora no tienen que descargar nada, todo es automatico :)
 temp <- tempfile()
@@ -63,6 +65,10 @@ censo_10$ClaveLoc<-as.numeric(censo_10$ClaveLoc)
 #Creo indice INEGI
 censo_10<-censo_10%>%mutate(INEGI=sprintf("%09d",censo_10$ClaveLoc))
 
+#Agrego identificadores de año
+
+addCol(censo,year=2010)
+addCol(censo_10,year=2020)
                         
 #MERGE
 #Aqui seria buena idea filtrar antes pero en fin... como sea más agusto :)

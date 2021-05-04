@@ -36,6 +36,43 @@ planea_10<-read.csv("ENLACE_sec_2010.csv")
 
 ```
 
+
+```{r}
+#________________________
+#MERGE CENSOS
+#________________________
+
+#Preparacion
+censo_10$ENTIDAD<-as.numeric(censo_10$ENTIDAD)
+censo_10$MUN<-as.numeric(censo_10$MUN)
+censo_10$LOC<-as.numeric(censo_10$LOC)
+
+#Creo indice INEGI
+
+censo<-censo%>%mutate(MUN=sprintf("%03d",censo$MUN),
+                      ENT=sprintf("%02d",censo$ENTIDAD),
+                      LOC=sprintf("%04d",censo$LOC)) %>% 
+              mutate(a=paste(ENT,MUN,sep=""))%>% 
+              mutate(INEGI=paste(a,LOC,sep=""))
+
+#Preparacion
+censo_10$ENTIDAD<-as.numeric(censo_10$ENTIDAD)
+censo_10$MUN<-as.numeric(censo_10$MUN)
+censo_10$LOC<-as.numeric(censo_10$LOC)
+
+
+#Creo indice INEGI
+censo_10<-censo_10%>%mutate(MUN=sprintf("%03d",censo_10$MUN),
+                      ENT=sprintf("%02d",censo_10$ENTIDAD),
+                      LOC=sprintf("%04d",censo_10$LOC)) %>% 
+              mutate(a=paste(ENT,MUN,sep=""))%>% 
+              mutate(INEGI=paste(a,LOC,sep=""))
+
+#MERGE
+#Aqui seria buena idea filtrar antes pero en fin... como sea más agusto :)
+censos<-merge(censo_10,censo, by= "INEGI")
+
+```
 \tableofcontents
 \newpage
 

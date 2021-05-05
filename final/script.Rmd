@@ -19,6 +19,10 @@ library(ggplot2)
 library(kableExtra)
 library(Jmisc)
 
+#________________________
+#AMBIENTE
+#________________________
+
 
 #Ahora no tienen que descargar nada, todo es automatico :)
 temp <- tempfile()
@@ -41,40 +45,118 @@ planea_10<-read.csv("ENLACE_sec_2010.csv")
 
 ```{r}
 #________________________
-#MERGE CENSOS
+#PREPROCESAMIENTO CENSO 2010
 #________________________
 
-#Preparacion
-censo$ENTIDAD<-as.numeric(censo$ENTIDAD)
-censo$MUN<-as.numeric(censo$MUN)
-censo$LOC<-as.numeric(censo$LOC)
 
+censo_10_localidad<-censo_10 %>% 
+                    select(ClaveEnt,Entidad,
+                           ClaveMun,Municipio,
+                           Localidad, ClaveLoc,
+                           vph_inter,vivtot,vph_pc) %>% 
+                    mutate(internet_10= vph_inter*100/vivtot,
+                           pc_10 =vph_pc*100/vivtot)
+#OJO: 84,690 MISSING VALUES PROVENIENTES DE LA BASE DE DATOS 
+
+censo_10_localidad <- as.data.frame(t(apply(censo_10_localidad,1,toupper)))
+
+# cambio nombres
+
+names(censo_10_localidad)[names(censo_10_localidad) == "Entidad"] <- "NOM_ENT"
+names(censo_10_localidad)[names(censo_10_localidad) == "Municipio"] <- "NOM_MUN"
+names(censo_10_localidad)[names(censo_10_localidad) == "Localidad"] <- "NOM_LOC"  
+  
+```
+
+```{r}
+#________________________
+#PREPROCESAMIENTO CENSO 2020
+#________________________
+
+
+#A) Encontrar acceso a internet (y variables que propuso sam) en censo a nivel localidad
+#convierto variables de interes a numéricas
+names<-c('VIVTOT','TVIVPAR','VIVPAR_HAB', #localidad
+         'VPH_INTER','VPH_PC') #internet y laptop
+
+for (i in names){
+    censo[[i]] <- as.numeric(censo[[i]])
+}
+
+
+#creo la base de datos de interes
+censo_20_localidad<-censo %>% 
+  select(ENTIDAD,MUN,LOC,       #claves numéricas de localidad
+    NOM_ENT,NOM_MUN,NOM_LOC,     #localidad           
+         VIVTOT,TVIVPAR,VIVPAR_HAB,       # vivienda
+         VPH_INTER,VPH_PC)   %>%    # internet y laptop
+        mutate(internet_20=VPH_INTER*100/VIVTOT,
+               pc_20=VPH_PC*100/VIVTOT)
+#cambio todo a mayus
+censo_20_localidad <- as.data.frame(t(apply(censo_20_localidad,1,toupper)))
+
+# cambio nombres
+
+names(censo_20_localidad)[names(censo_20_localidad) == "Entidad"] <- "NOM_ENT"
+names(censo_20_localidad)[names(censo_20_localidad) == "Municipio"] <- "NOM_MUN"
+names(censo_20_localidad)[names(censo_20_localidad) == "Localidad"] <- "NOM_LOC"  
+  
+```
+
+
+
+```{r}
+#________________________
+#PREPOCESAMIENTO: MERGE CENSOS
+#________________________
+
+#Preparacion para 2020
+censo_20_localidad$ENTIDAD<-as.numeric(censo_20_localidad$ENTIDAD)
+censo_20_localidad$MUN<-as.numeric(censo_20_localidad$MUN)
+censo_20_localidad$LOC<-as.numeric(censo_20_localidad$LOC)
 #Creo indice INEGI
-
-censo<-censo%>%mutate(MUN=sprintf("%03d",censo$MUN),
-                      ENT=sprintf("%02d",censo$ENTIDAD),
-                      LOC=sprintf("%04d",censo$LOC)) %>% 
+censo_20_localidad<-censo_20_localidad%>%
+              mutate(MUN=sprintf("%03d",censo_20_localidad$MUN),
+                     ENT=sprintf("%02d",censo_20_localidad$ENTIDAD),
+                     LOC=sprintf("%04d",censo_20_localidad$LOC)) %>% 
               mutate(a=paste(ENT,MUN,sep=""))%>% 
               mutate(INEGI=paste(a,LOC,sep=""))
 
-#Preparacion
-censo_10$ClaveLoc<-as.numeric(censo_10$ClaveLoc)
 
-
-
+#Preparacion 2010 (ya viene muy preparado)
+censo_10_localidad$ClaveLoc<-as.numeric(censo_10_localidad$ClaveLoc)
 #Creo indice INEGI
-censo_10<-censo_10%>%mutate(INEGI=sprintf("%09d",censo_10$ClaveLoc))
+censo_10_localidad<-censo_10_localidad%>%
+                     mutate(INEGI=sprintf("%09d",censo_10$ClaveLoc))
 
-#Agrego identificadores de año
-
-addCol(censo,year=2010)
-addCol(censo_10,year=2020)
                         
 #MERGE
-#Aqui seria buena idea filtrar antes pero en fin... como sea más agusto :)
-censos<-merge(censo_10,censo, by= "INEGI")
+censos<-merge(censo_10_localidad,censo_20_localidad, by= "INEGI")
 
 ```
+
+```{r}
+#________________________
+#ANALISIS CENSOS
+#________________________
+
+names<-c('pc_10','internet_10',
+         'internet_20','pc_20') 
+
+for (i in names){
+    censos[[i]] <- as.numeric(censos[[i]])
+}
+
+summary(censos)
+
+#REALITY CHECK, VIVIMOS EN UN PAIS MUY POBRE O TENEMOS UN PROBLEMA DE MISSING VALUES
+
+```
+
+
+
+
+
 \tableofcontents
 \newpage
 
@@ -127,65 +209,17 @@ Por el momento, nuestra base de datos final consiste en un *merge* a nivel local
 
 En este apartado mostraremos estadísticas descriptivas de nuestras variables independientes y dependientes, su distribución y finalmente una regresión para cuantificar el efecto del acceso a internet y equipo de computo sobre las calificaciones.
 
-```{r}
-#A) Encontrar acceso a internet (y variables que propuso sam) en censo a nivel localidad
-#convierto variables de interes a numéricas
-names<-c('VIVTOT','TVIVPAR','VIVPAR_HAB', #localidad
-         'VPH_INTER','VPH_PC') #internet y laptop
-
-for (i in names){
-    censo[[i]] <- as.numeric(censo[[i]])
-}
-
-
-#creo la base de datos de interes
-censo_localidad<-censo %>% 
-  select(NOM_ENT,NOM_MUN,NOM_LOC,     #localidad           
-         VIVTOT,TVIVPAR,VIVPAR_HAB,       # vivienda
-         VPH_INTER,VPH_PC)   %>%    # internet y laptop
-        mutate(internet=VPH_INTER*100/VIVTOT,
-               lap=VPH_PC*100/VIVTOT)
-#cambio todo a mayus
-censo_localidad <- as.data.frame(t(apply(censo_localidad,1,toupper)))
-
-#Para censo del 2010
-
-names2<-c('vivtot','tvivpar','vivparhab', #localidad
-         'vph_inter','vph_pc') #internet y laptop
-for (i in names2){
-  censo_10[[i]] <- as.numeric(censo_10[[i]])
-}
-
-#creo la base de datos de interes
-censo_localidad10<-censo_10 %>% 
-  select(Entidad,Municipio,Localidad,     #localidad           
-         vivtot,tvivpar,vivpar_hab,       # vivienda
-         vph_inter,vph_pc)   %>%    # internet y laptop
-  mutate(internet=vph_inter*100/vivtot,
-         lap=vph_pc*100/vivtot)
- 
-#cambio todo a mayus
-censo_localidad10 <- as.data.frame(t(apply(censo_localidad10,1,toupper)))
-  
-# cambio nombres
-
-names(censo_localidad10)[names(censo_localidad10) == "Entidad"] <- "NOM_ENT"
-names(censo_localidad10)[names(censo_localidad10) == "Municipio"] <- "NOM_MUN"
-names(censo_localidad10)[names(censo_localidad10) == "Localidad"] <- "NOM_LOC"  
-  
-```
-
 
 ```{r}
-# B) Encontrar calis (o mas bien distribucion de calis en planea) a nivel localidad
+#________________________
+#PREPROCESAMIENTO PLANTEA 2019
+#________________________
 
-#Para planea 19
 
 #convierto variables de interes a numéricas
 
 names<-c('...23','...24','...25','...26', #calis esp
          '...35','...36','...37','...38') #calis mate
-
 for (i in names){
     planea_19[[i]] <- as.numeric(planea_19[[i]])
 }
@@ -193,55 +227,131 @@ for (i in names){
 
 #creo la base de datos de interes
 
-planea_localidad<-planea_19 %>% 
+planea_localidad_19<-planea_19 %>% 
   select(...2,...6,...7,                  # son entidad, municipio y loc
          ...23,...24,...25,...26,       # son % de calis de español
          ...35,...36,...37,...38)   %>% # son % de calis de mate
   group_by(...2,...6,...7) %>%
-  summarize(esp_1 = mean(...23), 
-            esp_II= mean(...24),
-            esp_1II = mean(...25), 
-            esp_IV= mean(...26),
-            mat_1 = mean(...35), 
-            mat_II= mean(...36),
-            mat_1II = mean(...37), 
-            mat_IV= mean(...38),) %>%
-  mutate(top_50_esp=esp_1II+esp_IV,
-         top_50_mat=mat_1II+mat_IV) #convierto a mi variable de interes (porcentaje de niños en la mejor mitad)
+  summarize(esp_1_19 = mean(...23), 
+            esp_II_19= mean(...24),
+            esp_1II_19 = mean(...25), 
+            esp_IV_19= mean(...26),
+            mat_1_19 = mean(...35), 
+            mat_II_19= mean(...36),
+            mat_1II_19 = mean(...37), 
+            mat_IV_19= mean(...38)) %>%
+  mutate(top_50_esp_19=esp_1II_19+esp_IV_19,
+         top_50_mat_19=mat_1II_19+mat_IV_19) #convierto a mi variable de interes (porcentaje de niños en la mejor mitad)
 
 #cambio todo a mayus
-planea_localidad <- as.data.frame(t(apply(planea_localidad,1,toupper)))
+planea_localidad_19 <- as.data.frame(t(apply(planea_localidad_19,1,toupper)))
   
 
 #cambio nombres
 
-names(planea_localidad)[names(planea_localidad) == "...2"] <- "NOM_ENT"
-names(planea_localidad)[names(planea_localidad) == "...6"] <- "NOM_MUN"
-names(planea_localidad)[names(planea_localidad) == "...7"] <- "NOM_LOC"
+names(planea_localidad_19)[names(planea_localidad_19) == "...2"] <- "NOM_ENT"
+names(planea_localidad_19)[names(planea_localidad_19) == "...6"] <- "NOM_MUN"
+names(planea_localidad_19)[names(planea_localidad_19) == "...7"] <- "NOM_LOC"
 
-# Ahora para planea 2010
+```
 
-planea_localidad10<-planea_10 %>% 
+
+
+```{r}
+#________________________
+#PREPROCESAMIENTO PLANTEA 2015
+#________________________
+
+
+#convierto variables de interes a numéricas
+
+names<-c('...24','...25','...26','...27', #calis esp
+         '...40','...41','...42','...43') #calis mate
+for (i in names){
+    planea_15[[i]] <- as.numeric(planea_15[[i]])
+}
+
+
+#creo la base de datos de interes
+
+planea_localidad_15<-planea_15 %>% 
+  select(ENT,`NOMBRE DEL MUNICIPIO`,`NOMBRE DE LA LOCALIDAD`,                  # son entidad, municipio y loc
+         ...24,...25,...26,...27,       # son % de calis de español
+         ...40,...41,...42,...43)   %>% # son % de calis de mate
+  group_by(ENT,`NOMBRE DEL MUNICIPIO`,`NOMBRE DE LA LOCALIDAD`) %>%
+  summarize(esp_1_15 = mean(...24), 
+            esp_II_15= mean(...25),
+            esp_1II_15 = mean(...26), 
+            esp_IV_15= mean(...27),
+            mat_1_15 = mean(...40), 
+            mat_II_15= mean(...41),
+            mat_1II_15 = mean(...42), 
+            mat_IV_15= mean(...43)) %>%
+  mutate(top_50_esp_15=esp_1II_15+esp_IV_15,
+         top_50_mat_15=mat_1II_15+mat_IV_15) #convierto a mi variable de interes (porcentaje de niños en la mejor mitad)
+
+#cambio todo a mayus
+planea_localidad_15 <- as.data.frame(t(apply(planea_localidad_15,1,toupper)))
+  
+
+#cambio nombres
+
+names(planea_localidad_15)[names(planea_localidad_15) == "NOMBRE DEL MUNICIPIO"] <- "NOM_MUN"
+names(planea_localidad_15)[names(planea_localidad_15) == "NOMBRE DE LA LOCALIDAD"] <- "NOM_LOC"
+
+#IMPUTACION DE NOMBRE DE ENTIDAD
+claves<-planea_10 %>% select(CVE_ENT,NOM_ENT) %>% 
+              mutate(ENT=sprintf("%02d",planea_10$CVE_ENT)) %>% 
+              select(ENT,NOM_ENT)
+planea_localidad_15<-merge(planea_localidad_15,claves, by="ENT")                     
+
+```
+
+
+
+```{r}
+#________________________
+#PREPROCESAMIENTO PLANTEA 2010
+#________________________
+
+
+planea_localidad_10<-planea_10 %>% 
   select(NOM_ENT,NOM_MUN,NOM_LOC,                  # son entidad, municipio y loc
          POR_N1_ESP_3,POR_N2_ESP_3,POR_N3_ESP_3,POR_N4_ESP_3,       # son % de calis de español
          POR_N1_MAT_3,POR_N2_MAT_3,POR_N3_MAT_3,POR_N4_MAT_3)   %>% # son % de calis de mate
   group_by(NOM_ENT,NOM_MUN,NOM_LOC) %>%
-  summarize(esp_1 = mean(POR_N1_ESP_3), 
-            esp_II= mean(POR_N2_ESP_3),
-            esp_1II = mean(POR_N3_ESP_3), 
-            esp_IV= mean(POR_N4_ESP_3),
-            mat_1 = mean(POR_N1_MAT_3), 
-            mat_II= mean(POR_N2_MAT_3),
-            mat_1II = mean(POR_N3_MAT_3), 
-            mat_IV= mean(POR_N4_MAT_3),) %>%
-  mutate(top_50_esp10=esp_1II+esp_IV,
-         top_50_mat10=mat_1II+mat_IV) #convierto a mi variable de interes (porcentaje de niños en la mejor mitad)
+  summarize(esp_1_10 = mean(POR_N1_ESP_3), 
+            esp_II_10= mean(POR_N2_ESP_3),
+            esp_1II_10 = mean(POR_N3_ESP_3), 
+            esp_IV_10= mean(POR_N4_ESP_3),
+            mat_1_10 = mean(POR_N1_MAT_3), 
+            mat_II_10= mean(POR_N2_MAT_3),
+            mat_1II_10 = mean(POR_N3_MAT_3), 
+            mat_IV_10= mean(POR_N4_MAT_3),) %>%
+  mutate(top_50_esp_10=esp_1II_10+esp_IV_10,
+         top_50_mat_10=mat_1II_10+mat_IV_10) #convierto a mi variable de interes (porcentaje de niños en la mejor mitad)
 
 #cambio todo a mayus
-planea_localidad10 <- as.data.frame(t(apply(planea_localidad10,1,toupper)))
+planea_localidad_10 <- as.data.frame(t(apply(planea_localidad_10,1,toupper)))
 
 
 ```
+
+
+
+
+```{r}
+#________________________
+#MERGE GLOBAL
+#________________________
+
+data<-as.data.frame(merge(planea_localidad,censo_localidad, by= c("NOM_ENT","NOM_MUN","NOM_LOC"))) %>% na.omit()
+
+
+
+```
+
+
 
 
 ```{r}

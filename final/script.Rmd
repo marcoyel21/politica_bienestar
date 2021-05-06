@@ -324,6 +324,9 @@ planea_localidad_10 <- as.data.frame(t(apply(planea_localidad_10,1,toupper)))
 #correct encoding
 #________________________
 
+#esto simplemene elimina todos los caracteres especiales
+# se intentaron diferentes metodos (suplantacion, recodificacion) y este es el que rescata más observaciones
+
 planea_localidad_10$NOM_ENT<-stri_enc_toascii(planea_localidad_10$NOM_ENT)
 planea_localidad_10$NOM_MUN<-stri_enc_toascii(planea_localidad_10$NOM_MUN)
 planea_localidad_10$NOM_LOC<-stri_enc_toascii(planea_localidad_10$NOM_LOC)
@@ -337,9 +340,9 @@ planea_localidad_19$NOM_MUN<-stri_enc_toascii(planea_localidad_19$NOM_MUN)
 planea_localidad_19$NOM_LOC<-stri_enc_toascii(planea_localidad_19$NOM_LOC)
 
 
-#9481
-#10394
-#12199
+#9481 #n del primer metodo
+#10394  #n del segundo metodo
+#12199  #n del tercer metodo
 #12234 #lo maximo que he logrado recuperar
 planeas_del_10_al_15<-as.data.frame(merge(planea_localidad_10,planea_localidad_15, by= c("ENT","NOM_MUN","NOM_LOC"))) 
 #vemos un patron de municipios, son datos diferentes
@@ -358,11 +361,13 @@ planeas_del_10_al_19<-as.data.frame(merge(planea_localidad_10,planea_localidad_1
 #MERGE GLOBAL= FINAL DATA
 #________________________
 
+#cambio a numerico para poder hacer mutates
 planeas_del_10_al_19$top_50_esp_19<-as.numeric(planeas_del_10_al_19$top_50_esp_19)
 planeas_del_10_al_19$top_50_mat_19<-as.numeric(planeas_del_10_al_19$top_50_mat_19)
 planeas_del_10_al_19$top_50_esp_10<-as.numeric(planeas_del_10_al_19$top_50_esp_10)
 planeas_del_10_al_19$top_50_mat_10<-as.numeric(planeas_del_10_al_19$top_50_mat_10)
 
+#ccreo el data final (por mientras)
 
 data<-as.data.frame(merge(censos,planeas_del_10_al_19, by= c("INEGI"))) %>% 
        na.omit()  %>% mutate(cambio_internet=internet_20-internet_10,

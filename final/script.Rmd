@@ -175,61 +175,6 @@ summary(censos)
 
 
 
-
-
-\tableofcontents
-\newpage
-
-# Tema
-
-En primera instancia, conocer si la Reforma en Telecomunicaciones del 2013 causó un aumento en la adopción de Internet en los hogares de México. En segunda, averiguar si hay causalidad del acceso a Internet en el hogar en el desempeño escolar (reflejado en la evaluación estandarizada nacional *Planea*) de los estudiantes mexicanos.
-
-
-# Cuadro bibliografía 
-
-Se elaboró un cuadro de resumen bibliográfico mostrando tanto efectos de la Reforma de Telecomunicaciones en México en la adopción de Internet, como del acceso a Internet a nivel celular, hogar, o escuela en variables dependientes relacionadas al desempeño educativo de estudiantes, principalmente de secundaria. Es importante recalcar que, en México, aunque se ha medido el efecto de la Reforma en Telecomunicaciones en variables relacionadas con ingreso, no se ha analizado su efecto en la educación. Mientras tanto, sí se han realizado estudios de la adopción de Internet de los hogares, pero utilizando datos censales e intercensales del 2010 y del 2015,  y con la ENIGH del 2016, no con el censo del 2020. 
-
-![Bibliografía](A.jpg)
-
-
-# Justificación
-
-México tiene, como algunas de sus características, un bajo nivel de calidad educativo (en las pruebas Pisa del 2018, México ocupó las posiciones 53/77, 61/78, y 57/76 en Ciencias, Habilidad Lectora, y Matemáticas, respectivamente, así como una nula mejoría en Habilidad Lectora y en Ciencias desde el 2000), y una baja penetración de cobertura de Internet: por ejemplo, se encuentra en el percentil 65 según de suscripciones a banda ancha por cada 100 habitantes del Banco Mundial del 2019, respecto al resto de los países del mundo, con 17 suscripciones por cada 100 habitantes, mientras que en los países de ingresos altos es de 34. Esta brecha digital es un reto difícil de sobrellevar debido a fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas (Ovando & Oliveria, 2017). 
-
-Se ha puesto poca atención en las repercusiones de una baja o pobre conectividad en el desempeño escolar, tanto en el entorno rural como urbano del país. Estudios previos  demuestran que hay disparidades muy marcadas entre alumnos con conectividad en su hogar y los que no tienen acceso a ella, o que la tienen solo a través de un teléfono móvil. Esta disparidad se conoce en la literatura como “homework gap” (Hampton & Fernandez, 2020). Es claro que existe correlación de una baja conectividad y el desempeño escolar ¿Pero qué tanto de este está causado por el acceso a Internet (o la falta de)?
-
-El evento que causaría mayor acceso en los hogares del país, y que podría tener un efecto en el desempeño escolar, fue la Reforma en Telecomunicaciones del 2013. Esta fue llevada a cabo en un contexto en el que el mercado de telecomunicaciones en México, desde los 90s, estaba altamente concentrado, resultando en una falta de competencia, calidad de servicios baja, precios altos, y una penetración de banda ancha baja, en relación a países comparables en América Latina. ((Noll, 2012). En ella, el acceso a Internet se consagró como un derecho constitucional. Particularmente, se implementó una regulación asimétrica para "emparejar" a la participación de los otros competidores respecto a la del preponderante (Telmex en el caso de telefonía), estableciendo  las bases para garantizar una mayor competitividad en la oferta de los servicios de telecomunicaciones. Hoy en día, hay una mayor competencia y precios más bajos (Ovando & Oliveria, 2017), así como una mejora en la calidad de los servicios y una mayor cobertura de Internet. Asimismo, se implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil sitios y espacios públicos del país. El acceso a Internet se brinda a cada uno de los estados de la República Mexicana a través de los llamados “Puntos, México Conectado”, que se encuentran ubicados en varios sitios y espacios públicos como escuelas, bibliotecas, hospitales y centros comunitarios a nivel federal, estatal y municipal.
-
-En suma, la Refoma, al mejorar las condiciones de competencia, permitió a México, ampliar el proceso de universalización de Internet, y escalar en el índice de accesibilidad a Internet: según el índice de accesibilidad de la OECD, en 2012, el 26% de los hogares mexicanos tenían acceso a internet y en 2019, 56.4%, es decir, un aumento mayor al doble. Sin embargo, el entorno rural se encuentra en particular desventaja: su adopción es de 39%, mientras que en el entorno urbano es de 71.2%. (Mora-Rivera & García-Mora, 2021)
-
-Por esto, nuestro trabajo primero consistirá en determinar cuánto si existió un aumento de la adopción de Internet en los hogares debido a la Reforma, y después estimar cuánto afectó este acceso a Internet a los resultados de las evaluaciones de la prueba estandarizada nacional Planea. El alto nivel de desagregación de las bases tanto de Planea como del censo, con su base de *Principales resultados por localidad (ITER)* (2010 y 2020), nos permitirá, en primera instancia, realizar una estimación de tipo *diff-in-diff* para ver el efecto de la reforma en la adopción a Internet y después un *propensity score matching* para encontrar el efecto de tratamiento del acceso a Internet en comunidades rurales y urbanasp. Esto tendrá implicaciones relevantes en cuanto a política pública nacional. 
-
-Por un lado, se podrá evaluar la importancia de la Reforma en el acceso a internet y con ello su impacto en el ámbito educativo, ya que, como lo refiriera el propio Senado de la República en su Boletín plublicado en 2016, el panorama existente antes de la Reforma de 2013, mostraba, por una parte, una limitada participación económica de las telecomunicaciones en el Producto Interno Bruto y, por la otra, el dominio del mercado por una sola empresa, lo que daba por resultado un espacio carente de competencia, que, entre otras cuestiones, derivaba en servicios caros y por tanto inaccesibles para gran parte de la población mexicana, sobre todo, para la más vulnerable económicamente. 
-
-Además, a raíz de la pandemia del COVID-19, se ha puesto aún más en evidencia la necesidad del acceso a Internet y de medios tecnológicos, como computadoras, tabletas, televisiones, entre otros, como vehículos del aprendizaje y motor en la continuidad de la educación en todos los niveles. En consecuencia, hoy más que nunca resulta importante efectuar la valuación de esta política -la Reforma en telecomunicaciones de 2013, a través del programa “México Conectado”- y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora en su implementación. 
-
-# Aportación del trabajo (hipótesis)
-
-El objetivo general de este trabajo es analizar el impacto que ha tenido la Reforma en Telecomunicaciones, primero a nivel general, estimando el cambio en la adopción de Internet en toda la población y después, analizando si un mayor acceso a Internet en localidades rurales y urbanas afecta positivamente en el desempeño educativo. Este mayor adopción de Internet se da  por mecanismos como la facilitación del acceso a Internet por el programa "México Conectado", u otros relacionados con el aumento de la competencia del sector que trajo consigo la Reforma, como precios más bajos o mayor cobertura. 
-
-El presente trabajo determinará si un mayor acceso a internet en los hogares ha contribuido a elevar el desempeño educativo de los estudiantes, partiendo de la premisa de que el acceso a Internet puede mejorar la calidad de la educación en muchas maneras (por ejemplo, usando el internet para consultas o para realizar tareas), incrementando las oportunidades de aprendizaje y reduciendo la brecha digital.
-
-El trabajo examinará el efecto de acceso a Intenet a nivel localidad en el desempeño escolar de estudiantes utilizando los datos que provee el gobierno de la evaluación Planea, la cual se aplica a alumnos de 3° de secundaria en los ámbitos de Matemáticas y Lenguaje en el año 2019. Se utilizará el método *propensity score matching* para evaluar el impacto del internet en las localidades en los resultados de las pruebas, controlando por variables como nivel de marginación, entorno rural, tipo de escuela, y por características de las viviendas de las localidades como proxy de su ingreso, donde la variable de *treatment* la obtendremos al evaluar si hubo una diferencia significativa en la adopción de internet en las localidades.
-
-Para la primera etapa, esperaríamos que la Reforma en Telecomunicaciones, debido a los cambios que implementó ya mencionados, haya causado una mayor adopción de Internet en la población en general. Para la segunda, esperaríamos  que las localidades que tuvieron un aumento significativo en cuanto al acceso a internet hayan tenido un mayor desempeño en las calificaciones. Al controlar por características relacionadas con la desigualdad de las localidades (por ejemplo, tamaño, entorno, porcentaje de viviendas con drenaje, etc.), podremos diferenciar las disparidades en los resultados de las evaluaciones causadas por un diferenciado acceso a Internet de las disparidades causadas por diferencias iniciales. 
-
-# Datos
-
-Para esta tarea usaremos las bases de datos de INEGI (ITER 2010 y 2020) y la de Planea 2019. La primera para construir nuestra estimación del impacto de la reforma; la segunda para evaluar el impacto del acceso a internet y equipo de computo en las calificaicones. Aunque aún debemos evaluar la metodología más adecuada para la primera parte, podemos realizar un ejercicio preliminar con los datos actuales.
-
-Por el momento, nuestra base de datos final consiste en un *merge* a nivel localidad de las bases de ITER 2020 del INEGI y las bases de datos de datos Planea 2019, lo que nos da un cruce entre las calificaciones de Planea y características sociodemográficas de cada localidad. Aunque vale la pena comentar que debido a que las bases usan indices distintos para el nombre de cada localidad (algunas veces con o sin acentos, con o sin mayúsculas), por lo pronto no hemos podido realizar el *merge* final, si no uno parcial donde pudimos cruzar adecuadamente la mitad de las localidades que aparecen en la base de planea. Sin embargo, actualmente estamos en ese proceso de limpieza con miras a tener la base de datos completa.
-
-
-# Estadísticas descriptivas
-
-En este apartado mostraremos estadísticas descriptivas de nuestras variables independientes y dependientes, su distribución y finalmente una regresión para cuantificar el efecto del acceso a internet y equipo de computo sobre las calificaciones.
-
-
 ```{r}
 #________________________
 #PREPROCESAMIENTO PLANTEA 2019
@@ -408,10 +353,9 @@ planeas_del_10_al_19<-as.data.frame(merge(planea_localidad_10,planea_localidad_1
 ```
 
 
-
 ```{r}
 #________________________
-#MERGE GLOBAL
+#MERGE GLOBAL= FINAL DATA
 #________________________
 
 planeas_del_10_al_19$top_50_esp_19<-as.numeric(planeas_del_10_al_19$top_50_esp_19)
@@ -429,14 +373,63 @@ data<-as.data.frame(merge(censos,planeas_del_10_al_19, by= c("INEGI"))) %>%
 summary(data$cambio_internet) #notamos que el cambio de internet estuvo cañon
 summary(data$cambio_pc)  #notamos que el cambio de pc no tanto
 
-hist(data$cambio_internet)
-hist(data$cambio_pc)
-
-
-hist(data$cambio_esp)
-hist(data$cambio_mat)
 ```
 
+
+
+
+
+\tableofcontents
+\newpage
+
+# Tema
+
+En primera instancia, conocer si la Reforma en Telecomunicaciones del 2013 causó un aumento en la adopción de Internet en los hogares de México. En segunda, averiguar si hay causalidad del acceso a Internet en el hogar en el desempeño escolar (reflejado en la evaluación estandarizada nacional *Planea*) de los estudiantes mexicanos.
+
+
+# Cuadro bibliografía 
+
+Se elaboró un cuadro de resumen bibliográfico mostrando tanto efectos de la Reforma de Telecomunicaciones en México en la adopción de Internet, como del acceso a Internet a nivel celular, hogar, o escuela en variables dependientes relacionadas al desempeño educativo de estudiantes, principalmente de secundaria. Es importante recalcar que, en México, aunque se ha medido el efecto de la Reforma en Telecomunicaciones en variables relacionadas con ingreso, no se ha analizado su efecto en la educación. Mientras tanto, sí se han realizado estudios de la adopción de Internet de los hogares, pero utilizando datos censales e intercensales del 2010 y del 2015,  y con la ENIGH del 2016, no con el censo del 2020. 
+
+![Bibliografía](A.jpg)
+
+
+# Justificación
+
+México tiene, como algunas de sus características, un bajo nivel de calidad educativo (en las pruebas Pisa del 2018, México ocupó las posiciones 53/77, 61/78, y 57/76 en Ciencias, Habilidad Lectora, y Matemáticas, respectivamente, así como una nula mejoría en Habilidad Lectora y en Ciencias desde el 2000), y una baja penetración de cobertura de Internet: por ejemplo, se encuentra en el percentil 65 según de suscripciones a banda ancha por cada 100 habitantes del Banco Mundial del 2019, respecto al resto de los países del mundo, con 17 suscripciones por cada 100 habitantes, mientras que en los países de ingresos altos es de 34. Esta brecha digital es un reto difícil de sobrellevar debido a fallas regulatorias institucionales, una geografía compleja y densidades de población heterogéneas (Ovando & Oliveria, 2017). 
+
+Se ha puesto poca atención en las repercusiones de una baja o pobre conectividad en el desempeño escolar, tanto en el entorno rural como urbano del país. Estudios previos  demuestran que hay disparidades muy marcadas entre alumnos con conectividad en su hogar y los que no tienen acceso a ella, o que la tienen solo a través de un teléfono móvil. Esta disparidad se conoce en la literatura como “homework gap” (Hampton & Fernandez, 2020). Es claro que existe correlación de una baja conectividad y el desempeño escolar ¿Pero qué tanto de este está causado por el acceso a Internet (o la falta de)?
+
+El evento que causaría mayor acceso en los hogares del país, y que podría tener un efecto en el desempeño escolar, fue la Reforma en Telecomunicaciones del 2013. Esta fue llevada a cabo en un contexto en el que el mercado de telecomunicaciones en México, desde los 90s, estaba altamente concentrado, resultando en una falta de competencia, calidad de servicios baja, precios altos, y una penetración de banda ancha baja, en relación a países comparables en América Latina. ((Noll, 2012). En ella, el acceso a Internet se consagró como un derecho constitucional. Particularmente, se implementó una regulación asimétrica para "emparejar" a la participación de los otros competidores respecto a la del preponderante (Telmex en el caso de telefonía), estableciendo  las bases para garantizar una mayor competitividad en la oferta de los servicios de telecomunicaciones. Hoy en día, hay una mayor competencia y precios más bajos (Ovando & Oliveria, 2017), así como una mejora en la calidad de los servicios y una mayor cobertura de Internet. Asimismo, se implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil sitios y espacios públicos del país. El acceso a Internet se brinda a cada uno de los estados de la República Mexicana a través de los llamados “Puntos, México Conectado”, que se encuentran ubicados en varios sitios y espacios públicos como escuelas, bibliotecas, hospitales y centros comunitarios a nivel federal, estatal y municipal.
+
+En suma, la Refoma, al mejorar las condiciones de competencia, permitió a México, ampliar el proceso de universalización de Internet, y escalar en el índice de accesibilidad a Internet: según el índice de accesibilidad de la OECD, en 2012, el 26% de los hogares mexicanos tenían acceso a internet y en 2019, 56.4%, es decir, un aumento mayor al doble. Sin embargo, el entorno rural se encuentra en particular desventaja: su adopción es de 39%, mientras que en el entorno urbano es de 71.2%. (Mora-Rivera & García-Mora, 2021)
+
+Por esto, nuestro trabajo primero consistirá en determinar cuánto si existió un aumento de la adopción de Internet en los hogares debido a la Reforma, y después estimar cuánto afectó este acceso a Internet a los resultados de las evaluaciones de la prueba estandarizada nacional Planea. El alto nivel de desagregación de las bases tanto de Planea como del censo, con su base de *Principales resultados por localidad (ITER)* (2010 y 2020), nos permitirá, en primera instancia, realizar una estimación de tipo *diff-in-diff* para ver el efecto de la reforma en la adopción a Internet y después un *propensity score matching* para encontrar el efecto de tratamiento del acceso a Internet en comunidades rurales y urbanasp. Esto tendrá implicaciones relevantes en cuanto a política pública nacional. 
+
+Por un lado, se podrá evaluar la importancia de la Reforma en el acceso a internet y con ello su impacto en el ámbito educativo, ya que, como lo refiriera el propio Senado de la República en su Boletín plublicado en 2016, el panorama existente antes de la Reforma de 2013, mostraba, por una parte, una limitada participación económica de las telecomunicaciones en el Producto Interno Bruto y, por la otra, el dominio del mercado por una sola empresa, lo que daba por resultado un espacio carente de competencia, que, entre otras cuestiones, derivaba en servicios caros y por tanto inaccesibles para gran parte de la población mexicana, sobre todo, para la más vulnerable económicamente. 
+
+Además, a raíz de la pandemia del COVID-19, se ha puesto aún más en evidencia la necesidad del acceso a Internet y de medios tecnológicos, como computadoras, tabletas, televisiones, entre otros, como vehículos del aprendizaje y motor en la continuidad de la educación en todos los niveles. En consecuencia, hoy más que nunca resulta importante efectuar la valuación de esta política -la Reforma en telecomunicaciones de 2013, a través del programa “México Conectado”- y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora en su implementación. 
+
+# Aportación del trabajo (hipótesis)
+
+El objetivo general de este trabajo es analizar el impacto que ha tenido la Reforma en Telecomunicaciones, primero a nivel general, estimando el cambio en la adopción de Internet en toda la población y después, analizando si un mayor acceso a Internet en localidades rurales y urbanas afecta positivamente en el desempeño educativo. Este mayor adopción de Internet se da  por mecanismos como la facilitación del acceso a Internet por el programa "México Conectado", u otros relacionados con el aumento de la competencia del sector que trajo consigo la Reforma, como precios más bajos o mayor cobertura. 
+
+El presente trabajo determinará si un mayor acceso a internet en los hogares ha contribuido a elevar el desempeño educativo de los estudiantes, partiendo de la premisa de que el acceso a Internet puede mejorar la calidad de la educación en muchas maneras (por ejemplo, usando el internet para consultas o para realizar tareas), incrementando las oportunidades de aprendizaje y reduciendo la brecha digital.
+
+El trabajo examinará el efecto de acceso a Intenet a nivel localidad en el desempeño escolar de estudiantes utilizando los datos que provee el gobierno de la evaluación Planea, la cual se aplica a alumnos de 3° de secundaria en los ámbitos de Matemáticas y Lenguaje en el año 2019. Se utilizará el método *propensity score matching* para evaluar el impacto del internet en las localidades en los resultados de las pruebas, controlando por variables como nivel de marginación, entorno rural, tipo de escuela, y por características de las viviendas de las localidades como proxy de su ingreso, donde la variable de *treatment* la obtendremos al evaluar si hubo una diferencia significativa en la adopción de internet en las localidades.
+
+Para la primera etapa, esperaríamos que la Reforma en Telecomunicaciones, debido a los cambios que implementó ya mencionados, haya causado una mayor adopción de Internet en la población en general. Para la segunda, esperaríamos  que las localidades que tuvieron un aumento significativo en cuanto al acceso a internet hayan tenido un mayor desempeño en las calificaciones. Al controlar por características relacionadas con la desigualdad de las localidades (por ejemplo, tamaño, entorno, porcentaje de viviendas con drenaje, etc.), podremos diferenciar las disparidades en los resultados de las evaluaciones causadas por un diferenciado acceso a Internet de las disparidades causadas por diferencias iniciales. 
+
+# Datos
+
+Para esta tarea usaremos las bases de datos de INEGI (ITER 2010 y 2020) y la de Planea 2019. La primera para construir nuestra estimación del impacto de la reforma; la segunda para evaluar el impacto del acceso a internet y equipo de computo en las calificaicones. Aunque aún debemos evaluar la metodología más adecuada para la primera parte, podemos realizar un ejercicio preliminar con los datos actuales.
+
+Por el momento, nuestra base de datos final consiste en un *merge* a nivel localidad de las bases de ITER 2020 del INEGI y las bases de datos de datos Planea 2019, lo que nos da un cruce entre las calificaciones de Planea y características sociodemográficas de cada localidad. Aunque vale la pena comentar que debido a que las bases usan indices distintos para el nombre de cada localidad (algunas veces con o sin acentos, con o sin mayúsculas), por lo pronto no hemos podido realizar el *merge* final, si no uno parcial donde pudimos cruzar adecuadamente la mitad de las localidades que aparecen en la base de planea. Sin embargo, actualmente estamos en ese proceso de limpieza con miras a tener la base de datos completa.
+
+
+# Estadísticas descriptivas
+
+En este apartado mostraremos estadísticas descriptivas de nuestras variables independientes y dependientes, su distribución y finalmente una regresión para cuantificar el efecto del acceso a internet y equipo de computo sobre las calificaciones.
 
 
 
@@ -444,6 +437,13 @@ hist(data$cambio_mat)
 #________________________
 #MMODELOS INGENUOS
 #________________________
+
+hist(data$cambio_internet)
+hist(data$cambio_pc)
+
+
+hist(data$cambio_esp)
+hist(data$cambio_mat)
 
 
 a<-lm(cambio_esp~cambio_internet,data)

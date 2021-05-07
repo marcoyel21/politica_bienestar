@@ -1,0 +1,471 @@
+---
+title: "Divorce laws and intimate partner violence: Evidence from Mexico"
+subtitle: Aixa García-Ramos (2021)
+author: "Samantha Cervantes, Luis Fierro, Coral Hernández, Alfredo Lefranc, Marco Ramos"
+date: "Abril 2021"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css  
+    self_contained: true
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+options(scipen = 999)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "500", "600i")
+)
+```
+
+
+<div style="text-align: justify">
+  
+## Motivación
+
++ Sabemos, o pensamos, que mejorar el acceso a divorico empodera a las personas con mayor voluntad o *willingness* de terminar un matrimonio.
+
++ Hay mucha evidencia empirica y analitica que sostiene que facilitar el acceso al divorcio reduce la violencia de pareja.
+
++ Sin embargo, la evidencia empirica se ha obtenido de las experiencias en países desarrollados.
+
++ **¿Podemos extrapolar?**
+---
+
+## Relevancia: Violencia de pareja
+
++ En el mundo, 1 de cada 3 mujeres han experimentado violencia de pareja (inter-partner violence) (Si lo vemos del otro lado, aproximadamente 1 de cada 3 hombres la ha cometido).
+
++ Se ha asociado la violencia de pareja a inestabiliad en el empleo, reducción de productividad y ganancias, a salud deficiente, ademas de externalidades negativas en los hijos.
+
++ En países en desarrollo hay mayor prevalencia del uso de violencia.
+
+---
+
+## Relevancia: Divorcio unilateral
+
++ El divorcio unilateral permite que el divorcio sea concedido sin necesidad de probar una razón.
+
++ Empodera a la parte con el mayor *willingness* de terminar el matrimonio.
+
++ Es un derecho de la agenda progesista del derecho y se ha implementado en países desarrollados desde los 70s; y en países en desarrollo desde los 2000s.
+
++ No sabemos con certeza el efecto que tiene facilitar el acceso al divorcio en la violencia de pareja en países en desarrollo.
+
+---
+
+## Relevancia: Falta certeza sobre su relación con el divorcio
+
++ Modelos analíticos y trabajos empíricos en países desarrollados sostienen que con el divorcio unilateral disminuye la violencia.
+
++ Esta también el argumento de que la violencia puede aumentar **si el hombre sigue gozando de poder fáctico y ve al divorcio como una amenaza** de que su esposa “escape”.
+
++ Entre estas posturas está la respuesta, los modelos asumen que no hay fricciones de valores culturales. Es decir, asumen que un avance legal en la equidad de genero se traduce en un avance real.
+
++ Los estudios empiricos que se han hecho, comprueban que efectivamente hay una reduccion de violencia pero **¡sorpresa!**, estos se han hecho en paises desarrollados.
+
++ **A grandes rasgos en paises en desarrollo hay mayor prevalencia de violencia (de cualquier tipo) y el divorico es menos aceptado culturamente. Asimismo, hay menor apoyo a victimas y mas dificultades en cuando a sostener arreglos judiciales, como el pago de manuntencion.**
+
+---
+
+## Pregunta
+
+Debido a lo expuesto anteriormente, que surja la pregunta:
+
++ **¿Existe una relación entre facilitar el acceso al divorcio y la violencia de pareja en México?**
+
+---
+
+## Divorcio en México
+
+
+```{r, echo=FALSE, out.width="60%", fig.align="center", fig.cap="Proceso de divorcio bilateral antes y despues de la reforma"}
+knitr::include_graphics("bilateral.png")
+```
+
+
+
+---
+
+## Divorcio en México
+
+```{r, echo=FALSE, out.width="80%", fig.align="center", fig.cap=" Proceso de divorcio unilateral antes y después de la reforma"}
+knitr::include_graphics("unilateral.png")
+```
+
+
+
+---
+## Contexto
+
+México es un lugar ideal para evaluar esta pregunta debido a
+
++ existe una variación en la implementación del divorcio unilateral, temporal y geográficamente.
++ 15 entidades federativas aprobaron una reforma (CDMX en 2008 + 14 estados en 2016).
+
+```{r, echo=FALSE, out.width="70%", fig.align="center", fig.cap="Efecto de reforma"}
+knitr::include_graphics("main_graph.png")
+```
+---
+
+## Contexto
+
+El divorcio unilateral ha sido sucedido por un incremento significante en las tasas de divorcio; un incremento en el acumulado de mujeres divorciadas; un decremento en el acumulado de mujeres casadas y finalmente un cambio estadisticamente insiginicante en las tasas de matrimonio..
+
+Asimismo hay efectos de corto y mediano plazo en cuanto a VP: 
+
++ de 0 a 6 años después de la aprobación no hay relacion 
++ de 6-8  después existe un aumento del 21 al 24%, estadisticamente significativo.
+
+Estos resultados provenen sobretodo de aquellas mujeres que han seguido casadas despues de la reforma. (**La autora sugiere que puede ser que al principio los hombres tengamos herramientas no violentas para disuadir pero en el largo plazo estas son insuficientes y recurrimos a la violencia**)
+
++ Finalmente, el hecho de que la reforma se haya hecho en casi la mitad de las entidades federativas en distintos tiempos permite que la relación entre divorcio y violencia de pareja pueda ser analizada bajo un esquema de dif and dif.
+
+---
+
+## Datos
+
+---
+## Datos
+### 1.	Encuesta y muestra
+
+* ENDIREH 2016 (Encuesta Nacional sobre la Dinámica de las Relaciona en los Hogares).
+
+  - Recolecta información a detalle sobre la violencia que sufre la mujer en México.
+
+--
+
+.pull-left[
+
+###Años de recolección:
+
+2003: .pull-right[34,184]
+
+2006: .pull-right[133,398]
+
+2011: .pull-right[152,636]
+
+2016: .pull-right[111,256]
+
+]
+
+.pull-right[
+![Imagen Ilustrativa](dimg1.jpg)
+
+<small>Foto: Freepik.</small>
+
+]
+---
+---
+## Datos
+### 1.	Encuesta y muestra
+
+
+--
+### Composición de la muestra
+
+La muestra está compuesta por mujeres casadas durante la reforma y que continuaron con el mismo estatus o estaban divorciadas en el momento de la encuesta.
+
+<small>Se excluyeron aquellas que se casaron después de la reforma.</small>
+
+Características de la mujer casada:
+
+-	Mujeres que viven con su pareja.
+-	Separadas temporalmente.
+-	Separadas definitivamente, pero no divorciadas.
+
+
+Estatus de la relación al momento de la encuesta:
+
+-	Años de matrimonio y/o divorcio.
+---
+---
+## Datos
+### 1.	Encuesta y muestra
+
+
+--
+###.center[La muestra final: 214,972]
+
+.pull-left[
+
+186,584 mujeres casadas después de la reforma.
+
+- 2003: 23,333 .pull-right[100%]
+
+
+- 2006: 66,157 .pull-right[90.4%]
+
+
+- 2011: 74,770 .pull-right[80.7%]
+
+
+- 2016: 50,712 .pull-right[86%]
+
+]
+
+.pull-right[
+![Imagenilustrativa](dimg2.jpg)
+<small>Foto: Freepik.</small>
+]
+---
+---
+## Datos
+### 2.	Variables
+
+--
+### Cuestionario
+
+29 preguntas comparables en los diferentes años que se llevó la encuesta, no obstante, se eliminó la pregunta sobre si la pareja hombre le dejó de hablar a la mujer.
+
+.pull-left[
+Las 28 preguntas están divididas en 4 grupos de VP:
+1. Física .pull-right[[1,0]]
+2. Sexual .pull-right[[1,0]]
+3. Emocional .pull-right[[1,0]]
+4. Económica .pull-right[[1,0]]
+5. Plus: Cualquiera .pull-right[[1,0]]
+
+]
+
+.pull-right[
+![Tabla 1](dimg4.jpg)
+<small>Elaboración Propia. Fuente: Divorce laws and intimate partner violence: Evidence from Mexico.</small>
+]
+---
+---
+
+##Datos
+### 2.	Variables
+
+--
+###Controles
+
+.pull-left[
+
+Especificación con controles:
+
+-	Edad de la mujer
+
+-	Indígena mujer
+
+-	Nivel educativo de la mujer
+
+-	Presencia de niños
+
+-	Número de hijos
+
+-	Residencia Urbana
+
+-	Estatus socioeconómico
+
+]
+
+.pull-right[
+
+Especificación Restringida:
+
+- 1er especificación
+
+- Edad del hombre
+
+- Indígena Hombre
+
+- Nivel educativo del hombre
+
+- Años de matrimonio
+
+]
+
+---
+---
+##Datos
+### 2.	Variables
+
+
+--
+### Estudio sobre el impacto de la reforma
+
+.left[Para probar robustes en el impacto del divorcio unilateral en la VP se utilizaron las variables:] 
+
+
+
+.pull-left[
+- Tasa de divorcios
+
+- Tasa de matrimonios
+
+- Migración interestatal
+
+- Tasa de homicidios
+
+- Tasa de desempleo
+
+- Brecha PEA
+
+- Partido gobernante
+
+]
+
+.pull-right[
+![Divorcio](dimg3.jpg)
+<small>Foto:Freepik</small>
+]
+
+---
+
+## Estrategia de Identificación: DiD
+## Primera especificación
+
+La autora utiliza dos especificaciones: una general (antes y después) y una donde observa el período después de tratamiento a corto y largo plazo.
+En la primera, hace un *pool* de las cuatro olas y calcula un MPL:
+--
+
+$$IPV_{ist} = \gamma+ \delta \space Reform_{st} + X_{ist}\beta +\alpha_{s} +\mu_{t} + \epsilon_{ist}$$
+
+--
+donde nuestro coeficiente de interés es $\large \mathbf{\delta}$, y:
+
+$ist$ se refiere a la mujer $i$ viviendo en el estado $s$ en el año de la encuesta $t$,
+
+$IPV_{ist}$ indica si la mujer sufrió algún tipo de VP en los últimos doce meses,
+
+$Reform_{st}$ toma el valor de 1 si la reforma fue aprobada en el año de la encuesta $t$
+
+$X_{ist}$ incluye covariables a nivel individual, de la pareja, y del hogar.
+
+---
+## Primera especificación
+
+<div style="text-align: justify">
+
+$$IPV_{ist} = \gamma+ \delta \space Reform_{st} + X_{ist}\beta +\alpha_{s} +\mu_{t} + \epsilon_{ist}$$
+
+$\alpha_{s}$ es el vector de efectos fijos (EF) que controla por el estado de residencia de la mujer
+
+$\mu_{t}$ es el vector de EF de tiempo de la encuesta
+
+En primera instancia, utiliza errores estándar agrupados por estado, permitiendo que los shocks no observables dentro de ellos estén correlacionados.
+
+Sin embargo, cuando el número de clusters es chico (32), las pruebas T suelen sobre-rechazar. Su solución es utilizar *wild cluster bootstrap standard errors*.
+
+---
+## Segunda especificación
+
+Ahora, se analizará el período post-tratamiento a corto y largo plazo:
+
+$$\small IPV_{ist} = \gamma + \sum_{k=1}^2 \delta_k Reform_{st}^k + X_{ist}\beta +\alpha_{s} +\mu_{t} + \epsilon_{ist}$$
+
+en $Reform_{st}^k$, $k$ indica el número de olas que han pasado en los estados desde que pasó la reforma.
+
+$k=1$ si el estado ha estado expuesto a solo una ola:
+
+* Ciudad de México e Hidalgo en 2011
+
+* Resto de los estados en 2016
+
+$\large \delta_1$ mide el efecto de **corto plazo**, o hasta 5 años después de la reforma.
+
+$k=2$ si el estado ha estado expuesto a dos olas;
+
+* Ciudad de México e Hidalgo en 2016
+
+$\large \delta_2$ mide el efecto de **largo plazo**, o de 6-8 años después de la reforma.
+
+---
+## Resultados
+
+Mostraremos los resultados de facilitar/disminuir el costo del divorcio en cuatro partes:
+
+1. Efectos en la VP
+
+2. Efectos en el matrimonio y divorcios
+
+3. Pruebas de robustez
+
+4. Mecanismos
+
+---
+## Efecto de facilitar el divorcio en VP
+
+
+```{r, echo=FALSE, out.width="80%", fig.cap="", fig.align="center"}
+knitr::include_graphics("img/Tabla3.jpg")
+```
+---
+## Efecto de facilitar el divorcio en VP
+
+<div style="text-align: justify">
+
+El 89% de la muestra se compone de mujeres que estaban casadas al momento de la reforma y que continuaban casadas al momento de la encuesta.
+
+Analizar el efecto en las mujeres aún casadas tiene dos ventajas:
+
+1. Fueron encuestadas en el 2003, agregando un punto de tiempo
+
+2. Se incorporan controles de sus parejas
+
+Solo se nota incremento estadísticamente significativo de IPV a largo plazo (CDMX e Hidalgo en 2016)
+
+El aumento es de **21%** respecto a la media de VIP en los ET, y **24%** si consideramos *solo* a las mujeres aún casadas.
+
+  * Agregar tendencias de tiempo de los estados muestra un aumento de 31%. Sin embargo, su estimación es imprecisa.
+
+---
+### Efecto de facilitar el divorcio en VP: desglose
+
+<div style="text-align: justify">
+
+* A corto plazo, se da una *disminución* en la violencia sexual del 14% respecto a la media muestral.
+
+* A largo plazo, la violencia física aumentó en 21%, la emocional en 23%, y la económica en 14%
+
+```{r, echo=FALSE, out.width="65%", fig.cap="", fig.align="center"}
+knitr::include_graphics("img/Tabla4.jpg")
+```
+<small>Esta muestra se compone de mujeres casadas en la reforma, casadas o divorciadas al momento de la encuesta.</small>
+
+---
+### Efecto de facilitar el divorcio en VP: efectos marginales
+
+```{r, echo=FALSE, out.width="85%", fig.cap="", fig.align="center"}
+knitr::include_graphics("img/TablaB5.jpg")
+```
+
+---
+###  Efectos en matrimonios y divorcios: modelo estático
+
+<div style="text-align: justify">
+
+* Aumento en la tasa de divorcio en 34% respecto a número de personas
+
+* Incremento de 38% en tasa de divorcio respecto a personas casadas
+
+* No hay evidencia de impacto en el número de matrimonios por cada 1000 personas 
+
+```{r, echo=FALSE, out.width="70%", fig.cap="", fig.align="center"}
+knitr::include_graphics("img/TablaB2.jpg")
+```
+
+---
+##  Efectos en matrimonios y divorcios: MPL
+<div style="text-align: justify">
+  
+* Incremento de 19% en la proporción de mujeres divorciadas respecto a la media de los ET antes de la reforma 
+
+* Disminución de 3% en la proporción de mujeres casadas respecto a la media de los ET antes de la reforma 
+
+```{r, echo=FALSE, out.width="80%", fig.cap="", fig.align="center"}
+knitr::include_graphics("img/Tabla2.jpg")
+```
+
+
+---

@@ -21,8 +21,10 @@ library(stargazer)
 library(dplyr)
 library(ggplot2)
 library(kableExtra)
-library(Jmisc)
 library(stringi)
+library(rdrobust)
+library(rdd)
+library(stats)
 
 #________________________
 #DATOS
@@ -486,6 +488,48 @@ Finalmente, evaluamos la relación entre el nivel de acceso a internet y a equip
 ```{r, results='asis'}
 stargazer(a,b,c,d,header=FALSE)
 ```
+
+## Modelo 
+
+
+```{r, results='asis'}
+
+attach(data)
+#Comprobamos si hay discontinuidad en nuestro Score
+
+DCdensity(cambio_internet,plot=TRUE)
+
+```
+
+
+```{r, results='asis'}
+
+# RDPLOT
+
+out<- rdplot(cambio_mat,cambio_internet, nbins=c(20,20),binselect = "es",y.lim=c(0,+80))
+line
+
+out<- rdplot(cambio_esp,cambio_internet, nbins=c(20,20),binselect = "es",y.lim=c(0,+80))
+line
+```
+
+```{r, results='asis'}
+#Plot ..
+plot(cambio_internet,cambio_mat)
+
+y.loess <- loess(cambio_mat~cambio_internet,span=.8,
+                 data.frame(x=cambio_internet,y=cambio_mat))
+
+y.predict<- predict(y.loess,data.frame(x=cambio_internet))
+
+lines(cambio_internet,y.predict)
+
+```
+
+
+
+
+
 
 ## Referencias
 

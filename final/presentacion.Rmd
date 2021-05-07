@@ -32,18 +32,12 @@ style_mono_accent(
 
 + Sabemos, o pensamos, que mejorar el acceso a divorico empodera a las personas con mayor voluntad o *willingness* de terminar un matrimonio.
 
-+ Hay mucha evidencia empirica y analitica que sostiene que facilitar el acceso al divorcio reduce la violencia de pareja.
-
-+ Sin embargo, la evidencia empirica se ha obtenido de las experiencias en países desarrollados.
-
-+ **¿Podemos extrapolar?**
 ---
-## Contexto
+## Modelo
 
-México es un lugar ideal para evaluar esta pregunta debido a
-
-+ existe una variación en la implementación del divorcio unilateral, temporal y geográficamente.
-+ 15 entidades federativas aprobaron una reforma (CDMX en 2008 + 14 estados en 2016).
++ Ecuaciones
++ Explicación
++ Subíndices
 
 ```{r, echo=FALSE, out.width="70%", fig.align="center", fig.cap="Efecto de reforma"}
 knitr::include_graphics("main_graph.png")
@@ -51,61 +45,29 @@ knitr::include_graphics("main_graph.png")
 
 ---
 ## Datos
-### 1.	Encuesta y muestra
 
-* ENDIREH 2016 (Encuesta Nacional sobre la Dinámica de las Relaciona en los Hogares).
-
-  - Recolecta información a detalle sobre la violencia que sufre la mujer en México.
-
---
-
-.pull-left[
-
-###Años de recolección:
-
-2003: .pull-right[34,184]
-
-2006: .pull-right[133,398]
-
-2011: .pull-right[152,636]
-
-2016: .pull-right[111,256]
-
-]
-
-.pull-right[
-![Imagen Ilustrativa](dimg1.jpg)
-
-<small>Foto: Freepik.</small>
-
-]
++ No. observaciones
++ Unidad de análisis
++ Resúmenes estadísticos de variables
++ Est. descriptivas
 
 ---
 
-## Estrategia de Identificación: DiD
-## Primera especificación
+## Implementación
 
-La autora utiliza dos especificaciones: una general (antes y después) y una donde observa el período después de tratamiento a corto y largo plazo.
-En la primera, hace un *pool* de las cuatro olas y calcula un MPL:
---
++ Cuadro de estimaciones
++ descripción de los cuadros
+
 
 $$IPV_{ist} = \gamma+ \delta \space Reform_{st} + X_{ist}\beta +\alpha_{s} +\mu_{t} + \epsilon_{ist}$$
 
---
-donde nuestro coeficiente de interés es $\large \mathbf{\delta}$, y:
-
-$ist$ se refiere a la mujer $i$ viviendo en el estado $s$ en el año de la encuesta $t$,
-
-$IPV_{ist}$ indica si la mujer sufrió algún tipo de VP en los últimos doce meses,
-
-$Reform_{st}$ toma el valor de 1 si la reforma fue aprobada en el año de la encuesta $t$
-
-$X_{ist}$ incluye covariables a nivel individual, de la pareja, y del hogar.
-
 ---
-## Primera especificación
+## Resultados
 
 <div style="text-align: justify">
+  
+  + Relación hallazgos con bibliográfía 
+  + Aportación del trabajo
 
 $$IPV_{ist} = \gamma+ \delta \space Reform_{st} + X_{ist}\beta +\alpha_{s} +\mu_{t} + \epsilon_{ist}$$
 
@@ -113,46 +75,37 @@ $\alpha_{s}$ es el vector de efectos fijos (EF) que controla por el estado de re
 
 $\mu_{t}$ es el vector de EF de tiempo de la encuesta
 
-En primera instancia, utiliza errores estándar agrupados por estado, permitiendo que los shocks no observables dentro de ellos estén correlacionados.
+---
+## Conclusiones
 
-Sin embargo, cuando el número de clusters es chico (32), las pruebas T suelen sobre-rechazar. Su solución es utilizar *wild cluster bootstrap standard errors*.
++ Se comprueba la hipótesis
++ Aportación
++ Trabajo fitirp 
++ Aplicación en PP o privada
 
 ---
-## Segunda especificación
 
-Ahora, se analizará el período post-tratamiento a corto y largo plazo:
+## Anexos
 
-$$\small IPV_{ist} = \gamma + \sum_{k=1}^2 \delta_k Reform_{st}^k + X_{ist}\beta +\alpha_{s} +\mu_{t} + \epsilon_{ist}$$
-
-en $Reform_{st}^k$, $k$ indica el número de olas que han pasado en los estados desde que pasó la reforma.
-
-$k=1$ si el estado ha estado expuesto a solo una ola:
-
-* Ciudad de México e Hidalgo en 2011
-
-* Resto de los estados en 2016
-
-$\large \delta_1$ mide el efecto de **corto plazo**, o hasta 5 años después de la reforma.
-
-$k=2$ si el estado ha estado expuesto a dos olas;
-
-* Ciudad de México e Hidalgo en 2016
-
-$\large \delta_2$ mide el efecto de **largo plazo**, o de 6-8 años después de la reforma.
++ Pruebas q hicimos sin copy paste (?)
 
 ---
-### Efecto de facilitar el divorcio en VP: desglose
 
-<div style="text-align: justify">
+## Bibliografía
 
-* A corto plazo, se da una *disminución* en la violencia sexual del 14% respecto a la media muestral.
++ 8-10 artículos publicados de journals
 
-* A largo plazo, la violencia física aumentó en 21%, la emocional en 23%, y la económica en 14%
 
-```{r, echo=FALSE, out.width="65%", fig.cap="", fig.align="center"}
-knitr::include_graphics("img/Tabla4.jpg")
-```
-<small>Esta muestra se compone de mujeres casadas en la reforma, casadas o divorciadas al momento de la encuesta.</small>
 
----
+
+
+
+
+
+
+
+
+
+
+
 

@@ -59,12 +59,21 @@ planea_19 <- planea_19[-c(1:7),]
 
 
 censo_10_localidad<-censo_10 %>% 
-                    select(ClaveEnt,Entidad,              #EN ESTE SELECT AGREGAMOS LAS VARIABLES QUE NECESITEMOS
-                           ClaveMun,Municipio,
-                           Localidad, ClaveLoc,
-                           vph_inter,vivtot,vph_pc) %>% 
-                    mutate(internet_10= vph_inter*100/vivtot,
-                           pc_10 =vph_pc*100/vivtot)
+  select(ClaveEnt,Entidad,              #EN ESTE SELECT AGREGAMOS LAS VARIABLES QUE NECESITEMOS
+         ClaveMun,Municipio,
+         Localidad, ClaveLoc,
+         pobtot,vivpar_hab,vph_inter,vivtot,vph_pc,phog_ind,p15ym_se,graproes,pocupada,psinder,tothog,hogjef_f,
+         vph_cel,tam_loc) %>% 
+  mutate(internet_10= vph_inter*100/vivpar_hab,
+         pc_10 =vph_pc*100/vivpar_hab,
+         pobindig_10=phog_ind*100/pobtot,
+         p15sinesc_10=p15ym_se*100/pobtot,
+         promesc_10=graproes*100/pobtot,
+         pocup_10=pocupada*100/pobtot,
+         psinsalud_10=psinder*100/pobtot,
+         jefmujer_10=hogjef_f*100/vivpar_hab,
+         cel_10=vph_cel*100/vivpar_hab)
+         
 #OJO: 84,690 MISSING VALUES PROVENIENTES DE LA BASE DE DATOS 
 
 censo_10_localidad <- as.data.frame(t(apply(censo_10_localidad,1,toupper)))

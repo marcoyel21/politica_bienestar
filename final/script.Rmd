@@ -217,7 +217,8 @@ planea_localidad_19<-planea_19 %>%
   select(...2,...6,...7,ENT,                 
          # son entidad, municipio y loc
          ...23,...24,...25,...26,       # son % de calis de español
-         ...35,...36,...37,...38)   %>% # son % de calis de mate
+         ...35,...36,...37,...38,       # son % de calis de mate
+         ...10)   %>%                   # grado marginacion
   group_by(...2,...6,...7,ENT) %>%
   summarize(esp_1_19 = mean(...23), 
             esp_II_19= mean(...24),
@@ -238,6 +239,7 @@ planea_localidad_19 <- as.data.frame(t(apply(planea_localidad_19,1,toupper)))
 names(planea_localidad_19)[names(planea_localidad_19) == "...2"] <- "NOM_ENT"
 names(planea_localidad_19)[names(planea_localidad_19) == "...6"] <- "NOM_MUN"
 names(planea_localidad_19)[names(planea_localidad_19) == "...7"] <- "NOM_LOC"
+names(planea_localidad_19)[names(planea_localidad_19) == "...10"] <- "GRAD_MARG"
 
 ```
 

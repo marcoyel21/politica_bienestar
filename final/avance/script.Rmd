@@ -141,6 +141,71 @@ Finalmente, evaluamos la relación entre el nivel de acceso a internet y a equip
 stargazer(a,b,c,d,header=FALSE)
 ```
 
+## TRIAL RD
+
+# Regresion discontinua
+
+#y si hacemos una variable que sea cambio_internet & cambio_pc > 0 ?
+
+# Es es IMSE-optimal evenly-spaced method using spacings estimators.
+# ESPR . IMSE-optimal evenly-spaced method using polynomial regression.
+#qs: IMSE-optimal quantile-spaced method using spacings estimators.
+#qspr: IMSE-optimal quantile-spaced method using polynomial regression.
+
+#notamos que entre regresion polinomial y spacings estimators no cambia mucho, entonces nos
+#quedamos con regresion polinomial
+#pero si cambia entre evenly spaced y quantile spaced method. Se ven mas concentrados alrededor del 
+# cero en la quantile spaced. eso es lo que querriamos, para que nuestro LATE tenga validez para mas
+#observaciones? porque el ajuste (la linea roja) no cambia
+#En Cattaneo dice
+
+out<-rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "es")
+
+summary(out)
+
+out3<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "es")
+summary(out3)
+
+out5<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "qs")
+summary(out5)
+
+out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "qspr")
+summary(out6)
+
+
+
+##### COntenido
+SIn un proceso aleatorio para separar T y C, el efecto de tratamiento se puede identificar si 
+la asignacion a tratamiento tiene la forma de un RD. Esta requiere a una variable definitoria que,
+en cierto punto de corte, separe las observaciones de T yC
+en este caso seria 0
+
+Sharp RD: threshold separates treatment and control group exactly
+
+Regresion  RD simple: same slope, with a jump (en cero), for all Y (educational % change)
+
+Vamos a hacer una variable dummy para indicar si es mayor a nuestro punto de corte o no
+
+data$cutpoint<-as.numeric(data$cambio_internet>0)
+
+data1<-filter(data,pobtot<2500)
+
+simple.rd<- lm(cambio_esp_top~cambio_internet+cutpoint,data=data)
+
+data$pred<- predict(simple.rd)
+
+plot(cambio_internet,cambio_esp_top,pch=17, frame.plot = FALSE,
+     xaxs="i",yaxs="i",
+     xlim=c(-20,70), ylim=c(-20,70),
+     main = "Rd simple ",
+     xlab = "Cambio tasa internet", ylab =" Cambio tasa Calis ", cex.main=1, font.main=1)
+with(subset(data1, cutpoint<=0),lines(cambio_internet, pred, col="red", lty=3, lwd=3))
+with(subset(data1, cutpoint>1),lines(cambio_internet, pred, col="chocolate1", lty=3, lwd=3)))
+
+
+
+
+
 ## Referencias
 
 Belo, R., Ferreira, P., & Telang, R. (2014). Broadband in school: Impact on student performance. Management Science, 60(2), 265-282.

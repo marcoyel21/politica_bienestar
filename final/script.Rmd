@@ -387,13 +387,19 @@ planeas_del_10_al_19$top_50_mat_19<-as.numeric(planeas_del_10_al_19$top_50_mat_1
 planeas_del_10_al_19$top_50_esp_10<-as.numeric(planeas_del_10_al_19$top_50_esp_10)
 planeas_del_10_al_19$top_50_mat_10<-as.numeric(planeas_del_10_al_19$top_50_mat_10)
 
-#ccreo el data final (por mientras)
+                             
+#creo el data final (por mientras)
 
 data<-as.data.frame(merge(censos,planeas_del_10_al_19, by= c("INEGI"))) %>% 
        na.omit()  %>% mutate(cambio_internet=internet_20-internet_10,
                              cambio_pc=pc_20-pc_10,
-                             cambio_esp= top_50_esp_19-top_50_esp_10,
-                             cambio_mat= top_50_mat_19-top_50_mat_10)
+                             cambio_esp_bottom=esp_1_19-esp_1_10,
+                             cambio_esp_top=esp_IV_19-esp_IV_10,
+                             cambio_mat_bottom=mat_1_19-mat_1_10,
+                             cambio_mat_top=mat_IV_19-mat_IV_10)
+
+summary(data$cambio_internet) #notamos que el cambio de internet estuvo cañon
+summary(data$cambio_pc)  #notamos que el cambio de pc no tanto
 
 summary(data$cambio_internet) #notamos que el cambio de internet estuvo cañon
 summary(data$cambio_pc)  #notamos que el cambio de pc no tanto

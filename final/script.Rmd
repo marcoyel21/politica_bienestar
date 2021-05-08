@@ -266,7 +266,7 @@ planea_localidad_15<-planea_15 %>%
   select(ENT,`NOMBRE DEL MUNICIPIO`,`NOMBRE DE LA LOCALIDAD`,                  # son entidad, municipio y loc
          ...24,...25,...26,...27,       # son % de calis de español
          ...40,...41,...42,...43, 
-         `GRADO DE MARGINACION`)   %>% # son % de calis de mate y grado marg
+         `GRADO DE MARGINACIÓN`)   %>% # son % de calis de mate y grado marg
   group_by(ENT,`NOMBRE DEL MUNICIPIO`,`NOMBRE DE LA LOCALIDAD`) %>%
   summarize(esp_1_15 = mean(...24), 
             esp_II_15= mean(...25),
@@ -287,7 +287,7 @@ planea_localidad_15 <- as.data.frame(t(apply(planea_localidad_15,1,toupper)))
 
 names(planea_localidad_15)[names(planea_localidad_15) == "NOMBRE DEL MUNICIPIO"] <- "NOM_MUN"
 names(planea_localidad_15)[names(planea_localidad_15) == "NOMBRE DE LA LOCALIDAD"] <- "NOM_LOC"
-names(planea_localidad_15)[names(planea_localidad_15) == "GRADO DE MARGINACION"] <- "GRAD_MARG"
+names(planea_localidad_15)[names(planea_localidad_15) == "GRADO DE MARGINACIÓN "] <- "GRAD_MARG"
 
 #IMPUTACION DE NOMBRE DE ENTIDAD
 claves<-planea_10 %>% select(CVE_ENT,NOM_ENT) %>% 
@@ -320,7 +320,8 @@ planea_localidad_10<-planea_10 %>%
   select(NOM_ENT,NOM_MUN,NOM_LOC,
          MUN, ENT, LOC, INEGI,                # son entidad, municipio y loc
          POR_N1_ESP_3,POR_N2_ESP_3,POR_N3_ESP_3,POR_N4_ESP_3,       # son % de calis de español
-         POR_N1_MAT_3,POR_N2_MAT_3,POR_N3_MAT_3,POR_N4_MAT_3)   %>% # son % de calis de mate
+         POR_N1_MAT_3,POR_N2_MAT_3,POR_N3_MAT_3,POR_N4_MAT_3,      # son % de calis de mate
+         TIPO)   %>%  #Tipo de escuela
   group_by(NOM_ENT,NOM_MUN,NOM_LOC,
          MUN, ENT, LOC, INEGI) %>%
   summarize(esp_1_10 = mean(POR_N1_ESP_3), 

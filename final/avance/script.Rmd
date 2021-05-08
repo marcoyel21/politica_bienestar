@@ -207,6 +207,11 @@ summary(out5)
 out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "qspr")
 summary(out6)
 
+## Estimador del LATE (local ATE) 
+
+Obtendremos el estimador puntual del RD con polinomios locales. Utilizamos MCO 
+
+
 ## Referencias
 
 Belo, R., Ferreira, P., & Telang, R. (2014). Broadband in school: Impact on student performance. Management Science, 60(2), 265-282.

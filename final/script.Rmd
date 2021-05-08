@@ -265,7 +265,8 @@ for (i in names){
 planea_localidad_15<-planea_15 %>% 
   select(ENT,`NOMBRE DEL MUNICIPIO`,`NOMBRE DE LA LOCALIDAD`,                  # son entidad, municipio y loc
          ...24,...25,...26,...27,       # son % de calis de español
-         ...40,...41,...42,...43)   %>% # son % de calis de mate
+         ...40,...41,...42,...43, 
+         `GRADO DE MARGINACION`)   %>% # son % de calis de mate y grado marg
   group_by(ENT,`NOMBRE DEL MUNICIPIO`,`NOMBRE DE LA LOCALIDAD`) %>%
   summarize(esp_1_15 = mean(...24), 
             esp_II_15= mean(...25),
@@ -286,6 +287,7 @@ planea_localidad_15 <- as.data.frame(t(apply(planea_localidad_15,1,toupper)))
 
 names(planea_localidad_15)[names(planea_localidad_15) == "NOMBRE DEL MUNICIPIO"] <- "NOM_MUN"
 names(planea_localidad_15)[names(planea_localidad_15) == "NOMBRE DE LA LOCALIDAD"] <- "NOM_LOC"
+names(planea_localidad_15)[names(planea_localidad_15) == "GRADO DE MARGINACION"] <- "GRAD_MARG"
 
 #IMPUTACION DE NOMBRE DE ENTIDAD
 claves<-planea_10 %>% select(CVE_ENT,NOM_ENT) %>% 

@@ -236,8 +236,12 @@ print(right_intercept)
 difference = right_intercept - left_intercept
 print(paste("The RD estimator is", difference, sep = " "))
 ```
+** ojo hay que cambiar la Y
 
-La interpretacion es que dentro del intervalo de 10 puntos porcentuales, el porcentaje de calificaciones de espanol que *cambia* es de 
+Interpretacion con lo q tenemos ahorita: La interpretacion es que dentro del intervalo de 10 puntos porcentuales, el porcentaje de calificaciones de espanol que *cambia*  disminuye en -.38 puntos porcentuales debido al acceso a Internet: X% de las escuelas de las localidades rurales tuvieron un cambio en el acceso a internet de -10 pp, mientras que X% de las escuelas de localidades rurales tuvieron un cambio en el acceso a Internet de hasta 10 pp
+
+Interpretacion ideal: El porcentaje de alumnos que cambian de posicion (top/bottom o vicerversa) aumentan/disminuyen en X pp debido al acceso a Internet. El % de localidades rurales que apenas tienen internet (+ 5 pp arriba del corte) es de X%, mientras que el % de localidades rurales que por poco tendrian internet (- 5 pp debajo del corte) es de %
+
 
 ## Estimador LATE - kernel triangular
 

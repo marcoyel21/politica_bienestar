@@ -145,34 +145,6 @@ stargazer(a,b,c,d,header=FALSE)
 
 # Regresion discontinua
 
-#y si hacemos una variable que sea cambio_internet & cambio_pc > 0 ?
-
-# Es es IMSE-optimal evenly-spaced method using spacings estimators.
-# ESPR . IMSE-optimal evenly-spaced method using polynomial regression.
-#qs: IMSE-optimal quantile-spaced method using spacings estimators.
-#qspr: IMSE-optimal quantile-spaced method using polynomial regression.
-
-#notamos que entre regresion polinomial y spacings estimators no cambia mucho, entonces nos
-#quedamos con regresion polinomial
-#pero si cambia entre evenly spaced y quantile spaced method. Se ven mas concentrados alrededor del 
-# cero en la quantile spaced. eso es lo que querriamos, para que nuestro LATE tenga validez para mas
-#observaciones? porque el ajuste (la linea roja) no cambia
-#En Cattaneo dice
-
-out<-rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "es")
-
-summary(out)
-
-out3<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "es")
-summary(out3)
-
-out5<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "qs")
-summary(out5)
-
-out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "qspr")
-summary(out6)
-
-
 
 ##### COntenido
 SIn un proceso aleatorio para separar T y C, el efecto de tratamiento se puede identificar si 
@@ -190,6 +162,10 @@ data$cutpoint<-as.numeric(data$cambio_internet>0)
 
 data1<-filter(data,pobtot<2500)
 
+## modelo simple
+
+## error/ no sale la recta de tratamiento
+
 simple.rd<- lm(cambio_esp_top~cambio_internet+cutpoint,data=data)
 
 data$pred<- predict(simple.rd)
@@ -202,9 +178,34 @@ plot(cambio_internet,cambio_esp_top,pch=17, frame.plot = FALSE,
 with(subset(data1, cutpoint<=0),lines(cambio_internet, pred, col="red", lty=3, lwd=3))
 with(subset(data1, cutpoint>1),lines(cambio_internet, pred, col="chocolate1", lty=3, lwd=3)))
 
+## Modelo polinomial
 
+y si hacemos una variable que sea cambio_internet & cambio_pc > 0 ?
 
+Es es IMSE-optimal evenly-spaced method using spacings estimators.
+ESPR . IMSE-optimal evenly-spaced method using polynomial regression.
+qs: IMSE-optimal quantile-spaced method using spacings estimators.
+qspr: IMSE-optimal quantile-spaced method using polynomial regression.
 
+notamos que entre regresion polinomial y spacings estimators no cambia mucho, entonces nos
+quedamos con regresion polinomial
+pero si cambia entre evenly spaced y quantile spaced method. Se ven mas concentrados alrededor del 
+cero en la quantile spaced. eso es lo que querriamos, para que nuestro LATE tenga validez para mas
+observaciones? porque el ajuste (la linea roja) no cambia
+En Cattaneo dice
+
+out<-rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "es")
+
+summary(out)
+
+out3<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "es")
+summary(out3)
+
+out5<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "qs")
+summary(out5)
+
+out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "qspr")
+summary(out6)
 
 ## Referencias
 

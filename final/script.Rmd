@@ -106,21 +106,28 @@ names(censo_10_localidad)[names(censo_10_localidad) == "Localidad"] <- "NOM_LOC"
 #A) Encontrar acceso a internet (y variables que propuso sam) en censo a nivel localidad
 #convierto variables de interes a numéricas
 names<-c('VIVTOT','TVIVPAR','VIVPAR_HAB', #localidad
-         'VPH_INTER','VPH_PC') #internet y laptop
-
+         'VPH_INTER','VPH_PC','PHOG_IND','P15YM_SE','POBTOT','HOGJEF_F','VPH_CEL') #internet y laptop
 for (i in names){
-    censo[[i]] <- as.numeric(censo[[i]])
+  censo[[i]] <- as.numeric(censo[[i]])
 }
-
 
 #creo la base de datos de interes
 censo_20_localidad<-censo %>% 
   select(ENTIDAD,MUN,LOC,       #claves numéricas de localidad
-    NOM_ENT,NOM_MUN,NOM_LOC,     #localidad           
+         NOM_ENT,NOM_MUN,NOM_LOC,     #localidad           
          VIVTOT,TVIVPAR,VIVPAR_HAB,       # vivienda
-         VPH_INTER,VPH_PC)   %>%    # internet y laptop       #EN ESTE SELECT AGREGAMOS LAS VARIABLES QUE NECESITEMOS
-        mutate(internet_20=VPH_INTER*100/VIVTOT,
-               pc_20=VPH_PC*100/VIVTOT)
+         VPH_INTER,VPH_PC,PHOG_IND,P15YM_SE,GRAPROES,POCUPADA,PSINDER,TOTHOG,HOGJEF_F,POBTOT,VPH_CEL)   %>%    # internet y laptop       #EN ESTE SELECT AGREGAMOS LAS VARIABLES QUE NECESITEMOS
+  mutate(internet_20=VPH_INTER*100/VIVPAR_HAB,
+         pc_20=VPH_PC*100/VIVPAR_HAB,
+         pobindig_20=PHOG_IND*100/POBTOT,
+         p15sinesc_20=P15YM_SE*100/POBTOT,
+         promesc_20=GRAPROES*100/POBTOT,
+         pocup_20=POCUPADA*100/POBTOT,
+         psinsalud_20=PSINDER*100/POBTOT,
+         jefmujer_20=HOGJEF_F*100/VIVPAR_HAB,
+         cel_20=VPH_CEL*100/VIVPAR_HAB
+         )
+         
 #cambio todo a mayus
 censo_20_localidad <- as.data.frame(t(apply(censo_20_localidad,1,toupper)))
 

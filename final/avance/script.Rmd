@@ -158,13 +158,19 @@ Regresion  RD simple: same slope, with a jump (en cero), for all Y (educational 
 
 Vamos a hacer una variable dummy para indicar si es mayor a nuestro punto de corte o no
 
+```{r, results='asis'}
+
 data$cutpoint<-as.numeric(data$cambio_internet>0)
 
 data1<-filter(data,pobtot<2500)
 
+```
+
 ## modelo simple
 
 ## error/ no sale la recta de tratamiento
+
+```{r, results='asis'}
 
 simple.rd<- lm(cambio_esp_top~cambio_internet+cutpoint,data=data)
 
@@ -177,6 +183,7 @@ plot(cambio_internet,cambio_esp_top,pch=17, frame.plot = FALSE,
      xlab = "Cambio tasa internet", ylab =" Cambio tasa Calis ", cex.main=1, font.main=1)
 with(subset(data1, cutpoint<=0),lines(cambio_internet, pred, col="red", lty=3, lwd=3))
 with(subset(data1, cutpoint>1),lines(cambio_internet, pred, col="chocolate1", lty=3, lwd=3)))
+```
 
 ## Modelo polinomial
 
@@ -194,6 +201,8 @@ cero en la quantile spaced. eso es lo que querriamos, para que nuestro LATE teng
 observaciones? porque el ajuste (la linea roja) no cambia
 En Cattaneo dice
 
+```{r, results='asis'}
+
 out<-rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "es")
 
 summary(out)
@@ -206,10 +215,32 @@ summary(out5)
 
 out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "qspr")
 summary(out6)
+```
+
 
 ## Estimador del LATE (local ATE) 
+## Estimador Kernel uniforme
 
-Obtendremos el estimador puntual del RD con polinomios locales. Utilizamos MCO 
+Obtendremos el estimador puntual del RD con polinomios locales. Utilizamos MCO porque este tipo de estimacion es un ajuste de minimos cuadrados ponderados.
+Escogemos un ancho de banda de w=10 por ahora. Todas las observaciones afuera de [w-c,w+c] son excluidas, y las que caen dentro del intervalo pesan lo mismo.
+```{r, results='asis'}
+
+out = lm(cambio_esp_top[cambio_internet < 0 & cambio_internet >=-10] ~ cambio_internet[cambio_internet < 0 & cambio_internet >= -10])
+left_intercept = out$coefficients[1]
+print(left_intercept)
+
+out = lm(cambio_esp_top[cambio_internet >= 0 & cambio_internet <= 10] ~ cambio_internet[cambio_internet >= 0 & cambio_internet <= 10])
+right_intercept = out$coefficients[1]
+print(right_intercept)
+
+difference = right_intercept - left_intercept
+print(paste("The RD estimator is", difference, sep = " "))
+```
+
+La interpretacion es que dentro del intervalo de 10 puntos porcentuales, el porcentaje de calificaciones de espanol que *cambia* es de 
+
+## Estimador LATE - kernel triangular
+
 
 
 ## Referencias

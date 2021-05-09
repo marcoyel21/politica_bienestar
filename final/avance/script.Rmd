@@ -285,26 +285,26 @@ summary(out)
 # efecto de tratamiento es de .835 (coeficiente)
 
 #ahora triangular.
-out = rdrobust(cambio_esp_top, cambio_internet, kernel = "triangular", p = 1, c=20,h = 5)
+out = rdrobust(cambio_esp_top, cambio_internet, kernel = "triangular", p = 4, c=20,h = 5)
 summary(out)
 
 # tao es de 1.038
 
 # seleccionar ancho de banda optimo
 
-out = rdbwselect(cambio_esp_top, cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")
+out = rdbwselect(cambio_esp_top, cambio_internet, kernel = "triangular", p = 4, bwselect = "mserd")
 summary(out)
 
 #main bandwidth - 4.273
 
-out = rdbwselect(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p = 1, bwselect = "mserd")
+out = rdbwselect(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p = 4, bwselect = "mserd")
 summary(out)
 
 #main bw - 8.2
 
 # ahora lo incorporamos
 
-out = rdrobust(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p = 1, bwselect = "mserd")
+out = rdrobust(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p = 4, bwselect = "mserd")
 
 
 ## Referencias

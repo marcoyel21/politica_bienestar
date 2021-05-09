@@ -163,6 +163,7 @@ Vamos a hacer una variable dummy para indicar si es mayor a nuestro punto de cor
 data$cutpoint<-as.numeric(data$cambio_internet>0)
 
 data1<-filter(data,pobtot<2500)
+attach(data1)
 
 ```
 
@@ -300,6 +301,10 @@ out = rdbwselect(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p 
 summary(out)
 
 #main bw - 8.2
+
+# ahora lo incorporamos
+
+out = rdrobust(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p = 1, bwselect = "mserd")
 
 
 ## Referencias

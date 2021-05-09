@@ -245,6 +245,61 @@ Interpretacion ideal: El porcentaje de alumnos que cambian de posicion (top/bott
 
 ## Estimador LATE - kernel triangular
 
+#primero creamos los pesos
+
+w<- NA
+w[cambio_internet<0 & cambio_internet>=-10]= 1-abs(cambio_internet[cambio_internet<0 & cambio_internet>=-10]/10)
+w[cambio_internet>=0 & cambio_internet<=10]= 1-abs(cambio_internet[cambio_internet>=0 & cambio_internet<=10]/10)
+
+out = lm(cambio_esp_top[cambio_internet < 0] ~ cambio_internet[cambio_internet < 0],weights=w[cambio_internet<0])
+left_intercept = out$coefficients[1]
+print(left_intercept)
+
+out = lm(cambio_esp_top[cambio_internet >= 0] ~ cambio_internet[cambio_internet >= 0],weights=w[cambio_internet>=0])
+right_intercept = out$coefficients[1]
+print(right_intercept)
+
+difference = right_intercept - left_intercept
+print(paste("The RD estimator is", difference, sep = " "))
+
+
+#incorporating those terms in the estimation will reduce the approximation error and thus lead
+#to changes in the estimated eect.
+#pero nosotros lo q vemos abajo es que a medida que aumentas el polinomia mas crecen los IC, y mas chico se hace el valor p
+
+# Ahora con errores estandar apropiados. uniforme. corte 20, polinomio de orden 1, band width de 5,
+out = rdrobust(cambio_esp_top, cambio_internet, kernel = "uniform", p = 1, c=20,h = 5)
+summary(out)
+
+
+
+# balance
+6637/2499=2.65
+3392/1904 = 1.78
+2487/1431 = 1.73
+1890/956 = 1.97
+1428/559 = 2.55
+#estimador varianza covarianza es de NN (?)
+
+# efecto de tratamiento es de .835 (coeficiente)
+
+#ahora triangular.
+out = rdrobust(cambio_esp_top, cambio_internet, kernel = "triangular", p = 1, c=20,h = 5)
+summary(out)
+
+# tao es de 1.038
+
+# seleccionar ancho de banda optimo
+
+out = rdbwselect(cambio_esp_top, cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")
+summary(out)
+
+#main bandwidth - 4.273
+
+out = rdbwselect(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p = 1, bwselect = "mserd")
+summary(out)
+
+#main bw - 8.2
 
 
 ## Referencias

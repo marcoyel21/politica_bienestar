@@ -219,9 +219,6 @@ Z_i =&
 Donde Zi(1) y Zi(0) denotan dos vectores de covariables de potenciales- Zi(1) representa el valor que toman las covariables arriba del punto de corte (tratamiento) y Zi(0) los respectivos del control. Se asume que el valor de las covariables fue determinado antes del tratamiento, por lo que su efecto de tratamiento es cero. 
 
 ---
-
-OJO. deberiamos de meter una de regiones
-
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}
 # Ahora vamos a ver si covariates son iguales en el punto de corte
 data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
@@ -261,7 +258,7 @@ dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactor
 kable(dataf, booktabs=T,"latex") %>% kable_styling(position = "center")
 ```
 
-Dado que las covariables no estan balanceadas dentro del punto de corte y el ancho del intervalo [c-h,c+h], no las incluiremos en la estimacion, ya que... Cattaneo
+Dado que las covariables no estan balanceadas dentro del punto de corte y el ancho del intervalo [c-h,c+h], no las incluiremos en la estimacion. En el 
 
 ---
 

@@ -326,9 +326,18 @@ of (3:020=12:6454218)  100 = 23:88 percent relative to the control mean.
 
 + Se comprueba la hipótesis
 + Aportación
-+ Trabajo fitirp 
++ Trabajo + Trabajo futuro
 + Aplicación en PP o privada
 
+---
+
+## Posibles cambios
+
++ Cambiar la variable dependiente a "proporcion de alumnos que cambiaron de *bottom* a *top*
+
++ Anadir variable de control de region
+
++ Cambiar la variable independiente a cambio de proporcion de hogares que tienen Internet junto con adquisicion de computadoras, laptops o tablets
 ---
 
 ## Anexos

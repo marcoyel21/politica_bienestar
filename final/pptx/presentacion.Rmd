@@ -26,8 +26,22 @@ style_mono_accent(
 ```
 
 
+```{r setup, include=FALSE}
+
+library(stargazer)
+library(readr)
+library(rdrobust)
+library(dplyr)
+
+# Leer datos
+urlfile="https://raw.githubusercontent.com/marcoyel21/politica_bienestar/master/final/avance/data.csv"
+
+data<-read_csv(url(urlfile))
+attach(data)
+
+```
+
 <div style="text-align: justify">
-  
 ## Motivación
 
 
@@ -81,10 +95,13 @@ as.numeric(data$marg)
 
 ```
 
+OJO deberiamos de recortar la Y que no sean +- 100 porque creo que se salieron o metieron escuelas a la evaluacion 
+
 ```{r}
 library(stargazer)
-f_data<-data %>% select (cambio_esp_top,cambio_mat_top,cp_15pp,promesc_20,marg,cel_20,pocup_20)
-stargazer(f_data,header=FALSE)
+dat<-data.frame(data$cambio_esp_top,data$cambio_mat_top,data$cp_15pp,data$promesc_20,data$marg,data$pocup_20)
+stargazer(dat,digits=2,type='text',covariate.labels =c("Cambio Espanol","Cambio Mate","Tratamiento","Prom. Escol.",
+                                                       "Marginacion","Pob. Ocupada"))
 
 ```
 
@@ -192,7 +209,7 @@ t.test(marg_T,marg_C,alternative="two.sided")
 
 ```
 
-El balance entre el grupo de control y el grupo de tratamiento **en el punto de corte** es:
+El balance entre el grupo de control y el grupo de tratamiento en el punto de corte es:
 
 ```{r}
 
@@ -217,8 +234,6 @@ out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20),covs=Z, kern
 ```{r}
 out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),c=15, covs=Z,kernel = "triangular",h=12,binselect = "qspr")
 ```
-
-
 
 ---
 
@@ -267,11 +282,7 @@ of (3:020=12:6454218)  100 = 23:88 percent relative to the control mean.
   + Relación hallazgos con bibliográfía 
   + Aportación del trabajo
 
-$$IPV_{ist} = \gamma+ \delta \space Reform_{st} + X_{ist}\beta +\alpha_{s} +\mu_{t} + \epsilon_{ist}$$
 
-$\alpha_{s}$ es el vector de efectos fijos (EF) que controla por el estado de residencia de la mujer
-
-$\mu_{t}$ es el vector de EF de tiempo de la encuesta
 
 ---
 ## Conclusiones

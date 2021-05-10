@@ -42,9 +42,59 @@ attach(data)
 ```
 
 <div style="text-align: justify">
+## Objetivo 
+Este trabajo tiene como objetivo determinar:
+
+- El impacto de la Reforma en Telecomunicaciones de 2013 en México en el acceso al servicio de Internet de banda ancha en los hogares. 
+
+- El impacto del aumento en el acceso al servicio de Internet en el desempeño escolar. 
+
+##Hipótesis 
+
+* La Reforma en Telecomunicaciones de 2013 aumentó el acceso al servicio de Internet en hogares de localidades rurales, y 
+  
+* Mayor conectividad aumentó las calificaciones de los estudiantes de tercero de secundaria en las pruebas de matemáticas y español.  
+  
+    
+    
+```{r echo=FALSE, out.width = "800px", out.height="100px",fig.align='center'}
+knitr::include_graphics("objetivo2.png")
+```
+---
+
+<div style="text-align: justify">
+
+## Introducción. Antecedentes y contexto
+
+#### El panorama existente antes de la Reforma de 2013:  
+
+-  La alta concentración del mercado en el sector de las telecomunicaciones era una limitante para el crecimiento económico. 
+
+- Los  niveles  de  penetración  de  los  servicios  de  telecomunicaciones  en  la población  se  encontraban  dentro de los más bajos entre los paísesde la  OCDE.
+
+
+#### Reforma
+
+* El 10 de junio de 2013 se promulgó la Reforma en Telecomunicaciones, con la que el acceso a Internet se convirtió en un derecho constitucional. 
+
+* La Reforma estaba enfocada a promover una efectiva competencia, como base para lograr mejor calidad en los servicios y la mejora de precios.
+
+* Se implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil espacios públicos de todo el país; lo anterior a través de los llamados “Puntos, México Conectado”.
+
+---
+<div style="text-align: justify">
+
 ## Motivación
 
+### ¿Por qué es relevante este estudio?
 
+- No hay precedentes de un análisis en el que se refleje la contribución de la Reforma en Telecomunicaciones de 2013 en el acceso a internet y con ello en el desempeño educativo.
+
+- Es de vital importancia hacer investigaciones que se centren en medir los impactos de las modificaciones en legislaciones clave para la generación de políticas públicas apropiadas; sobre todo, considerando que dichos impactos tienden a afectar más a la población vulnerable.
+
+### ¿Por qué se eligió este tema?
+
+- Derivado de la pandemia, hoy más que nunca resulta importante efectuar la valuación de una política como la de la Reforma, a través del programa “México Conectado”, y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora. 
 
 ---
 ## Modelo: Regresión discontinua

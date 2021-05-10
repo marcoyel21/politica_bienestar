@@ -26,12 +26,14 @@ style_mono_accent(
 ```
 
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 library(stargazer)
 library(readr)
 library(rdrobust)
 library(dplyr)
+library(kableExtra)
+
 
 # Leer datos
 urlfile="https://raw.githubusercontent.com/marcoyel21/politica_bienestar/master/final/avance/data.csv"
@@ -119,6 +121,9 @@ $G_i$, es la variable definitoria, que en este caso es la tasa de cambio en la a
 
 ---
 
+## Modelo: Regresión discontinua
+
+
 Para estimar el efecto de tratamiento, o la $\beta_1$, se utilizarán observaciones con una $G_i$ cerca a $c_i$. Se asume que la discontinuidad, o el salto, es el efecto causal.
 
 Se utilizara un diseno Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
@@ -135,7 +140,6 @@ La base original consiste en 13,789 observaciones. Al restringir a la muestra a 
 
 ## Resúmenes estadísticos de variables
 
-
 ```{r,include=FALSE, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
 #Creamos variable de tratamiento y recodificamos la de marginacion
 data<-data[which(pobtot<2500),]
@@ -143,20 +147,171 @@ data$cp_15pp<-as.numeric(ifelse(data$cambio_internet<15,0,1))
 data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
                   'MEDIA'=1)
 as.numeric(data$marg)
-data <- data[(data$cambio_esp_top & data$cambio_mat_top < 95) & (data$cambio_esp_top & data$cambio_mat_top > -100) & (data$promesc_20<20), ]
+data <- data[(data$promesc_20<20), ]
 
 attach(data)
 ```
 
-OJO deberiamos de recortar la Y que no sean +- 100 porque creo que se salieron o metieron escuelas a la evaluacion 
-
-```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,results='hide'}
 dat<-data.frame(data$cambio_esp_top,data$cambio_mat_top,data$cp_15pp,data$promesc_20,data$marg,data$pocup_20)
-stargazer(dat,digits=2,type='latex',title="Tabla 1. Resumen estadisticas descriptivas",covariate.labels =c("Cambio Espanol","Cambio Mate","Tratamiento","Prom. Escol.",
-                                                       "Marginacion","Pob. Ocupada"))
+#stargazer(dat,digits=2,type='latex',title="Tabla 1. Resumen estadisticas descriptivas",covariate.labels =c("Cambio Espanol","Cambio Mate","Tratamiento","Prom. Escol.","Marginacion","Pob. Ocupada"))
 ```
 
-FALTAN LAS DE MARCO
+```{r, results = "asis", echo = FALSE, message = FALSE}
+library(knitr)
+tex2markdown <- function(texstring) {
+  writeLines(text = texstring,
+             con = myfile <- tempfile(fileext = ".tex"))
+  texfile <- pandoc(input = myfile, format = "html")
+  cat(readLines(texfile), sep = "\n")
+  unlink(c(myfile, texfile))
+}
+
+textable <- "\\begin{table}[!htbp] \\centering 
+  \\caption{Tabla 1. Resumen estadisticas descriptivas} 
+  \\label{} 
+\\begin{tabular}{@{\\extracolsep{5pt}}lccccccc} 
+\\\\[-1.8ex]\\hline 
+\\hline \\\\[-1.8ex] 
+Statistic & \\multicolumn{1}{c}{N} & \\multicolumn{1}{c}{Mean} & \\multicolumn{1}{c}{St. Dev.} & \\multicolumn{1}{c}{Min} & \\multicolumn{1}{c}{Pctl(25)} & \\multicolumn{1}{c}{Pctl(75)} & \\multicolumn{1}{c}{Max} \\\\
+\\hline \\\\[-1.8ex] 
+Cambio Espanol & 11,515 & 2.99 & 7.74 & $-$71 & 0 & 3.3 & 100 \\\\ 
+Cambio Mate & 11,515 & 5.38 & 17.13 & $-$100.00 & 0.00 & 6.72 & 100.00 \\\\ 
+Tratamiento & 11,515 & 0.28 & 0.45 & 0 & 0 & 1 & 1 \\\\ 
+Prom. Escol. & 11,515 & 1.99 & 2.25 & 0.11 & 0.69 & 2.38 & 19.97 \\\\ 
+Marginacion & 11,515 & 1.91 & 0.51 & 1 & 2 & 2 & 3 \\\\ 
+Pob. Ocupada & 11,515 & 42.68 & 11.63 & 0.00 & 35.80 & 49.17 & 91.62 \\\\ 
+\\hline \\\\[-1.8ex] 
+\\end{tabular} 
+\\end{table}  "
+tex2markdown(textable)
+                                                    
+```
+
+
+---
+## Histogramas X
+.pull-left[
+```{r} 
+hist(data$cambio_internet)
+```
+]
+
+.pull-right[
+
+```{r} 
+hist(data$cambio_pc)
+```  
+]
+---
+## Histogramas Y- Español
+
+.pull-left[
+```{r} 
+hist(data$cambio_esp_top)
+```
+]
+
+.pull-right[
+
+```{r} 
+hist(data$cambio_esp_bottom)
+```  
+] 
+---
+
+## Histogramas Y- Matemáticas
+
+.pull-left[
+```{r} 
+hist(data$cambio_mat_top)
+```
+]
+
+.pull-right[
+
+```{r} 
+hist(data$cambio_mat_bottom)
+```  
+]
+  
+---
+## Regresiones Ingenuas- Español
+
+```{r, results = "asis", echo = FALSE, message = FALSE}
+a<-lm(cambio_esp_top~cambio_internet,data)
+b<-lm(cambio_esp_top~cambio_pc,data)
+c<-lm(cambio_esp_bottom~cambio_internet,data)
+d<-lm(cambio_esp_bottom~cambio_pc,data)
+
+textable <- "\\begin{table}[!htbp] \\centering 
+  \\caption{} 
+  \\label{} 
+\\begin{tabular}{@{\\extracolsep{5pt}}lcccc} 
+\\\\[-1.8ex]\\hline 
+\\hline \\\\[-1.8ex] 
+ & \\multicolumn{4}{c}{\\textit{Dependent variable:}} \\\\ 
+\\cline{2-5} 
+\\\\[-1.8ex] & \\multicolumn{2}{c}{cambio\\_esp\\_top} & \\multicolumn{2}{c}{cambio\\_esp\\_bottom} \\\\ 
+\\\\[-1.8ex] & (1) & (2) & (3) & (4)\\\\ 
+\\hline \\\\[-1.8ex] 
+ cambio\\_internet & 0.047$^{***}$ &  & $-$0.041 &  \\\\ 
+  & (0.006) &  & (0.028) &  \\\\ 
+  & & & & \\\\ 
+ cambio\\_pc &  & 0.098$^{***}$ &  & $-$0.220$^{***}$ \\\\ 
+  &  & (0.019) &  & (0.082) \\\\ 
+  & & & & \\\\ 
+ Constant & 2.494$^{***}$ & 2.695$^{***}$ & $-$2.451$^{***}$ & $-$2.219$^{***}$ \\\\ 
+  & (0.100) & (0.092) & (0.435) & (0.402) \\\\ 
+  & & & & \\\\ 
+\\hline \\\\[-1.8ex] 
+Observations & 11,515 & 11,515 & 11,515 & 11,515 \\\\ 
+\\end{tabular} 
+\\end{table}  "
+tex2markdown(textable)
+```
+
+
+---
+
+## Regresiones ingenuas- Matemáticas
+
+```{r, results = "asis", echo = FALSE, message = FALSE}
+
+e<-lm(cambio_mat_top~cambio_internet,data)
+f<-lm(cambio_mat_top~cambio_pc,data)
+g<-lm(cambio_mat_bottom~cambio_internet,data)
+h<-lm(cambio_mat_bottom~cambio_pc,data)
+
+textable <- "\\begin{table}[!htbp] \\centering 
+  \\caption{} 
+  \\label{} 
+\\begin{tabular}{@{\\extracolsep{5pt}}lcccc} 
+\\\\[-1.8ex]\\hline 
+\\hline \\\\[-1.8ex] 
+ & \\multicolumn{4}{c}{\\textit{Dependent variable:}} \\\\
+\\cline{2-5} 
+\\\\[-1.8ex] & \\multicolumn{2}{c}{cambio\\_mat\\_top} & \\multicolumn{2}{c}{cambio\\_mat\\_bottom} \\\\ 
+\\\\[-1.8ex] & (1) & (2) & (3) & (4)\\\\ 
+\\hline \\\\[-1.8ex] 
+ cambio\\_internet & $-$0.006 &  & 0.038 &  \\\\ 
+  & (0.014) &  & (0.031) &  \\\\ 
+  & & & & \\\\ 
+ cambio\\_pc &  & 0.075$^{*}$ &  & $-$0.082 \\\\ 
+  &  & (0.042) &  & (0.091) \\\\ 
+  & & & & \\\\ 
+ Constant & 5.444$^{***}$ & 5.150$^{***}$ & 6.884$^{***}$ & 7.546$^{***}$ \\\\ 
+  & (0.222) & (0.205) & (0.482) & (0.445) \\\\ 
+  & & & & \\\\ 
+\\hline \\\\[-1.8ex] 
+Observations & 11,515 & 11,515 & 11,515 & 11,515 \\\\ 
+\\hline 
+\\hline \\\\[-1.8ex] 
+\\end{tabular} 
+\\end{table}  "
+tex2markdown(textable)
+```
+
 
 ---
 
@@ -173,13 +328,13 @@ Las medias muestrales locales se construyen a partir de intervalos o *bins* de $
 Sin considerar a los controles o el ancho del intervalo alrededor del punto de corte, los grupos se ven así: 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out6<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(-50,50),x.label="Cambio Internet",y.label="Cambio Espanol",title="",kernel="triangular",c=15, binselect = "qspr")
+out6<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(-50,50),x.label="Cambio Internet",y.label="Cambio Espanol",title="",kernel="triangular",c=10, binselect = "qspr")
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-
 out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-50,50),y.lim=c(-10,20),x.label="Cambio Internet",y.label="Cambio Espanol",title="",c=15,kernel="triangular", binselect = "qspr")
 ```
+
 ---
 
 Ahora, verificaremos cual es el ancho de banda optima si queremos realizar una estimacion con regresion kernel de tipo triangular, un corte de 15, y orden del polinomio de 4:
@@ -219,6 +374,7 @@ Z_i =&
 Donde Zi(1) y Zi(0) denotan dos vectores de covariables de potenciales- Zi(1) representa el valor que toman las covariables arriba del punto de corte (tratamiento) y Zi(0) los respectivos del control. Se asume que el valor de las covariables fue determinado antes del tratamiento, por lo que su efecto de tratamiento es cero. 
 
 ---
+c
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}
 # Ahora vamos a ver si covariates son iguales en el punto de corte
 data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
@@ -258,6 +414,7 @@ dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactor
 kable(dataf, booktabs=T,"latex") %>% kable_styling(position = "center")
 ```
 
+
 Dado que las covariables no estan balanceadas dentro del punto de corte y el ancho del intervalo [c-h,c+h], no las incluiremos en la estimacion. En el 
 
 ---
@@ -267,11 +424,13 @@ Ahora vemos como cambian nuestras dispersiones al incorporar estos resultados la
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 Z = cbind(data$marg, data$promesc_20,data$pocup_20)
 colnames(Z) = c("Marginacion", "Promedio escolaridad", "Pob. ocupada")
-out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20), kernel = "triangular",c=15,h=14, binselect = "qspr")
+out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20), kernel = "triangular",c=15,h=19.687 , binselect = "qspr")
 ```
 
+---
+
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-25,50),y.lim=c(0,10),x.label="Cambio Internet",y.label="Cambio Espanol",title="",c=15,kernel = "triangular",h=12,binselect = "qspr")
+out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-25,50),y.lim=c(0,10),x.label="Cambio Internet",y.label="Cambio Espanol",title="",c=15,kernel = "triangular",h=10.262 ,binselect = "qspr")
 ```
 
 ---
@@ -289,7 +448,6 @@ summary(out)
 out = rdrobust(data$cambio_mat_top,data$cambio_internet, kernel = "triangular", c=15,p = 4, bwselect = "mserd",cluster=data$ClaveMun)
 summary(out)
 ```
-
 
 Interpretacion con lo q tenemos ahorita: La interpretacion es que dentro del intervalo de 10 puntos porcentuales, el porcentaje de calificaciones de espanol que *cambia*  disminuye en 1.12  puntos porcentuales en espanol y 1.34 en matematicas debido al acceso a Internet: X% de las escuelas de las localidades rurales tuvieron un cambio en el acceso a internet de -10 pp, mientras que X% de las escuelas de localidades rurales tuvieron un cambio en el acceso a Internet de hasta 10 pp
 

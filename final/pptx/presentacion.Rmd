@@ -150,7 +150,7 @@ OJO deberiamos de recortar la Y que no sean +- 100 porque creo que se salieron o
 
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 dat<-data.frame(data$cambio_esp_top,data$cambio_mat_top,data$cp_15pp,data$promesc_20,data$marg,data$pocup_20)
-stargazer(dat,digits=2,type='latex',covariate.labels =c("Cambio Espanol","Cambio Mate","Tratamiento","Prom. Escol.",
+stargazer(dat,digits=2,type='latex',title="Tabla 1. Resumen estadisticas descriptivas",covariate.labels =c("Cambio Espanol","Cambio Mate","Tratamiento","Prom. Escol.",
                                                        "Marginacion","Pob. Ocupada"))
 ```
 

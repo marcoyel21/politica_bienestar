@@ -42,19 +42,18 @@ attach(data)
 ```
 
 <div style="text-align: justify">
-## Objetivo 
+  
+## Objetivo e Hipotesis
+
 Este trabajo tiene como objetivo determinar:
 
-- El impacto de la Reforma en Telecomunicaciones de 2013 en México en el acceso al servicio de Internet de banda ancha en los hogares. 
+* El impacto de la Reforma en Telecomunicaciones del 2013 en Mexico en el desempeño escolar, mediante un aumento en el acceso a Internet de localidades rurales.
 
-- El impacto del aumento en el acceso al servicio de Internet en el desempeño escolar. 
+Las hipotesis son: 
 
-## Hipótesis 
-
-* La Reforma en Telecomunicaciones de 2013 aumentó el acceso al servicio de Internet en hogares de localidades rurales, y 
+* La Reforma en Telecomunicaciones de 2013 impacto positivamente al nivel de competitividad del sector, reflejado en una disminucion de los precios de telefonia, aumento de la cobertura, y mejora de calidad del servicio. Esto provocaria una mayor demanda por servicios de Internet en los hogares. 
   
-* Mayor conectividad aumentó las calificaciones de los estudiantes de tercero de secundaria en las pruebas de matemáticas y español.  
-  
+* Una mayor conectividad en los hogares de los alumnos causa un aumento en su desempeno escolar, especificamente en nuestro contexto el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de matemáticas y español.  
     
     
 ```{r echo=FALSE, out.width = "800px", out.height="100px",fig.align='center'}
@@ -66,43 +65,43 @@ knitr::include_graphics("objetivo2.png")
 
 ## Introducción. Antecedentes y contexto
 
-#### El panorama existente antes de la Reforma de 2013  
+El panorama existente antes de la Reforma de 2013 era: 
 
--  La alta concentración del mercado en el sector de las telecomunicaciones era una limitante para el crecimiento económico. 
+* La alta concentración del mercado en el sector de las telecomunicaciones era una limitante para el crecimiento de la demanda de este. 
 
-- Los  niveles  de  penetración  de  los  servicios  de  telecomunicaciones  en  la población  se  encontraban  dentro de los más bajos entre los paísesde la  OCDE.
+* Los  niveles  de  penetración  de  los  servicios  de  telecomunicaciones  en  la población  se  encontraban  dentro de los más bajos entre los países de la  OCDE.
 
 
-#### Reforma
+La Reforma en Telecomunicaciones promulgada en junio del 2013:
 
-* El 10 de junio de 2013 se promulgó la Reforma en Telecomunicaciones, con la que el acceso a Internet se convirtió en un derecho constitucional. 
+* El acceso a Internet se convirtió en un derecho constitucional. 
 
-* La Reforma estaba enfocada a promover una efectiva competencia, como base para lograr mejor calidad en los servicios y la mejora de precios.
+* Se enfoco en promover una efectiva competencia con la regulacion asimetrica impuesta al Agente Economico Preponderante, como base para lograr mejor calidad en los servicios, la mejora de precios, y aumentar la cobertura por un mayor numero de competidores, de demanda, y de competencia.
 
-* Se implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil espacios públicos de todo el país; lo anterior a través de los llamados “Puntos, México Conectado”.
+* Implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil espacios públicos de todo el país; lo anterior a través de los llamados “Puntos, México Conectado”.
 
 ---
 <div style="text-align: justify">
 
 ## Motivación
 
-### ¿Por qué es relevante este estudio?
+### ¿Por qué es relevante este estudio? ¿Por qué se eligió este tema?
 
-- No hay precedentes de un análisis en el que se refleje la contribución de la Reforma en Telecomunicaciones de 2013 en el acceso a internet y con ello en el desempeño educativo.
+* No hay precedentes de un análisis en el que se refleje la contribución de la Reforma en Telecomunicaciones de 2013 en el acceso a internet y con ello en el desempeño educativo.
 
-- Es de vital importancia hacer investigaciones que se centren en medir los impactos de las modificaciones en legislaciones clave para la generación de políticas públicas apropiadas; sobre todo, considerando que dichos impactos tienden a afectar más a la población vulnerable.
+* Es de vital importancia hacer investigaciones que se centren en medir los impactos de las modificaciones en legislaciones clave para la generación de políticas públicas apropiadas; sobre todo, considerando que dichos impactos tienden a afectar más a la población vulnerable.
 
-### ¿Por qué se eligió este tema?
-
-- Derivado de la pandemia, hoy más que nunca resulta importante efectuar la valuación de una política como la de la Reforma, a través del programa “México Conectado”, y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora. 
+* Derivado de la pandemia, hoy más que nunca resulta importante efectuar la valuación de una política como la de la Reforma, a través del programa “México Conectado”, y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora. 
 
 ---
 
 ## Modelo: Regresión discontinua
 
+Nuestra especificacion consiste en:
+
  $$\delta NivelLogro_i =\beta_0 + \beta_1 T_i + \beta_2 G_i +\beta_3 X_i  + u_i$$
 
-y
+donde
 
 \begin{align*}
 T_i =& 
@@ -112,7 +111,7 @@ T_i =&
   \end{cases}
 \end{align*}
 
-Donde $i$ indica localidades y
+$i$ indica la localidad, y:
 
 $T_i$ es la variable de tratamiento, la cual está determinada por un límite, o punto $c_i$ de la variable definitoria, que será de 15 pp
 
@@ -130,7 +129,7 @@ Se utilizara un diseno Sharp, ya que la asignación a tratamiento es determinís
 
 Las unidades de analisis son localidades, obtenidas de las bases de *Principales resultados por Localidad (ITER)* de la INEGI de los anios 2010 y 2020, asi como de las bases de Enlace del 2010 y Planea del 2019.
 
-La base original consiste en 13,XXX observaciones. Sin embargo, nuestra muestra se restringe a localidades rurales (con poblacion menor a 2,500 habitantes), lo cual reduce a la base a 11,597 observaciones. 
+La base original consiste en 13,789 observaciones. Al restringir a la muestra a localidades rurales (con poblacion menor a 2,500 habitantes) que hayan participado en ambas evaluaciones (Enlace en 2010 y Planea en 2019), el numero de observaciones se reduce a 3536 observaciones. 
 
 ---
 
@@ -174,12 +173,12 @@ Las medias muestrales locales se construyen a partir de intervalos o *bins* de $
 Sin considerar a los controles o el ancho del intervalo alrededor del punto de corte, los grupos se ven así: 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out6<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),kernel="triangular",c=15, binselect = "qspr")
+out6<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(-50,50),x.label="Cambio Internet",y.label="Cambio Espanol",title="",kernel="triangular",c=15, binselect = "qspr")
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
-out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),c=15,kernel="triangular", binselect = "qspr")
+out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-50,50),y.lim=c(-10,20),x.label="Cambio Internet",y.label="Cambio Espanol",title="",c=15,kernel="triangular", binselect = "qspr")
 ```
 ---
 
@@ -275,7 +274,7 @@ out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20), kernel = "t
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),c=15,kernel = "triangular",h=12,binselect = "qspr")
+out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-25,50),y.lim=c(0,10),x.label="Cambio Internet",y.label="Cambio Espanol",title="",c=15,kernel = "triangular",h=12,binselect = "qspr")
 ```
 
 ---

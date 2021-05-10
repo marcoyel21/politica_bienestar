@@ -201,9 +201,6 @@ attach(data)
 
 Como no me esta saliendo lo de quitar los valores infinitos ahorita vamos a seguir con cambio_esp... y cambio_mat
 
-```{r}
-data2 <- data[is.finite(rowSums(data)),]
-```
 
 Ahora vamos a observar como se ven los datos utilizando las medias de local band width? como se dice/// y con ajuste usando un polinomio, como se recomienda.
 

@@ -49,7 +49,7 @@ Este trabajo tiene como objetivo determinar:
 
 - El impacto del aumento en el acceso al servicio de Internet en el desempeño escolar. 
 
-##Hipótesis 
+## Hipótesis 
 
 * La Reforma en Telecomunicaciones de 2013 aumentó el acceso al servicio de Internet en hogares de localidades rurales, y 
   
@@ -103,11 +103,13 @@ knitr::include_graphics("objetivo2.png")
 
 y
 
+\begin{align*}
 T_i =& 
   \begin{cases}
     1, & G_i \geq c \\
     0, & G_i < c
   \end{cases}
+\end{align*}
 
 Donde $i$ indica localidades y
 
@@ -119,9 +121,10 @@ $G_i$, es la variable definitoria, que en este caso es la tasa de cambio en la a
 
 Para estimar el efecto de tratamiento, o la $\beta_1$, se utilizarán observaciones con una $G_i$ cerca a $c_i$. Se asume que la discontinuidad, o el salto, es el efecto causal.
 
-Se utilizara un diseno Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c $ serán parte del control y todas las que tengan un valor de $G_i >= c $ del tratamiento. 
+Se utilizara un diseno Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
 
 ---
+
 ## Datos
 
 Las unidades de analisis son localidades, obtenidas de las bases de *Principales resultados por Localidad (ITER)* de la INEGI de los anios 2010 y 2020, asi como de las bases de Enlace del 2010 y Planea del 2019.
@@ -133,7 +136,7 @@ La base original consiste en 13,XXX observaciones. Sin embargo, nuestra muestra 
 ## Resúmenes estadísticos de variables
 
 
-```{r}
+```{r, ,include=FALSE}
 #Creamos variable de tratamiento y recodificamos la de marginacion
 
 data<-data[which(pobtot<2500),]
@@ -158,6 +161,7 @@ stargazer(dat,digits=2,type='text',covariate.labels =c("Cambio Espanol","Cambio 
 FALTAN LAS DE MARCO
 
 ---
+
 ## Estadisticas descriptivas: RD
 
 En el contexto de RD, hacer un scatterplot simple de los datos no es beneficioso, ya que no permite distinguir los saltos en los datos. Los datos deben agregarse, o suavizarse antes de graficarse. En las siguientes gráficas se muestra un ajuste polinomial global (línea) y las medias muestrales locales (puntos).
@@ -198,18 +202,20 @@ summary(out)
 Observamos que es de 12. 
 
 ---
----
+
 ## Covariables
 
 Para incluir a las covariables en nuestra estimacion, debemos verificar que no sean distintas en el grupo de tratamiento y de control en el punto de corte (+/- el ancho de banda). En caso de que fueran distintas, no se cumpliria el supuesto de continuidad, por lo que se tendrian que imponer restricciones adicionales. 
 
 Entonces, definimos a las covariables: 
 
+\begin{align*}
 Z_i =& 
   \begin{cases}
     1, & G_i \geq c \\
     0, & G_i < c
   \end{cases}
+\end{align*}
 
 Donde Zi(1) y Zi(0) denotan dos vectores de covariables de potenciales- Zi(1) representa el valor que toman las covariables arriba del punto de corte (tratamiento) y Zi(0) los respectivos del control. Se asume que el valor de las covariables fue determinado antes del tratamiento, por lo que su efecto de tratamiento es cero. 
 
@@ -272,17 +278,17 @@ Dado que las covariables si estan balanceadas dentro del punto de corte y el anc
 
 ---
 
-Ahora vemos como cambian nuestras dispersiones al incorporar estos resultados las covariables y el ancho de banda adecuado:
+Ahora vemos como cambian nuestras dispersiones al incorporar el ancho de banda adecuado:
 
 ```{r}
 Z = cbind(data$marg, data$promesc_20,data$pocup_20)
 colnames(Z) = c("Marginacion", "Promedio escolaridad", "Pob. ocupada")
-out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20),covs=Z, kernel = "triangular",c=15,h=14, binselect = "qspr")
+out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20), kernel = "triangular",c=15,h=14, binselect = "qspr")
 
 ```
 
 ```{r}
-out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),c=15, covs=Z,kernel = "triangular",h=12,binselect = "qspr")
+out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),c=15,kernel = "triangular",h=12,binselect = "qspr")
 ```
 
 ---

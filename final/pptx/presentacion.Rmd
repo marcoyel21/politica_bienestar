@@ -340,22 +340,12 @@ of (3:020=12:6454218)  100 = 23:88 percent relative to the control mean.
 
 + Cambiar la variable dependiente a "proporcion de alumnos que cambiaron de *bottom* a *top*
 
++ Cambiar la variable independiente a cambio de proporcion de hogares que tienen Internet junto con adquisicion de computadoras, laptops o tablets
+
 + Anadir variable de control de region
 
-+ Cambiar la variable independiente a cambio de proporcion de hogares que tienen Internet junto con adquisicion de computadoras, laptops o tablets
----
-
-## Anexos
-
-+ Pruebas q hicimos sin copy paste (?)
 
 ---
-
-## Bibliografía
-
-+ 8-10 artículos publicados de journals
-
-
 
 
 

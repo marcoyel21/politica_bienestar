@@ -133,7 +133,7 @@ stargazer(f_data,header=FALSE)
 ```
 
 
-## Regresiones
+## Regresiones 
 
 Finalmente, evaluamos la relación entre el nivel de acceso a internet y a equipo de computo por localidad con la proporción de calificaciones en los últimos dos cuartiles. Lo que podemos notar es una relación positiva y estadísticamente significativa al 99% entre estas dos variables independientes y las dos variables dependientes.
 
@@ -141,170 +141,313 @@ Finalmente, evaluamos la relación entre el nivel de acceso a internet y a equip
 stargazer(a,b,c,d,header=FALSE)
 ```
 
-## TRIAL RD
 
-# Regresion discontinua
+```{r}
+library(readr)
+library(rdrobust)
+library(dplyr)
+
+# Leer datos
+urlfile="https://raw.githubusercontent.com/marcoyel21/politica_bienestar/master/final/avance/data.csv"
+
+data<-read_csv(url(urlfile))
+attach(data)
+
+```
 
 
-##### COntenido
-SIn un proceso aleatorio para separar T y C, el efecto de tratamiento se puede identificar si 
+##### Contenido
+Sin un proceso aleatorio para separar T y C, el efecto de tratamiento se puede identificar si 
 la asignacion a tratamiento tiene la forma de un RD. Esta requiere a una variable definitoria que,
 en cierto punto de corte, separe las observaciones de T yC
 en este caso seria 0
 
 Sharp RD: threshold separates treatment and control group exactly
 
-Regresion  RD simple: same slope, with a jump (en cero), for all Y (educational % change)
 
-Vamos a hacer una variable dummy para indicar si es mayor a nuestro punto de corte o no
+Primero hacemos un subset de las localidades rurales
 
-```{r, results='asis'}
-
-data$cutpoint<-as.numeric(data$cambio_internet>0)
-
-data1<-filter(data,pobtot<2500)
-attach(data1)
+```{r}
+data<-data[which(pobtot<2500),]
 
 ```
 
-## modelo simple
+Construimos la variable de tratamiento a partir de un cut point de 15 puntos porcentuales. Creemos que es una cifra conservadora... el valor de corte no lo dicen los datos, es predefinido, es el criterio para decidir los que son elegibles y los que no (Cattaneo, Arturo)
 
-## error/ no sale la recta de tratamiento
+Asimismo, creamos a la variable de interes. Esta es el cambio en el ratio de proporcion de los mejores puntajes entre los peores por localidad (promedio de las escuelas) del 2019 y del 2010.
 
-```{r, results='asis'}
+```{r}
+attach(data)
+#Variable de tratamiento (T)
 
-simple.rd<- lm(cambio_esp_top~cambio_internet+cutpoint,data=data)
+data$cp_15pp<-as.numeric(ifelse(data$cambio_internet<15,0,1))
 
-data$pred<- predict(simple.rd)
+#Variable dependiente (Y)
 
-plot(cambio_internet,cambio_esp_top,pch=17, frame.plot = FALSE,
-     xaxs="i",yaxs="i",
-     xlim=c(-20,70), ylim=c(-20,70),
-     main = "Rd simple ",
-     xlab = "Cambio tasa internet", ylab =" Cambio tasa Calis ", cex.main=1, font.main=1)
-with(subset(data1, cutpoint<=0),lines(cambio_internet, pred, col="red", lty=3, lwd=3))
-with(subset(data1, cutpoint>1),lines(cambio_internet, pred, col="chocolate1", lty=3, lwd=3)))
+#sacar un ratio de top/bottom de 2010 y 2019 
+
+data$prop_ratio_esp_10<-(esp_1II_10+esp_IV_10)/(esp_1_10+esp_II_10)
+data$prop_ratio_esp_19<-(esp_1II_19+esp_IV_19)/(esp_1_19+esp_II_19)
+data$prop_ratio_mat_10<-(mat_1II_10+mat_IV_10)/(mat_1_10+mat_II_10)
+data$prop_ratio_mat_19<-(mat_1II_19+mat_IV_19)/(mat_1_19+mat_II_19)
+
+#cambio. esta es mejor porque lanza menos nans e inf
+
+data$cambio_ratio_esp <- data$prop_ratio_esp_19-data$prop_ratio_esp_10
+data$cambio_ratio_mat <- data$prop_ratio_mat_19-data$prop_ratio_mat_10
+
+attach(data)
 ```
 
-## Modelo polinomial
+Como no me esta saliendo lo de quitar los valores infinitos ahorita vamos a seguir con cambio_esp... y cambio_mat
 
-y si hacemos una variable que sea cambio_internet & cambio_pc > 0 ?
+```{r}
+data2 <- data[is.finite(rowSums(data)),]
+```
+
+Ahora vamos a observar como se ven los datos utilizando las medias de local band width? como se dice/// y con ajuste usando un polinomio, como se recomienda.
+
 
 Es es IMSE-optimal evenly-spaced method using spacings estimators.
 ESPR . IMSE-optimal evenly-spaced method using polynomial regression.
 qs: IMSE-optimal quantile-spaced method using spacings estimators.
 qspr: IMSE-optimal quantile-spaced method using polynomial regression.
 
-notamos que entre regresion polinomial y spacings estimators no cambia mucho, entonces nos
-quedamos con regresion polinomial
-pero si cambia entre evenly spaced y quantile spaced method. Se ven mas concentrados alrededor del 
-cero en la quantile spaced. eso es lo que querriamos, para que nuestro LATE tenga validez para mas
-observaciones? porque el ajuste (la linea roja) no cambia
-En Cattaneo dice
+notamos que entre regresion polinomial y spacings estimators no cambia mucho, entonces nos quedamos con regresion polinomial, pero si cambia entre evenly spaced y quantile spaced method. Se ven mas concentrados alrededor del  cero en la quantile spaced. eso es lo que querriamos, para que nuestro LATE tenga validez para mas observaciones? porque el ajuste (la linea roja) no cambia
 
-```{r, results='asis'}
+```{r}
 
-out<-rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "es")
+out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20),c=15, binselect = "es")
+
+```
+
+
+```{r}
+out3<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), c=15,binselect = "es")
+```
+
+
+```{r}
+out5<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),c=15, binselect = "qs")
+```
+
+
+```{r}
+out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),c=15, binselect = "qspr")
+```
+
+Para incluir a las covariables en nuestra estimacion, debemos verificar que las covariables no sean distintas en el punto de corte (+/- el ancho de banda). Primero, verificaremos cual es el ancho de banda optima si queremos realizar una estimacion con regresion kernel de tipo triangular, un corte de 15, y un el prden del polinomio de 4:
+
+```{r}
+out = rdbwselect(cambio_esp_top, cambio_internet,c=15, kernel = "triangular", p = 4, bwselect = "mserd")
+summary(out)
+```
+
+Observamos que el ancho de banda optimo (que implica esto?) es de 14.
+
+En el caso de matematicas:
+
+```{r}
+out = rdbwselect(cambio_mat_top, cambio_internet,c=15, kernel = "triangular", p = 4, bwselect = "mserd")
+summary(out)
+```
+
+Observamos que es de 12. Ahora vemos como cambian nuestras dispersones al incorporar estos resultados:
+
+```{r}
+
+out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20),c=15,h=14, binselect = "es")
+
+```
+
+
+```{r}
+out3<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), c=15,h=12,binselect = "es")
+```
+
+
+```{r}
+out5<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),c=15, h=14,binselect = "qs")
+```
+
+
+```{r}
+out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),c=15, h=12,binselect = "qspr")
+```
+
+
+Ahora, vamos a comprobar que las medias de C y T sean iguales en el punto de corte
+
+The simplest way to implement RD local polynomial analysis is to t the outcome on the
+score alone. Although this basic specication is sucient to analyze most applications, some
+researchers may want to augment it by including other covariates in their model specication.
+Local polynomials methods can easily accommodate additional covariates, but the latter
+must satisfy an important condition. Unless researchers are willing to invoke parametric
+assumptions or redene the parameter of interest, the covariates used to augment the analysis
+must be balanced at the cuto.
+
+covariate-adjustment cannot be used to restore
+identication of standard RD design treatment eects when treated and control observations
+dier systematically at the cuto. When the empirical evidence shows that important predetermined
+covariates dier systematically at the cuto, the assumption of continuity of
+the potential outcomes is implausible, and thus the nonparametric continuity-based RD
+framework discussed in this volume is no longer appropriate without further (restrictive)
+assumptions about the data generating process.
+
+We let Zi(1) and Zi(0) denote two vectors of potential covariates|where Zi(1) represents
+the value taken by the covariates above the cuto (i.e., under treatment), and Zi(0)
+the value taken below the cuto (i.e., under control). We assume that these covariates are
+predetermined|that is, that their values are determined before the treatment is ever assigned
+and therefore the treatment eect on the covariates is zero by construction. without interacting the covariates with the treatment
+
+
+```{r}
+# Ahora vamos a ver si covariates son iguales en el punto de corte
+
+data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
+                  'MEDIA'=1)
+
+as.numeric(data$marg)
+
+```
+
+
+```{r}
+#este es con un ancho de banda de 5
+
+marg_C<-(data$marg[cambio_internet>=9 & cambio_internet<=14])
+marg_T<-(data$marg[cambio_internet>=15 & cambio_internet<=20])
+
+promesc_C<-(data$promesc_20[cambio_internet>=9 & cambio_internet<=14])
+promesc_T<-(data$promesc_20[cambio_internet>=15 & cambio_internet<=20])
+
+pocup_C<-(data$pocup_20[cambio_internet>=9 & cambio_internet<=14])
+pocup_T<-(data$pocup_20[cambio_internet>=15 & cambio_internet<=20])
+
+cel_C<-(data$cel_20[cambio_internet>=9 & cambio_internet<=14])
+cel_T<-(data$cel_20[cambio_internet>=15 & cambio_internet<=20])
+
+indig_C<-(data$pobindig_20[cambio_internet>=9 & cambio_internet<=14])
+indig_T<-(data$pobindig_20[cambio_internet>=15 & cambio_internet<=20])
+
+
+```
+
+```{r}
+#este es con un ancho de banda de 12
+
+marg_C<-(data$marg[cambio_internet>=2 & cambio_internet<=14])
+marg_T<-(data$marg[cambio_internet>=15 & cambio_internet<=27])
+
+promesc_C<-(data$promesc_20[cambio_internet>=2 & cambio_internet<=14])
+promesc_T<-(data$promesc_20[cambio_internet>=15 & cambio_internet<=27])
+
+pocup_C<-(data$pocup_20[cambio_internet>=2 & cambio_internet<=14])
+pocup_T<-(data$pocup_20[cambio_internet>=15 & cambio_internet<=27])
+
+cel_C<-(data$cel_20[cambio_internet>=2 & cambio_internet<=14])
+cel_T<-(data$cel_20[cambio_internet>=15 & cambio_internet<=27])
+
+indig_C<-(data$pobindig_20[cambio_internet>=2 & cambio_internet<=14])
+indig_T<-(data$pobindig_20[cambio_internet>=15 & cambio_internet<=27])
+
+
+```
+
+```{r}
+#hacemos t.test (ancho de banda de 5)
+
+#prom esc no es igual en tratamiento y control en el punto de corte (con un bandwidth de 5)
+
+t.test(promesc_T,promesc_C,alternative="two.sided")
+
+#Pob ocupada si es igual en el punto de corte (con un bandwidth de 5)
+
+t.test(pocup_T,pocup_C,alternative="two.sided")
+
+# celular. no son iguales
+
+t.test(cel_T,cel_C,alternative="two.sided")
+
+# marginacion. si son iguales
+
+t.test(marg_T,marg_C,alternative="two.sided")
+
+```
+
+```{r}
+# con ancho de banda de 12
+
+#prom esc es igual en tratamiento y control en el punto de corte (con un bandwidth de 5)
+
+t.test(promesc_T,promesc_C,alternative="two.sided")
+
+#Pob ocupada si es igual en el punto de corte (con un bandwidth de 5)
+
+t.test(pocup_T,pocup_C,alternative="two.sided")
+
+# celular.  son iguales
+
+t.test(cel_T,cel_C,alternative="two.sided")
+
+# marginacion. si son iguales
+
+t.test(marg_T,marg_C,alternative="two.sided")
+
+
+```
+
+El balance entre el grupo de control y el grupo de tratamiento **en el punto de corte** es:
+
+```{r}
+
+# kable...
+
+
+```
+
+Dado que las covariables si estan balanceadas dentro del punto de corte y el ancho de banda [c-h,c+h], podemos incluirlas en la estimacion.
+
+
+Ahora vamos a hacer una estimacion usando el ancho de banda adecuado segun nuestros datos (se indica en la funcion), una regresion kernel triangular, errores agrupados a nivel municipal, un punto de corte en 15, y los regresores por localidad: promedio de anios de escolaridad, poblacion ocupada, proporcion de casas con celular, y nivel de marginacion:
+
+```{r}
+
+Z = cbind(data$marg, data$promesc_20,data$pocup_20,data$cel_20)
+colnames(Z) = c("Marginacion", "Promedio escolaridad", "Pob. ocupada", "Tenencia celulares")
+out = rdrobust(data$cambio_esp_top,data$cambio_internet, covs = Z, kernel = "triangular", c=15,p = 4, bwselect = "mserd",cluster=data$ClaveMun)
 
 summary(out)
+```
 
-out3<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "es")
-summary(out3)
+```{r}
+out = rdrobust(data$cambio_mat_top,data$cambio_internet, covs = Z, kernel = "triangular", c=15,p = 4, bwselect = "mserd",cluster=data$ClaveMun)
 
-out5<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20), binselect = "qs")
-summary(out5)
-
-out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20), binselect = "qspr")
-summary(out6)
+summary(out)
 ```
 
 
-## Estimador del LATE (local ATE) 
-## Estimador Kernel uniforme
 
-Obtendremos el estimador puntual del RD con polinomios locales. Utilizamos MCO porque este tipo de estimacion es un ajuste de minimos cuadrados ponderados.
-Escogemos un ancho de banda de w=10 por ahora. Todas las observaciones afuera de [w-c,w+c] son excluidas, y las que caen dentro del intervalo pesan lo mismo.
-```{r, results='asis'}
-
-out = lm(cambio_esp_top[cambio_internet < 0 & cambio_internet >=-10] ~ cambio_internet[cambio_internet < 0 & cambio_internet >= -10])
-left_intercept = out$coefficients[1]
-print(left_intercept)
-
-out = lm(cambio_esp_top[cambio_internet >= 0 & cambio_internet <= 10] ~ cambio_internet[cambio_internet >= 0 & cambio_internet <= 10])
-right_intercept = out$coefficients[1]
-print(right_intercept)
-
-difference = right_intercept - left_intercept
-print(paste("The RD estimator is", difference, sep = " "))
-```
-** ojo hay que cambiar la Y
-
-Interpretacion con lo q tenemos ahorita: La interpretacion es que dentro del intervalo de 10 puntos porcentuales, el porcentaje de calificaciones de espanol que *cambia*  disminuye en -.38 puntos porcentuales debido al acceso a Internet: X% de las escuelas de las localidades rurales tuvieron un cambio en el acceso a internet de -10 pp, mientras que X% de las escuelas de localidades rurales tuvieron un cambio en el acceso a Internet de hasta 10 pp
+Interpretacion con lo q tenemos ahorita: La interpretacion es que dentro del intervalo de 10 puntos porcentuales, el porcentaje de calificaciones de espanol que *cambia*  disminuye en 1.12  puntos porcentuales en espanol y 1.34 en matematicas debido al acceso a Internet: X% de las escuelas de las localidades rurales tuvieron un cambio en el acceso a internet de -10 pp, mientras que X% de las escuelas de localidades rurales tuvieron un cambio en el acceso a Internet de hasta 10 pp
 
 Interpretacion ideal: El porcentaje de alumnos que cambian de posicion (top/bottom o vicerversa) aumentan/disminuyen en X pp debido al acceso a Internet. El % de localidades rurales que apenas tienen internet (+ 5 pp arriba del corte) es de X%, mientras que el % de localidades rurales que por poco tendrian internet (- 5 pp debajo del corte) es de %
 
+```{r pressure, echo=FALSE}
+print(out$beta_p_r)
+```
 
-## Estimador LATE - kernel triangular
+```{r pressure, echo=FALSE}
+print(out$beta_p_l)
+```
 
-#primero creamos los pesos
-
-w<- NA
-w[cambio_internet<0 & cambio_internet>=-10]= 1-abs(cambio_internet[cambio_internet<0 & cambio_internet>=-10]/10)
-w[cambio_internet>=0 & cambio_internet<=10]= 1-abs(cambio_internet[cambio_internet>=0 & cambio_internet<=10]/10)
-
-out = lm(cambio_esp_top[cambio_internet < 0] ~ cambio_internet[cambio_internet < 0],weights=w[cambio_internet<0])
-left_intercept = out$coefficients[1]
-print(left_intercept)
-
-out = lm(cambio_esp_top[cambio_internet >= 0] ~ cambio_internet[cambio_internet >= 0],weights=w[cambio_internet>=0])
-right_intercept = out$coefficients[1]
-print(right_intercept)
-
-difference = right_intercept - left_intercept
-print(paste("The RD estimator is", difference, sep = " "))
+We see that the RD eect of 3.020 percentage points in the female high school attainment
+percentage is the dierence between a percentage of 15.6649438 percent in municipalities
+where the Islamic party barely wins and a percentage of 12.6454218 percent in municipalities
+where the Islamic party barely loses|that is, 15:6649438􀀀12:6454218  3:020. By accessing
+the control mean at the cuto in this way, we learn that the RD eect represents an increase
+of (3:020=12:6454218)  100 = 23:88 percent relative to the control mean.
 
 
-#incorporating those terms in the estimation will reduce the approximation error and thus lead
-#to changes in the estimated eect.
-#pero nosotros lo q vemos abajo es que a medida que aumentas el polinomia mas crecen los IC, y mas chico se hace el valor p
-
-# Ahora con errores estandar apropiados. uniforme. corte 20, polinomio de orden 1, band width de 5,
-out = rdrobust(cambio_esp_top, cambio_internet, kernel = "uniform", p = 1, c=20,h = 5)
-summary(out)
-
-
-
-# balance
-6637/2499=2.65
-3392/1904 = 1.78
-2487/1431 = 1.73
-1890/956 = 1.97
-1428/559 = 2.55
-#estimador varianza covarianza es de NN (?)
-
-# efecto de tratamiento es de .835 (coeficiente)
-
-#ahora triangular.
-out = rdrobust(cambio_esp_top, cambio_internet, kernel = "triangular", p = 4, c=20,h = 5)
-summary(out)
-
-# tao es de 1.038
-
-# seleccionar ancho de banda optimo
-
-out = rdbwselect(cambio_esp_top, cambio_internet, kernel = "triangular", p = 4, bwselect = "mserd")
-summary(out)
-
-#main bandwidth - 4.273
-
-out = rdbwselect(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p = 4, bwselect = "mserd")
-summary(out)
-
-#main bw - 8.2
-
-# ahora lo incorporamos
-
-out = rdrobust(cambio_esp_top, cambio_internet,c=20, kernel = "triangular", p = 4, bwselect = "mserd")
 
 
 ## Referencias

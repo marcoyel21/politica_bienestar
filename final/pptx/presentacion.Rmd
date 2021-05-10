@@ -285,12 +285,12 @@ out6<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),c=15,kernel = "trian
 Ahora, realizaremos nuestra estimacion usando el ancho de banda adecuado segun nuestros datos (se indica en la funcion), una regresion kernel triangular, errores agrupados a nivel municipal, el punto de corte en 15, y los regresores por localidad: promedio de anios de escolaridad, poblacion ocupada, y nivel de marginacion:
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out = rdrobust(data$cambio_esp_top,data$cambio_internet, covs = Z, kernel = "triangular", c=15,p = 4, bwselect = "mserd",cluster=data$ClaveMun)
+out = rdrobust(data$cambio_esp_top,data$cambio_internet, kernel = "triangular", c=15,p = 4, bwselect = "mserd",cluster=data$ClaveMun)
 summary(out)
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out = rdrobust(data$cambio_mat_top,data$cambio_internet, covs = Z, kernel = "triangular", c=15,p = 4, bwselect = "mserd",cluster=data$ClaveMun)
+out = rdrobust(data$cambio_mat_top,data$cambio_internet, kernel = "triangular", c=15,p = 4, bwselect = "mserd",cluster=data$ClaveMun)
 summary(out)
 ```
 

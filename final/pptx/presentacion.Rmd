@@ -144,6 +144,9 @@ data$cp_15pp<-as.numeric(ifelse(data$cambio_internet<15,0,1))
 data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
                   'MEDIA'=1)
 as.numeric(data$marg)
+data <- data[(data$cambio_esp_top & data$cambio_mat_top < 95) & (data$cambio_esp_top & data$cambio_mat_top > -100) & (data$promesc_20<20), ]
+
+attach(data)
 ```
 
 OJO deberiamos de recortar la Y que no sean +- 100 porque creo que se salieron o metieron escuelas a la evaluacion 

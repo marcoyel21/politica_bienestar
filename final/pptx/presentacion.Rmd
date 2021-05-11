@@ -188,8 +188,8 @@ Statistic & \\multicolumn{1}{c}{N} & \\multicolumn{1}{c}{Mean} & \\multicolumn{1
 \\hline \\\\[-1.8ex] 
 Cambio Espanol & 11,515 & 2.99 & 7.74 & $-$71 & 0 & 3.3 & 100 \\\\ 
 Cambio Mate & 11,515 & 5.38 & 17.13 & $-$100.00 & 0.00 & 6.72 & 100.00 \\\\ 
-Cambio Internet & 11,515 & 11.74 & 11.39 & -12.04 & 2.20 & 18.79 & 85.71 \\\\
-Tratamiento & 11,515 & 0.28 & 0.45 & 0 & 0 & 1 & 1 \\\\ 
+Cambio Internet & 11,515 & 10.72 & 11.14 & $-$25.25 & 1.91 & 16.67 & 85.71 \\\\ 
+Tratamiento & 11,515 & 0.44 & 0.50 & 0 & 0 & 1 & 1 \\\\ 
 Prom. Escol. & 11,515 & 1.99 & 2.25 & 0.11 & 0.69 & 2.38 & 19.97 \\\\ 
 Marginacion & 11,515 & 1.91 & 0.51 & 1 & 2 & 2 & 3 \\\\ 
 Pob. Ocupada & 11,515 & 42.68 & 11.63 & 0.00 & 35.80 & 49.17 & 91.62 \\\\ 
@@ -476,13 +476,13 @@ summary(out1)
 ## Visualización del modelo
 
 .pull-left[
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+```{r, message= F, warning = F} 
 out3<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10,40),title="",x.label="Cambio Internet",y.label="Cambio Espanol", kernel = "triangular",c=9,h=4.572 ,p=1 , binselect = "qspr")
 ```
 ]
 
 .pull-right[
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+```{r, message= F, warning = F} 
 out4<-rdplot(data$cambio_mat_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10,40),title="",x.label="Cambio Internet",y.label="Cambio Espanol", kernel = "triangular",c=9,h=4.183 ,p=1 , binselect = "qspr")
 ```
 ]

@@ -33,6 +33,8 @@ library(readr)
 library(rdrobust)
 library(dplyr)
 library(kableExtra)
+library(ggplot2)
+library(ggthemes)
 
 
 # Leer datos
@@ -198,32 +200,52 @@ tex2markdown(textable)
 
 
 ---
-## Histogramas X
+## Histogramas T
+
 .pull-left[
-```{r} 
-hist(data$cambio_internet)
+```{r, message= F, warning = F} 
+
+ggplot(data, aes(x=cambio_internet))+
+  geom_histogram(color="darkblue", fill="lightblue")+
+  theme_calc()+
+  ggtitle("Cambio en el porcentaje de hogares con acceso a internet")
+
+
 ```
 ]
 
 .pull-right[
 
-```{r} 
-hist(data$cambio_pc)
+```{r, message= F, warning = F} 
+
+ggplot(data, aes(x=cambio_pc))+
+  geom_histogram(color="darkblue", fill="lightblue")+ 
+  theme_calc()+
+  ggtitle("Cambio en el porcentaje de hogares con acceso a PC")
+
 ```  
 ]
 ---
 ## Histogramas Y- Español
 
 .pull-left[
-```{r} 
-hist(data$cambio_esp_top)
+```{r, message= F, warning = F} 
+ggplot(data, aes(x=cambio_esp_top))+
+  geom_histogram(color="darkblue", fill="lightblue")+
+  theme_calc()+
+  ggtitle("Cambio en porcentaje de alumnos en el nivel IV (más alto) en español")
+
 ```
 ]
 
 .pull-right[
 
-```{r} 
-hist(data$cambio_esp_bottom)
+```{r, message= F, warning = F} 
+ggplot(data, aes(x=cambio_esp_bottom))+
+  geom_histogram(color="darkblue", fill="lightblue")+
+  theme_calc()+
+  ggtitle("Cambio en porcentaje de alumnos en el nivel I (más bajo) en español ")
+
 ```  
 ] 
 ---
@@ -231,15 +253,21 @@ hist(data$cambio_esp_bottom)
 ## Histogramas Y- Matemáticas
 
 .pull-left[
-```{r} 
-hist(data$cambio_mat_top)
+```{r, message= F, warning = F} 
+ggplot(data, aes(x=cambio_mat_top))+
+  geom_histogram(color="darkblue", fill="lightblue")+
+  theme_calc()+
+  ggtitle("Cambio en porcentaje de alumnos en el nivel IV (más alto) en matemáticas")
 ```
 ]
 
 .pull-right[
 
-```{r} 
-hist(data$cambio_mat_bottom)
+```{r, message= F, warning = F} 
+ggplot(data, aes(x=cambio_mat_bottom))+
+  geom_histogram(color="darkblue", fill="lightblue")+
+  theme_calc()+
+  ggtitle("Cambio en porcentaje de alumnos en el nivel I (más bajo) en matemáticas")
 ```  
 ]
   
@@ -333,16 +361,18 @@ tex2markdown(textable)
 
 ---
 
+## Estadisticas descriptivas: RD
+
+
 .pull-left[
-```{r,echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+```{r, message= F, warning = F,results='hide'} 
 
 out7<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
 ```
 ]
 
 .pull-right[
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-
+```{r, message= F, warning = F,results='hide'} 
 out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
 ```
 ]

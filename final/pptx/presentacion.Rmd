@@ -516,9 +516,9 @@ Los resultados generales de este trabajo son:
 
 A partir de la revisión de la literatura, se observa que existen autores que detectaron un efecto positivo de la cobertura de Internet en el desempeño de los estudiantes, aunque no muy grande, pero otros no encuentran efecto alguno. 
 
-- Grimes y Townsend (2017): Efecto positivo pero bajo, en tasas de aprobación de las escuelas primarias en Nueva Zelanda.
-- Bessone, Dahis, Ho. (2020): No hay ningún efecto de internet móvil en las puntuaciones de las pruebas de portugués y matemáticas en los estudiantes de Brasil.
-- Malamud, Cueto, Cristia y Beuermann (2019): Efecto positivo en cierre de brecha de habilidades digitales pero no hubo efectos significativos en el rendimiento de las matemáticas y la lectura. 
+- **Grimes y Townsend (2017):** Efecto positivo pero bajo, en tasas de aprobación de las escuelas primarias en Nueva Zelanda.
+- **Bessone, Dahis, Ho. (2020):** No hay ningún efecto de internet móvil en las puntuaciones de las pruebas de portugués y matemáticas en los estudiantes de Brasil.
+- **Malamud, Cueto, Cristia y Beuermann (2019):** Efecto positivo en cierre de brecha de habilidades digitales pero no hubo efectos significativos en el rendimiento de las matemáticas y la lectura. 
 
 ---
 <div style="text-align: justify">
@@ -539,13 +539,13 @@ A partir de la revisión de la literatura, se observa que existen autores que de
   
 ## Conclusiones
 
-¿Se comprueba la hipótesis?  Se comprueba la hipótesis de que una mayor conectividad en los hogares de los alumnos causa un aumento en el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de español, no así en las de matemáticas. 
+**¿Se comprueba la hipótesis?**  Se comprueba la hipótesis de que una mayor conectividad en los hogares de los alumnos causa un aumento en el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de español, no así en las de matemáticas. 
 
-Aportaciones al lector: Se suele dar por sentado que el acceso a Internet mejora por si mismo el desempeño educativo; en este trabajo se brinda al lector otra perspectiva de esta afirmación. 
+**Aportaciones al lector:** Se suele dar por sentado que el acceso a Internet mejora por si mismo el desempeño educativo; en este trabajo se brinda al lector otra perspectiva de esta afirmación. 
 
-¿Qué queda por hacer? Para la entrega final nos gustaría extender el análisis al grupo más bajo de la distribución en logros escolares, y analizar también el impacto de tener una computadora en el desempeño educativo, y si no es posible, este sería el punto de partida para futuros investigadores. 
+**¿Qué queda por hacer?** Para la entrega final nos gustaría extender el análisis al grupo más bajo de la distribución en logros escolares, y analizar también el impacto de tener una computadora en el desempeño educativo, y si no es posible, este sería el punto de partida para futuros investigadores. 
 
-¿Hay algo de tu trabajo que sirva para una política pública o privada? De acuerdo a los hallazgos, es posible observar una variedad de vías para futuras investigaciones. Si el acceso a internet es sólo una condición necesaria pero no suficiente para mejorar la educación, entonces es crucial entender si complementar las políticas públicas análogas puede ser el eslabón perdido.
+**¿Hay algo de tu trabajo que sirva para una política pública o privada?** De acuerdo a los hallazgos, es posible observar una variedad de vías para futuras investigaciones. Si el acceso a internet es sólo una condición necesaria pero no suficiente para mejorar la educación, entonces es crucial entender si complementar las políticas públicas análogas puede ser el eslabón perdido.
 
 
 ---

@@ -464,9 +464,9 @@ Ahora, realizaremos nuestra estimación utilizando:
 El resultado del coeficiente de $\beta_3$, o el efecto de tratamiento local es de 1.188 en español con una significancia de 0.03, y el de matemáticas de -0.92 con una significancia de 0.94.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out = rdrobust(data$cambio_esp_top,data$cambio_internet, kernel = "triangular", c=15,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out = rdrobust(data$cambio_esp_top,data$cambio_internet, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 summary(out)
-out1 = rdrobust(data$cambio_mat_top,data$cambio_internet, kernel = "triangular", c=15,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out1 = rdrobust(data$cambio_mat_top,data$cambio_internet, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 summary(out1)
 ```
 

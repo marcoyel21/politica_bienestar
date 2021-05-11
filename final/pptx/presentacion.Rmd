@@ -503,10 +503,11 @@ print(out1$beta_p_r)
 print(out1$beta_p_l)
 ```
 ---
+  
+### Resultados. Relación de hallazgos estudio/bibliografía.
+
 <div style="text-align: justify">
   
-### Resultados. Relación de hallazgos estudio/bibliografía. 
-
 Los resultados generales de este trabajo son: 
 
 - En las localidades rurales en las que hubo un incremento en la conectividad hay un aumento en la proporción de estudiantes de tercero de secundaria que pasaron de nivel bajo a nivel alto en el puntaje de español.
@@ -520,9 +521,10 @@ Existen autores que detectaron un efecto positivo de la cobertura de Internet en
 - **Malamud, Cueto, Cristia y Beuermann (2019):** Efecto positivo en cierre de brecha de habilidades digitales pero no hubo efectos significativos en el rendimiento de las matemáticas y la lectura. 
 
 ---
-<div style="text-align: justify">
   
 ## Resultados. ¿Cuál es la aportación del trabajo?
+
+<div style="text-align: justify">
 
 - Generar una investigación para México sobre los efectos de un mayor acceso a Internet, derivado de la Reforma en Telecomunicaciones en 2013, sobre el desempeño escolar.  
 

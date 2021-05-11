@@ -98,6 +98,8 @@ knitr::include_graphics("objetivo2.png")
 
 * Derivado de la pandemia, hoy más que nunca resulta importante efectuar la valuación de una política como la de la Reforma, a través del programa “México Conectado”, y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora. 
 
+* **La educación en linea es una alternativa potencial muy económica a la educación presencial, sobretodo en el contexto de la pandemia.**
+
 ---
 <div style="text-align: justify">
   
@@ -442,10 +444,10 @@ El balance entre el grupo de control y el grupo de tratamiento en el punto de co
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion")
-Media.C<-c("1.006","43.928","1.903")
-Media.T<-c("1.440", "44.620","1.855")
-Diferencia<-c("0.434", "0.692","-0.048")
-Valor.p<-c("0.00000", "0.0176","0.008")
+Media.C<-c("1.721","43.2068","1.903")
+Media.T<-c("1.590", "43.153","1.855")
+Diferencia<-c("-.131", "-.053","-0.048")
+Valor.p<-c("0.119", "0.91","0.138")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
@@ -455,21 +457,23 @@ kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamie
   
 ## Implementación
 
-Ahora, realizaremos nuestra estimación utilizando:
+Ahora, realizaremos nuestra estimacion utilizando:
 
-+ Un ancho de banda *h* de 4.57 para español y 4.18 para matemáticas;
-+ Una función kernel triangular;
++ Un ancho de banda *h* de 4.57 para espanol y 4.18 para matematicas;
++ Una funcion kernel triangular;
 + Errores agrupados a nivel municipal;
 + Punto de corte $c_i$ en 9
 + Polinomio de orden 1 (RD local lineal)
++ Controles
 
-El resultado del coeficiente de $\beta_3$, o el efecto de tratamiento local es de 1.188 en español con una significancia de 0.03, y el de matemáticas de -0.92 con una significancia de 0.94.
+
+El resultado del coeficiente de $\beta_3$, o el efecto de tratamiento local es de 1.17 en espanol con una significancia de 0.04, y el de matematicas de -0.42 con una significancia de 0.975.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out = rdrobust(data$cambio_esp_top,data$cambio_internet, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+Z<-cbind(data$promesc_20, data$pocup_20, data$marg)
+out = rdrobust(data$cambio_esp_top,data$cambio_internet, covs=Z,kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 summary(out)
-out1 = rdrobust(data$cambio_mat_top,data$cambio_internet, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
-summary(out1)
+out1 = rdrobust(data$cambio_mat_top,data$cambio_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 ```
 
 
@@ -494,7 +498,7 @@ out4<-rdplot(data$cambio_mat_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10
   
 ## Interpretación
 
-La interpretación es que, dentro del intervalo de cambio en internet (5,13], el *cambio* en la calificación en espanol promedio de las localidades rurales en el punto de corte sería de 1.188 puntos porcentuales si pasaran de ser del grupo de control al grupo de tratamiento. 
+La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el aumento en el de las calificaciones en espanol promedio de las localidades rurales de control en el punto de corte, seria de 1.17 puntos porcentuales si fueran del grupo de tratamiento.
 
 Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.
 
@@ -553,6 +557,18 @@ Existen autores que detectaron un efecto positivo de la cobertura de Internet en
 
 ---
 
+## Limitaciones
 
+* Establecer un nexo causal entre la Reforma y una mejor conectividad.
+
+* Hasta ahora no hemos investigado si está conectividad es a través de banda ancha o celular, lo cual puede afectar de forma heterogénea a los outcomes educativos
+
+* Sería interesante explorar no solo el cambio en el mayor logro sino también como afecta en el logro más bajo.
+
+* Sería interesante explorar el impacto en localidades urbanas.
+
+* Creemos que para observar un impacto en matemáticas (si esque existe) necesitamos datos de un mayor alcance temporal.
+
+* Por lo pronto, solo exploramos el efecto del acceso a internet pero bien podríamos explorar otras variables relacionadas como tenencia de celular, PC o tablet.
 
 

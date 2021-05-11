@@ -49,13 +49,13 @@ attach(data)
   
 ## Objetivo e Hipótesis
 
-Este trabajo tiene como objetivo determinar:
+**Este trabajo tiene como objetivo determinar:**
 
 * El impacto de la Reforma en Telecomunicaciones del 2013 en México en el desempeño escolar, mediante un aumento en el acceso a Internet de localidades rurales.
 
 * Lo anterior, a partir de que la Reforma impactó positivamente al nivel de competitividad del sector, reflejado en una disminución de los precios de telefonía, aumento de la cobertura, y mejora de calidad del servicio. Esto provocaría una mayor demanda por servicios de Internet en los hogares. 
 
-La hipótesis es: 
+**La hipótesis es:**
   
 * Una mayor conectividad en los hogares de los alumnos causa un aumento en su desempeño escolar, específicamente, en nuestro contexto, en el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de matemáticas y español.   
     
@@ -505,7 +505,7 @@ print(out1$beta_p_l)
 ---
 <div style="text-align: justify">
   
-## Resultados.Relación de hallazgos estudio/bibliografía. 
+### Resultados. Relación de hallazgos estudio/bibliografía. 
 
 Los resultados generales de este trabajo son: 
 

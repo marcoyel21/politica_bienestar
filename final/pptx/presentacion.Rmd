@@ -402,7 +402,6 @@ t.test(pocup_T,pocup_C,alternative="two.sided")
 # marginacion. si son iguales
 t.test(marg_T,marg_C,alternative="two.sided")
 ```
-
 El balance entre el grupo de control y el grupo de tratamiento en el punto de corte es:
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
@@ -412,10 +411,8 @@ Media.T<-c("1.440", "44.620","1.855")
 Diferencia<-c("0.434", "0.692","-0.048")
 Valor.p<-c("0.00000", "0.0176","0.008")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
-kable(dataf, booktabs=T,format = "latex",col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
-
-Dado que las covariables no estan balanceadas dentro del punto de corte y el ancho del intervalo (5,13], no las incluiremos en la estimacion. 
 
 ---
 

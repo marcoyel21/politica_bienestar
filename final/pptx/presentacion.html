@@ -28,17 +28,17 @@ class: center, middle, inverse, title-slide
 
 &lt;div style=&quot;text-align: justify&quot;&gt;
   
-## Objetivo e Hipotesis
+## Objetivo e Hipótesis
 
-Este trabajo tiene como objetivo determinar:
+**Este trabajo tiene como objetivo determinar:**
 
-* El impacto de la Reforma en Telecomunicaciones del 2013 en Mexico en el desempeño escolar, mediante un aumento en el acceso a Internet de localidades rurales.
+* El impacto de la Reforma en Telecomunicaciones del 2013 en México en el desempeño escolar, mediante un aumento en el acceso a Internet de localidades rurales.
 
-* La reforma impacto positivamente al nivel de competitividad del sector, reflejado en una disminucion de los precios de telefonia, aumento de la cobertura, y mejora de calidad del servicio. Esto provocaria una mayor demanda por servicios de Internet en los hogares. 
+* Lo anterior, a partir de que la Reforma impactó positivamente al nivel de competitividad del sector, reflejado en una disminución de los precios de telefonía, aumento de la cobertura, y mejora de calidad del servicio. Esto provocaría una mayor demanda por servicios de Internet en los hogares. 
 
-La hipotesis es: 
+**La hipótesis es:**
   
-* Una mayor conectividad en los hogares de los alumnos causa un aumento en su desempeno escolar, especificamente en nuestro contexto el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de matemáticas y español.  
+* Una mayor conectividad en los hogares de los alumnos causa un aumento en su desempeño escolar, específicamente, en nuestro contexto, en el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de matemáticas y español.   
     
     
 &lt;img src=&quot;data:image/png;base64,#objetivo2.png&quot; width=&quot;800px&quot; height=&quot;100px&quot; style=&quot;display: block; margin: auto;&quot; /&gt;
@@ -48,17 +48,17 @@ La hipotesis es:
 
 ## Introducción. Antecedentes y contexto
 
-El panorama existente antes de la Reforma de 2013 era: 
+**El panorama existente antes de la Reforma de 2013 era:** 
 
-* La alta concentración del mercado en el sector de las telecomunicaciones era una limitante para el crecimiento de la demanda de este. 
+* La alta concentración del mercado en el sector de las telecomunicaciones era una limitante para el crecimiento de su demanda. 
 
-* Los  niveles  de  penetración  de  los  servicios  de  telecomunicaciones  en  la población  se  encontraban  dentro de los más bajos entre los países de la  OCDE.
+* Los niveles de penetración de los servicios de telecomunicaciones en la población se encontraban dentro de los más bajos entre los países de la OCDE.
 
-La Reforma en Telecomunicaciones promulgada en junio del 2013:
+**La Reforma en Telecomunicaciones promulgada en junio del 2013:**
 
-* Convirtio al acceso a Internet en un derecho constitucional. 
+* Convirtió al acceso a Internet en un derecho constitucional. 
 
-* Se enfoco en promover una efectiva competencia con la regulacion asimetrica impuesta al Agente Economico Preponderante, como base para lograr mejor calidad en los servicios, la mejora de precios, y aumentar la cobertura por un mayor numero de competidores, de demanda, y de competencia.
+* Se enfocó en promover una efectiva competencia, como base para lograr mejor calidad en los servicios, la mejora de precios, y aumentar la cobertura por el aumento en el número de competidores y de la demanda.
 
 * Implementó el Programa “México Conectado”, con el fin de llevar Internet de manera gratuita a más de 100 mil espacios públicos de todo el país; lo anterior a través de los llamados “Puntos, México Conectado”.
 
@@ -76,10 +76,11 @@ La Reforma en Telecomunicaciones promulgada en junio del 2013:
 * Derivado de la pandemia, hoy más que nunca resulta importante efectuar la valuación de una política como la de la Reforma, a través del programa “México Conectado”, y la medición de su impacto en la educación, con el fin de identificar áreas de oportunidad y ventanas de mejora. 
 
 ---
+&lt;div style=&quot;text-align: justify&quot;&gt;
+  
+## Metodología: Regresión discontinua
 
-## Metodologia: Regresión discontinua
-
-Nuestra especificacion consiste en:
+Nuestra especificación consiste en:
 
  `$$\delta NivelLogro_i =\beta_0 + \beta_1 (G_i - c) + \beta_2 T_i +\beta_3 (G_i - c) T_i + u_i$$`
 
@@ -100,27 +101,28 @@ T_i =&amp;
 `\(G_i\)`, es la variable definitoria, que en este caso es la tasa de cambio en la adopción de Internet de las localidades 
 
 ---
+&lt;div style=&quot;text-align: justify&quot;&gt;
+  
+## Metodología: Regresión discontinua
 
-## Metodologia: Regresión discontinua
 
+* Para estimar el efecto de tratamiento, se utilizarán observaciones con una `\(G_i\)` cerca a `\(c_i\)`. Se asume que la discontinuidad, o el salto, es el efecto causal.
 
-* Para estimar el efecto de tratamiento, o la `\(\beta_1\)`, se utilizarán observaciones con una `\(G_i\)` cerca a `\(c_i\)`. Se asume que la discontinuidad, o el salto, es el efecto causal.
-
-* Se utilizara un diseno Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un `\(G_i &lt; c\)` serán parte del control y todas las que tengan un valor de `\(G_i &gt;= c\)` del tratamiento. 
+* Se utilizará un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un `\(G_i &lt; c\)` serán parte del control y todas las que tengan un valor de `\(G_i &gt;= c\)` del tratamiento. 
 
 ---
 
 ## Datos
 
 * Se utilizaron las bases:
-    * *Principales resultados por Localidad (ITER)* de la INEGI de los anios 2010 y 2020, 
+    * *Principales resultados por Localidad (ITER)* de la INEGI de los años 2010 y 2020, 
     * Bases de Enlace del 2010 y Planea del 2019. 
 
 * Se empataron las bases de Enlace y la de Localidades en el 2010, la de Planea y localidades en el 2020, y finalmente estas dos se combinaron en una sola
 
-* Las unidades de analisis seran las localidades.
+* Las unidades de análisis serán las localidades.
 
-* La base original consiste en 13,789 observaciones. Al restringir a la muestra a localidades rurales (con poblacion menor a 2,500 habitantes) que hayan participado en ambas evaluaciones (Enlace en 2010 y Planea en 2019), el numero de observaciones se reduce a 11,597 observaciones. 
+* La base original consiste en 13,789 observaciones. Al restringir a la muestra a localidades rurales (con población menor a 2,500 habitantes) que hayan participado en ambas evaluaciones (Enlace en 2010 y Planea en 2019), el número de observaciones se reduce a 11,597 observaciones. 
 
 ---
 
@@ -186,18 +188,18 @@ T_i =&amp;
 &lt;tr class=&quot;even&quot;&gt;
 &lt;td style=&quot;text-align: left;&quot;&gt;Cambio Internet&lt;/td&gt;
 &lt;td style=&quot;text-align: center;&quot;&gt;11,515&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;11.74&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;11.39&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;-12.04&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;2.20&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;18.79&lt;/td&gt;
+&lt;td style=&quot;text-align: center;&quot;&gt;10.72&lt;/td&gt;
+&lt;td style=&quot;text-align: center;&quot;&gt;11.14&lt;/td&gt;
+&lt;td style=&quot;text-align: center;&quot;&gt;&lt;span class=&quot;math inline&quot;&gt;−&lt;/span&gt;25.25&lt;/td&gt;
+&lt;td style=&quot;text-align: center;&quot;&gt;1.91&lt;/td&gt;
+&lt;td style=&quot;text-align: center;&quot;&gt;16.67&lt;/td&gt;
 &lt;td style=&quot;text-align: center;&quot;&gt;85.71&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&quot;odd&quot;&gt;
 &lt;td style=&quot;text-align: left;&quot;&gt;Tratamiento&lt;/td&gt;
 &lt;td style=&quot;text-align: center;&quot;&gt;11,515&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;0.28&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;0.45&lt;/td&gt;
+&lt;td style=&quot;text-align: center;&quot;&gt;0.44&lt;/td&gt;
+&lt;td style=&quot;text-align: center;&quot;&gt;0.50&lt;/td&gt;
 &lt;td style=&quot;text-align: center;&quot;&gt;0&lt;/td&gt;
 &lt;td style=&quot;text-align: center;&quot;&gt;0&lt;/td&gt;
 &lt;td style=&quot;text-align: center;&quot;&gt;1&lt;/td&gt;
@@ -414,7 +416,7 @@ T_i =&amp;
 
 ---
 
-## Regresiones ingenuas- Matemáticas
+## Regresiones Ingenuas- Matemáticas
 
 &lt;table&gt;
 &lt;tbody&gt;
@@ -551,10 +553,11 @@ T_i =&amp;
 
 
 ---
+&lt;div style=&quot;text-align: justify&quot;&gt;
+  
+## Estadísticas descriptivas: RD
 
-## Estadisticas descriptivas: RD
-
-* Realizamos un ajuste polinomial global (linea) y obtuvimos las medias muestrales locales de la distribucion (puntos). 
+* Realizamos un ajuste polinomial global (línea) y obtuvimos las medias muestrales locales de la distribución (puntos). 
 
 * Las medias muestrales locales se construyen a partir de intervalos o *bins* de `\(G_i\)`, calculando la media de la Y para las observaciones que caen dentro de cada intervalo. 
 
@@ -562,7 +565,7 @@ T_i =&amp;
 
 ---
 
-## Estadisticas descriptivas: RD
+## Estadísticas descriptivas: RD
 
 
 .pull-left[
@@ -574,29 +577,30 @@ T_i =&amp;
 ]
 
 ---
-## Eleccion de ancho de banda
+## Elección de ancho de banda
 
-* Posteriormente, verificamos cual es el ancho de banda ideal, *h*. Este controla el ancho de la vecindad alrededor del punto de corte, `\(c_i\)`. 
+* Posteriormente, verificamos cuál es el ancho de banda ideal, *h*. Este controla el ancho de la vecindad alrededor del punto de corte, `\(c_i\)`. 
 
-* Su eleccion es fundamental ya que esta afecta a la forma funcional y la obtencion de los estimadores para calcular el ATE.
+* Su eleccion es fundamental ya que ésta afecta a la forma funcional y la obtención de los estimadores para calcular el LATE.
 
-* El ancho de banda optima con una funcion kernel de tipo triangular, un punto de corte de 9, y orden del polinomio de 1 es de: 
+* El ancho de banda óptima con una función kernel de tipo triangular, un punto de corte de 9, y orden del polinomio de 1 es de: 
     
-    * 4.572 para las calificaciones de espanol
+    * 4.572 para las calificaciones de español
     
-    * 4.183 para las de matematicas
+    * 4.183 para las de matemáticas
 
 
 
 ---
-
+&lt;div style=&quot;text-align: justify&quot;&gt;
+  
 ## Covariables
 
-* Para incluir a las covariables en nuestra estimacion, debemos verificar que no sean distintas en el grupo de tratamiento y de control en el punto de corte. 
+* Para incluir a las covariables en nuestra estimación, debemos verificar que no sean distintas en el grupo de tratamiento y de control en el punto de corte. 
 
-* En caso de que fueran distintas, no se cumpliria el supuesto de continuidad, por lo que se tendrian que imponer restricciones adicionales. 
+* En caso de que fueran distintas, no se cumpliría el supuesto de continuidad, por lo que se tendrían que imponer restricciones adicionales. 
 
-* Realizamos una tabla de balance para verificar que las covariables esten balanceadas en [h-c,c+h]:
+* Realizamos una tabla de balance para verificar que las covariables esten balanceadas en [5,13]:
 
 
 
@@ -641,72 +645,91 @@ El balance entre el grupo de control y el grupo de tratamiento en el punto de co
 &lt;/table&gt;
 
 ---
-
+&lt;div style=&quot;text-align: justify&quot;&gt;
+  
 ## Implementación
 
-Ahora, realizaremos nuestra estimacion utilizando:
+Ahora, realizaremos nuestra estimación utilizando:
 
-+ Un ancho de banda *h* de 4.57 para espanol y 4.18 para matematicas;
-+ Una funcion kernel triangular;
++ Un ancho de banda *h* de 4.57 para español y 4.18 para matemáticas;
++ Una función kernel triangular;
 + Errores agrupados a nivel municipal;
 + Punto de corte `\(c_i\)` en 9
 + Polinomio de orden 1 (RD local lineal)
 
-El resultado del coeficiente de `\(\beta_3\)`, o el efecto de tratamiento local es de 1.188 en espanol con una significancia de 0.03, y el de matematicas de -0.92 con una significancia de 0.94.
+El resultado del coeficiente de `\(\beta_3\)`, o el efecto de tratamiento local es de 1.188 en español con una significancia de 0.03, y el de matemáticas de -0.92 con una significancia de 0.94.
 
 
 
 
 ---
 
-## Visualizacion del modelo
+## Visualización del modelo
 
 .pull-left[
-
-```
-## [1] &quot;Mass points detected in the running variable.&quot;
-```
-
 ![](data:image/png;base64,#presentacion_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-
-```
-## [1] &quot;Mass points detected in the running variable.&quot;
-```
-
 ![](data:image/png;base64,#presentacion_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 ]
 
 ---
+&lt;div style=&quot;text-align: justify&quot;&gt;
+  
+## Interpretación
 
-## Interpretacion
+La interpretación es que, dentro del intervalo de cambio en internet (5,13], el *cambio* en la calificación en espanol promedio de las localidades rurales en el punto de corte sería de 1.188 puntos porcentuales si pasaran de ser del grupo de control al grupo de tratamiento. 
 
-La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el cambio de las calificaciones en espanol promedio de las localidades rurales aumenta en 1.188 puntos porcentuales por tener acceso a Internet. 
-
-Este coeficiente representa a la diferencia en los puntajes en espanol de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* estan por debajo del punto de corte, que es de 2.93 pp.
+Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.
 
 
 ---
-
-## Resultados
+  
+### Resultados. Relación de hallazgos estudio/bibliografía.
 
 &lt;div style=&quot;text-align: justify&quot;&gt;
   
-  + Relación hallazgos con bibliográfía 
-  + Aportación del trabajo
+Los resultados generales de este trabajo son: 
 
+- En las localidades rurales en las que hubo un incremento en la conectividad hay un aumento en la proporción de estudiantes de tercero de secundaria que pasaron de nivel bajo a nivel alto en el puntaje de español.
+
+- No hay evidencia de relación causal entre el incremento en la conectividad y el desempeño de los estudiantes en matemáticas. 
+
+Existen autores que detectaron un efecto positivo de la cobertura de Internet en el desempeño de los estudiantes, pero otros no encuentran efecto alguno. 
+
+- **Grimes y Townsend (2017):** Efecto positivo pero bajo, en tasas de aprobación de las escuelas primarias en Nueva Zelanda.
+- **Bessone, Dahis, Ho. (2020):** No hay ningún efecto de internet móvil en las puntuaciones de las pruebas de portugués y matemáticas en los estudiantes de Brasil.
+- **Malamud, Cueto, Cristia y Beuermann (2019):** Efecto positivo en cierre de brecha de habilidades digitales pero no hubo efectos significativos en el rendimiento de las matemáticas y la lectura. 
+
+---
+  
+## Resultados. ¿Cuál es la aportación del trabajo?
+
+&lt;div style=&quot;text-align: justify&quot;&gt;
+
+- Generar una investigación para México sobre los efectos de un mayor acceso a Internet, derivado de la Reforma en Telecomunicaciones en 2013, sobre el desempeño escolar.  
+
+- El enfoque de la investigación: acotada a estudiantes de tercero de secundaria de localidades rurales.
+
+- La metodología implementada en el presente trabajo: método de regresión discontinua. 
+
+- Las bases de datos utilizadas: Bases de datos de Enlace y Localidades en 2010 junto con la de Planea y Localidades de 2020. 
 
 
 ---
-
+&lt;div style=&quot;text-align: justify&quot;&gt;
+  
 ## Conclusiones
 
-+ Se comprueba la hipótesis
-+ Aportación
-+ Trabajo + Trabajo futuro
-+ Aplicación en PP o privada
+**¿Se comprueba la hipótesis?**  Se comprueba la hipótesis de que una mayor conectividad en los hogares de los alumnos causa un aumento en el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de español, no así en las de matemáticas. 
+
+**Aportaciones al lector:** Se suele dar por sentado que el acceso a Internet mejora por si mismo el desempeño educativo; en este trabajo se brinda al lector otra perspectiva de esta afirmación. 
+
+**¿Qué queda por hacer?** Para la entrega final nos gustaría extender el análisis al grupo más bajo de la distribución en logros escolares, y analizar también el impacto de tener una computadora en el desempeño educativo, y si no es posible, este sería el punto de partida para futuros investigadores. 
+
+**¿Hay algo de tu trabajo que sirva para una política pública o privada?** De acuerdo a los hallazgos, es posible observar una variedad de vías para futuras investigaciones. Si el acceso a internet es sólo una condición necesaria pero no suficiente para mejorar la educación, entonces es crucial entender si complementar las políticas públicas análogas puede ser el eslabón perdido.
+
 
 ---
 

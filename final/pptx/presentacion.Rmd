@@ -476,13 +476,13 @@ summary(out1)
 ## Visualización del modelo
 
 .pull-left[
-```{r, message= F, warning = F} 
+```{r, message= F, warning = F,results='hide'} 
 out3<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10,40),title="",x.label="Cambio Internet",y.label="Cambio Espanol", kernel = "triangular",c=9,h=4.572 ,p=1 , binselect = "qspr")
 ```
 ]
 
 .pull-right[
-```{r, message= F, warning = F} 
+```{r, message= F, warning = F,results='hide'} 
 out4<-rdplot(data$cambio_mat_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10,40),title="",x.label="Cambio Internet",y.label="Cambio Espanol", kernel = "triangular",c=9,h=4.183 ,p=1 , binselect = "qspr")
 ```
 ]

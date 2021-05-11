@@ -505,8 +505,7 @@ print(out1$beta_p_l)
 ---
 <div style="text-align: justify">
   
-## Resultados. 
-####Relación de hallazgos del estudio con los de la bibliografía. 
+## Resultados. ####Relación de hallazgos del estudio con los de la bibliografía. 
 
 Los resultados generales de este trabajo son: 
 

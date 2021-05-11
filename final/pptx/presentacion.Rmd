@@ -51,9 +51,9 @@ Este trabajo tiene como objetivo determinar:
 
 * El impacto de la Reforma en Telecomunicaciones del 2013 en Mexico en el desempeño escolar, mediante un aumento en el acceso a Internet de localidades rurales.
 
-Las hipotesis son: 
+* La reforma impacto positivamente al nivel de competitividad del sector, reflejado en una disminucion de los precios de telefonia, aumento de la cobertura, y mejora de calidad del servicio. Esto provocaria una mayor demanda por servicios de Internet en los hogares. 
 
-* La Reforma en Telecomunicaciones de 2013 impacto positivamente al nivel de competitividad del sector, reflejado en una disminucion de los precios de telefonia, aumento de la cobertura, y mejora de calidad del servicio. Esto provocaria una mayor demanda por servicios de Internet en los hogares. 
+La hipotesis es: 
   
 * Una mayor conectividad en los hogares de los alumnos causa un aumento en su desempeno escolar, especificamente en nuestro contexto el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de matemáticas y español.  
     
@@ -73,10 +73,9 @@ El panorama existente antes de la Reforma de 2013 era:
 
 * Los  niveles  de  penetración  de  los  servicios  de  telecomunicaciones  en  la población  se  encontraban  dentro de los más bajos entre los países de la  OCDE.
 
-
 La Reforma en Telecomunicaciones promulgada en junio del 2013:
 
-* El acceso a Internet se convirtió en un derecho constitucional. 
+* Convirtio al acceso a Internet en un derecho constitucional. 
 
 * Se enfoco en promover una efectiva competencia con la regulacion asimetrica impuesta al Agente Economico Preponderante, como base para lograr mejor calidad en los servicios, la mejora de precios, y aumentar la cobertura por un mayor numero de competidores, de demanda, y de competencia.
 
@@ -97,11 +96,11 @@ La Reforma en Telecomunicaciones promulgada en junio del 2013:
 
 ---
 
-## Modelo: Regresión discontinua
+## Metodologia: Regresión discontinua
 
 Nuestra especificacion consiste en:
 
- $$\delta NivelLogro_i =\beta_0 + \beta_1 T_i + \beta_2 G_i +\beta_3 X_i  + u_i$$
+ $$\delta NivelLogro_i =\beta_0 + \beta_1 (G_i - c) + \beta_2 T_i +\beta_3 (G_i - c) T_i + u_i$$
 
 donde
 
@@ -115,26 +114,32 @@ T_i =&
 
 $i$ indica la localidad, y:
 
-$T_i$ es la variable de tratamiento, la cual está determinada por un límite, o punto $c_i$ de la variable definitoria, que será de 15 pp
+$T_i$ es la variable de tratamiento, la cual está determinada por un límite, o punto $c_i$ de la variable definitoria, que será de 9 pp
 
 $G_i$, es la variable definitoria, que en este caso es la tasa de cambio en la adopción de Internet de las localidades 
 
 ---
 
-## Modelo: Regresión discontinua
+## Metodologia: Regresión discontinua
 
 
-Para estimar el efecto de tratamiento, o la $\beta_1$, se utilizarán observaciones con una $G_i$ cerca a $c_i$. Se asume que la discontinuidad, o el salto, es el efecto causal.
+* Para estimar el efecto de tratamiento, o la $\beta_1$, se utilizarán observaciones con una $G_i$ cerca a $c_i$. Se asume que la discontinuidad, o el salto, es el efecto causal.
 
-Se utilizara un diseno Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
+* Se utilizara un diseno Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
 
 ---
 
 ## Datos
 
-Las bases de datos que utilizamos son las de *Principales resultados por Localidad (ITER)* de la INEGI de los anios 2010 y 2020, asi como de las bases de Enlace del 2010 y Planea del 2019. Se empataran las bases de Enlace y la de Localidades en el 2010, la de Planea y localidades en el 2020, y finalmente estas dos se combinaran en una sola donde las unidades de analisis seran las localidades, con informacion de los dos puntos del tiempo.
+* Se utilizaron las bases:
+    * *Principales resultados por Localidad (ITER)* de la INEGI de los anios 2010 y 2020, 
+    * Bases de Enlace del 2010 y Planea del 2019. 
 
-La base original consiste en 13,789 observaciones. Al restringir a la muestra a localidades rurales (con poblacion menor a 2,500 habitantes) que hayan participado en ambas evaluaciones (Enlace en 2010 y Planea en 2019), el numero de observaciones se reduce a 11,597 observaciones. 
+* Se empataron las bases de Enlace y la de Localidades en el 2010, la de Planea y localidades en el 2020, y finalmente estas dos se combinaron en una sola
+
+* Las unidades de analisis seran las localidades.
+
+* La base original consiste en 13,789 observaciones. Al restringir a la muestra a localidades rurales (con poblacion menor a 2,500 habitantes) que hayan participado en ambas evaluaciones (Enlace en 2010 y Planea en 2019), el numero de observaciones se reduce a 11,597 observaciones. 
 
 ---
 
@@ -320,90 +325,57 @@ tex2markdown(textable)
 
 ## Estadisticas descriptivas: RD
 
-En el contexto de RD, hacer un scatterplot simple de los datos no es beneficioso, ya que no permite distinguir los saltos en los datos. Los datos deben agregarse, o suavizarse antes de graficarse. En las siguientes gráficas se muestra un ajuste polinomial global (línea) y las medias muestrales locales (puntos).
+* Realizamos un ajuste polinomial global (linea) y obtuvimos las medias muestrales locales de la distribucion (puntos). 
 
-El ajuste polinomial es una aproximacion suavizada basada en regresiones polinomiales de cuarto o quinto orden de la variable dependiente, separada en control y tratamiento. 
+* Las medias muestrales locales se construyen a partir de intervalos o *bins* de $G_i$, calculando la media de la Y para las observaciones que caen dentro de cada intervalo. 
 
-Las medias muestrales locales se construyen a partir de intervalos o *bins* de $G_i$, calculando la media de la Y para las observaciones que caen dentro de cada intervalo. En este caso utilizaremos el método cuantil-espaciado, en el que cada bin tendrá el mismo número de observaciones usando regresiones polinomiales. Esto para ver más "fielmente" cómo se comporta $G_i$.
+* En este caso utilizaremos el método cuantil-espaciado, en el que cada bin tendrá el mismo número de observaciones usando regresiones polinomiales. 
 
 ---
-
-A analizar los datos de esta forma obtenemos los siguientes graficos. Podemos notar que una aproximacion lineal llevaria a errores de especificacion. 
 
 .pull-left[
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
-out7<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="",c=15,kernel="triangular", binselect = "qspr")
+out7<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
 ```
 ]
 
 .pull-right[
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
-out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="",c=15,kernel="triangular", binselect = "qspr")
+out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
 ```
 ]
 
 ---
+## Eleccion de ancho de banda
 
-Posteriormente, verificamos cual es el ancho de banda ideal, *h*. Este controla el ancho de la vecindad alrededor del punto de corte, $c_i$. Su eleccion es fundamental ya que esta afecta a la forma funcional y a obtencion de los estimadores para calcular el ATE; os resultados suelen ser muy sensibles a este valor. Si las observaciones cerca del punto de corte se acercan a una forma lineal, podemos usar un orden menor a 4 o 5.
+* Posteriormente, verificamos cual es el ancho de banda ideal, *h*. Este controla el ancho de la vecindad alrededor del punto de corte, $c_i$. 
 
-Verificaremos cual es el ancho de banda optima si queremos realizar una estimacion con regresion kernel de tipo triangular, un corte de 15, y orden del polinomio de 1:
+* Su eleccion es fundamental ya que esta afecta a la forma funcional y la obtencion de los estimadores para calcular el ATE.
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+* El ancho de banda optima con una funcion kernel de tipo triangular, un punto de corte de 9, y orden del polinomio de 1 es de: 
+    
+    * 4.572 para las calificaciones de espanol
+    
+    * 4.183 para las de matematicas
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,include=FALSE}
 out = rdbwselect(cambio_esp_top, cambio_internet,c=9, kernel = "triangular", p = 1, bwselect = "mserd")
+out2 = rdbwselect(cambio_esp_top, cambio_internet,c=9, kernel = "triangular", p = 1, bwselect = "mserd")
 summary(out)
+summary(out2)
 ```
-
-Elegimos la funcion de kernel triangular ya que esta es la recomendada para este tipo de analisis, ya que proporciona estimadores puntuales que minimizan al error cuadrado medio.
-
----
-
-En el caso de matematicas:
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out = rdbwselect(cambio_mat_top, cambio_internet,c=9, kernel = "triangular", p = 1, bwselect = "mserd")
-summary(out)
-```
-
-Observamos que en el caso de espa;ol *h* es de 5 y en matematicas de 6. 
-
----
-
-Al incorporar los anchos de banda adecuados, las distribuciones se ven asi:
-
-.pull-left[
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10,40),title="",x.label="Cambio Internet",y.label="Cambio Espanol", kernel = "triangular",c=9,h=4.572 ,p=1 , binselect = "qspr")
-```
-]
-
-.pull-right[
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out<-rdplot(data$cambio_mat_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10,40),title="",x.label="Cambio Internet",y.label="Cambio Espanol", kernel = "triangular",c=9,h=4.183 ,p=1 , binselect = "qspr")
-```
-]
 
 ---
 
 ## Covariables
 
-Para incluir a las covariables en nuestra estimacion, debemos verificar que no sean distintas en el grupo de tratamiento y de control en el punto de corte (+/- el ancho de banda). En caso de que fueran distintas, no se cumpliria el supuesto de continuidad, por lo que se tendrian que imponer restricciones adicionales. 
+* Para incluir a las covariables en nuestra estimacion, debemos verificar que no sean distintas en el grupo de tratamiento y de control en el punto de corte. 
 
-Definimos a las covariables: 
+* En caso de que fueran distintas, no se cumpliria el supuesto de continuidad, por lo que se tendrian que imponer restricciones adicionales. 
 
-\begin{align*}
-Z_i =& 
-  \begin{cases}
-    1, & G_i \geq c \\
-    0, & G_i < c
-  \end{cases}
-\end{align*}
-
-Donde Zi(1) y Zi(0) denotan dos vectores de covariables de potenciales- Zi(1) representa el valor que toman las covariables arriba del punto de corte (tratamiento) y Zi(0) los respectivos del control. Se asume que el valor de las covariables fue determinado antes del tratamiento, por lo que su efecto de tratamiento es cero. 
-
----
-Realizamos una tabla de balance para verificar que las covariables esten balanceadas en [h-c,c+h]:
+* Realizamos una tabla de balance para verificar que las covariables esten balanceadas en [h-c,c+h]:
 
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}
 # Ahora vamos a ver si covariates son iguales en el punto de corte
@@ -412,18 +384,18 @@ data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2,
 as.numeric(data$marg)
 ```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-#este es con un ancho de banda de 5
-marg_C<-(data$marg[cambio_internet>=9 & cambio_internet<=14])
-marg_T<-(data$marg[cambio_internet>=15 & cambio_internet<=20])
-promesc_C<-(data$promesc_20[cambio_internet>=9 & cambio_internet<=14])
-promesc_T<-(data$promesc_20[cambio_internet>=15 & cambio_internet<=20])
-pocup_C<-(data$pocup_20[cambio_internet>=9 & cambio_internet<=14])
-pocup_T<-(data$pocup_20[cambio_internet>=15 & cambio_internet<=20])
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include= FALSE}
+#este es con un ancho de banda de 4
+marg_C<-(data$marg[cambio_internet>=10 & cambio_internet<=14])
+marg_T<-(data$marg[cambio_internet>=15 & cambio_internet<=19])
+promesc_C<-(data$promesc_20[cambio_internet>=10 & cambio_internet<=14])
+promesc_T<-(data$promesc_20[cambio_internet>=15 & cambio_internet<=19])
+pocup_C<-(data$pocup_20[cambio_internet>=10 & cambio_internet<=14])
+pocup_T<-(data$pocup_20[cambio_internet>=15 & cambio_internet<=19])
 ```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-#prom esc es igual en tratamiento y control en el punto de corte (con un bandwidth de 5)
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+#prom esc es igual en tratamiento y control en el punto de corte (con un bandwidth de 4)
 t.test(promesc_T,promesc_C,alternative="two.sided")
 #Pob ocupada si es igual en el punto de corte (con un bandwidth de 8)
 t.test(pocup_T,pocup_C,alternative="two.sided")
@@ -443,12 +415,7 @@ dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactor
 kable(dataf, booktabs=T,format = "latex",col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
 
-
-Dado que las covariables no estan balanceadas dentro del punto de corte y el ancho del intervalo [c-h,c+h], no las incluiremos en la estimacion. Segun Cattaneo et al (2017), la especificacion 
-
-$$\delta NivelLogro_i =\beta_0 + \beta_1 T_i + \beta_2 G_i + u_i$$
-
-es suficiente para el analisis que queremos llevar a cabo.
+Dado que las covariables no estan balanceadas dentro del punto de corte y el ancho del intervalo (5,13], no las incluiremos en la estimacion. 
 
 ---
 
@@ -456,23 +423,35 @@ es suficiente para el analisis que queremos llevar a cabo.
 
 Ahora, realizaremos nuestra estimacion utilizando:
 
-+ Un ancho de banda *h* de 8 para espanol y 7 para matematicas;
++ Un ancho de banda *h* de 4.57 para espanol y 4.18 para matematicas;
 + Una funcion kernel triangular;
 + Errores agrupados a nivel municipal;
-+ Punto de corte $c_i$ en 15
++ Punto de corte $c_i$ en 9
 + Polinomio de orden 1 (RD local lineal)
+
+El resultado del coeficiente de $\beta_3$, o el efecto de tratamiento local es de 1.188 en espanol con una significancia de 0.03, y el de matematicas de -0.92 con una significancia de 0.94.
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out = rdrobust(data$cambio_esp_top,data$cambio_internet, kernel = "triangular", c=15,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out)
+out1 = rdrobust(data$cambio_mat_top,data$cambio_internet, kernel = "triangular", c=15,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out1)
+```
+
+
+---
+
+## Visualizacion del modelo
 
 .pull-left[
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out = rdrobust(data$cambio_esp_top,data$cambio_internet, kernel = "triangular", c=15,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
-summary(out)
+out3<-rdplot(data$cambio_esp_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10,40),title="",x.label="Cambio Internet",y.label="Cambio Espanol", kernel = "triangular",c=9,h=4.572 ,p=1 , binselect = "qspr")
 ```
 ]
 
 .pull-right[
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out1 = rdrobust(data$cambio_mat_top,data$cambio_internet, kernel = "triangular", c=15,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
-summary(out1)
+out4<-rdplot(data$cambio_mat_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10,40),title="",x.label="Cambio Internet",y.label="Cambio Espanol", kernel = "triangular",c=9,h=4.183 ,p=1 , binselect = "qspr")
 ```
 ]
 
@@ -480,24 +459,14 @@ summary(out1)
 
 ## Interpretacion
 
-La interpretacion es que, dentro del intervalo de cambio en internet [15-5,15+5], el cambio de las calificaciones en espanol promedio de las localidades rurales aumenta en .846 puntos porcentuales por tener acceso a Internet. 
+La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el cambio de las calificaciones en espanol promedio de las localidades rurales aumenta en 1.188 puntos porcentuales por tener acceso a Internet. 
 
-Este coeficiente representa a la diferencia en los puntajes en espanol de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.18 pp, menos el de las localidades que *apenas* estan por debajo del punto de corte, que es de 3.32 pp.
+Este coeficiente representa a la diferencia en los puntajes en espanol de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* estan por debajo del punto de corte, que es de 2.93 pp.
 
-En el caso de matematicas, esta diferencia viene de la puntuacion del grupo de tratamiento en la vecindad del punto de corte, que es de 6.71 pp, menos el de control, que es de 4.59 pp.
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,include=FALSE}
 print(out$beta_p_r)
-```
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 print(out$beta_p_l)
-```
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 print(out1$beta_p_r)
-```
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 print(out1$beta_p_l)
 ```
 ---
@@ -521,21 +490,6 @@ print(out1$beta_p_l)
 + Aplicación en PP o privada
 
 ---
-
-## Posibles cambios
-
-+ Cambiar la variable dependiente a "proporcion de alumnos que cambiaron de *bottom* a *top*
-
-+ Cambiar la variable independiente a cambio de proporcion de hogares que tienen Internet junto con adquisicion de computadoras, laptops o tablets
-
-+ Anadir variable de control de region
-
-
----
-
-
-
-
 
 
 

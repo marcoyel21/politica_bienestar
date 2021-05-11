@@ -1,5 +1,5 @@
 ---
-title: "Evaluación de impacto de la Reforma en Telecomunicaciones del 2013 en logro educativo en México"
+title: "Evaluación del impacto de un mayor acceso a internet y computadora en el logro educativo en México"
 author: "Cynthia Valdivia, Samantha Cervantes, Marco Ramos"
 date: "Mayo 2021"
 output:
@@ -51,9 +51,11 @@ attach(data)
 
 **Este trabajo tiene como objetivo determinar:**
 
-* El impacto de la Reforma en Telecomunicaciones del 2013 en México en el desempeño escolar, mediante un aumento en el acceso a Internet de localidades rurales.
+* El impacto de un mayor acceso a internet y tecnología en México en el desempeño escolar, mediante un aumento en el acceso a internet y computadora en localidades rurales.
 
 * Lo anterior, a partir de que la Reforma impactó positivamente al nivel de competitividad del sector, reflejado en una disminución de los precios de telefonía, aumento de la cobertura, y mejora de calidad del servicio. Esto provocaría una mayor demanda por servicios de Internet en los hogares. 
+
+* Además contribuyeron otras variables como un mayor acceso a la tecnología de manera generalizada, independientemente de la Reforma.
 
 **La hipótesis es:**
   

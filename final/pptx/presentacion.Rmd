@@ -492,7 +492,7 @@ out4<-rdplot(data$cambio_mat_top,data$cambio_internet,nbins=c(20,20),x.lim=c(-10
   
 ## Interpretación
 
-La interpretación es que, dentro del intervalo de cambio en internet (5,13], el cambio de las calificaciones en español promedio de las localidades rurales aumenta en 1.188 puntos porcentuales por tener acceso a Internet. 
+La interpretación es que, dentro del intervalo de cambio en internet (5,13], el *cambio* en la calificación en espanol promedio de las localidades rurales en el punto de corte sería de 1.188 puntos porcentuales si pasaran de ser del grupo de control al grupo de tratamiento. 
 
 Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.
 

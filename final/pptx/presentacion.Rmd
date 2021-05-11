@@ -505,13 +505,14 @@ print(out1$beta_p_l)
 ---
 <div style="text-align: justify">
   
-## Resultados. Relación de hallazgos del estudio con los de la bibliografía. 
+## Resultados. 
+####Relación de hallazgos del estudio con los de la bibliografía. 
 
 Los resultados generales de este trabajo son: 
 
-•	En las localidades rurales en las que hubo un incremento en la conectividad hay un aumento en la proporción de estudiantes de tercero de secundaria que pasaron de nivel bajo a nivel alto en el puntaje de español.
+- En las localidades rurales en las que hubo un incremento en la conectividad hay un aumento en la proporción de estudiantes de tercero de secundaria que pasaron de nivel bajo a nivel alto en el puntaje de español.
 
-•	No hay evidencia de relación causal entre el incremento en la conectividad y el desempeño de los estudiantes en matemáticas. 
+- No hay evidencia de relación causal entre el incremento en la conectividad y el desempeño de los estudiantes en matemáticas. 
 
 A partir de la revisión de la literatura, se observa que existen autores que detectaron un efecto positivo de la cobertura de Internet en el desempeño de los estudiantes, aunque no muy grande, pero otros no encuentran efecto alguno. 
 

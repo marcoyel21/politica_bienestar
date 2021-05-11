@@ -1,5 +1,5 @@
 ---
-title: "Evaluación del impacto de un mayor acceso a internet y computadora en el logro educativo en México"
+title: "Evaluación del impacto de una mayor conectividad en el logro educativo en México"
 author: "Cynthia Valdivia, Samantha Cervantes, Marco Ramos"
 date: "Mayo 2021"
 output:
@@ -51,7 +51,7 @@ attach(data)
 
 **Este trabajo tiene como objetivo determinar:**
 
-* El impacto de un mayor acceso a internet y tecnología en México en el desempeño escolar, mediante un aumento en el acceso a internet y computadora en localidades rurales.
+* El impacto de un mayor acceso a internet y tecnología en México en el desempeño escolar, mediante un aumento en el acceso a internet en localidades rurales.
 
 * Lo anterior, a partir de que la Reforma impactó positivamente al nivel de competitividad del sector, reflejado en una disminución de los precios de telefonía, aumento de la cobertura, y mejora de calidad del servicio. Esto provocaría una mayor demanda por servicios de Internet en los hogares. 
 

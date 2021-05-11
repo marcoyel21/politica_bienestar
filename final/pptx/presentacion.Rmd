@@ -73,7 +73,7 @@ knitr::include_graphics("objetivo2.png")
 
 * La alta concentración del mercado en el sector de las telecomunicaciones era una limitante para el crecimiento de su demanda. 
 
-* Los niveles de penetración de los servicios de telecomunicaciones en la población se encontraban dentro de los más bajos entre los paísesde la OCDE
+* Los niveles de penetración de los servicios de telecomunicaciones en la población se encontraban dentro de los más bajos entre los países de la OCDE.
 
 **La Reforma en Telecomunicaciones promulgada en junio del 2013:**
 

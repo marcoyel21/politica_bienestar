@@ -127,7 +127,7 @@ $G_i$, es la variable definitoria, que en este caso es la tasa de cambio en la a
 ## Metodología: Regresión discontinua
 
 
-* Para estimar el efecto de tratamiento, o la $\beta_1$, se utilizarán observaciones con una $G_i$ cerca a $c_i$. Se asume que la discontinuidad, o el salto, es el efecto causal.
+* Para estimar el efecto de tratamiento, se utilizarán observaciones con una $G_i$ cerca a $c_i$. Se asume que la discontinuidad, o el salto, es el efecto causal.
 
 * Se utilizará un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
 
@@ -141,7 +141,7 @@ $G_i$, es la variable definitoria, que en este caso es la tasa de cambio en la a
 
 * Se empataron las bases de Enlace y la de Localidades en el 2010, la de Planea y localidades en el 2020, y finalmente estas dos se combinaron en una sola
 
-* Las unidades de analisis serán las localidades.
+* Las unidades de análisis serán las localidades.
 
 * La base original consiste en 13,789 observaciones. Al restringir a la muestra a localidades rurales (con población menor a 2,500 habitantes) que hayan participado en ambas evaluaciones (Enlace en 2010 y Planea en 2019), el número de observaciones se reduce a 11,597 observaciones. 
 
@@ -385,7 +385,7 @@ out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim
 
 * Posteriormente, verificamos cuál es el ancho de banda ideal, *h*. Este controla el ancho de la vecindad alrededor del punto de corte, $c_i$. 
 
-* Su eleccion es fundamental ya que ésta afecta a la forma funcional y la obtención de los estimadores para calcular el ATE.
+* Su eleccion es fundamental ya que ésta afecta a la forma funcional y la obtención de los estimadores para calcular el LATE.
 
 * El ancho de banda óptima con una función kernel de tipo triangular, un punto de corte de 9, y orden del polinomio de 1 es de: 
     
@@ -409,7 +409,7 @@ summary(out2)
 
 * En caso de que fueran distintas, no se cumpliría el supuesto de continuidad, por lo que se tendrían que imponer restricciones adicionales. 
 
-* Realizamos una tabla de balance para verificar que las covariables esten balanceadas en [h-c,c+h]:
+* Realizamos una tabla de balance para verificar que las covariables esten balanceadas en [5,13]:
 
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,include=FALSE}
 # Ahora vamos a ver si covariates son iguales en el punto de corte

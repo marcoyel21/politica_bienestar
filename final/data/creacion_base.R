@@ -68,7 +68,7 @@ censo_10_localidad<-censo_10 %>%
 
 censo_10_localidad <- as.data.frame(t(apply(censo_10_localidad,1,toupper)))
 
-
+#nuevas variables porc_viv_luz popindig_10_real, niñas_12_14_esc, ambito, inter_pc_internet
 
 names(censo_10_localidad)[names(censo_10_localidad) == "Entidad"] <- "NOM_ENT"
 names(censo_10_localidad)[names(censo_10_localidad) == "Municipio"] <- "NOM_MUN"

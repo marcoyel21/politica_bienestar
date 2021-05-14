@@ -358,16 +358,32 @@ data<-as.data.frame(merge(censos,planeas_del_10_al_19, by= c("INEGI"))) %>%
                         cambio_esp_top=esp_IV_19-esp_IV_10,
                         cambio_mat_bottom=mat_1_19-mat_1_10,
                         cambio_mat_top=mat_IV_19-mat_IV_10,
-                        inter_pc_internet= cambio_pc*cambio_internet)
+                        inter_pc_internet= cambio_pc*cambio_internet,
+                        region= ifelse(ClaveEnt %in% c(9,12,13,15,17,21,29,20),'Centro',
+                                (ifelse(ClaveEnt %in% c(1,6,11,14,16,18,22,24,32), "Occidente",
+                                (ifelse(ClaveEnt %in% c(2,3,8,5,10,19,25,26,28),"Norte", "Sudeste"))))))
 
 summary(data$cambio_internet) #notamos que el cambio de internet estuvo cañon
 summary(data$cambio_pc)  #notamos que el cambio de pc no tanto
+summary(factor(data$region))
+#Agrego regiones
+#claves<-data %>% select(ClaveEnt,NOM_ENT.y.y,NOM_ENT.x.x,NOM_ENT.y.x,NOM_ENT.x.y)%>% group_by(ClaveEnt)%>%
+  #summarize(Nombre1 = Mode(NOM_ENT.y.y),Nombre2 = Mode(NOM_ENT.x.x),Nombre3= Mode(NOM_ENT.y.x),Nombre4 = Mode(NOM_ENT.x.y))
+#1	Región Centro (Ciudad de México, Guerrero, Hidalgo, Estado de México, Morelos, Puebla, Tlaxcala y Oaxaca)
+#9|12|13|15|17|21|29|20
+#2	Región Centro Occidente (Aguascalientes, Colima, Guanajuato, Jalisco, Michoacán de Ocampo, Nayarit, Querétaro, San Luis Potosí y Zacatecas)
+#1|6|11|14|16|18|22|24|32
+#3	Región Norte (Baja California, Baja California Sur, Chihuahua, Coahuila, Durango, Nuevo León, Sinaloa, Sonora y Tamaulipas)
+#2|3|8|5|10|19|25|26|28
+#4	Región Sureste (Campeche, Chiapas, Quintana Roo, Tabasco, Veracruz de Ignacio de la Llave y Yucatán)
+#4|7|23|27|30|31
 
-hist(data$inter_pc_internet)
 #________________________
 #GUARDO BASE FINAL
 #________________________
 
 write_csv(data,"data.csv")
-summary(data)
+
+
+
 

@@ -55,154 +55,259 @@ lapply(packages,
 
 ```
 
-
-\begingroup
-\fontsize{24}{50}\selectfont
-**¿Brecha de género o sesgo por variables omitidas? - Un análisis con métodos cuasiexperimentales sobre la inclusión financiera en México**
-\endgroup
-
-**Resumen ejecutivo**
-\begin{spacing}{1} En este ensayo se hace un análisis de la ENIF 2018 desde un enfoque de métodos cuasiexperimentales con el fin de detectar sesgos en la encuesta y de cuantificar el efecto de la discriminación de género en la inclusión financiera. Debido a que la diferencia de medias simple en indicadores financieros entre ambos sexos tiene el potencial de sobrestimar el efecto de la discriminación, se empleo la técnica de matching, o pareo, para producir estimaciones con menor sesgo en cuanto a la diferencia por género en tenencia de una cuenta bancaria, fondo para el retiro, algún seguro y crédito o tarjeta de crédito. En primer lugar, se encontró que existe un menos-reporte de respuestas por parte de personas rezagadas financieramente, de los cuáles el 75\% corresponde a mujeres. En segundo lugar, se encontró que el género es todavía un factor determinante en el acceso a servicios y productos financieros, en particual, la diferencia es grande en cuanto a tenencia de un fondo para el retiro, sin embargo la diferencia de medias simple en casi todos los casos sobrestimó el efecto de la discriminación atribuible al sector financiero. Ambos son hallazgos importantes a considerar para los investigadores interesados en sesgos muestrales; aquellos que trabajen con modelos econométricos estimados a partir de la ENIF 2018; estudiantes, investigadores y demás ususarios de la encuesta; y, finalmente, para aquellos que estén a cargo de las estrategias en la inclusión financiera con perspectiva de género. En la medida en que otros factores determinantes en la inclusión financiera estén previamente relacionadas con el género, una diferencia de medias simple estaría subestimando o sobrestimando el efecto real de la discriminación, o dicho de otra manera, no se estaría identificando al efecto de la discriminación atribuible exclusivamente al sistema financiero sino que se estarían mezclando otros factores de índole estructural y en las cuales el sistema financiero tiene capacidad limitada de incidencia. Identificar en cuales variables el efecto real de la discriminación es mayor y en cuales menor permitirá concentrar esfuerzos en aquellas áreas donde el potencial de incidencia es mayor.
-
-\end{spacing}
-
-**Palabras clave** 
-
-*género, discriminación, causalidad, sesgo, métodos cuasiexperimentales*
-
-
-**Número de palabras totales:**
-
-2,434
-
-\newpage
-\tableofcontents
-\newpage
-
-
 # Introducción
 
-Es bien reconocido que es difícil obtener estimaciones insesgadas sobre la brecha de género en inclusión financiera debido a la calidad de los datos disponibles, la falta de comparabilidad entre los datos de cada país (incluso dentro de cada país) y debido al poco conocimiento que existe de métodos adecuados[@inegis]. Uno de los estimadores más populares[@enif] es la simple diferencia de medias entre hombres y mujeres en variables relacionadas con la inclusión, la cuál tiene el potencial de ser un indicador del efecto real de la discriminación (o como se conoce en estadística, un estimador insesgado) siempre y cuando otros factores que pudieran afectar a los promedios no estén previamente relacionados con el género[@Angrist2008].
+# Datos
 
-Es decir, la discriminación sería completamente atribuible al sector financiero siempre y cuando un hombre y una mujer con caracterísitcas similares (por ejemplo, mismo ingreso y escolaridad) tengan un acceso diferenciado a una cuenta bancaria, una tarjeta de crédito, un fondo para el retiro, un seguro, etc. En la medida en que otros factores determinantes en la inclusión financiera esten previamente relacionadas con el sexo, se estaría subestimando o sobrestimando el efecto real de la discriminación, o dicho de otra manera, no se estaría identificando al efecto de la discriminación atribuible exclusivamente al sistema financiero sino que se estarían mezclando otros factores de índole estructural y en las cuales los actores del sistema financiero tienen una capacidad limitada de incidencia. 
+datos...
 
-Por ejemplo, supongamos que para ser contratada en un banco es necesario contar con licenciatura terminada. Si existen más hombres que mujeres con licenciatura terminada y hacemos una comparación de medias (porcentaje de hombres contratados del total que aplican contra porcentaje de mujeres) encontraríamos que más hombres son contratados sencillamente porque son más. Sin embargo esto poco dice sobre el efecto de discriminación atribuible al banco. Supongamos que ahora comparamos el porcentaje de hombres contratados del total de hombres que aplican con licenciatura terminada frente al porcentaje de mujeres contratadas del total de mujeres con las mismas características, en este caso si la media es la misma, pues no existiría evidencia de discriminación. Por el contrario, si encontramos que el 50% de los hombres con licenciatura son contratados pero que solo el 20% de mujeres con las mismas caracterísitcas lo están, entonces sí existiría evidencia de un efecto de discriminación atribuible al banco.
-
-Este tipo de comparación se basa en dos conceptos torales de la econometría que sirven para intentar atribuir causalidad, el *ceteris paribus* o todo lo demás constante y el contrafactual. En cuanto al primero, el *ceteris paribus* implica que la comparación que estamos haciendo está logrando aislar el efecto que queremos observar de todos los efectos presentes. Por ejemplo, supongamos que queremos medir el efecto de un año más de estudios en el ingreso de las personas pero notamos que las personas con un año más también realizaron determinada certificación. En este caso, para aislar solo el efecto del año necesitaríamos buscar información de personas que hayan completado el año pero que no hayan realizado la certificación o bien que ya tenían la certificación desde antes. 
-
-El segundo, se refiere a que para poder atribuir causalidad necesitamos conocer el "qué hubiera pasado". Por ejemplo si mi hijo hubiese sido hija, ¿habría estudiado la misma licenciatura?. Evidentemente, el contrafactual necesita más imaginación y es imposible de conocer con certeza. Sin embargo, podemos tener una aproximación si comparamos grupos de personas muy similares, por ejemplo, podría darme una idea viendo la licenciatura que eligieron estudiar las mujeres que provienen de familias similares a la mia[@Angrist2008].
-
-Debido a que existen muchas brechas de género en distintos temas como educación, trabajo, salud y casi cualquier dimensión de la existencia humana[@unodp2020], se espera que cualquier diferencia de medias sobrestime el efecto real de la discriminación en la inclusión financiera. La única manera de poder saber si existe un efecto causal del ser mujer en una menor inclusión es mediante la aleatorización de la asignación del género en las personas donde dicha aleatorización lograría que la relación entre caracterísitcas previas de las personas y su sexo desaparecíera. Para esto necesitaríamos que a todas las personas hoy se les reasginara su género por ejemplo aventando una moneda, lo cual es evidentemente imposible. Sin embargo, en los últimos años la econometría  ha desarrollado métodos capaces de simular en mayor o menor medida estos escenarios. A estos métodos se les conoce como cuasiexperimentales y han estado detrás de muchos descubrimientos causales en la economía, sobretodo en temas como pobreza[@Duflo2009], educación, microfinanzas y discriminación[@Chattopadhyay2004].
-
-En temas de discriminación, los enfoques cuasiexperimentales han logrado ser muy útiles y exitosos para estimar efectos verdaderos de la discriminación además de poder identificar sesgos y sus tamaños. El ejemplo por excelencia es la investigación de Marianne Bertrand y Sendhil Mullainathan en la que intentan conocer el efecto de la discriminación racial laboral en EEUU[@Bertrand2004]. Para ello, crearon CVs ficticios, con características sociodemográficas, educativas y de competencias aleatorias; además, les asignaron de manera aleatoria un nombre ficticio, que podía ser un nombre común de persona blanca o un nombre común de persona negra; finalmente, enviaron los CVs a diferentes empresas de diferentes industrias en diferentes ciudades y contaron las llamadas de regreso que recibían para una entrevista. De esta manera, lograron que la calidad de los CVs no dependiera de la supuesta etnicidad de la persona además de que las características de los destinatarios estaban balanceadas con el fin de minimizar cualquier sesgo. Los investigadores encontraron que las personas blancas tenían 50% más de probabilidad de recibir una llamada de regreso y que dicha probabilidad era más sensible a la calidad del CV en personas blancas que en negras. Por ello, concluyen que el efecto de la discriminación es real sin embargo es mucho menor al que normalmente se estima con una diferencia de medias.
+## Estadísticas descriptivas - variables de interés
 
 # Metodología
 
-Existen métodos para asegurar o simular la aleatorización ex ante y ex post la implementación de un experimento o encuesta. Como la ENIF 2018 ya se levantó, usaremos un método ex post. En este ensayo, optaremos por usar el método llamado pareo, o *matching*, en la base de datos de la ENIF 2018 para evaluar las diferencias en promedios de variables importantes de la inclusión financiera **(tenencia de algún crédito o tarjeta de crédito, de cuenta bancaria, de algún seguro y de AFORE).** 
+Algo del esquema, framework los datos 
 
-El método consiste en primer lugar, en encontrar algunas variables que estén relacionas con la variable de interés. pero que también estén determinadas en mayor o menor medida por el sexo (por ejemplo, ingreso y educación), las cuáles tienen distribuciones diferentes para hombres y mujeres ; en segundo lugar, en que para cada mujer en la base de datos se va a encontrar al hombre más parecido en dichas características, este hombre será su "pareja"^[En nuestra especificación como queremos un *matching* lo más parecido posible, es posible que un hombre sea la pareja de varias mujeres.] (por ejemplo para una mujer con ingreso de 16,000 y con Maestría se va le va a asignar a un hombre con el mismo ingreso y mismo grado académico); finalmente, se reestima la diferencia de medias pero solamente entre el grupo de mujeres y el grupo de parejas. De esta manera, este nuevo estimador solo compara mujeres contra hombres muy similares y se minimizan los sesgos por discriminación estructural[@Abadie2016].
+Si usáramos una regresión MCO, habría muchos factores de confusión como... Esto podría impliciar un problema de variables omitidas o de endogeneidad. Esto se puede solucionar usando un diseño de regresión discontinua. Esta soluciona la endogeneidad de nuestro contexto tomando una ventana alrededor de la media de adopción de Internet.. En este intervalo, podemos asumir que los factores no observados influenciando la adopción de Internet son similares, por lo que las observaciones antes del punto de corte son unbuen contrafactual de las que están después de este. (@ ... davis)
+
+Formalmente, estimamos con una regresión discontinua local lineal (?) weighted or least square?
+
+ $$\delta NivelLogro_i =\beta_0 + \beta_1 (G_i - c) + \beta_2 T_i +\beta_3 (G_i - c) T_i +\beta_4 Xi + u_i$$
+ 
+donde $i$ es un indicador de la localidad. 
+
+En nuestra especificación, tendremos dos variables dependientes $\delta NivelLogro_i$. En el primer caso, la variable indica el cambio en la proporción de alumnos en el nivel más alto de logro de la evaluación del 2010 al 2019 (el IV) de cada escuela. A estos los llamamos con fines de abreviación los "top". La segunda variable dependiente indica el cambio en la proporción de alumnos en el nivel más bajo (el I), en el mismo período de tiempo. A estos los indicamos como los "bottom". Como se mencionó anteriormente, los resultados por escuela se agregaron a nivel localidad.
+
+$G_i$, es la variable definitoria, o la que definirá la discontinuidad. Tendremos dos en nuestro análisis. 
+
+* Tasa de cambio en la proporción de hogares de las localidades de acceso a Internet 
+
+* Tasa de cambio en la proporción de hogares de adopción de Internet junto con adquisición de computadora, laptop, o tablet.
+
+Ambos cambios son de los Principales Resultados por Localidad (ITER) del 2010 al 2020. 
+
+$T_i$ es la variable de tratamiento, donde
+
+\begin{align*}
+T_i =& 
+  \begin{cases}
+    1, & G_i \geq c \\
+    0, & G_i < c
+  \end{cases}
+\end{align*}
+
+Tendremos cuatro puntos de corte $c$, donde ocurre la discontinuidad, resultados de combinar las dos variables dependientes con las dos variables definitorias. Estas son:
+
+#### falta
+```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,results='hide'}
+#hacer un kable o algo
+
+```
+
+Para estimar el efecto de tratamiento, se asume que la discontinuidad, o el salto, es el efecto causal.
+
+$X_i$ es nuestro vector de covariables de las localidades, que incluye a una variable dummy indicadora de la región del país, nivel de marginación, proporción de niñas en edad ... respecto a... , población indígena.... , proporción de hogares de la localidad con acceso a Internet, proporción de población ocupada, y años promedio de escolaridad de la localidad.
+
+La elección de esas variables... (@doc del senado) (@world bank pagina 7)
+
+
+Se utilizará un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
+
+
+## Estadísticas descriptivas - regresión discontinua
+
+```{r,include=FALSE, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
+#Creamos variable de tratamiento y recodificamos la de marginacion
+data<-data[which(pobtot<2500),]
+data$cp_15pp<-as.numeric(ifelse(data$cambio_internet<15,0,1))
+data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
+                  'MEDIA'=1)
+as.numeric(data$marg)
+data <- data[(data$promesc_20<20), ]
+attach(data)
+```
+Los métodos de regresentación gráfica de datos usuales para hacer estadísticas descriptvias, por ejemplo los *scatter plots*, no son tan convenientes en el contexto de RD, ya que no permite ver las discontinuidades en el punto de corte que elijamos (@ Cattaneo). Para ver esto en el caso de nuestros datos, ver Anexo 1.
+
+Para poder hacer una adecuada visualización de los datos, vamos a mostrarlos de forma agregada o suavizada con dos métodos en una sola gráfica. El primero es el del ajuste polinomial global (la línea), y el segundo el de medias condicionales locales (los puntos). El polinomio global es un ajuste de cuarto o quinto orden en dos partes: antes y después del corte. Las medias locales condicionales se crean al particionar a las observaciones en bandas y posteriormente calculando la media de cada uno. 
+
+Hay dos tipos de bandas que se pueden usar para construir estas gráficas: las *equidistantes* o las *cuantilespaciadas* (@Cattaneo). Decidimos utilizar el segundo, ya que en el caso de las bandas equidistantes, de no haber un número balanceado de observaciones en cada una, se aumentaría mucho la varianza. En cambio, las bandas cuantilespaciadas tienen el mismo número de observaciones en cada una, por la que serán comparables entre ellas. Asimismo, representan a la densidad de las observaciones respecto a la variable definitoria (la cual tiene menos observaciones en los extremos), por lo que es una representación "más fiel" de los datos. Dado que el rango de las X son de -100 a 100, usamos 20 bandas de cada lado. 
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+out7<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+out7<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+```
+]
+
+Podemos notar que en general, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar .... saltos positivos en el punto de la discontinuidad, lo que podría indicar o preveer (?) efectos de tratamiento positivos: el cambio de los "tops" será positivo al tener acceso a Internet, mientras que el de los bottoms sería negativo en el grupo de tratamiento. 
+
+# Implementación
+
+## Elección de bando de ancha 
+
+Antes de implementar los modelos, debemos de elegir el ancho de banda óptimo alrededor de nuestro punto de corte, $h$. Su eleccion es fundamental ya que ésta afecta a la forma funcional y la obtención de los estimadores para calcular el LATE. El ancho de banda óptimo será el resultado de un "trade-off" entre sesgo (o error de especificación, por tener anchos de banda grandes, que podría hacer que una especificación lineal ya no fuera la mejor) y varianza (por tener menos observaciones en las bandas) para el efecto de tratamiento.
+
+Los anchos de banda que utilizaremos para implementar nuestro modelo son:
+
+
+## Covariables
+
+Como último paso antes de realizar nuestro análisis, verificamos que las covariables enlistadas anteriormente estén balanceadas *en el punto de corte*. En caso de no serlo, no se podría asumir el supuesto de continuidad de los resultados potenciales. Entonces, para incluirlos se tendrían que hacer supuestos paramétricos o cambiar los parámetros de interés.
+
+Para verificar esto, realizamos una tabla de balance:
+
+
+```{r,include=FALSE, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
+
+```
+En la cual podemos observar que ............
 
 
 
-En cuanto a las variables que se eligieron para emparejar están principalmente aquellas pertenecientes a las secciones I,II y III referentes a características sociodemográficas del hogar y la persona entrevistada de la ENIF  (y algunas variables de las demás secciones relevantes a comportamiento financieros). Esto es lo ideal pues en los métodos cuasiexperimentales siempre es preferible crear controles con base en datos basales[@Abadie2016]. Es decir, la pareja de cada mujer será el hombre que tenga los valores más similares a ella en las variables elegidas. A continuación se muestra una tabla con las variables para el *matching*.
+## Modelos
 
+Nuestro principal interés es estimar el efecto de tratamiento alrededor del punto de corte. El método del polinomio global que mencionamos anteriormente no da aproximaciones óptimas en el intervalo alrededor del corte, ya que si se toma a toda la muestra de datos da peso a observaciones lejanas a las del punto de corte. 
 
+Por esto, utilizaremos el método de polinomio local, el cual solo toma en cuenta a la forma funcional de las observaciones alrededor del punto de corte y sus anchos de banda. En este caso, utilizaremos un ajuste lineal. Por esto la importancia de la elección de ancho de banda. 
+
+El método de ponderación que utilizaremos es el de kernel triangular. De esta forma nos aseguramos de que las observaciones más cerca del punto de corte pesen más. Además, es la función recomendadad dado que provee estimaciones óptimas en cuanto a errores cuadrados medios. (@Cattaneo).
+
+### ojo cambiar las variables X y Y
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+Z<-cbind(data$promesc_20, data$pocup_20, data$marg)
+out = rdrobust(data$cambio_esp_top,data$cambio_internet,title="Tabla 1. Cambio español "top" vs cambio Internet, covs=Z,kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out1 = rdrobust(data$cambio_mat_top,data$cambio_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out2 = rdrobust(data$cambio_esp_bottom,data$cambio_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out3 = rdrobust(data$cambio_mat_bottom,data$cambio_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out4 = rdrobust(data$cambio_esp_top,data$,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out5 = rdrobust(data$cambio_mat_top,data$,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out6 = rdrobust(data$cambio_esp_bottom,data$,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out6 = rdrobust(data$cambio_mat_bottom,data$,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+VER SI SE PUEDE HACER SUMMARY(RDROBUST
+```
+
+POdemos ver que... La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el aumento en el de las calificaciones en espanol promedio de las localidades rurales de control en el punto de corte, seria de 1.17 puntos porcentuales si fueran del grupo de tratamiento.
+
+Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,include=FALSE}
+print(out$beta_p_r)
+print(out$beta_p_l)
+print(out1$beta_p_r)
+print(out1$beta_p_l)
+```
+
+## Resultados gráficos
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+```
+]
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+```
+]
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+
+bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+
+```
+]
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+
+```
+]
 
 
 # Resultados
 
-## Comparación de medias simple
-
-En primer lugar, creamos la comparación de medias simple para que sirva de punto de referencia para las demás estimaciones. En la tabla podemos observar que el 54% de los hombres tiene un AFORE frente al 33% de las mujeres; 29% un crédito o tarjeta de crédito frente al 28%; el 49% una cuenta bancaria frente al 38%; y el 29% algún seguro frente al 21% de las mujeres. De esta tabla podemos concluir que bajo la comparación de medias simple las mujeres están rezagadas en mayor o menor medida en las 4 variables de interés, siendo la tenencia de AFORE la diferencia más grande con 21 puntos porcentuales. Asimismo, en cuanto a tenencia de crédito o tarjeta de crédito la diferencia es de tan solo 1 punto porcentual y no es estadísticamente significativa.
-
-
-En las siguientes secciones estimaremos la diferencia de medias mediante el pareo de observaciones, primero asignando una pareja a cada mujer de la ENIF y luego, asignando una pareja para cada hombre. De esta manera evaluaremos la diferencia de medias entre las mujeres y su contrafactual; y posteriormente, entre los hombres y el suyo.
-
-## Detección de sesgo en valores faltantes de la ENIF
-
-Antes de proceder a la estimación final, cabe recalcar que las variables que podemos encontrar en la ENIF 2018 muchas veces vienen con una gran cantidad de valores faltantes. En este caso, una cantidad considerable de observaciones de mujeres carecían de información relacionada a ingreso, una variable muy importante para el pareo que se propuso, Por ello, a continuación se muestran las estimaciones para el pareo de mujeres y hombres omitiendo las observaciones con valores faltantes.
-
-
-\begin{table}[!htbp] \centering 
-  \caption{Regresión entre valores faltantes y variables de interés para mujeres} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-\\[-1.8ex] & Cuenta & Crédito & Seguro & Afore \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
-\hline \\[-1.8ex] 
- Valores faltantes & $-$0.259$^{***}$ & $-$0.132$^{***}$ & $-$0.113$^{***}$ & $-$0.263$^{***}$ \\ 
-  & (0.011) & (0.011) & (0.010) & (0.011) \\ 
-  & & & & \\ 
- Constante & 0.512$^{***}$ & 0.351$^{***}$ & 0.272$^{***}$ & 0.469$^{***}$ \\ 
-  & (0.008) & (0.008) & (0.007) & (0.008) \\ 
-  & & & & \\ 
-\hline \\[-1.8ex] 
-Observaciones & 6,807 & 6,807 & 6,807 & 6,807 \\ 
-R$^{2}$ & 0.071 & 0.022 & 0.019 & 0.078 \\ 
-R$^{2}$ ajustada & 0.071 & 0.021 & 0.019 & 0.078 \\ 
-Error estandar residual (gl = 6805) & 0.467 & 0.446 & 0.406 & 0.453 \\ 
-Estadístico F (gl = 1; 6805) & 523.713$^{***}$ & 149.830$^{***}$ & 132.089$^{***}$ & 574.494$^{***}$ \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Nota:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-
-
-\begin{table}[!htbp] \centering 
-  \caption{Regresión entre valores faltantes y variables de interés para hombres} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-\\[-1.8ex] & Cuenta & Crédito & Seguro & Afore \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
-\hline \\[-1.8ex] 
- Valores faltantes & $-$0.054$^{***}$ & $-$0.055$^{***}$ & $-$0.028$^{*}$ & $-$0.221$^{***}$ \\ 
-  & (0.016) & (0.015) & (0.015) & (0.016) \\ 
-  & & & & \\ 
- Constante & 0.504$^{***}$ & 0.305$^{***}$ & 0.300$^{***}$ & 0.586$^{***}$ \\ 
-  & (0.007) & (0.007) & (0.007) & (0.007) \\ 
-  & & & & \\ 
-\hline \\[-1.8ex] 
-Observaciones & 5,639 & 5,639 & 5,639 & 5,639 \\ 
-R$^{2}$ & 0.002 & 0.002 & 0.001 & 0.032 \\ 
-R$^{2}$ ajustada & 0.002 & 0.002 & 0.0004 & 0.032 \\ 
-Error estandar residual (gl) & 0.500 & 0.455 & 0.456 & 0.490 \\ 
-Estadístico F (gl = 1; 5637) & 10.650$^{***}$ & 13.788$^{***}$ & 3.525$^{*}$ & 187.900$^{***}$ \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Nota:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-
-Lo que podemos observar es que tanto para hombres como para mujeres existe una relación negativa estadísticamente significativa entre la presencia de valores faltantes y las variables de inclusión financiera.  Sin embargo, en el caso de las mujeres, la relación es mucho más fuerte. Por ejemplo, el solo hecho de no haber brindado ninguna información de ingreso disminuye la probabilidad de tener cuenta en 25.9 puntos porcentuales para mujeres y 5.4 en hombres; la de tener crédito en 13.2 para mujeres y 5.5 en hombres; la de tener algún seguro en 11.3 para mujeres y 2.8 para hombres; y finalmente, la de contar con un AFORE en 26.3 para mujeres y 22.1  para hombres.
-
-Esto quiere decir que nuestra estimación de pareo, al omitir las observaciones con valores faltantes en el ingreso, está ignorando desproporcionadamente más a las mujeres excluidas financieramente que a los hombres y en consecuencia está estimando de manera muy optimista la diferencia de medias: la estimación está sesgada
-
-## Estimación con matching con la ENIF completa
-
-Habiendo detectado un sesgo en la información, el siguiente paso es corregir. En este sentido, al haber identificado que las personas que no respondieron información en realidad son mujeres y hombres con mayor probabilidad de ser financieramente excluidos, les imputamos un ingreso de 0 (lo cual no tiene sentido económico pero tiene sentido para el pareo pues mujeres con ingreso cero encontrarán ahora su contraparte en hombres quienes también tengan ingreso 0 y las demás variables sociodemográficas similares).
-
-
-En esta última tabla podemos notar la diferencia de medias dependiendo cada enfoque. En cuanto a tenencia de AFORE, notamos que la comparación sencilla está sobrestimando el efecto de la discriminación desde en 3 hasta en 9 puntos porcentuales, aunque el efecto de la discriminación es sin duda positivo y de almenos 12 puntos porcentuales. 
-
-En cuanto a la tenencia de algún crédito o tarjeta de crédito encontramos que no hay un efecto discriminatorio en contra de las mujeres bajo ninguna métrica pues en ninguna de las comparaciones la diferencia es diferente a 0 de manera estadísticamente significativa.
-
-En cuanto a tenencia de algún seguro notamos que sí hay un efecto de discriminación de almenos 3 puntos porcentuales sin embargo la diferencia de medias simple está sobrestimando el efecto real desde en 1 punto hasta en 5 puntos porcentuales.
-
-Finalmente en cuanto a tenencia de cuenta bancaria notamos que el efecto no es claro. Mientras que el pareo de mujeres parece indicar que la diferencia de medias sencilla está subestimando la discriminación, la diferencia en el pareo de hombres indica que no hay un efecto de discriminación. Esto quiere decir que la discriminación en el acceso a una cuenta bancaria de las mujeres con respecto a sus contrafacutales hombres depende mucho de donde se encuentren en la distribución de características sociodemográficas y que dicha diferencia va desde 13 puntos hasta 0 puntos porcentuales.
 
 
 # Conclusión
 
-En conclusión, se encontró  que existe un sesgo en contra de las mujeres en cuanto a los valores faltantes en la ENIF con respecto a información relacionada con ingreso y otras variables de interés en el tema de inclusión, particularmente contra las mujeres rezagadas en la inclusión financiera. Este es un hallazgo importante a considerar para los investigadores interesados en sesgos muestrales, aquellos que trabajen con modelos econométricos estimados a partir de la ENIF 2018, estudiantes, investigadores y otros usuarios de la encuesta y para los diseñadores e implementadores mismos de la encuesta.
+# Anexos
 
-Asimismo, se encontró que el género es todavía un factor determinante en el acceso a servicios y productos financieros, sobretodo en la tenencia de un fondo de ahorro para el retiro, sin embargo, encontramos que la diferencia de medias simple en general sobrestima el efecto atribuible al sector financiero de la discrminación (salvo en cuanto a la tenencia de cuenta bancaria en donde no es claro si se sobrestima o se subestima).
-
-# Referencias
+# Bibliografía 
 
 
 

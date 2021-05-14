@@ -33,14 +33,15 @@ knitr::opts_chunk$set(echo = FALSE, comment = NA, message = FALSE, warning=FALSE
 
 ```{r, include=FALSE}
 packages <- c(
-  "MatchIt",
-  "dplyr",
-  'stargazer',
-  'foreign',
-  'fastDummies',
-  'RCT',
-  'kableExtra'
+  "stargazer",
+  "readr",
+  'rdrobust',
+  'dplyr',
+  'kableExtra',
+  'ggplot2',
+  'ggthemes'
   )
+
 
 # instala los que no tengas
 installed_packages <- packages %in% rownames(installed.packages())
@@ -52,6 +53,9 @@ if (any(installed_packages == FALSE)) {
 lapply(packages,
        library,
        character.only = TRUE)
+
+#cargo datos
+data<-read_csv("data/data.csv")
 
 ```
 
@@ -142,13 +146,13 @@ Se utilizará un diseño Sharp, ya que la asignación a tratamiento es determin�
 ## Estadísticas descriptivas - regresión discontinua
 
 ```{r,include=FALSE, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
-#Creamos variable de tratamiento y recodificamos la de marginacion
-data<-data[which(pobtot<2500),]
+#Creamos variable de tratamiento (ambito rural) y recodificamos la de marginacion
+data<-data%>% filter(Ambito=='R')
 data$cp_15pp<-as.numeric(ifelse(data$cambio_internet<15,0,1))
 data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
                   'MEDIA'=1)
 as.numeric(data$marg)
-data <- data[(data$promesc_20<20), ]
+data <- data[(data$promesc_20<20), ] #SAM_COMMENT: QUE HACE ESO?
 attach(data)
 ```
 Los métodos de regresentación gráfica de datos usuales para hacer estadísticas descriptvias, por ejemplo los *scatter plots*, no son tan convenientes en el contexto de RD, ya que no permite ver las discontinuidades en el punto de corte que elijamos (@ Cattaneo). Para ver esto en el caso de nuestros datos, ver Anexo 1.
@@ -157,31 +161,112 @@ Para poder hacer una adecuada visualización de los datos, vamos a mostrarlos de
 
 Hay dos tipos de bandas que se pueden usar para construir estas gráficas: las *equidistantes* o las *cuantilespaciadas* (@Cattaneo). Decidimos utilizar el segundo, ya que en el caso de las bandas equidistantes, de no haber un número balanceado de observaciones en cada una, se aumentaría mucho la varianza. En cambio, las bandas cuantilespaciadas tienen el mismo número de observaciones en cada una, por la que serán comparables entre ellas. Asimismo, representan a la densidad de las observaciones respecto a la variable definitoria (la cual tiene menos observaciones en los extremos), por lo que es una representación "más fiel" de los datos. Dado que el rango de las X son de -100 a 100, usamos 20 bandas de cada lado. 
 
+## ANALISIS PARA INTERNET
+
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
+#TOP ESP INTERNET
 out7<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
 ```
 ]
 
 .pull-right[
 ```{r, message= F, warning = F,results='hide'} 
-out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+#TOP MAT INTERNET
+
+out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=21,kernel="triangular", binselect = "qspr")
 ```
 ]
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
-out7<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+#BOTTOM ESP INTERNET
+out7<- rdplot(cambio_esp_bottom,cambio_internet,nbins=c(20,20), x.lim=c(-1,35),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=3,kernel="triangular", binselect = "qspr")
 ```
 ]
 
 .pull-right[
 ```{r, message= F, warning = F,results='hide'} 
-out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+#BOTTOM MAT INTERNET
+
+out7<- rdplot(cambio_mat_bottom,cambio_internet,nbins=c(20,20), x.lim=c(0,40),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=6,kernel="triangular", binselect = "qspr")
 ```
 ]
 
 Podemos notar que en general, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar .... saltos positivos en el punto de la discontinuidad, lo que podría indicar o preveer (?) efectos de tratamiento positivos: el cambio de los "tops" será positivo al tener acceso a Internet, mientras que el de los bottoms sería negativo en el grupo de tratamiento. 
+
+## ANALISIS PARA PC:INTERNET
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+#TOP ESP INTERNET:PC
+#SAM_COMMENT: AQUI PARECE QUE ES MAS FUZZY
+out7<- rdplot(cambio_esp_top,inter_pc_internet,nbins=c(20,20),x.lim=c(0,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+#TOP MAT INTERNET
+#SAM _COMMENT; ESTA RELACION SI ES EVIDENTE
+out7<- rdplot(cambio_mat_top,inter_pc_internet,nbins=c(20,20),x.lim=c(0,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=17,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+#BOTTOM ESP INTERNET:PC
+
+out7<- rdplot(cambio_esp_bottom,inter_pc_internet,nbins=c(20,20), x.lim=c(-5,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=3,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+#BOTTOM MAT INTERNET:PC
+
+out7<- rdplot(cambio_mat_bottom,inter_pc_internet,nbins=c(20,20), x.lim=c(-5,100),y.lim=c(-5,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=17,kernel="triangular", binselect = "qspr")
+```
+]
+
+NOTAMOS QUE EN MATE SE REUIQERE UN PUNTO DE CORTE MAS GRANDE PARA VER UN CAMBIO, SIN EMBARGO EL SIGNO DE LA DIFERENCIA ES EL ESPERADO. PARECE QUE PC Y INTERNET VAN EN LA MISMA DIRECCION
+
+
+## ANALISIS PARA PC:INTERNET
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+#TOP ESP PC
+#SAM_COMMENT: AQUI PARECE QUE ES MAS FUZZY
+out7<- rdplot(cambio_esp_top,cambio_pc,nbins=c(20,20),x.lim=c(-1,17),y.lim=c(-3,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=11,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+#TOP MAT PC
+#SAM _COMMENT; ESTA RELACION SI ES EVIDENTE
+out7<- rdplot(cambio_mat_top,cambio_pc,nbins=c(20,20),x.lim=c(-3,15),y.lim=c(-3,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=4,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+#BOTTOM ESP PC
+
+out7<- rdplot(cambio_esp_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c(-10,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=1.1,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+#BOTTOM MAT PC
+
+out7<- rdplot(cambio_mat_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c(-2,12),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+```
+]
+
+CONCLUSION: EN PC POR SI SOLO LAS RELACIONES NO SON TAN CLARAS PERO LO INTERESANTE ES QUE PC:INTER SI NOS DA MAS INSIGHT
 
 # Implementación
 

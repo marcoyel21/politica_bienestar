@@ -45,23 +45,30 @@ censo_10_localidad<-censo_10 %>%
          Localidad, ClaveLoc,
          pobtot,vivpar_hab,vph_inter,
          vivtot,vph_pc,phog_ind,p15ym_se,
-         graproes,pocupada,psinder,tothog,hogjef_f,  #COVARIATES
+         graproes,pocupada,psinder,tothog,hogjef_f, #COVARIATES primera generacion
+         vph_c_elec,p3ym_hli,         #COVARIATES segunda generacion
+         p12a14noaf,#total 12-14 no asiste muj
+         p_12a14_f,#total 12-14 
+         Ambito,
          vph_cel,tam_loc,
          vph_inter,vivtot,vph_pc) %>% 
   mutate(internet_10= vph_inter*100/vivtot,
          pc_10 =vph_pc*100/vivtot,
          pobindig_10=phog_ind*100/pobtot,
+         popindig_10_real=p3ym_hli*100/pobtot,
          p15sinesc_10=p15ym_se*100/pobtot,
          promesc_10=graproes*100/pobtot,
          pocup_10=pocupada*100/pobtot,
          psinsalud_10=psinder*100/pobtot,
          jefmujer_10=hogjef_f*100/vivtot,
-         cel_10=vph_cel*100/vivtot)
+         cel_10=vph_cel*100/vivtot,
+         porc_viv_luz=vph_c_elec*100/vivtot,
+         niñas_12_14_esc= (p_12a14_f-p12a14noaf)*100/p_12a14_f)
 #OJO: 84,690 MISSING VALUES PROVENIENTES DE LA BASE DE DATOS 
 
 censo_10_localidad <- as.data.frame(t(apply(censo_10_localidad,1,toupper)))
 
-# cambio nombres
+
 
 names(censo_10_localidad)[names(censo_10_localidad) == "Entidad"] <- "NOM_ENT"
 names(censo_10_localidad)[names(censo_10_localidad) == "Municipio"] <- "NOM_MUN"
@@ -144,9 +151,6 @@ censo_10_localidad<-censo_10_localidad%>%
 #MERGE
 censos<-merge(censo_10_localidad,censo_20_localidad, by= "INEGI")
 
-```
-
-```{r}
 #________________________
 #ANALISIS CENSOS
 #________________________
@@ -353,15 +357,17 @@ data<-as.data.frame(merge(censos,planeas_del_10_al_19, by= c("INEGI"))) %>%
                         cambio_esp_bottom=esp_1_19-esp_1_10,
                         cambio_esp_top=esp_IV_19-esp_IV_10,
                         cambio_mat_bottom=mat_1_19-mat_1_10,
-                        cambio_mat_top=mat_IV_19-mat_IV_10)
+                        cambio_mat_top=mat_IV_19-mat_IV_10,
+                        inter_pc_internet= cambio_pc*cambio_internet)
 
 summary(data$cambio_internet) #notamos que el cambio de internet estuvo cañon
 summary(data$cambio_pc)  #notamos que el cambio de pc no tanto
 
+hist(data$inter_pc_internet)
 #________________________
 #GUARDO BASE FINAL
 #________________________
 
 write_csv(data,"data.csv")
-
+summary(data)
 

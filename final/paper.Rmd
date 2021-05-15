@@ -372,24 +372,23 @@ summary(out7)
 ```
 Resultados cambio itnernet
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-Row<-c("Δ español top","Δ matemáticas top","Δ español bottom","Δ matemáticas bottom")
+Row<-c("Cambio español top","Cambio matemáticas top","Cambio español bottom","Cambio matemáticas bottom")
 cut<-c("9","21","3","6")
 bw<-c("4.55","7.692","2.882","4.837")
 pointe<-c("1.235","1.996","-3.914","-0.567")
 pval<-c("0.031","0.182","0.102",".816")
-ci<-c("[0.03,2.67]","[-1.50 , 25.61]","[-10.24,1.19]","[-5.902,5.488]")
-dataf<-data.frame(Row,bw,pointe,pval,ci, stringsAsFactors=TRUE)
+ci<-c("[0.03 , 2.67]","[-1.50 , 25.61]","[-10.24 , 1.19]","[-5.902 , 5.488]")
+dataf<-data.frame(Row,cut,bw,pointe,pval,ci, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual",
-                                    "Valor-p","IC 95% robustos",caption = "Resultados")) %>% 
-  kable_styling(position = "center") 
+                                    "Valor-p","IC 95% robustos"),caption = "Resultados") %>%  kable_styling(position = "center") 
 
 ```
 
 Resultados cambio internet y pc intersect
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-Row<-c("Δ español top","Δ matemáticas top","Δ español bottom","Δ matemáticas bottom")
+Row<-c("Cambio español top","Cambio matemáticas top","Cambio español bottom","Cambio matemáticas bottom")
 cut<-c("9","17","3","17")
 bw<-c("37.309","35.984","38.146","41.53")
 pointe<-c("1.252","3.277","-3.855","-2.818")
@@ -398,10 +397,11 @@ ci<-c("[0.445 , 1.991]","[1.226 , 5.316]","[-6.797 , -1.239]","[-7.064 , 1.591]"
 dataf<-data.frame(Row,cut,bw,pointe,pval,ci, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual",
-                                    "Valor-p","IC 95% robustos",caption = "Resultados")) %>% 
+                                    "Valor-p","IC 95% robustos"),caption = "Resultados") %>% 
   kable_styling(position = "center") 
 
 ```
+
 POdemos ver que... La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el aumento en el de las calificaciones en espanol promedio de las localidades rurales de control en el punto de corte, seria de 1.17 puntos porcentuales si fueran del grupo de tratamiento.
 
 Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.

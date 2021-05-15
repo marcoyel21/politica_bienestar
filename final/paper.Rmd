@@ -415,66 +415,49 @@ print(out1$beta_p_l)
 
 ## Resultados gráficos
 
-.pull-left[
-```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(cambio_esp_top, cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(cambio_esp_top[abs(cambio_internet) <= bandwidth],cambio_internet[abs(cambio_internet) <= bandwidth],p = 1, kernel = "triangular")
-```
-]
 
-.pull-right[
-```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(cambio_mat_top, cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(cambio_mat_top[abs(cambio_internet) <= bandwidth], cambio_internet[abs(cambio_internet) <= bandwidth],p = 1, kernel = "triangular")
-```
-]
 
-.pull-left[
-```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(cambio_esp_bottom, cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(cambio_esp_top[abs(cambio_internet) <= bandwidth], cambio_internet[abs(cambio_internet) <= bandwidth],p = 1, kernel = "triangular")
-```
-]
-
-.pull-right[
-```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(cambio_mat_bottom,cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(cambio_mat_top[abs(cambio_internet) <= bandwidth], cambio_internet[abs(cambio_internet) <= bandwidth],p = 1, kernel = "triangular")
-```
-]
-
-.pull-left[
-```{r, message= F, warning = F,results='hide'} 
-
-bandwidth = rdrobust(cambio_esp_top, inter_pc_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(cambio_esp_bottom[abs(inter_pc_internet) <= bandwidth], inter_pc_internet[abs(inter_pc_internet) <= bandwidth],p = 1, kernel = "triangular")
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+out = rdplot(data$cambio_esp_top,data$cambio_internet,kernel = "triangular", c=9,p = 1,x.lim=c(5,13),y.lim=c(0,7.5))
 
 ```
-]
 
-.pull-right[
-```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(cambio_mat_top, inter_pc_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(cambio_mat_top[abs(inter_pc_internet) <= bandwidth], inter_pc_internet[abs(inter_pc_internet) <= bandwidth],p = 1, kernel = "triangular")
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+out1 = rdplot(data$cambio_mat_top,data$cambio_internet,kernel = "triangular", y.lim=c(0,7.5),x.lim=c(12.3,28.7),c=21,p = 1)
 
 ```
-]
 
-.pull-left[
-```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(cambio_esp_bottom, inter_pc_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(cambio_esp_bottom[abs(inter_pc_internet) <= bandwidth], inter_pc_internet[abs(inter_pc_internet) <= bandwidth],p = 1, kernel = "triangular")
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+out2 = rdplot(data$cambio_mat_bottom,data$cambio_internet,kernel = "triangular", c=3,p = 1)
 
 ```
-]
 
-.pull-right[
-```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(cambio_mat_bottom, inter_pc_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(cambio_mat_bottom[abs(inter_pc_internet) <= bandwidth],inter_pc_internet[abs(inter_pc_internet) <= bandwidth],p = 1, kernel = "triangular")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out3 = rdplot(data$cambio_mat_bottom,data$cambio_internet,kernel = "triangular", c=6,p = 1, x.lim=c(3.17,10.84))
 
 ```
-]
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+out4 = rdplot(data$cambio_esp_top,data$inter_pc_internet,kernel = "triangular", c=9,p = 1,x.lim=c(-28.304,46.304),y.lim=c(0,7.5))
+
+```
+
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+out5 = rdplot(data$cambio_mat_top,data$inter_pc_internet, kernel = "triangular", c=17,p = 1,x.lim=c(-18.984,52.984),y.lim=c(0,7.5))
+
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out6 = rdplot(data$cambio_esp_bottom,data$inter_pc_internet,kernel = "triangular", c=3,p = 1, x.lim=c(-35.146,41.146),y.lim=c(0,7.5))
+
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out7 = rdplot(data$cambio_mat_bottom,data$inter_pc_internet,kernel = "triangular", c=17,p = 1,x.lim=c(-24.53,58.53),y.lim=c(0,7.5))
+
+```
 
 
 # Resultados

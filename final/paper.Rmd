@@ -75,39 +75,11 @@ Por otro lado, se usarán los datos censales del INEGI agregados a nivel localid
 
 Para fusionar a las localidades se hicieron dos emparejamientos: primero, el de Enlace 2010 con la ITER del INEGI del mismo año, así como la de Planea 2019 con la ITER del INEGI en 2020. Posteriormente, estas se fusionaron en una sola base, sobre la cual se realizaron los análisis. El análisis empírico se limitará a localidades rurales, ya que estas son más comparables entre sí y para analizar si un incremento en el acceso a Internet (posiblemente influenciado por la Reforma en Telecomunicaciones) benefició a este grupo (el efecto posiblemente sería más bajo en el ámbito urbano, ya que este cuenta con niveles mayores de conectividad). 
 
-Las variables que se utilizarán en el análisis son: 
-
-•	Los resultados de la prueba Enlace en 2010 (promediados a nivel localidad).
-•	Los resultados de la prueba Planea en 2019 (promediados a nivel localidad). 
-•	Pobi,t: el número de personas que viven en la localidad i en el año t (t  {2010,2020}).
-•	Margi,t: el nivel de marginación de la localidad i en el año t.
-•	PIBi,: el PIB per cápita del municipio donde se encuentra la localidad i en el año  (  {2010,2015}). 
-•	Escolari,t: el grado promedio de escolaridad en la localidad i en el año t.
-•	Econ_acti,t: el porcentaje de la población económicamente activa en la localidad i en el año t.
-•	Acceso_Interneti,: Una variable binaria que tome el valor uno si la localidad i tiene acceso al Internet en el año  ( = 2011, …, 2020).
-
-
-
-## Variables 
-
-
-## Estadísticas descriptivas 
-
-# Metodología
-
-Algo del esquema, framework los datos 
-
-Si usáramos una regresión MCO, habría muchos factores de confusión como... Esto podría impliciar un problema de variables omitidas o de endogeneidad. Esto se puede solucionar usando un diseño de regresión discontinua. Esta soluciona la endogeneidad de nuestro contexto tomando una ventana alrededor de la media de adopción de Internet.. En este intervalo, podemos asumir que los factores no observados influenciando la adopción de Internet son similares, por lo que las observaciones antes del punto de corte son unbuen contrafactual de las que están después de este. (@ ... davis)
-
-Formalmente, estimamos con una regresión discontinua local lineal (?) weighted or least square?
-
- $$\delta NivelLogro_i =\beta_0 + \beta_1 (G_i - c) + \beta_2 T_i +\beta_3 (G_i - c) T_i +\beta_4 Xi + u_i$$
- 
-donde $i$ es un indicador de la localidad. 
+## Variables
 
 En nuestra especificación, tendremos dos variables dependientes $\delta NivelLogro_i$. En el primer caso, la variable indica el cambio en la proporción de alumnos en el nivel más alto de logro de la evaluación del 2010 al 2019 (el IV) de cada escuela. A estos los llamamos con fines de abreviación los "top". La segunda variable dependiente indica el cambio en la proporción de alumnos en el nivel más bajo (el I), en el mismo período de tiempo. A estos los indicamos como los "bottom". Como se mencionó anteriormente, los resultados por escuela se agregaron a nivel localidad.
 
-$G_i$, es la variable definitoria, o la que definirá la discontinuidad. Tendremos dos en nuestro análisis. 
+Las variables X, o las definitorias ($G_i$), serán: 
 
 * Tasa de cambio en la proporción de hogares de las localidades de acceso a Internet 
 
@@ -115,7 +87,41 @@ $G_i$, es la variable definitoria, o la que definirá la discontinuidad. Tendrem
 
 Ambos cambios son de los Principales Resultados por Localidad (ITER) del 2010 al 2020. 
 
-$T_i$ es la variable de tratamiento, donde
+Las covariables que se incorporarán al modelo serán del 2020:
+
+•	$Marg_i$: el nivel de marginación de la localidad i.
+•	$Escolar_i$: el grado promedio de escolaridad en la localidad i en el año t.
+•	$PEA_i$: el porcentaje de la población económicamente activa en la localidad i en el año t.
+•	$_i$: INDIG
+•	$niñas$: 
+•	$electricidad$: 
+
+
+Y la variable de tratamiento: 
+
+•	AccesoInternet_i: Una variable binaria que tomará el valor 1 si la localidad i tiene acceso al Internet en el año 2020.
+
+
+La elección de esas variables... (@doc del senado) (@world bank pagina 7)... poner algo de cómo se contruyen los indices de marginacion, en particular cuál es el que usaplanea
+
+
+## Estadísticas descriptivas 
+
+### MARCO
+
+
+
+# Metodología
+
+Algo del esquema, framework los datos 
+
+Si usáramos una regresión MCO, habría muchos factores de confusión como... Esto podría implicar un problema de variables omitidas o de endogeneidad. Esto se puede solucionar usando un diseño de regresión discontinua. Esta soluciona la endogeneidad de nuestro contexto tomando una ventana alrededor de la media de adopción de Internet.. En este intervalo, podemos asumir que los factores no observados influenciando la adopción de Internet son similares, por lo que las observaciones antes del punto de corte son unbuen contrafactual de las que están después de este. (@ ... davis)
+
+Formalmente, estimamos con una regresión discontinua local lineal (?) weighted or least square?
+
+ $$\delta NivelLogro_i =\beta_0 + \beta_1 (G_i - c) + \beta_2 T_i +\beta_3 (G_i - c) T_i +\beta_4 Xi + u_i$$
+ 
+donde $i$ es un indicador de la localidad, $G_i$, es la variable definitoria, o la que definirá la discontinuidad, $T_i$ es la variable de tratamiento, donde
 
 \begin{align*}
 T_i =& 
@@ -125,22 +131,34 @@ T_i =&
   \end{cases}
 \end{align*}
 
-Tendremos cuatro puntos de corte $c$, donde ocurre la discontinuidad, resultados de combinar las dos variables dependientes con las dos variables definitorias. Estas son:
+y $X_i$ es el vector de covariables de las localidades, que incluye a una variable dummy indicadora de la región del país, nivel de marginación, proporción de niñas en edad ... respecto a... , población indígena.... , proporción de hogares de la localidad con acceso a Internet, proporción de población ocupada, y años promedio de escolaridad de la localidad.
 
-#### falta
-```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,results='hide'}
-#hacer un kable o algo
+De acuerdo a la especificación, habrá ocho modelos, resultados de la combinación de los dos tipos de examen, los dos tipos de variables dependiente (cambio en "tops" y "bottoms"), y las dos variables $G_i$ (cambio en adopción de Internet y cambio adopción Internet + computadora, laptop o tablet). Asimismo, habrá ocho puntos de corte $c$, donde ocurre la discontinuidad, cada una calculada..... 
+
+Estas son: 
+
+```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+Row<-c("Internet","Internet + PC")
+TopEsp<-c("9","9")
+BottomEsp<-c("3","3")
+TopMat<-c("21","17")
+BottomMat<-c("6","17")
+dataf<-data.frame(Row,TopEsp,BottomEsp,TopMat,BottomMat, stringsAsFactors=TRUE)
+
+kable(dataf, booktabs=T,col.names=c("X", "Top", "Bottom",
+                                    "Top","Bottom",caption = "Valores de punto de corte")) %>% 
+  kable_styling(position = "center") %>%  add_header_above(c(" " = 1, "Español" = 2, "Matemáticas" = 2))
+
 
 ```
 
-Para estimar el efecto de tratamiento, se asume que la discontinuidad, o el salto, es el efecto causal.
+Para estimar el efecto de tratamiento, se asume que la discontinuidad, o el salto, es el efecto causal. Esta será estimada con el coeficiente $\beta_2 T_i$ Se utilizará un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
 
-$X_i$ es nuestro vector de covariables de las localidades, que incluye a una variable dummy indicadora de la región del país, nivel de marginación, proporción de niñas en edad ... respecto a... , población indígena.... , proporción de hogares de la localidad con acceso a Internet, proporción de población ocupada, y años promedio de escolaridad de la localidad.
+Nuestro principal interés es estimar el efecto de tratamiento alrededor del punto de corte. El método del polinomio global que mencionamos anteriormente no da aproximaciones óptimas en el intervalo alrededor del corte, ya que si se toma a toda la muestra de datos da peso a observaciones lejanas a las del punto de corte. 
 
-La elección de esas variables... (@doc del senado) (@world bank pagina 7)
+Por esto, utilizaremos el método de polinomio local, el cual solo toma en cuenta a la forma funcional de las observaciones alrededor del punto de corte y sus anchos de banda. En este caso, utilizaremos un ajuste lineal. Por esto la importancia de la elección de ancho de banda. 
 
-
-Se utilizará un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
+El método de ponderación que utilizaremos es el de kernel triangular. De esta forma nos aseguramos de que las observaciones más cerca del punto de corte pesen más. Además, es la función recomendadad dado que provee estimaciones óptimas en cuanto a errores cuadrados medios. (@Cattaneo). Por último agrupamos los errores a nivel municipal, ya que .... (está bien esto?)
 
 
 ## Estadísticas descriptivas - regresión discontinua
@@ -195,7 +213,7 @@ out7<- rdplot(cambio_mat_bottom,cambio_internet,nbins=c(20,20), x.lim=c(0,40),y.
 
 Podemos notar que en general, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar .... saltos positivos en el punto de la discontinuidad, lo que podría indicar o preveer (?) efectos de tratamiento positivos: el cambio de los "tops" será positivo al tener acceso a Internet, mientras que el de los bottoms sería negativo en el grupo de tratamiento. 
 
-## ANALISIS PARA PC:INTERNET
+## ANALISIS PARA PC + INTERNET
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
@@ -231,42 +249,7 @@ out7<- rdplot(cambio_mat_bottom,inter_pc_internet,nbins=c(20,20), x.lim=c(-5,100
 
 NOTAMOS QUE EN MATE SE REUIQERE UN PUNTO DE CORTE MAS GRANDE PARA VER UN CAMBIO, SIN EMBARGO EL SIGNO DE LA DIFERENCIA ES EL ESPERADO. PARECE QUE PC Y INTERNET VAN EN LA MISMA DIRECCION
 
-
-## ANALISIS PARA PC:INTERNET
-
-.pull-left[
-```{r, message= F, warning = F,results='hide'} 
-#TOP ESP PC
-#SAM_COMMENT: AQUI PARECE QUE ES MAS FUZZY
-out7<- rdplot(cambio_esp_top,cambio_pc,nbins=c(20,20),x.lim=c(-1,17),y.lim=c(-3,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=11,kernel="triangular", binselect = "qspr")
-```
-]
-
-.pull-right[
-```{r, message= F, warning = F,results='hide'} 
-#TOP MAT PC
-#SAM _COMMENT; ESTA RELACION SI ES EVIDENTE
-out7<- rdplot(cambio_mat_top,cambio_pc,nbins=c(20,20),x.lim=c(-3,15),y.lim=c(-3,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=4,kernel="triangular", binselect = "qspr")
-```
-]
-
-.pull-left[
-```{r, message= F, warning = F,results='hide'} 
-#BOTTOM ESP PC
-
-out7<- rdplot(cambio_esp_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c(-10,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=1.1,kernel="triangular", binselect = "qspr")
-```
-]
-
-.pull-right[
-```{r, message= F, warning = F,results='hide'} 
-#BOTTOM MAT PC
-
-out7<- rdplot(cambio_mat_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c(-2,12),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
-```
-]
-
-CONCLUSION: EN PC POR SI SOLO LAS RELACIONES NO SON TAN CLARAS PERO LO INTERESANTE ES QUE PC:INTER SI NOS DA MAS INSIGHT
+ANEXO INDICAR PC
 
 # Implementación
 
@@ -293,11 +276,7 @@ En la cual podemos observar que ............
 
 ## Modelos
 
-Nuestro principal interés es estimar el efecto de tratamiento alrededor del punto de corte. El método del polinomio global que mencionamos anteriormente no da aproximaciones óptimas en el intervalo alrededor del corte, ya que si se toma a toda la muestra de datos da peso a observaciones lejanas a las del punto de corte. 
 
-Por esto, utilizaremos el método de polinomio local, el cual solo toma en cuenta a la forma funcional de las observaciones alrededor del punto de corte y sus anchos de banda. En este caso, utilizaremos un ajuste lineal. Por esto la importancia de la elección de ancho de banda. 
-
-El método de ponderación que utilizaremos es el de kernel triangular. De esta forma nos aseguramos de que las observaciones más cerca del punto de corte pesen más. Además, es la función recomendadad dado que provee estimaciones óptimas en cuanto a errores cuadrados medios. (@Cattaneo).
 
 ### ojo cambiar las variables X y Y
 
@@ -307,32 +286,42 @@ out = rdrobust(data$cambio_esp_top,data$cambio_internet,title="Tabla 1. Cambio e
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out1 = rdrobust(data$cambio_mat_top,data$cambio_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out1 = rdrobust(data$cambio_mat_top,data$cambio_internet,covs=Z, kernel = "triangular", c=21,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out2 = rdrobust(data$cambio_esp_bottom,data$cambio_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out2 = rdrobust(data$cambio_esp_bottom,data$cambio_internet,covs=Z, kernel = "triangular", c=3,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 ```
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out3 = rdrobust(data$cambio_mat_bottom,data$cambio_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out3 = rdrobust(data$cambio_mat_bottom,data$cambio_internet,covs=Z, kernel = "triangular", c=6,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 ```
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out4 = rdrobust(data$cambio_esp_top,data$,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
-```
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out5 = rdrobust(data$cambio_mat_top,data$,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
-```
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out6 = rdrobust(data$cambio_esp_bottom,data$,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out4 = rdrobust(data$cambio_esp_top,data$inter_pc_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out6 = rdrobust(data$cambio_mat_bottom,data$,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out5 = rdrobust(data$cambio_mat_top,data$inter_pc_internet,covs=Z, kernel = "triangular", c=17,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out6 = rdrobust(data$cambio_esp_bottom,data$inter_pc_internet,covs=Z, kernel = "triangular", c=3,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-VER SI SE PUEDE HACER SUMMARY(RDROBUST
+out6 = rdrobust(data$cambio_mat_bottom,data$inter_pc_internet,covs=Z, kernel = "triangular", c=17,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+Row<-c("Internet","Internet + PC")
+bw<-c("9","9")
+pointe<-c("3","3")
+pval<-c("21","17")
+ci<-c("6","17")
+dataf<-data.frame(Row,bw,pointe,pval,ci, stringsAsFactors=TRUE)
+
+kable(dataf, booktabs=T,col.names=c("Modelo", "Ancho de banda", "Estimador puntual",
+                                    "Valor-p","IC",caption = "Resultados")) %>% 
+  kable_styling(position = "center")
+
 ```
 
 POdemos ver que... La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el aumento en el de las calificaciones en espanol promedio de las localidades rurales de control en el punto de corte, seria de 1.17 puntos porcentuales si fueran del grupo de tratamiento.
@@ -417,6 +406,42 @@ out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "tri
 # Conclusión
 
 # Anexos
+
+## ANALISIS PARA PC
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+#TOP ESP PC
+#SAM_COMMENT: AQUI PARECE QUE ES MAS FUZZY
+out7<- rdplot(cambio_esp_top,cambio_pc,nbins=c(20,20),x.lim=c(-1,17),y.lim=c(-3,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=11,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+#TOP MAT PC
+#SAM _COMMENT; ESTA RELACION SI ES EVIDENTE
+out7<- rdplot(cambio_mat_top,cambio_pc,nbins=c(20,20),x.lim=c(-3,15),y.lim=c(-3,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=4,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-left[
+```{r, message= F, warning = F,results='hide'} 
+#BOTTOM ESP PC
+
+out7<- rdplot(cambio_esp_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c(-10,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=1.1,kernel="triangular", binselect = "qspr")
+```
+]
+
+.pull-right[
+```{r, message= F, warning = F,results='hide'} 
+#BOTTOM MAT PC
+
+out7<- rdplot(cambio_mat_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c(-2,12),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
+```
+]
+
+CONCLUSION: EN PC POR SI SOLO LAS RELACIONES NO SON TAN CLARAS PERO LO INTERESANTE ES QUE PC:INTER SI NOS DA MAS INSIGHT
 
 # Bibliografía 
 

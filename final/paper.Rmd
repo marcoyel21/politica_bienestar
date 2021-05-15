@@ -63,9 +63,6 @@ attach(data)
 # a rurales
 data<-data[which(Ambito=="R"),]
 
-#creamos var tratamiento
-data$cp_15pp<-as.numeric(ifelse(data$cambio_internet<15,0,1))
-
 #recodificamos marginación
 data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
                   'MEDIA'=1)
@@ -323,60 +320,88 @@ Para verificar esto, realizamos una tabla de balance:... anexos
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
 
 ```
-En la cual podemos observar que ............
+En la cual podemos observar que ............ rechazamos en todas y no las podemos usar.. citar a cattaneo
 
 
 
 ## Modelos
 
-
-
-### ojo cambiar las variables X y Y
+decir algo d elos intervalos robustos
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-Z<-cbind(data$promesc_20, data$pocup_20, data$marg)
-out = rdrobust(data$cambio_esp_top,data$cambio_internet,title="Tabla 1. Cambio español "top" vs cambio Internet, covs=Z,kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out = rdrobust(data$cambio_esp_top,data$cambio_internet,kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out)
+
+```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out1 = rdrobust(data$cambio_mat_top,data$cambio_internet,kernel = "triangular", c=21,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out1)
+
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out1 = rdrobust(data$cambio_mat_top,data$cambio_internet,covs=Z, kernel = "triangular", c=21,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out2 = rdrobust(data$cambio_esp_bottom,data$cambio_internet, kernel = "triangular", c=3,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out2)
+
+```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out3 = rdrobust(data$cambio_mat_bottom,data$cambio_internet,kernel = "triangular", c=6,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out3)
+
+```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+out4 = rdrobust(data$cambio_esp_top,data$inter_pc_internet,kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out4)
+
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out2 = rdrobust(data$cambio_esp_bottom,data$cambio_internet,covs=Z, kernel = "triangular", c=3,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out5 = rdrobust(data$cambio_mat_top,data$inter_pc_internet, kernel = "triangular", c=17,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out5)
+
 ```
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out3 = rdrobust(data$cambio_mat_bottom,data$cambio_internet,covs=Z, kernel = "triangular", c=6,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
-```
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out4 = rdrobust(data$cambio_esp_top,data$inter_pc_internet,covs=Z, kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out6 = rdrobust(data$cambio_esp_bottom,data$inter_pc_internet,kernel = "triangular", c=3,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out6)
+
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out5 = rdrobust(data$cambio_mat_top,data$inter_pc_internet,covs=Z, kernel = "triangular", c=17,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+out7 = rdrobust(data$cambio_mat_bottom,data$inter_pc_internet,kernel = "triangular", c=17,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
+summary(out7)
 ```
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out6 = rdrobust(data$cambio_esp_bottom,data$inter_pc_internet,covs=Z, kernel = "triangular", c=3,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
-```
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out6 = rdrobust(data$cambio_mat_bottom,data$inter_pc_internet,covs=Z, kernel = "triangular", c=17,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
-```
-
+Resultados cambio itnernet
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-Row<-c("Internet","Internet + PC")
-bw<-c("9","9")
-pointe<-c("3","3")
-pval<-c("21","17")
-ci<-c("6","17")
+Row<-c("Δ español top","Δ matemáticas top","Δ español bottom","Δ matemáticas bottom")
+cut<-c("9","21","3","6")
+bw<-c("4.55","7.692","2.882","4.837")
+pointe<-c("1.235","1.996","-3.914","-0.567")
+pval<-c("0.031","0.182","0.102",".816")
+ci<-c("[0.03,2.67]","[-1.50 , 25.61]","[-10.24,1.19]","[-5.902,5.488]")
 dataf<-data.frame(Row,bw,pointe,pval,ci, stringsAsFactors=TRUE)
 
-kable(dataf, booktabs=T,col.names=c("Modelo", "Ancho de banda", "Estimador puntual",
-                                    "Valor-p","IC",caption = "Resultados")) %>% 
-  kable_styling(position = "center")
+kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual",
+                                    "Valor-p","IC 95% robustos",caption = "Resultados")) %>% 
+  kable_styling(position = "center") 
 
 ```
 
+Resultados cambio internet y pc intersect
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+Row<-c("Δ español top","Δ matemáticas top","Δ español bottom","Δ matemáticas bottom")
+cut<-c("9","17","3","17")
+bw<-c("37.309","35.984","38.146","41.53")
+pointe<-c("1.252","3.277","-3.855","-2.818")
+pval<-c("0.000","0.001","0.003","0.168")
+ci<-c("[0.445 , 1.991]","[1.226 , 5.316]","[-6.797 , -1.239]","[-7.064 , 1.591]")
+dataf<-data.frame(Row,cut,bw,pointe,pval,ci, stringsAsFactors=TRUE)
+
+kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual",
+                                    "Valor-p","IC 95% robustos",caption = "Resultados")) %>% 
+  kable_styling(position = "center") 
+
+```
 POdemos ver que... La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el aumento en el de las calificaciones en espanol promedio de las localidades rurales de control en el punto de corte, seria de 1.17 puntos porcentuales si fueran del grupo de tratamiento.
 
 Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.
@@ -547,6 +572,19 @@ dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactor
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 
 ```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+
+#F- test. P-value es cero. Rechazamos que sean iguales a cero en conjunto. No la podemos utilizar
+
+data1<-data[which(cambio_internet<=13.53 & cambio_internet>=4.461),]
+data$t1<-as.numeric(ifelse(data$cambio_internet<9,0,1))
+attach(data)
+variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t1)
+tabla1<-balance_regression(variables,treatment="t1")
+stargazer(as.data.frame(tabla1$F_test),type="text",summary=FALSE)
+```
+
+
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -580,6 +618,7 @@ t.test(ind_T,ind_C,alternative="two.sided")
 t.test(luz_T,luz_C,alternative="two.sided")
 # 
 t.test(ninas_T,ninas_C,alternative="two.sided")
+```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -591,6 +630,20 @@ Diferencia<-c("", "","","","","")
 Valor.p<-c("0.455", "0.51","0.731",".076","0.001","0.082")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
+
+data2<-data[which(cambio_internet<=28.692 & cambio_internet>=13.308),]
+data$t2<-as.numeric(ifelse(data$cambio_internet<21,0,1))
+attach(data)
+variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t2)
+tabla2<-balance_regression(variables,treatment="t2")
+stargazer(as.data.frame(tabla2$F_test),type="text",summary=FALSE)
+```
+
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -634,6 +687,20 @@ Diferencia<-c("", "","","","","")
 Valor.p<-c(".049", "0.0004","0.103","0.000",".5855","0.124")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
+
+data3<-data[which(cambio_internet<=5.885 & cambio_internet>=.115),]
+data$t3<-as.numeric(ifelse(data$cambio_internet<3,0,1))
+attach(data)
+variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t3)
+tabla3<-balance_regression(variables,treatment="t3")
+stargazer(as.data.frame(tabla3$F_test),type="text",summary=FALSE)
+
+```
+
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -677,6 +744,19 @@ Diferencia<-c("", "","","","","")
 Valor.p<-c("0.00", "0.00","0.176","0.00","0.071","1.903")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+```
+
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
+
+data4<-data[which(cambio_internet<=10.837 & cambio_internet>=1.163),]
+data$t4<-as.numeric(ifelse(data$cambio_internet<6,0,1))
+attach(data)
+variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t4)
+tabla4<-balance_regression(variables,treatment="t4")
+stargazer(as.data.frame(tabla4$F_test),type="text",summary=FALSE)
+```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -721,6 +801,22 @@ Diferencia<-c("", "","","","","")
 Valor.p<-c("0.00", "0.00","0.00","0.00","0.00","0.034")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+
+```
+
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
+
+data5<-data[which(cambio_internet<=46.309 & cambio_internet>=-28.309),]
+data$t5<-as.numeric(ifelse(data$cambio_internet<9,0,1))
+attach(data)
+variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t5)
+tabla5<-balance_regression(variables,treatment="t5")
+stargazer(as.data.frame(tabla5$F_test),type="text",summary=FALSE)
+
+```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -769,6 +865,20 @@ kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamie
 
 ```
 
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+
+#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
+
+data6<-data[which(cambio_internet<=52.984 & cambio_internet>=-18.984),]
+data$t6<-as.numeric(ifelse(data$cambio_internet<17,0,1))
+attach(data)
+variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t6)
+tabla6<-balance_regression(variables,treatment="t6")
+stargazer(as.data.frame(tabla6$F_test),type="text",summary=FALSE)
+
+```
+
+
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
 # internet pc 3, 38.146
@@ -815,6 +925,19 @@ kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamie
 
 ```
 
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
+
+data7<-data[which(cambio_internet<=41.146 & cambio_internet>=-35.146),]
+data$t7<-as.numeric(ifelse(data$cambio_internet<3,0,1))
+attach(data)
+variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t7)
+tabla7<-balance_regression(variables,treatment="t7")
+stargazer(as.data.frame(tabla7$F_test),type="text",summary=FALSE)
+
+```
+
+
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
 # internet pc 17, 41.53
@@ -859,8 +982,18 @@ Valor.p<-c("0.00", "0.00","0.001","0.00","0.00","0.00")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
+#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
 
+data8<-data[which(cambio_internet<=58.53 & cambio_internet>=-24.53),]
+data$t8<-as.numeric(ifelse(data$cambio_internet<17,0,1))
+attach(data)
+variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t8)
+tabla8<-balance_regression(variables,treatment="t8")
+stargazer(as.data.frame(tabla8$F_test),type="text",summary=FALSE)
+
+```
 # Bibliografía 
 
 

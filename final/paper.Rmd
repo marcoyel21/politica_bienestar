@@ -56,6 +56,25 @@ lapply(packages,
 
 #cargo datos
 data<-read_csv("data/data.csv")
+attach(data)
+
+#filtramos y modificamos variables
+
+# a rurales
+data<-data[which(Ambito=="R"),]
+
+#creamos var tratamiento
+data$cp_15pp<-as.numeric(ifelse(data$cambio_internet<15,0,1))
+
+#recodificamos marginación
+data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
+                  'MEDIA'=1)
+as.numeric(data$marg)
+
+#filtramos observaciones con valores anormales
+data <- data[(data$promesc_20<25), ]
+
+attach(data)
 
 ```
 
@@ -73,7 +92,7 @@ representatividad... anexo
 
 Por otro lado, se usarán los datos censales del INEGI agregados a nivel localidad y publicados en “Principales Resultados por Localidad” (ITER), del 2010 y 2020. El ITER cuenta con indicadores socio-demográficos de las localidades y de varias características de la vivienda. Se considera que los datos del 2019 de Planea y del 2020 del censo son comparables, ya que la prueba y las encuestas del censo se realizaron con 8 meses de diferencia. Asimismo, el censo se realizó del 2 al 27 de marzo, mientras que se declaró la pandemia en México el 11 de marzo, por lo que no consideramos que haya cambios en las variables de interés.
 
-Para fusionar a las localidades se hicieron dos emparejamientos: primero, el de Enlace 2010 con la ITER del INEGI del mismo año, así como la de Planea 2019 con la ITER del INEGI en 2020. Posteriormente, estas se fusionaron en una sola base, sobre la cual se realizaron los análisis. El análisis empírico se limitará a localidades rurales, ya que estas son más comparables entre sí y para analizar si un incremento en el acceso a Internet (posiblemente influenciado por la Reforma en Telecomunicaciones) benefició a este grupo (el efecto posiblemente sería más bajo en el ámbito urbano, ya que este cuenta con niveles mayores de conectividad). 
+Para fusionar a las localidades se hicieron dos emparejamientos: primero, el de Enlace 2010 con la ITER del INEGI del mismo año, así como la de Planea 2019 con la ITER del INEGI en 2020. Posteriormente, estas se fusionaron en una sola base, sobre la cual se realizaron los análisis. El análisis empírico se limitará a localidades rurales, ya que estas son más comparables entre sí y para analizar si un incremento en el acceso a Internet (posiblemente influenciado por la Reforma en Telecomunicaciones) benefició a este grupo (el efecto posiblemente sería más bajo en el ámbito urbano, ya que este cuenta con niveles mayores de conectividad). La muestra con ambos ámbitos es de 13,720 localidades; al filtrar por ámbito rural es de 11,194.
 
 ## Variables
 
@@ -87,19 +106,19 @@ Las variables X, o las definitorias ($G_i$), serán:
 
 Ambos cambios son de los Principales Resultados por Localidad (ITER) del 2010 al 2020. 
 
-Las covariables que se incorporarán al modelo serán del 2020:
+Las covariables que se incorporarán al modelo serán del 2010:
 
 •	$Marg_i$: el nivel de marginación de la localidad i.
-•	$Escolar_i$: el grado promedio de escolaridad en la localidad i en el año t.
-•	$PEA_i$: el porcentaje de la población económicamente activa en la localidad i en el año t.
-•	$_i$: INDIG
-•	$niñas$: 
-•	$electricidad$: 
-
+•	$Escolar_i$: el grado promedio de escolaridad en la localidad i.
+•	$PEA_i$: el porcentaje de la población económicamente activa en la localidad i.
+•	$Pob_indig_i$: proporción de personas de un hogar donde el jefe del hogar o su cónyuge hablan alguna lengua indígena. 
+•	$Porc_Viv_Luz_i$:  proporción de hogares que disponen de luz eléctrica.
+•	$Niñas_12a14_esc_i$: proporción de niñas de 12 a 14 años estudiando respecto al total de alumnos de esa edad.
+•	$Región_i$: ....
 
 Y la variable de tratamiento: 
 
-•	AccesoInternet_i: Una variable binaria que tomará el valor 1 si la localidad i tiene acceso al Internet en el año 2020.
+•	$AccesoInternet_i$: Una variable binaria que tomará el valor 1 si la localidad i tiene acceso al Internet en el año 2020.
 
 
 La elección de esas variables... (@doc del senado) (@world bank pagina 7)... poner algo de cómo se contruyen los indices de marginacion, en particular cuál es el que usaplanea
@@ -145,7 +164,7 @@ TopMat<-c("21","17")
 BottomMat<-c("6","17")
 dataf<-data.frame(Row,TopEsp,BottomEsp,TopMat,BottomMat, stringsAsFactors=TRUE)
 
-kable(dataf, booktabs=T,col.names=c("X", "Top", "Bottom",
+kable(dataf, booktabs=T,col.names=c("Variable definitoria", "Top", "Bottom",
                                     "Top","Bottom",caption = "Valores de punto de corte")) %>% 
   kable_styling(position = "center") %>%  add_header_above(c(" " = 1, "Español" = 2, "Matemáticas" = 2))
 
@@ -259,15 +278,49 @@ Antes de implementar los modelos, debemos de elegir el ancho de banda óptimo al
 
 Los anchos de banda que utilizaremos para implementar nuestro modelo son:
 
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+o1<-rdbwselect(cambio_esp_top, cambio_internet,c=9, kernel = "triangular", p = 1, bwselect = "mserd")
+o2<-rdbwselect(cambio_mate_top, cambio_internet,c=21, kernel = "triangular", p = 1, bwselect = "mserd")
+o3<-rdbwselect(cambio_esp_bottom, cambio_internet,c=3, kernel = "triangular", p = 1, bwselect = "mserd")
+o4<-rdbwselect(cambio_mate_bottom, cambio_internet,c=6, kernel = "triangular", p = 1, bwselect = "mserd")
+o5<-rdbwselect(cambio_esp_top, inter_pc_internet,c=9, kernel = "triangular", p = 1, bwselect = "mserd")
+o6<-rdbwselect(cambio_mate_top, inter_pc_internet,c=17, kernel = "triangular", p = 1, bwselect = "mserd")
+o7<-rdbwselect(cambio_esp_bottom, inter_pc_internet,c=3, kernel = "triangular", p = 1, bwselect = "mserd")
+o8<-rdbwselect(cambio_mate_bottom, inter_pc_internet,c=17, kernel = "triangular", p = 1, bwselect = "mserd")
+
+summary(o1)
+summary(o2)
+summary(o3)
+summary(o4)
+summary(o5)
+summary(o6)
+summary(o7)
+summary(o8)
+```
+
+```{r,results='asis',echo=FALSE,message=FALSE,warning=FALSE}
+Row<-c("Internet","Internet + PC")
+TopEsp<-c("4.539","37.309")
+BottomEsp<-c("2.885","38.146")
+TopMat<-c("7.692","35.984")
+BottomMat<-c("4.837","41.537")
+dataf<-data.frame(Row,TopEsp,BottomEsp,TopMat,BottomMat, stringsAsFactors=TRUE)
+
+kable(dataf, booktabs=T,col.names=c("Variable definitoria", "Top", "Bottom",
+                                    "Top","Bottom",caption = "Anchos de banda óptimos")) %>% 
+  kable_styling(position = "center") %>%  add_header_above(c(" " = 1, "Español" = 2, "Matemáticas" = 2))
+
+```
+Podemos notar que las de internet + pc son mucho más altas...
 
 ## Covariables
 
 Como último paso antes de realizar nuestro análisis, verificamos que las covariables enlistadas anteriormente estén balanceadas *en el punto de corte*. En caso de no serlo, no se podría asumir el supuesto de continuidad de los resultados potenciales. Entonces, para incluirlos se tendrían que hacer supuestos paramétricos o cambiar los parámetros de interés.
 
-Para verificar esto, realizamos una tabla de balance:
+Para verificar esto, realizamos una tabla de balance:... anexos
 
 
-```{r,include=FALSE, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
+```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
 
 ```
 En la cual podemos observar que ............
@@ -339,61 +392,61 @@ print(out1$beta_p_l)
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+bandwidth = rdrobust(cambio_esp_top, cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(cambio_esp_top[abs(cambio_internet) <= bandwidth],cambio_internet[abs(cambio_internet) <= bandwidth],p = 1, kernel = "triangular")
 ```
 ]
 
 .pull-right[
 ```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+bandwidth = rdrobust(cambio_mat_top, cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(cambio_mat_top[abs(cambio_internet) <= bandwidth], cambio_internet[abs(cambio_internet) <= bandwidth],p = 1, kernel = "triangular")
 ```
 ]
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+bandwidth = rdrobust(cambio_esp_bottom, cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(cambio_esp_top[abs(cambio_internet) <= bandwidth], cambio_internet[abs(cambio_internet) <= bandwidth],p = 1, kernel = "triangular")
 ```
 ]
 
 .pull-right[
 ```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+bandwidth = rdrobust(cambio_mat_bottom,cambio_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(cambio_mat_top[abs(cambio_internet) <= bandwidth], cambio_internet[abs(cambio_internet) <= bandwidth],p = 1, kernel = "triangular")
 ```
 ]
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
 
-bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+bandwidth = rdrobust(cambio_esp_top, inter_pc_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(cambio_esp_bottom[abs(inter_pc_internet) <= bandwidth], inter_pc_internet[abs(inter_pc_internet) <= bandwidth],p = 1, kernel = "triangular")
 
 ```
 ]
 
 .pull-right[
 ```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+bandwidth = rdrobust(cambio_mat_top, inter_pc_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(cambio_mat_top[abs(inter_pc_internet) <= bandwidth], inter_pc_internet[abs(inter_pc_internet) <= bandwidth],p = 1, kernel = "triangular")
 
 ```
 ]
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+bandwidth = rdrobust(cambio_esp_bottom, inter_pc_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(cambio_esp_bottom[abs(inter_pc_internet) <= bandwidth], inter_pc_internet[abs(inter_pc_internet) <= bandwidth],p = 1, kernel = "triangular")
 
 ```
 ]
 
 .pull-right[
 ```{r, message= F, warning = F,results='hide'} 
-bandwidth = rdrobust(Y, X, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
-out = rdplot(Y[abs(X) <= bandwidth], X[abs(X) <= bandwidth],p = 1, kernel = "triangular", cex.axis = 1.5, cex.lab = 1.5)
+bandwidth = rdrobust(cambio_mat_bottom, inter_pc_internet, kernel = "triangular", p = 1, bwselect = "mserd")$bws[1,1]
+out = rdplot(cambio_mat_bottom[abs(inter_pc_internet) <= bandwidth],inter_pc_internet[abs(inter_pc_internet) <= bandwidth],p = 1, kernel = "triangular")
 
 ```
 ]
@@ -442,6 +495,371 @@ out7<- rdplot(cambio_mat_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c
 ]
 
 CONCLUSION: EN PC POR SI SOLO LAS RELACIONES NO SON TAN CLARAS PERO LO INTERESANTE ES QUE PC:INTER SI NOS DA MAS INSIGHT
+
+
+
+### ANEXOS 2
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+# cambio internet 9, 4.539
+
+
+9+4.539
+9-4.539
+
+marg_C<-(data$marg[cambio_internet>=4.461 & cambio_internet<=8])
+marg_T<-(data$marg[cambio_internet>=9 & cambio_internet<=13.539])
+promesc_C<-(data$promesc_20[cambio_internet>=4.461 & cambio_internet<=8])
+promesc_T<-(data$promesc_20[cambio_internet>=9 & cambio_internet<=13.539])
+pocup_C<-(data$pocup_20[cambio_internet>=4.461 & cambio_internet<=8])
+pocup_T<-(data$pocup_20[cambio_internet>=9 & cambio_internet<=13.539])
+ind_C<-(data$popindig_10_real[cambio_internet>=4.461 & cambio_internet<=8])
+ind_T<-(data$popindig_10_real[cambio_internet>=9 & cambio_internet<=13.539])
+luz_C<-(data$porc_viv_luz[cambio_internet>=4.461 & cambio_internet<=8])
+luz_T<-(data$porc_viv_luz[cambio_internet>=9 & cambio_internet<=13.539])
+ninas_C<-(data$niñas_12_14_esc[cambio_internet>=4.461 & cambio_internet<=8])
+ninas_T<-(data$niñas_12_14_esc[cambio_internet>=9 & cambio_internet<=13.539])
+
+#
+t.test(promesc_T,promesc_C,alternative="two.sided")
+#
+t.test(pocup_T,pocup_C,alternative="two.sided")
+# 
+t.test(marg_T,marg_C,alternative="two.sided")
+#
+t.test(ind_T,ind_C,alternative="two.sided")
+#
+t.test(luz_T,luz_C,alternative="two.sided")
+# 
+t.test(ninas_T,ninas_C,alternative="two.sided")
+
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.C<-c("1.694","43.579","1.885","9.170","74.645","93.065")
+Media.T<-c("1.810", "43.305","1.911","12.866","75.525","92.175")
+Diferencia<-c("", "","","","","")
+Valor.p<-c("0.09", "0.4883","0.154","0.00","0.088","0.01211")
+dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+# cambio internet 21,7.692
+
+21+7.692
+21-7.692
+
+marg_C<-(data$marg[cambio_internet>=13.308 & cambio_internet<=21])
+marg_T<-(data$marg[cambio_internet>=21 & cambio_internet<=28.692])
+promesc_C<-(data$promesc_20[cambio_internet>=13.308 & cambio_internet<=21])
+promesc_T<-(data$promesc_20[cambio_internet>=21 & cambio_internet<=28.692])
+pocup_C<-(data$pocup_20[cambio_internet>=13.308 & cambio_internet<=21])
+pocup_T<-(data$pocup_20[cambio_internet>=21 & cambio_internet<=28.692])
+ind_C<-(data$popindig_10_real[cambio_internet>=13.308 & cambio_internet<=21])
+ind_T<-(data$popindig_10_real[cambio_internet>=21 & cambio_internet<=28.692])
+luz_C<-(data$porc_viv_luz[cambio_internet>=13.308 & cambio_internet<=21])
+luz_T<-(data$porc_viv_luz[cambio_internet>=21 & cambio_internet<=28.692])
+ninas_C<-(data$niñas_12_14_esc[cambio_internet>=13.308 & cambio_internet<=21])
+ninas_T<-(data$niñas_12_14_esc[cambio_internet>=21 & cambio_internet<=28.692])
+
+#
+t.test(promesc_T,promesc_C,alternative="two.sided")
+#
+t.test(pocup_T,pocup_C,alternative="two.sided")
+# 
+t.test(marg_T,marg_C,alternative="two.sided")
+#
+t.test(ind_T,ind_C,alternative="two.sided")
+#
+t.test(luz_T,luz_C,alternative="two.sided")
+# 
+t.test(ninas_T,ninas_C,alternative="two.sided")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.C<-c("1.497","43.873","1.880","5.266","77.347","93.770")
+Media.T<-c("1.549", "43.616","1.871","6.508","75.918","93.247")
+Diferencia<-c("", "","","","","")
+Valor.p<-c("0.455", "0.51","0.731",".076","0.001","0.082")
+dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+# cambio internet 3, 2.885
+
+3+2.885
+3-2.885
+
+marg_C<-(data$marg[cambio_internet>=0.115 & cambio_internet<=3])
+marg_T<-(data$marg[cambio_internet>=3 & cambio_internet<=5.885])
+promesc_C<-(data$promesc_20[cambio_internet>=0.115 & cambio_internet<=3])
+promesc_T<-(data$promesc_20[cambio_internet>=3 & cambio_internet<=5.885])
+pocup_C<-(data$pocup_20[cambio_internet>=0.115 & cambio_internet<=3])
+pocup_T<-(data$pocup_20[cambio_internet>=3 & cambio_internet<=5.885])
+ind_C<-(data$popindig_10_real[cambio_internet>=0.115 & cambio_internet<=3])
+ind_T<-(data$popindig_10_real[cambio_internet>=3 & cambio_internet<=5.885])
+luz_C<-(data$porc_viv_luz[cambio_internet>=0.115 & cambio_internet<=3])
+luz_T<-(data$porc_viv_luz[cambio_internet>=3 & cambio_internet<=5.885])
+ninas_C<-(data$niñas_12_14_esc[cambio_internet>=0.115 & cambio_internet<=3])
+ninas_T<-(data$niñas_12_14_esc[cambio_internet>=3 & cambio_internet<=5.885])
+
+#
+t.test(promesc_T,promesc_C,alternative="two.sided")
+#
+t.test(pocup_T,pocup_C,alternative="two.sided")
+# 
+t.test(marg_T,marg_C,alternative="two.sided")
+#
+t.test(ind_T,ind_C,alternative="two.sided")
+#
+t.test(luz_T,luz_C,alternative="two.sided")
+# 
+t.test(ninas_T,ninas_C,alternative="two.sided")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.C<-c("1.917","","43.091","1.919","14.682","74.592","92.488")
+Media.T<-c("1.805", "41.701","1.939","21.735","74.859","91.998")
+Diferencia<-c("", "","","","","")
+Valor.p<-c(".049", "0.0004","0.103","0.000",".5855","0.124")
+dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+# cambio internet 6,4.837
+
+6+4.837
+6-4.837
+
+marg_C<-(data$marg[cambio_internet>=1.163 & cambio_internet<=6])
+marg_T<-(data$marg[cambio_internet>=6 & cambio_internet<=10.837])
+promesc_C<-(data$promesc_20[cambio_internet>=1.163 & cambio_internet<=6])
+promesc_T<-(data$promesc_20[cambio_internet>=6 & cambio_internet<=10.837])
+pocup_C<-(data$pocup_20[cambio_internet>=1.163 & cambio_internet<=6])
+pocup_T<-(data$pocup_20[cambio_internet>=6 & cambio_internet<=10.837])
+ind_C<-(data$popindig_10_real[cambio_internet>=1.163 & cambio_internet<=6])
+ind_T<-(data$popindig_10_real[cambio_internet>=6 & cambio_internet<=10.837])
+luz_C<-(data$porc_viv_luz[cambio_internet>=1.163 & cambio_internet<=6])
+luz_T<-(data$porc_viv_luz[cambio_internet>=6 & cambio_internet<=10.837])
+ninas_C<-(data$niñas_12_14_esc[cambio_internet>=1.163 & cambio_internet<=6])
+ninas_T<-(data$niñas_12_14_esc[cambio_internet>=6 & cambio_internet<=10.837])
+
+#
+t.test(promesc_T,promesc_C,alternative="two.sided")
+#
+t.test(pocup_T,pocup_C,alternative="two.sided")
+# 
+t.test(marg_T,marg_C,alternative="two.sided")
+#
+t.test(ind_T,ind_C,alternative="two.sided")
+#
+t.test(luz_T,luz_C,alternative="two.sided")
+# 
+t.test(ninas_T,ninas_C,alternative="two.sided")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.C<-c("1.704","43.641","1.906","11.156","75.499","92.687")
+Media.T<-c("1.943", "42.409","1.925","17.158","74.737","92.31")
+Diferencia<-c("", "","","","","")
+Valor.p<-c("0.00", "0.00","0.176","0.00","0.071","1.903")
+dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+# itnernet pc 9, 37.309
+
+9+ 37.309
+9-37.309
+
+
+marg_C<-(data$marg[inter_pc_internet>=-28.309 & inter_pc_internet<=9])
+marg_T<-(data$marg[inter_pc_internet>=9 & inter_pc_internet<= 46.309])
+promesc_C<-(data$promesc_20[inter_pc_internet>=-28.309 & inter_pc_internet<=9])
+promesc_T<-(data$promesc_20[inter_pc_internet>=9 & inter_pc_internet<= 46.309])
+pocup_C<-(data$pocup_20[inter_pc_internet>=-28.309 & inter_pc_internet<=9])
+pocup_T<-(data$pocup_20[inter_pc_internet>=9 & inter_pc_internet<= 46.309])
+ind_C<-(data$popindig_10_real[inter_pc_internet>=-28.309 & inter_pc_internet<=9])
+ind_T<-(data$popindig_10_real[inter_pc_internet>=9 & inter_pc_internet<= 46.309])
+luz_C<-(data$porc_viv_luz[inter_pc_internet>=-28.309 & inter_pc_internet<=9])
+luz_T<-(data$porc_viv_luz[inter_pc_internet>=9 & inter_pc_internet<= 46.309])
+ninas_C<-(data$niñas_12_14_esc[inter_pc_internet>=-28.309 & inter_pc_internet<=9])
+ninas_T<-(data$niñas_12_14_esc[inter_pc_internet>=9 & inter_pc_internet<= 46.309])
+
+#
+t.test(promesc_T,promesc_C,alternative="two.sided")
+#
+t.test(pocup_T,pocup_C,alternative="two.sided")
+# 
+t.test(marg_T,marg_C,alternative="two.sided")
+#
+t.test(ind_T,ind_C,alternative="two.sided")
+#
+t.test(luz_T,luz_C,alternative="two.sided")
+# 
+t.test(ninas_T,ninas_C,alternative="two.sided")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.C<-c("1.594","43.374","1.908","12.489","75.439","92.601")
+Media.T<-c("2.493", "41.489","1.936","18.497","73.335","92.113")
+Diferencia<-c("", "","","","","")
+Valor.p<-c("0.00", "0.00","0.00","0.00","0.00","0.034")
+dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+# internet pc 17, 35.984
+
+17+35.984
+17-35.984
+
+marg_C<-(data$marg[inter_pc_internet>=-18.984 & inter_pc_internet<=17])
+marg_T<-(data$marg[inter_pc_internet>=17 & inter_pc_internet<=52.984])
+promesc_C<-(data$promesc_20[inter_pc_internet>=-18.984 & inter_pc_internet<=17])
+promesc_T<-(data$promesc_20[inter_pc_internet>=17 & inter_pc_internet<=52.984])
+pocup_C<-(data$pocup_20[inter_pc_internet>=-18.984 & inter_pc_internet<=17])
+pocup_T<-(data$pocup_20[inter_pc_internet>=17 & inter_pc_internet<=52.984])
+ind_C<-(data$popindig_10_real[inter_pc_internet>=-18.984 & inter_pc_internet<=17])
+ind_T<-(data$popindig_10_real[inter_pc_internet>=17 & inter_pc_internet<=52.984])
+luz_C<-(data$porc_viv_luz[inter_pc_internet>=-18.984 & inter_pc_internet<=17])
+luz_T<-(data$porc_viv_luz[inter_pc_internet>=17 & inter_pc_internet<=52.984])
+ninas_C<-(data$niñas_12_14_esc[inter_pc_internet>=-18.984 & inter_pc_internet<=17])
+ninas_T<-(data$niñas_12_14_esc[inter_pc_internet>=17 & inter_pc_internet<=52.984])
+
+#
+t.test(promesc_T,promesc_C,alternative="two.sided")
+#
+t.test(pocup_T,pocup_C,alternative="two.sided")
+# 
+t.test(marg_T,marg_C,alternative="two.sided")
+#
+t.test(ind_T,ind_C,alternative="two.sided")
+#
+t.test(luz_T,luz_C,alternative="two.sided")
+# 
+t.test(ninas_T,ninas_C,alternative="two.sided")
+
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.C<-c("1.558","43.541","1.898","11.368","75.803","92.861")
+Media.T<-c("2.369", "41.721","1.935","18.057","73.519","92.107")
+Diferencia<-c("", "","","","","")
+Valor.p<-c("0.00", "0.00","0.002","0.00","0.00","1.903")
+dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+# internet pc 3, 38.146
+
+3+38.146
+3-38.146
+
+marg_C<-(data$marg[inter_pc_internet>=-35.146 & inter_pc_internet<=3])
+marg_T<-(data$marg[inter_pc_internet>=3 & inter_pc_internet<=41.146])
+promesc_C<-(data$promesc_20[inter_pc_internet>=-35.146 & inter_pc_internet<=3])
+promesc_T<-(data$promesc_20[inter_pc_internet>=3 & inter_pc_internet<=41.146])
+pocup_C<-(data$pocup_20[inter_pc_internet>=-35.146 & inter_pc_internet<=3])
+pocup_T<-(data$pocup_20[inter_pc_internet>=3 & inter_pc_internet<=41.146])
+ind_C<-(data$popindig_-35.146_real[inter_pc_internet>=-35.146 & inter_pc_internet<=3])
+ind_T<-(data$popindig_-35.146_real[inter_pc_internet>=3 & inter_pc_internet<=41.146])
+luz_C<-(data$porc_viv_luz[inter_pc_internet>=-35.146 & inter_pc_internet<=3])
+luz_T<-(data$porc_viv_luz[inter_pc_internet>=3 & inter_pc_internet<=41.146])
+ninas_C<-(data$niñas_12_14_esc[inter_pc_internet>=-35.146 & inter_pc_internet<=3])
+ninas_T<-(data$niñas_12_14_esc[inter_pc_internet>=3 & inter_pc_internet<=41.146])
+
+#
+t.test(promesc_T,promesc_C,alternative="two.sided")
+#
+t.test(pocup_T,pocup_C,alternative="two.sided")
+# 
+t.test(marg_T,marg_C,alternative="two.sided")
+#
+t.test(ind_T,ind_C,alternative="two.sided")
+#
+t.test(luz_T,luz_C,alternative="two.sided")
+# 
+t.test(ninas_T,ninas_C,alternative="two.sided")
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.C<-c("1.645","43.100","1.918","11.368","75.203","92.437")
+Media.T<-c("2.712", "41.185","1.940","18.057","72.979","92.066")
+Diferencia<-c("", "","","","","")
+Valor.p<-c("0.00", "0.00","0.024","0.00","0.00","0.112")
+dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+
+# internet pc 17, 41.53
+
+17+41.53
+17-41.53
+
+marg_C<-(data$marg[inter_pc_internet>=-24.53 & inter_pc_internet<=17])
+marg_T<-(data$marg[inter_pc_internet>=17 & inter_pc_internet<=58.53])
+promesc_C<-(data$promesc_20[inter_pc_internet>=-24.53 & inter_pc_internet<=17])
+promesc_T<-(data$promesc_20[inter_pc_internet>=17 & inter_pc_internet<=58.53])
+pocup_C<-(data$pocup_20[inter_pc_internet>=-24.53 & inter_pc_internet<=17])
+pocup_T<-(data$pocup_20[inter_pc_internet>=17 & inter_pc_internet<=58.53])
+ind_C<-(data$popindig_10_real[inter_pc_internet>=-24.53 & inter_pc_internet<=17])
+ind_T<-(data$popindig_10_real[inter_pc_internet>=17 & inter_pc_internet<=58.53])
+luz_C<-(data$porc_viv_luz[inter_pc_internet>=-24.53 & inter_pc_internet<=17])
+luz_T<-(data$porc_viv_luz[inter_pc_internet>=17 & inter_pc_internet<=58.53])
+ninas_C<-(data$niñas_12_14_esc[inter_pc_internet>=-24.53 & inter_pc_internet<=17])
+ninas_T<-(data$niñas_12_14_esc[inter_pc_internet>=17 & inter_pc_internet<=58.53])
+
+#
+t.test(promesc_T,promesc_C,alternative="two.sided")
+#
+t.test(pocup_T,pocup_C,alternative="two.sided")
+# 
+t.test(marg_T,marg_C,alternative="two.sided")
+#
+t.test(ind_T,ind_C,alternative="two.sided")
+#
+t.test(luz_T,luz_C,alternative="two.sided")
+# 
+t.test(ninas_T,ninas_C,alternative="two.sided")
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.C<-c("1.557","43.586","1.897","11.087","75.809","92.907")
+Media.T<-c("2.369", "41.727","1.936","17.934","73.540","92.120")
+Diferencia<-c("", "","","","","")
+Valor.p<-c("0.00", "0.00","0.001","0.00","0.00","0.00")
+dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+```
+
 
 # Bibliografía 
 

@@ -83,42 +83,58 @@ attach(data)
 
 Los datos que utiliza el presente trabajo provienen de dos muestras, en dos puntos diferentes del tiempo. Por un lado, se utilizarán las bases de datos de los resultados de la evaluación Enlace (Evaluación Nacional de Logros Académicos en Centros Escolares) para el año 2010, y Planea (Plan Nacional para la Evaluación de los Aprendizajes), el reemplazo de Enlace, en el año 2019. 
 
-Planea es una evaluación aplicada por la Secretaria de Educación Pública anualmente a alumnos de sexto de primaria, tercero de secundaria y el último grado de Educación Media Superior. La prueba mide el desempeño de los alumnos en Matemáticas y Lenguaje en cuatro niveles de logro a nivel escuela. La base tiene información de la localidad donde se encuentran las escuelas, el tipo de escuela, y el nivel de marginación de la localidad. Debido a la disponibilidad de los datos de las dos fuentes, se optó por estudiar solo a alumnos de tercero de secundaria. En el 2019, la muestra consistió de 34,209 escuelas de 16,402 localidades, mientras que la del 2010 en 32,302 escuelas de 15,968 distintas localidades. Dado que nuestra unidad de análisis son localidades, y no escuelas, se utilizará un promedio de nivel de logro de las escuelas por localidad. 
+Planea es una evaluación aplicada por la Secretaria de Educación Pública anualmente a alumnos de sexto de primaria, tercero de secundaria y el último grado de Educación Media Superior. La prueba mide el desempeño de los alumnos en Matemáticas y Lenguaje y Comunicación en cuatro niveles de logro a nivel escuela, mostrado como proporción de alumnos que caen en cada uno de estos. Asimismo, la base tiene información de la localidad donde se encuentran las escuelas, el tipo de escuela, y el nivel de marginación de la localidad. Debido a la disponibilidad de los datos de las dos fuentes, se optó por estudiar solo a alumnos de tercero de secundaria. En el 2010, la muestra consiste en 32,302 escuelas de 15,968 distintas localidades, mientras que en el 2019, de 34,209 escuelas de 16,402 localidades diferentes. 
 
-representatividad... anexo 
+Nuestra unidad de análisis son localidades. En caso de que haya más de una escuela por localidad, se promediarán las proporciones de alumnos de cada nivel de logro por escuela de cada localidad. Para ver datos de cobertura de las pruebas, ver Anexo 1.
 
-Por otro lado, se usarán los datos censales del INEGI agregados a nivel localidad y publicados en “Principales Resultados por Localidad” (ITER), del 2010 y 2020. El ITER cuenta con indicadores socio-demográficos de las localidades y de varias características de la vivienda. Se considera que los datos del 2019 de Planea y del 2020 del censo son comparables, ya que la prueba y las encuestas del censo se realizaron con 8 meses de diferencia. Asimismo, el censo se realizó del 2 al 27 de marzo, mientras que se declaró la pandemia en México el 11 de marzo, por lo que no consideramos que haya cambios en las variables de interés.
+Por otro lado, se usarán los datos censales del INEGI agregados a nivel localidad y publicados en “Principales Resultados por Localidad” (ITER), del 2010 y 2020. El ITER cuenta con indicadores socio-demográficos de las localidades y de características de la vivienda que las conforman. Se considera que los datos del 2019 de Planea y del 2020 del censo son comparables, ya que la prueba y las encuestas del censo se realizaron con 8 meses de diferencia. Asimismo, el censo se realizó del 2 al 27 de marzo, mientras que se declaró la pandemia en México el 11 de marzo, por lo que no se considera que haya habido cambios en las variables de interés.
 
-Para fusionar a las localidades se hicieron dos emparejamientos: primero, el de Enlace 2010 con la ITER del INEGI del mismo año, así como la de Planea 2019 con la ITER del INEGI en 2020. Posteriormente, estas se fusionaron en una sola base, sobre la cual se realizaron los análisis. El análisis empírico se limitará a localidades rurales, ya que estas son más comparables entre sí y para analizar si un incremento en el acceso a Internet (posiblemente influenciado por la Reforma en Telecomunicaciones) benefició a este grupo (el efecto posiblemente sería más bajo en el ámbito urbano, ya que este cuenta con niveles mayores de conectividad). La muestra con ambos ámbitos es de 13,720 localidades; al filtrar por ámbito rural es de 11,194.
+Para construir a la base del *match* entre las bases de los Principales Resultados por Localidad y Planea y Enlace se hicieron dos emparejamientos: primero, el de Enlace 2010 con la ITER del INEGI del mismo año, así como la de Planea 2019 con la ITER del INEGI en 2020. Posteriormente, estas se fusionaron en una sola base, sobre la cual se realizaron los análisis. 
+
+El análisis empírico se limitará a localidades rurales, ya que estas son más comparables entre sí y para analizar si un incremento en el acceso a Internet (posiblemente influenciado por la Reforma en Telecomunicaciones) benefició a este grupo (el efecto posiblemente sería más bajo en el ámbito urbano, ya que este cuenta con niveles mayores de conectividad). La muestra con ambos ámbitos es de 13,720 localidades; al filtrar por ámbito rural es de 11,194.
 
 ## Variables
 
-En nuestra especificación, tendremos dos variables dependientes $\delta NivelLogro_i$. En el primer caso, la variable indica el cambio en la proporción de alumnos en el nivel más alto de logro de la evaluación del 2010 al 2019 (el IV) de cada escuela. A estos los llamamos con fines de abreviación los "top". La segunda variable dependiente indica el cambio en la proporción de alumnos en el nivel más bajo (el I), en el mismo período de tiempo. A estos los indicamos como los "bottom". Como se mencionó anteriormente, los resultados por escuela se agregaron a nivel localidad.
+En nuestra especificación, tendremos cuatro variables dependientes $\delta NivelLogro_i$. Estas son el cambio en la proporción de alumnos en el nivel más alto de logro (o los "top") de la evaluación del 2010 al 2019 (el IV) de cada escuela para Matemáticas y Lenguaje, y;  el cambio en la proporción de alumnos en el nivel más bajo (el I), en el mismo período de tiempo, también por Matemáticas y Español. A estos los indicamos como los "bottom". Como se mencionó anteriormente, los resultados por escuela se agregaron a nivel localidad.
 
 Las variables X, o las definitorias ($G_i$), serán: 
 
-* Tasa de cambio en la proporción de hogares de las localidades de acceso a Internet 
+* Tasa de cambio en el acceso a Internet en la proporción de hogares de las localidades. 
 
-* Tasa de cambio en la proporción de hogares de adopción de Internet junto con adquisición de computadora, laptop, o tablet.
+* Tasa de cambio en el acceso a Internet junto con adquisición de computadora, laptop, o tablet en la proporción de hogares de las localidades.  
 
 Ambos cambios son de los Principales Resultados por Localidad (ITER) del 2010 al 2020. 
 
-Las covariables que se incorporarán al modelo serán del 2010:
+Las covariables que se evaluarán para ser incorporadas al modelo son las siguientes, todas del 2010:
 
 •	$Marg_i$: el nivel de marginación de la localidad i.
 •	$Escolar_i$: el grado promedio de escolaridad en la localidad i.
 •	$PEA_i$: el porcentaje de la población económicamente activa en la localidad i.
 •	$Pob_indig_i$: proporción de personas de un hogar donde el jefe del hogar o su cónyuge hablan alguna lengua indígena. 
 •	$Porc_Viv_Luz_i$:  proporción de hogares que disponen de luz eléctrica.
-•	$Niñas_12a14_esc_i$: proporción de niñas de 12 a 14 años estudiando respecto al total de alumnos de esa edad.
 •	$Región_i$: ....
 
-Y la variable de tratamiento: 
+Y la variable de tratamiento, que tomará ocho valores distintos, según los puntos de corte de las ocho combinaciones de las variables dependientes por las definitorias (4 x 2): 
 
-•	$AccesoInternet_i$: Una variable binaria que tomará el valor 1 si la localidad i tiene acceso al Internet en el año 2020.
+•	$AccesoInternet_i$: Una variable binaria que tomará el valor 1 si la localidad i es mayor al punto de corte.
 
 
-La elección de esas variables... (@doc del senado) (@world bank pagina 7)... poner algo de cómo se contruyen los indices de marginacion, en particular cuál es el que usaplanea
+La elección de las covariables se realizó a partir de la literatura de los factores escolares y de aprendizaje en México (@doc del senado), de los determinantes del rendimiento escolar (@baezas, contreras, sanchez), y características del hogar utilizadas en análisis de impacot de la cobertura de Internet en el bienestar de los hogares(@world bank pagina 9).
+
+El trabajo de Backhoff, Bouzas, et al. utiliza modelos jerárquicos lineales midiendo el impacto de variables de la modalidad educativa, condiciones escolares de tipo estructural, composición de la escuela, y características de los estudiantes. El presente trabajo no incluyó tipo de escuela (privada, pública, telesecundaria) debido a que la unidad de análisis es por localidad, y el resto de las variables por falta de accesibilidad a ellas. Sin embargo, se pudieron rescatar el uso de lengua indígena, la cual se aproximó con la variable $Pob_indig_i$.
+
+Baez et al, por su lado, usan las siguientes variables promediadas por estado para explicar los resultados de la prueba ENLACE en el 2006:
+
+1. Promedio de resultados estatal de la prueba Enlace,
+2. Ingreso de las familias,
+3. Escolaridad de los padres,
+4. Cantidad de niñas estudiando,
+5. Gasto de gobierno en educación,
+6. Eficiencia de los maestros.
+
+Este trabajo utiliza las proporciones por localidad de las primeras cuatro variables (**Oooojo ver si vamos a meter niñas***), pero  en vez de jefe de familia con bachillerato terminado se utilizó el promedio de años de escolaridad por localidad. 
+
+Por último, del documento de Bahia, Castells et al. se rescató la variable de porcentaje de casas por localidad que cuentan con acceso a electricidad. El ingreso de las familias es aproximado con el nivel de marginación por localidad, el cual es un índice que mide las privaciones de las personas en cuatro dimensiones: educación, vivienda, distribución de la población e ingresos monetarios. (@gob conapo).
 
 
 ## Estadísticas descriptivas 
@@ -129,9 +145,11 @@ La elección de esas variables... (@doc del senado) (@world bank pagina 7)... po
 
 # Metodología
 
-Algo del esquema, framework los datos 
+El diseño empírico del presente trabajo utiliza una regresión discontinua para encontrar el efecto causal del acceso a Internet y del acceso a Internet aunado a un equipo tecnológico (computadora, PC o tablet) en el desempeño de las localidades en pruebas estandarizadas aplicadas a nivel nacional en dos diferentes áreas: Matemáticas y Lenguaje. 
 
-Si usáramos una regresión MCO, habría muchos factores de confusión como... Esto podría implicar un problema de variables omitidas o de endogeneidad. Esto se puede solucionar usando un diseño de regresión discontinua. Esta soluciona la endogeneidad de nuestro contexto tomando una ventana alrededor de la media de adopción de Internet.. En este intervalo, podemos asumir que los factores no observados influenciando la adopción de Internet son similares, por lo que las observaciones antes del punto de corte son unbuen contrafactual de las que están después de este. (@ ... davis)
+El diseño RD calculará este efecto comparando a localidades que apenas están por encima del punto de corte de las variables definitorias contra las que se quedaron cerca de estar en este mismo punto de corte. Este fue definido con las medias... y es diferente para cada variable definitoria y variable dependiente. 
+
+Si usáramos una regresión MCO, muy posiblemente habría factores de confusión para el efecto causal. Esto podría implicar un problema de variables omitidas o de endogeneidad. La regresión discontinua soluciona este problema tomando una ventana, determinada de forma óptima, alrededor de la media de adopción de Internet y de la media de adopción de Internet más equipo tecnológico en cada una de las cuatro variables dependientes. En este intervalo, se puede asumir que el grupo de localidades que está por debajo del punto de corte es un buen contrafactual para las comunidades que tienen acceso apenas por encima del corte. Se asume que estos grupos son prácticamente iguales porque están en el mismo punto de las variables definitorias pero tienen asignación a tratamiento diferente. (@ ... davis)
 
 Formalmente, estimamos con una regresión discontinua local lineal (?) weighted or least square?
 
@@ -147,11 +165,11 @@ T_i =&
   \end{cases}
 \end{align*}
 
-y $X_i$ es el vector de covariables de las localidades, que incluye a una variable dummy indicadora de la región del país, nivel de marginación, proporción de niñas en edad ... respecto a... , población indígena.... , proporción de hogares de la localidad con acceso a Internet, proporción de población ocupada, y años promedio de escolaridad de la localidad.
+y $X_i$ es el vector de covariables de las localidades, que puede o no ser incluido en la estimación, como se explicará en la sección de Implementación. Este incluye a una variable dummy indicadora de la región del país, nivel de marginación, proporción de niñas de 12 a 14 años respecto al total de este grupo, población donde el jefe o el cónyuge del hogar habla alguna lengua indígen, proporción de población ocupada, y años promedio de escolaridad de la localidad.
 
-De acuerdo a la especificación, habrá ocho modelos, resultados de la combinación de los dos tipos de examen, los dos tipos de variables dependiente (cambio en "tops" y "bottoms"), y las dos variables $G_i$ (cambio en adopción de Internet y cambio adopción Internet + computadora, laptop o tablet). Asimismo, habrá ocho puntos de corte $c$, donde ocurre la discontinuidad, cada una calculada..... 
+De acuerdo a la especificación y a lo explicado anteriormente, habrá ocho modelos, resultados de la combinación de los dos tipos de examen, los dos tipos de variables dependiente (cambio en "tops" y "bottoms"), y las dos variables $G_i$ (cambio en adopción de Internet y cambio adopción Internet + computadora, laptop o tablet). Asimismo, habrá ocho puntos de corte $c$, donde ocurre la discontinuidad, cada una calculada..... 
 
-Estas son: 
+Estos son: 
 
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 Row<-c("Internet","Internet + PC")
@@ -162,19 +180,15 @@ BottomMat<-c("6","17")
 dataf<-data.frame(Row,TopEsp,BottomEsp,TopMat,BottomMat, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Variable definitoria", "Top", "Bottom",
-                                    "Top","Bottom",caption = "Valores de punto de corte")) %>% 
+                                    "Top","Bottom"),caption = "Tabla 1. Valores de punto de corte") %>% 
   kable_styling(position = "center") %>%  add_header_above(c(" " = 1, "Español" = 2, "Matemáticas" = 2))
 
 
 ```
 
-Para estimar el efecto de tratamiento, se asume que la discontinuidad, o el salto, es el efecto causal. Esta será estimada con el coeficiente $\beta_2 T_i$ Se utilizará un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
+Para estimar el efecto de tratamiento, se asume que la discontinuidad, o el salto, es el efecto causal. Esta será estimada con el coeficiente $\beta_2 T_i$ , utilizando un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
 
-Nuestro principal interés es estimar el efecto de tratamiento alrededor del punto de corte. El método del polinomio global que mencionamos anteriormente no da aproximaciones óptimas en el intervalo alrededor del corte, ya que si se toma a toda la muestra de datos da peso a observaciones lejanas a las del punto de corte. 
-
-Por esto, utilizaremos el método de polinomio local, el cual solo toma en cuenta a la forma funcional de las observaciones alrededor del punto de corte y sus anchos de banda. En este caso, utilizaremos un ajuste lineal. Por esto la importancia de la elección de ancho de banda. 
-
-El método de ponderación que utilizaremos es el de kernel triangular. De esta forma nos aseguramos de que las observaciones más cerca del punto de corte pesen más. Además, es la función recomendadad dado que provee estimaciones óptimas en cuanto a errores cuadrados medios. (@Cattaneo). Por último agrupamos los errores a nivel municipal, ya que .... (está bien esto?)
+Se utilizará el método de polinomio local, el cual hace un ajuste lineal para las observaciones alrededor del punto de corte y sus anchos de banda, usando un método de ponderación triangular. De esta forma nos aseguramos de que las observaciones más cerca del punto de corte pesen más. Además, es la función recomendadad dado que provee estimaciones óptimas en cuanto a errores cuadrados medios. (@Cattaneo). Por último agrupamos los errores a nivel municipal, ya que .... (está bien esto?)
 
 
 ## Estadísticas descriptivas - regresión discontinua
@@ -182,20 +196,19 @@ El método de ponderación que utilizaremos es el de kernel triangular. De esta 
 ```{r,include=FALSE, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
 #Creamos variable de tratamiento (ambito rural) y recodificamos la de marginacion
 data<-data%>% filter(Ambito=='R')
-data$cp_15pp<-as.numeric(ifelse(data$cambio_internet<15,0,1))
 data$marg<-recode(data$marg_10, 'BAJA O MUY BAJA'=3, 'MUY ALTA O ALTA'=2, 
                   'MEDIA'=1)
 as.numeric(data$marg)
-data <- data[(data$promesc_20<20), ] #SAM_COMMENT: QUE HACE ESO?
+data <- data[(data$promesc_20<25), ] 
 attach(data)
 ```
-Los métodos de regresentación gráfica de datos usuales para hacer estadísticas descriptvias, por ejemplo los *scatter plots*, no son tan convenientes en el contexto de RD, ya que no permite ver las discontinuidades en el punto de corte que elijamos (@ Cattaneo). Para ver esto en el caso de nuestros datos, ver Anexo 1.
+Los métodos de regresentación gráfica de datos usuales para hacer estadísticas descriptivas, por ejemplo los *scatter plots*, no son tan convenientes en el contexto de RD, ya que no permite ver las discontinuidades en el punto de corte que elijamos (@ Cattaneo). Para ver esto en el caso de los datos de esta muestra, ver Anexo 2.
 
 Para poder hacer una adecuada visualización de los datos, vamos a mostrarlos de forma agregada o suavizada con dos métodos en una sola gráfica. El primero es el del ajuste polinomial global (la línea), y el segundo el de medias condicionales locales (los puntos). El polinomio global es un ajuste de cuarto o quinto orden en dos partes: antes y después del corte. Las medias locales condicionales se crean al particionar a las observaciones en bandas y posteriormente calculando la media de cada uno. 
 
-Hay dos tipos de bandas que se pueden usar para construir estas gráficas: las *equidistantes* o las *cuantilespaciadas* (@Cattaneo). Decidimos utilizar el segundo, ya que en el caso de las bandas equidistantes, de no haber un número balanceado de observaciones en cada una, se aumentaría mucho la varianza. En cambio, las bandas cuantilespaciadas tienen el mismo número de observaciones en cada una, por la que serán comparables entre ellas. Asimismo, representan a la densidad de las observaciones respecto a la variable definitoria (la cual tiene menos observaciones en los extremos), por lo que es una representación "más fiel" de los datos. Dado que el rango de las X son de -100 a 100, usamos 20 bandas de cada lado. 
+Hay dos tipos de bandas que se pueden usar para construir estas gráficas: las *equidistantes* o las *cuantilespaciadas* (@Cattaneo). Decidimos utilizar las segundas, ya que en el caso de las bandas equidistantes, de no haber un número balanceado de observaciones en cada una, se aumentaría mucho la varianza. En cambio, las bandas cuantilespaciadas tienen el mismo número de observaciones en cada una, por la que la varianza será comparable entre bandas. Asimismo, representan a la densidad de las observaciones respecto a la variable definitoria (la cual tiene menos observaciones en los extremos), siendo "más fiel" de los datos. Dado que el rango de las X son de -100 a 100, usamos 20 bandas de cada lado. 
 
-## ANALISIS PARA INTERNET
+## Análisis descriptivo para cambio en acceso a Internet: RD
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
@@ -227,14 +240,13 @@ out7<- rdplot(cambio_mat_bottom,cambio_internet,nbins=c(20,20), x.lim=c(0,40),y.
 ```
 ]
 
-Podemos notar que en general, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar .... saltos positivos en el punto de la discontinuidad, lo que podría indicar o preveer (?) efectos de tratamiento positivos: el cambio de los "tops" será positivo al tener acceso a Internet, mientras que el de los bottoms sería negativo en el grupo de tratamiento. 
+Podemos notar que en general, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar que hay saltos positivos en el punto de la discontinuidad en el caso de la variable de cambio en las calificaciones más altas, mientras que el de los bottoms sería negativo en el grupo de tratamiento. Este es un indicador del efecto que esperamos ver: el acceso a Internet aumento la proporción de alumnos en las localidades que pasaron a ser de los más altos, y disminuyó la proporción de alumnos que pasaron a ser d elos más bajos.
 
-## ANALISIS PARA PC + INTERNET
+## Análisis descriptivo para acceso a Internet y adquisición de equipo tecnológico: RD
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
 #TOP ESP INTERNET:PC
-#SAM_COMMENT: AQUI PARECE QUE ES MAS FUZZY
 out7<- rdplot(cambio_esp_top,inter_pc_internet,nbins=c(20,20),x.lim=c(0,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
 ```
 ]
@@ -242,7 +254,6 @@ out7<- rdplot(cambio_esp_top,inter_pc_internet,nbins=c(20,20),x.lim=c(0,100),y.l
 .pull-right[
 ```{r, message= F, warning = F,results='hide'} 
 #TOP MAT INTERNET
-#SAM _COMMENT; ESTA RELACION SI ES EVIDENTE
 out7<- rdplot(cambio_mat_top,inter_pc_internet,nbins=c(20,20),x.lim=c(0,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=17,kernel="triangular", binselect = "qspr")
 ```
 ]
@@ -263,15 +274,15 @@ out7<- rdplot(cambio_mat_bottom,inter_pc_internet,nbins=c(20,20), x.lim=c(-5,100
 ```
 ]
 
-NOTAMOS QUE EN MATE SE REUIQERE UN PUNTO DE CORTE MAS GRANDE PARA VER UN CAMBIO, SIN EMBARGO EL SIGNO DE LA DIFERENCIA ES EL ESPERADO. PARECE QUE PC Y INTERNET VAN EN LA MISMA DIRECCION
+Notamos que en Matemáticas se requiere un punto de corte más grande para notar un cambio en las localidades, sin embargo los signos son los esperados. Se observa un comportamiento similar al de acceso a Internet solo, pero más marcado. Esto tiene sentido, ya que el acceso a Internet sin estar acompañado de equipo tecnológico puede estar captando conectividad solo a través de los celulares, lo cual podría ser menos efectivo que una computadora u otro equipo (@Quello).
 
-ANEXO INDICAR PC
+Realizamos este mismo análisis para adquisición de equipo tecnológico sin acceso a Internet. Observamos los mismos signos que los análisis previos, sin embargo, cae fuera de nuestro objeto de estudio. Las gráficas se muestran en el Anexo 2.
 
 # Implementación
 
 ## Elección de bando de ancha 
 
-Antes de implementar los modelos, debemos de elegir el ancho de banda óptimo alrededor de nuestro punto de corte, $h$. Su eleccion es fundamental ya que ésta afecta a la forma funcional y la obtención de los estimadores para calcular el LATE. El ancho de banda óptimo será el resultado de un "trade-off" entre sesgo (o error de especificación, por tener anchos de banda grandes, que podría hacer que una especificación lineal ya no fuera la mejor) y varianza (por tener menos observaciones en las bandas) para el efecto de tratamiento.
+Antes de implementar los modelos, debemos de elegir el ancho de banda óptimo alrededor de nuestro punto de corte, $h$. Su eleccion es fundamental ya que ésta afecta a la forma funcional y la obtención de los estimadores para calcular el LATE. El ancho de banda óptimo será el resultado de un "trade-off" entre sesgo (o error de especificación, por tener anchos de banda grandes, que podría hacer que una especificación lineal ya no fuera la mejor) y varianza (por tener menos observaciones en las bandas) para el efecto de tratamiento, resultado de minimizar la media de los errores al cuadrado (checar!!****!!!*)
 
 Los anchos de banda que utilizaremos para implementar nuestro modelo son:
 
@@ -304,29 +315,21 @@ BottomMat<-c("4.837","41.537")
 dataf<-data.frame(Row,TopEsp,BottomEsp,TopMat,BottomMat, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Variable definitoria", "Top", "Bottom",
-                                    "Top","Bottom",caption = "Anchos de banda óptimos")) %>% 
+                                    "Top","Bottom"),caption = "Tabla 2. Anchos de banda óptimos") %>% 
   kable_styling(position = "center") %>%  add_header_above(c(" " = 1, "Español" = 2, "Matemáticas" = 2))
 
 ```
-Podemos notar que las de internet + pc son mucho más altas...
+Podemos notar que mientras que las $h$ de cambio en el acceso a Internet son de tamaños relativamente bajos, las de cambio en internet y equipo tecnológico son mucho más altas. Esto posiblemente se deba una mayor varianza en el intervalo cerca del punto de corte, o una cantidad de observaciones menor en este mismo intervalo (h-c,h+c]. 
 
-## Covariables
+## Test de discontuinidad de las Covariables
 
-Como último paso antes de realizar nuestro análisis, verificamos que las covariables enlistadas anteriormente estén balanceadas *en el punto de corte*. En caso de no serlo, no se podría asumir el supuesto de continuidad de los resultados potenciales. Entonces, para incluirlos se tendrían que hacer supuestos paramétricos o cambiar los parámetros de interés.
+Como último paso antes de realizar el análisis, se verifica que las covariables enlistadas anteriormente estén balanceadas *en el punto de corte*. En caso de no serlo, no se podría asumir el supuesto de continuidad de los resultados potenciales. Entonces, para incluirlos se tendrían que hacer supuestos paramétricos o cambiar los parámetros de interés.
 
-Para verificar esto, realizamos una tabla de balance:... anexos
+Para verificar esto, realizamos una tabla de balance para los ocho modelos (dos variables dependientes x dos variables definitorias x dos tipos de examen), considerando en cada uno sus respectivos puntos de corte y anchos de banda. Para ver la construcción de cada tabla, donde se señalan las medias de tratamiento y control de cada variable, la diferencia, el valor-p de las pruebas T de cada una, y las pruebas F, donde evaluamos para cada modelo si las medias en conjunto de las variables son iguales a cero, ver Anexo 4. 
 
-
-```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
-
-```
-En la cual podemos observar que ............ rechazamos en todas y no las podemos usar.. citar a cattaneo
-
-
+En todos los modelos se rechazó la prueba F, por lo que no podemos asumir que las covariables son iguales en el punto de corte, por lo que no se incluirán en la implementación. Esto no representa un problema para la estimación: la inclusión de covariables, en caso de cumplir con el balance, es con fines de eficiencia. (@cattaneo).
 
 ## Modelos
-
-decir algo d elos intervalos robustos
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 out = rdrobust(data$cambio_esp_top,data$cambio_internet,kernel = "triangular", c=9,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
@@ -370,7 +373,9 @@ summary(out6)
 out7 = rdrobust(data$cambio_mat_bottom,data$inter_pc_internet,kernel = "triangular", c=17,p = 1, bwselect = "mserd",cluster=data$ClaveMun)
 summary(out7)
 ```
-Resultados cambio itnernet
+
+Los resultados para la variable definitoria de *cambio en acceso a Internet* se resumen en la siguiente tabla: 
+
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 Row<-c("Cambio español top","Cambio matemáticas top","Cambio español bottom","Cambio matemáticas bottom")
 cut<-c("9","21","3","6")
@@ -381,11 +386,27 @@ ci<-c("[0.03 , 2.67]","[-1.50 , 25.61]","[-10.24 , 1.19]","[-5.902 , 5.488]")
 dataf<-data.frame(Row,cut,bw,pointe,pval,ci, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual",
-                                    "Valor-p","IC 95% robustos"),caption = "Resultados") %>%  kable_styling(position = "center") 
+                                    "Valor-p","IC 95% robustos"),caption = "Tabla 3. Resultados de cambio acceso a Internet") %>%  kable_styling(position = "center") 
 
 ```
+Con esta variable definitoria, solo observamos resultados significativos en el cambio de la proporción de alumnos que pasan a ser del nivel de logro más alto en Español, con un estimador del efecto de tratamiento local (LATE) de 1.234 y un nivel de significancia de 0.03. 
 
-Resultados cambio internet y pc intersect
+La interpretación de este resultado es que 
+
+La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el aumento en el de las calificaciones en espanol promedio de las localidades rurales de control en el punto de corte, seria de 1.17 puntos porcentuales si fueran del grupo de tratamiento.
+
+Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,include=FALSE}
+print(out$beta_p_r)
+print(out$beta_p_l)
+print(out1$beta_p_r)
+print(out1$beta_p_l)
+```
+
+
+Mientras tanto, los de *cambio en acceso a Internet* junto con *cambio en equipo tecnológico* son: 
+
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 Row<-c("Cambio español top","Cambio matemáticas top","Cambio español bottom","Cambio matemáticas bottom")
@@ -397,7 +418,7 @@ ci<-c("[0.445 , 1.991]","[1.226 , 5.316]","[-6.797 , -1.239]","[-7.064 , 1.591]"
 dataf<-data.frame(Row,cut,bw,pointe,pval,ci, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual",
-                                    "Valor-p","IC 95% robustos"),caption = "Resultados") %>% 
+                                    "Valor-p","IC 95% robustos"),caption = "Tabla 4. Resultados de cambio acceso a Internet") %>% 
   kable_styling(position = "center") 
 
 ```
@@ -468,7 +489,16 @@ out7 = rdplot(data$cambio_mat_bottom,data$inter_pc_internet,kernel = "triangular
 
 # Anexos
 
-## ANALISIS PARA PC
+## Anexo 1. Cobertura Enlace y Planea
+
+La cobertura de ENLACE es prácticamente del 100% de las escuelas en todas las entidades
+federativas
+http://www.cpte.gob.mx/desarrollo_educativo/pdf/pedagogia/herramientas/ManualtecnicoENLACE2010.pdf
+
+foto de cobertura porcentajes
+http://planea.sep.gob.mx/ba/
+
+## Anexo 2. Análisis RD para adquisición equipo tecnológico
 
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
@@ -502,11 +532,7 @@ out7<- rdplot(cambio_mat_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c
 ```
 ]
 
-CONCLUSION: EN PC POR SI SOLO LAS RELACIONES NO SON TAN CLARAS PERO LO INTERESANTE ES QUE PC:INTER SI NOS DA MAS INSIGHT
-
-
-
-### ANEXOS 2
+## Anexo 3. Tablas de balance y pruebas Fisher de las covariables.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 

@@ -49,6 +49,10 @@ censo_10_localidad<-censo_10 %>%
          vph_c_elec,p3ym_hli,         #COVARIATES segunda generacion
          p12a14noaf,#total 12-14 no asiste muj
          p_12a14_f,#total 12-14 
+         p_12a14, #total hombre mujer 
+         p_12a14_m,
+         p_12a14_m,
+         p12a14noa,
          Ambito,
          vph_cel,tam_loc,
          vph_inter,vivtot,vph_pc) %>% 
@@ -63,8 +67,10 @@ censo_10_localidad<-censo_10 %>%
          jefmujer_10=hogjef_f*100/vivtot,
          cel_10=vph_cel*100/vivtot,
          porc_viv_luz=vph_c_elec*100/vivtot,
-         niñas_12_14_esc= (p_12a14_f-p12a14noaf)*100/p_12a14_f)
+         niñas_12_14_esc= (p_12a14_f-p12a14noaf)*100/p_12a14_f,
+         prop_niñas_12_14_esc=(p_12a14_f-p12a14noaf+p_12a14_m-p_12a14_m)*100/(p_12a14-p12a14noa)  )
 #OJO: 84,690 MISSING VALUES PROVENIENTES DE LA BASE DE DATOS 
+
 
 censo_10_localidad <- as.data.frame(t(apply(censo_10_localidad,1,toupper)))
 

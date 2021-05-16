@@ -389,24 +389,17 @@ kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda",
                                     "Valor-p","IC 95% robustos"),caption = "Tabla 3. Resultados de cambio acceso a Internet") %>%  kable_styling(position = "center") 
 
 ```
-Con esta variable definitoria, solo observamos resultados significativos en el cambio de la proporción de alumnos que pasan a ser del nivel de logro más alto en Español, con un estimador del efecto de tratamiento local (LATE) de 1.234 y un nivel de significancia de 0.03. 
+Con esta variable definitoria, solo observamos resultados significativos en el cambio de la proporción de alumnos que pasan a ser del nivel de logro más alto en Español, con un estimador del efecto de tratamiento local (LATE) de 1.234 puntos porcentuales y un nivel de significancia de 0.03. 
 
-La interpretación de este resultado es que 
+La interpretacion es que, dentro del intervalo de cambio en internet (4.4,13.6], el aumento en las calificaciones en español promedio de las localidades rurales de control en el punto de corte, hubiera sido de 1.17 puntos porcentuales si fueran del grupo de tratamiento; si hubieran tenido acceso a Internet.
 
-La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el aumento en el de las calificaciones en espanol promedio de las localidades rurales de control en el punto de corte, seria de 1.17 puntos porcentuales si fueran del grupo de tratamiento.
-
-Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.
+Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.09 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.86 pp.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,include=FALSE}
 print(out$beta_p_r)
 print(out$beta_p_l)
-print(out1$beta_p_r)
-print(out1$beta_p_l)
 ```
-
-
 Mientras tanto, los de *cambio en acceso a Internet* junto con *cambio en equipo tecnológico* son: 
-
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 Row<-c("Cambio español top","Cambio matemáticas top","Cambio español bottom","Cambio matemáticas bottom")
@@ -423,67 +416,52 @@ kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda",
 
 ```
 
-POdemos ver que... La interpretacion es que, dentro del intervalo de cambio en internet (5,13] , el aumento en el de las calificaciones en espanol promedio de las localidades rurales de control en el punto de corte, seria de 1.17 puntos porcentuales si fueran del grupo de tratamiento.
+En este caso, se puede notar que hubo cambios significativos para el cambio en la proporción de alumnos que pasan a ser los más altos en español (con un LATE de 1.252 pp y nivel de significancia de 0.00) y matemáticas (con un estimador de 3.277 pp y un nivel de significancia de 0.001) , así como una disminución significativa de la proporción de alumnos por localidad rural que dejaron de ser parte del nivel de logro más bajo en español, con un estimador del efecto de tratamiento de -3.855 pp y nivel de significancia de 0.003. La interpretación sigue la línea del mencionado para cambios en Internet. 
 
-Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a Internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.12 pp, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.93 pp.
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,include=FALSE}
-print(out$beta_p_r)
-print(out$beta_p_l)
-print(out1$beta_p_r)
-print(out1$beta_p_l)
-```
 
 ## Resultados gráficos
 
-
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out = rdplot(data$cambio_esp_top,data$cambio_internet,kernel = "triangular", c=9,p = 1,x.lim=c(5,13),y.lim=c(0,7.5))
+out = rdplot(data$cambio_esp_top,data$cambio_internet,kernel = "triangular", c=9,p = 1,x.lim=c(5,13),y.lim=c(0,7.5),x.label="Cambio Internet",y.label="Cambio Español Top",title="RLL de cambio en desempeño más alto en español contra cambio en acceso a Internet")
 
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out1 = rdplot(data$cambio_mat_top,data$cambio_internet,kernel = "triangular", y.lim=c(0,7.5),x.lim=c(12.3,28.7),c=21,p = 1)
+out1 = rdplot(data$cambio_mat_top,data$cambio_internet,kernel = "triangular", y.lim=c(0,7.5),x.lim=c(12.3,28.7),c=21,p = 1,x.label="Cambio Internet",y.label="Cambio Mate Top",title="RLL de cambio en desempeño más alto en matemáticas contra cambio en acceso a Internet")
 
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out2 = rdplot(data$cambio_mat_bottom,data$cambio_internet,kernel = "triangular", c=3,p = 1)
+out2 = rdplot(cambio_esp_bottom,cambio_internet,kernel = "triangular",nbins=c(20,20),binselect = "qspr", c=3,p = 1,x.lim=c(.115,5.885),x.label="Cambio Internet",y.label="Cambio Español Bottom",title="RLL de cambio en desempeño más bajo en español contra cambio en acceso a Internet")
+
 
 ```
-
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out3 = rdplot(data$cambio_mat_bottom,data$cambio_internet,kernel = "triangular", c=6,p = 1, x.lim=c(3.17,10.84))
+out3 = rdplot(cambio_mat_bottom,cambio_internet,kernel = "triangular", c=6,p = 1, x.lim=c(3.17,10.84),x.label="Cambio Internet",y.label="Cambio Mates Bottom",title="RLL de cambio en desempeño más bajo en matemáticas contra cambio en acceso a Internet",y.lim=c(0,7.5),binselect = "qspr",nbins=c(20,20))
 
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out4 = rdplot(data$cambio_esp_top,data$inter_pc_internet,kernel = "triangular", c=9,p = 1,x.lim=c(-28.304,46.304),y.lim=c(0,7.5))
+out4 = rdplot(data$cambio_esp_top,data$inter_pc_internet,kernel = "triangular", c=9,p = 1,x.lim=c(-28.304,46.304),y.lim=c(0,7.5),title="RLL de cambio en desempeño más alto en español contra cambio en acceso a Internet y adquisición de equipo tecnológico")
 
 ```
 
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out5 = rdplot(data$cambio_mat_top,data$inter_pc_internet, kernel = "triangular", c=17,p = 1,x.lim=c(-18.984,52.984),y.lim=c(0,7.5))
+out5 = rdplot(data$cambio_mat_top,data$inter_pc_internet, kernel = "triangular", c=17,p = 1,x.lim=c(-18.984,52.984),y.lim=c(0,7.5),title="RLL de cambio en desempeño más alto en matemáticas contra cambio en acceso a Internet y adquisición de equipo tecnológico")
 
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out6 = rdplot(data$cambio_esp_bottom,data$inter_pc_internet,kernel = "triangular", c=3,p = 1, x.lim=c(-35.146,41.146),y.lim=c(0,7.5))
+out7<- rdplot(cambio_esp_bottom,inter_pc_internet,nbins=c(20,20),y.lim=c(0,7.5),x.label="Cambio Internet",y.label="Cambio Español Bottom",title="RLL de cambio en desempeño más bajo en español contra cambio en acceso a Internet y adquisición de equipo tecnológico",c=3,kernel="triangular", binselect = "qspr", x.lim=c(-35.146,41.146),y.lim=c(0,7.5),c=3)
 
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out7 = rdplot(data$cambio_mat_bottom,data$inter_pc_internet,kernel = "triangular", c=17,p = 1,x.lim=c(-24.53,58.53),y.lim=c(0,7.5))
+out7<- rdplot(cambio_mat_bottom,inter_pc_internet,nbins=c(20,20), x.lim=c(-5,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate Bottom",title="RLL de cambio en desempeño más bajo en matemáticas contra cambio en acceso a Internet y adquisición de equipo tecnológico",c=17,p = 1,x.lim=c(-24.53,58.53),y.lim=c(0,7.5),kernel="triangular", binselect = "qspr")
 
 ```
-
 
 # Resultados
-
-
 
 # Conclusión
 
@@ -503,7 +481,6 @@ http://planea.sep.gob.mx/ba/
 .pull-left[
 ```{r, message= F, warning = F,results='hide'} 
 #TOP ESP PC
-#SAM_COMMENT: AQUI PARECE QUE ES MAS FUZZY
 out7<- rdplot(cambio_esp_top,cambio_pc,nbins=c(20,20),x.lim=c(-1,17),y.lim=c(-3,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=11,kernel="triangular", binselect = "qspr")
 ```
 ]
@@ -511,7 +488,6 @@ out7<- rdplot(cambio_esp_top,cambio_pc,nbins=c(20,20),x.lim=c(-1,17),y.lim=c(-3,
 .pull-right[
 ```{r, message= F, warning = F,results='hide'} 
 #TOP MAT PC
-#SAM _COMMENT; ESTA RELACION SI ES EVIDENTE
 out7<- rdplot(cambio_mat_top,cambio_pc,nbins=c(20,20),x.lim=c(-3,15),y.lim=c(-3,7),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=4,kernel="triangular", binselect = "qspr")
 ```
 ]
@@ -536,9 +512,8 @@ out7<- rdplot(cambio_mat_bottom,cambio_pc,nbins=c(20,20), x.lim=c(-5,15),y.lim=c
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
-# cambio internet 9, 4.539
-
-
+# Español, top, internet. 
+# intervalo
 9+4.539
 9-4.539
 
@@ -573,11 +548,11 @@ t.test(ninas_T,ninas_C,alternative="two.sided")
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.C<-c("1.694","43.579","1.885","9.170","74.645","93.065")
-Media.T<-c("1.810", "43.305","1.911","12.866","75.525","92.175")
-Diferencia<-c("", "","","","","")
-Valor.p<-c("0.09", "0.4883","0.154","0.00","0.088","0.01211")
-dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+Media.C<-c("1.694","43.579","1.885","9.170","74.645","x")
+Media.T<-c("1.810", "43.305","1.911","12.866","75.525","x")
+Diferencia<-c("0.116", "-0.274","0.026","3.716","0.88","x")
+Valor.p<-c("0.09", "0.4883","0.154","0.00","0.088","x")
+dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 
 ```
@@ -593,15 +568,15 @@ tabla1<-balance_regression(variables,treatment="t1")
 stargazer(as.data.frame(tabla1$F_test),type="text",summary=FALSE)
 ```
 
-
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
-# cambio internet 21,7.692
+# Matemáticas, top, cambio internet. 21,7.692
 
+#intervalo
 21+7.692
 21-7.692
 
+#
 marg_C<-(data$marg[cambio_internet>=13.308 & cambio_internet<=21])
 marg_T<-(data$marg[cambio_internet>=21 & cambio_internet<=28.692])
 promesc_C<-(data$promesc_20[cambio_internet>=13.308 & cambio_internet<=21])
@@ -629,19 +604,19 @@ t.test(luz_T,luz_C,alternative="two.sided")
 t.test(ninas_T,ninas_C,alternative="two.sided")
 ```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.C<-c("1.497","43.873","1.880","5.266","77.347","93.770")
-Media.T<-c("1.549", "43.616","1.871","6.508","75.918","93.247")
-Diferencia<-c("", "","","","","")
-Valor.p<-c("0.455", "0.51","0.731",".076","0.001","0.082")
-dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+Media.T<-c("1.497","43.873","1.880","5.266","77.347","X")
+Media.C<-c("1.549", "43.616","1.871","6.508","75.918","X")
+Diferencia<-c("-0.052", "0.257","0.009","-1.242","1.429","X")
+Valor.p<-c("0.455", "0.51","0.731",".076","0.001",X")
+dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 #F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
 
@@ -656,8 +631,9 @@ stargazer(as.data.frame(tabla2$F_test),type="text",summary=FALSE)
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
-# cambio internet 3, 2.885
+# Español, bottom, cambio internet. 3, 2.885
 
+#intervalo
 3+2.885
 3-2.885
 
@@ -687,18 +663,18 @@ t.test(luz_T,luz_C,alternative="two.sided")
 # 
 t.test(ninas_T,ninas_C,alternative="two.sided")
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.C<-c("1.917","","43.091","1.919","14.682","74.592","92.488")
-Media.T<-c("1.805", "41.701","1.939","21.735","74.859","91.998")
-Diferencia<-c("", "","","","","")
-Valor.p<-c(".049", "0.0004","0.103","0.000",".5855","0.124")
-dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+Media.T<-c("1.917","","43.091","1.919","14.682","74.592","X")
+Media.C<-c("1.805", "41.701","1.939","21.735","74.859","X")
+Diferencia<-c("0.112", "1.39","-0.02","-7.053","-0.027","X")
+Valor.p<-c(".049", "0.0004","0.103","0.000",".5855","X")
+dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 #F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
 
 data3<-data[which(cambio_internet<=5.885 & cambio_internet>=.115),]
@@ -713,7 +689,9 @@ stargazer(as.data.frame(tabla3$F_test),type="text",summary=FALSE)
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
-# cambio internet 6,4.837
+# Mate, bottom, cambio internet. 6,4.837
+
+#intervalo
 
 6+4.837
 6-4.837
@@ -744,19 +722,19 @@ t.test(luz_T,luz_C,alternative="two.sided")
 # 
 t.test(ninas_T,ninas_C,alternative="two.sided")
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.C<-c("1.704","43.641","1.906","11.156","75.499","92.687")
-Media.T<-c("1.943", "42.409","1.925","17.158","74.737","92.31")
-Diferencia<-c("", "","","","","")
-Valor.p<-c("0.00", "0.00","0.176","0.00","0.071","1.903")
-dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+Media.T<-c("1.943", "42.409","1.925","17.158","74.737","X")
+Media.C<-c("1.704","43.641","1.906","11.156","75.499","X")
+Diferencia<-c("0.239", "1.232",".019","6.002","0.762","X")
+Valor.p<-c("0.00", "0.00","0.176","0.00","0.071","X")
+dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
 
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 #F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
 
 data4<-data[which(cambio_internet<=10.837 & cambio_internet>=1.163),]
@@ -769,8 +747,9 @@ stargazer(as.data.frame(tabla4$F_test),type="text",summary=FALSE)
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
-# itnernet pc 9, 37.309
+# español, top, internet+pc 9, 37.309
 
+#intervalo
 9+ 37.309
 9-37.309
 
@@ -801,20 +780,19 @@ t.test(luz_T,luz_C,alternative="two.sided")
 # 
 t.test(ninas_T,ninas_C,alternative="two.sided")
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.C<-c("1.594","43.374","1.908","12.489","75.439","92.601")
-Media.T<-c("2.493", "41.489","1.936","18.497","73.335","92.113")
-Diferencia<-c("", "","","","","")
-Valor.p<-c("0.00", "0.00","0.00","0.00","0.00","0.034")
+Media.T<-c("2.493", "41.489","1.936","18.497","73.335","x")
+Media.C<-c("1.594","43.374","1.908","12.489","75.439","x")
+Diferencia<-c("0.899", "-1.885","0.028","6.008","-2.104","x")
+Valor.p<-c("0.00", "0.00","0.00","0.00","0.00","x")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 
 ```
 
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 #F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
 
@@ -829,8 +807,9 @@ stargazer(as.data.frame(tabla5$F_test),type="text",summary=FALSE)
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
-# internet pc 17, 35.984
+# mate, top, internet + pc. 17, 35.984
 
+#intervalo
 17+35.984
 17-35.984
 
@@ -865,11 +844,11 @@ t.test(ninas_T,ninas_C,alternative="two.sided")
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.C<-c("1.558","43.541","1.898","11.368","75.803","92.861")
-Media.T<-c("2.369", "41.721","1.935","18.057","73.519","92.107")
-Diferencia<-c("", "","","","","")
-Valor.p<-c("0.00", "0.00","0.002","0.00","0.00","1.903")
-dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+Media.T<-c("2.369", "41.721","1.935","18.057","73.519","X")
+Media.C<-c("1.558","43.541","1.898","11.368","75.803","X")
+Diferencia<-c("0.811", "-1.82","0.037","6.689","-2.284","X")
+Valor.p<-c("0.00", "0.00","0.002","0.00","0.00","X")
+dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 
 ```
@@ -890,8 +869,9 @@ stargazer(as.data.frame(tabla6$F_test),type="text",summary=FALSE)
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
-# internet pc 3, 38.146
+#Español, bottom, internet + pc. 3, 38.146
 
+#intervalo
 3+38.146
 3-38.146
 
@@ -925,11 +905,11 @@ t.test(ninas_T,ninas_C,alternative="two.sided")
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.C<-c("1.645","43.100","1.918","11.368","75.203","92.437")
-Media.T<-c("2.712", "41.185","1.940","18.057","72.979","92.066")
-Diferencia<-c("", "","","","","")
-Valor.p<-c("0.00", "0.00","0.024","0.00","0.00","0.112")
-dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
+Media.T<-c("2.712", "41.185","1.940","18.057","72.979","x")
+Media.C<-c("1.645","43.100","1.918","11.368","75.203","x")
+Diferencia<-c("1.067", "-1.915","0.022","7.589","-2.224","x")
+Valor.p<-c("0.00", "0.00","0.024","0.00","0.00","x")
+dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 
 ```
@@ -946,11 +926,11 @@ stargazer(as.data.frame(tabla7$F_test),type="text",summary=FALSE)
 
 ```
 
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
-# internet pc 17, 41.53
+# Mate, bottom, internet+ pc- 17, 41.53
 
+#intervalo
 17+41.53
 17-41.53
 
@@ -984,10 +964,10 @@ t.test(ninas_T,ninas_C,alternative="two.sided")
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.C<-c("1.557","43.586","1.897","11.087","75.809","92.907")
-Media.T<-c("2.369", "41.727","1.936","17.934","73.540","92.120")
-Diferencia<-c("", "","","","","")
-Valor.p<-c("0.00", "0.00","0.001","0.00","0.00","0.00")
+Media.T<-c("2.369", "41.727","1.936","17.934","73.540","x")
+Media.C<-c("1.557","43.586","1.897","11.087","75.809","x")
+Diferencia<-c("0.812", "-1.859","0.039","6.847","-2.269","x")
+Valor.p<-c("0.00", "0.00","0.001","0.00","0.00","x")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```

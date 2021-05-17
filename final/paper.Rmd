@@ -151,7 +151,7 @@ Las covariables que se evaluarán para ser incorporadas al modelo son las siguie
 •	$PEA_i$: el porcentaje de la población económicamente activa en la localidad i.
 •	$Pob_indig_i$: proporción de personas de un hogar donde el jefe del hogar o su cónyuge hablan alguna lengua indígena. 
 •	$Porc_Viv_Luz_i$: proporción de hogares que disponen de luz eléctrica.
-•	$Región_i$: ....
+•	$Región_i$: #marco una clasificación de la región de INEGI a la que pertenece la localidad. ^[Son 4 posibles clasificaciones: Centro, Occidente, Norte y Sureste, para más información consultar https://www.inegi.org.mx/rnm/index.php/catalog/223/datafile/F25/V3358]
 
 Y la variable de tratamiento, que tomará ocho valores distintos, según los puntos de corte de las ocho combinaciones de las variables dependientes por las definitorias (4 x 2): 
 
@@ -177,58 +177,25 @@ Por último, del documento de Bahia, Castells et al. se rescató la variable de 
 
 
 ## Estadísticas descriptivas 
-
+#marco
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,results='hide'}
-dat<-data.frame(data$cambio_esp_top,data$cambio_mat_top,data$cambio_internet,data$promesc_10,data$marg,data$pocup_10, data$pobindig_10,data$porc_viv_luz,data$prop_niñas_12_14_esc)
-stargazer(dat,digits=2,type='text',title="Tabla 1. Resumen estadisticas descriptivas",covariate.labels =c("Cambio Espanol","Cambio Mate","Cambio Internet","Promedio Escolaridad","Marginacion","Pob. Ocupada","Pob. Lengua indígena","Electricidad","Niñas estudiando"))
+dat<-data.frame(data$cambio_esp_top,data$cambio_mat_top, data$cambio_esp_bottom,data$cambio_mat_bottom,data$cambio_internet,data$promesc_10,data$marg,data$pocup_10, data$pobindig_10,data$porc_viv_luz,data$prop_niñas_12_14_esc)
+data$marg<-as.factor(data$marg)
+stargazer(dat,digits=2,type='text',title="Tabla 1. Resumen estadisticas descriptivas",covariate.labels =c("Cambio Top Espanol","Cambio Top Mate","Cambio Bottom Español","Cambio Bottom Mate","Cambio Internet","Promedio Escolaridad","Marginacion","Pob. Ocupada","Pob. Lengua indígena","Electricidad","Niñas estudiando"))
 ```
 
-```{r, results = "asis", echo = FALSE, message = FALSE}
-library(knitr)
-tex2markdown <- function(texstring) {
-  writeLines(text = texstring,
-             con = myfile <- tempfile(fileext = ".tex"))
-  texfile <- pandoc(input = myfile, format = "html")
-  cat(readLines(texfile), sep = "\n")
-  unlink(c(myfile, texfile))
-}
-textable <- "\\begin{table}[!htbp] \\centering 
-  \\caption{Tabla 1. Resumen estadisticas descriptivas} 
-  \\label{} 
-\\begin{tabular}{@{\\extracolsep{5pt}}lccccccc} 
-\\\\[-1.8ex]\\hline 
-\\hline \\\\[-1.8ex] 
-Statistic & \\multicolumn{1}{c}{N} & \\multicolumn{1}{c}{Mean} & \\multicolumn{1}{c}{St. Dev.} & \\multicolumn{1}{c}{Min} & \\multicolumn{1}{c}{Pctl(25)} & \\multicolumn{1}{c}{Pctl(75)} & \\multicolumn{1}{c}{Max} \\\\
-\\hline \\\\[-1.8ex] 
-Cambio Espanol & 11,515 & 2.99 & 7.74 & $-$71 & 0 & 3.3 & 100 \\\\ 
-Cambio Mate & 11,515 & 5.38 & 17.13 & $-$100.00 & 0.00 & 6.72 & 100.00 \\\\ 
-Cambio Internet & 11,515 & 10.72 & 11.14 & $-$25.25 & 1.91 & 16.67 & 85.71 \\\\ 
-Tratamiento & 11,515 & 0.44 & 0.50 & 0 & 0 & 1 & 1 \\\\ 
-Prom. Escolaridad & 11,515 & 1.99 & 2.25 & 0.11 & 0.69 & 2.38 & 19.97 \\\\ 
-Marginacion & 11,515 & 1.91 & 0.51 & 1 & 2 & 2 & 3 \\\\ 
-Pob. Ocupada & 11,515 & 42.68 & 11.63 & 0.00 & 35.80 & 49.17 & 91.62 \\\\ 
-Pob. Lengua indígena & 11,141 18.70 & 34.68 & 0.00 & 0.0 & 10.37 & 100.00 \\\\ 
-Electricidad & 11,141 & 75.05 & 14.88 & 0.00 & 69.28 & 84.62 & 100.00 \\\\ 
-Niñas estudiando & 11,141 & 49.75 & 11.12 & 0.00 & 43.75 & 55.56 & 100.00 \\\\ 
-\\hline \\\\[-1.8ex] 
-\\end{tabular} 
-\\end{table}  "
-tex2markdown(textable)
-                                                    
-```
+Lo primero que notamos esque las medias del cambio son positivas para todas las variables dependientes con exepción del cambio en español para el grupo de menor aprovechamiento. Asimismo, notamos que la media y la varianza para ambas variables de cambio en matemáticas son mayores que en español. Esto quiere decir que los cambios en matemáticas han sido más sensibles en el periodo observado, tanto para el grupo de mayor como para el de menor aprovechamiento. Asimismo, notamos que el promedio de grado de marginación es ligeramente menor al 2, lo cual quiere decir que la distribución de dicha variable está ligeramente sesgada hacia la izquierda. Tambien notamos que el promedio de escolaridad es bajo y la proporción de personas quee hablan una lengua indígena es alta (con respecto al país). Esto es una consecuencia de que cuando se desagregan los datos a nivel localidad, las poblaciones rurales son sobrerepresentadas debido a que las localidades urbanas "empacan" grandes cantidades de habitantes, mientras que las rurales "empacan" menos y están distribuidas geograficamente con mayor exparsión. Además, notamos que la media el porcentaje de niñas estudiando es muy cercano al 50% con una desviación estandar de 11 puntos porcentuales.
+
+Finalmente, cabe resaltar que solo usamos observaciones completas en la base de datos, por lo que no contemplamos escuelas nuevas que antes no existían. Sin embargo, incluso con datos completos, notamos algunas localidades (muy pequeñas), que han logrado cambios desde -100 hasta 100 puntos procentuales. Es importante aclarar que los datos así están y que para las regresión discontinuas que estimaremos, dichas observaciones no serán tomadas en cuenta para los cálculos de efectos de tratamiento debido a que estos se realizan acotando la variable dependiente a cierto margen de valores.
 
 ## Histogramas Tratamiento
 
-.pull-left[
 ```{r, message= F, warning = F} 
 ggplot(data, aes(x=cambio_internet))+
   geom_histogram(color="darkblue", fill="lightblue")+
   theme_calc()+
   ggtitle("Cambio en el porcentaje de hogares con acceso a internet")
 ```
-]
-
-.pull-right[
 
 ```{r, message= F, warning = F} 
 ggplot(data, aes(x=cambio_pc))+
@@ -236,20 +203,15 @@ ggplot(data, aes(x=cambio_pc))+
   theme_calc()+
   ggtitle("Cambio en el porcentaje de hogares con acceso a PC")
 ```  
-]
----
+
 ## Histogramas - Español
 
-.pull-left[
 ```{r, message= F, warning = F} 
 ggplot(data, aes(x=cambio_esp_top))+
   geom_histogram(color="darkblue", fill="lightblue")+
   theme_calc()+
   ggtitle("Cambio en porcentaje de alumnos en el nivel IV (más alto) en español")
 ```
-]
-
-.pull-right[
 
 ```{r, message= F, warning = F} 
 ggplot(data, aes(x=cambio_esp_bottom))+
@@ -257,20 +219,16 @@ ggplot(data, aes(x=cambio_esp_bottom))+
   theme_calc()+
   ggtitle("Cambio en porcentaje de alumnos en el nivel I (más bajo) en español ")
 ```  
-] 
+
 
 ## Histogramas - Matemáticas
 
-.pull-left[
 ```{r, message= F, warning = F} 
 ggplot(data, aes(x=cambio_mat_top))+
   geom_histogram(color="darkblue", fill="lightblue")+
   theme_calc()+
   ggtitle("Cambio en porcentaje de alumnos en el nivel IV (más alto) en matemáticas")
 ```
-]
-
-.pull-right[
 
 ```{r, message= F, warning = F} 
 ggplot(data, aes(x=cambio_mat_bottom))+
@@ -278,8 +236,7 @@ ggplot(data, aes(x=cambio_mat_bottom))+
   theme_calc()+
   ggtitle("Cambio en porcentaje de alumnos en el nivel I (más bajo) en matemáticas")
 ```  
-]
-  
+
 ## Regresiones Ingenuas - Español
 
 ```{r, results = "asis", echo = FALSE, message = FALSE}
@@ -287,31 +244,7 @@ a<-lm(cambio_esp_top~cambio_internet,data)
 b<-lm(cambio_esp_top~cambio_pc,data)
 c<-lm(cambio_esp_bottom~cambio_internet,data)
 d<-lm(cambio_esp_bottom~cambio_pc,data)
-textable <- "\\begin{table}[!htbp] \\centering 
-  \\caption{} 
-  \\label{} 
-\\begin{tabular}{@{\\extracolsep{5pt}}lcccc} 
-\\\\[-1.8ex]\\hline 
-\\hline \\\\[-1.8ex] 
- & \\multicolumn{4}{c}{\\textit{Dependent variable:}} \\\\ 
-\\cline{2-5} 
-\\\\[-1.8ex] & \\multicolumn{2}{c}{cambio\\_esp\\_top} & \\multicolumn{2}{c}{cambio\\_esp\\_bottom} \\\\ 
-\\\\[-1.8ex] & (1) & (2) & (3) & (4)\\\\ 
-\\hline \\\\[-1.8ex] 
- cambio\\_internet & 0.047$^{***}$ &  & $-$0.041 &  \\\\ 
-  & (0.006) &  & (0.028) &  \\\\ 
-  & & & & \\\\ 
- cambio\\_pc &  & 0.098$^{***}$ &  & $-$0.220$^{***}$ \\\\ 
-  &  & (0.019) &  & (0.082) \\\\ 
-  & & & & \\\\ 
- Constant & 2.494$^{***}$ & 2.695$^{***}$ & $-$2.451$^{***}$ & $-$2.219$^{***}$ \\\\ 
-  & (0.100) & (0.092) & (0.435) & (0.402) \\\\ 
-  & & & & \\\\ 
-\\hline \\\\[-1.8ex] 
-Observations & 11,515 & 11,515 & 11,515 & 11,515 \\\\ 
-\\end{tabular} 
-\\end{table}  "
-tex2markdown(textable)
+stargazer(a,b,c,d,type="latex")
 ```
 
 ## Regresiones Ingenuas- Matemáticas
@@ -321,33 +254,8 @@ e<-lm(cambio_mat_top~cambio_internet,data)
 f<-lm(cambio_mat_top~cambio_pc,data)
 g<-lm(cambio_mat_bottom~cambio_internet,data)
 h<-lm(cambio_mat_bottom~cambio_pc,data)
-textable <- "\\begin{table}[!htbp] \\centering 
-  \\caption{} 
-  \\label{} 
-\\begin{tabular}{@{\\extracolsep{5pt}}lcccc} 
-\\\\[-1.8ex]\\hline 
-\\hline \\\\[-1.8ex] 
- & \\multicolumn{4}{c}{\\textit{Dependent variable:}} \\\\
-\\cline{2-5} 
-\\\\[-1.8ex] & \\multicolumn{2}{c}{cambio\\_mat\\_top} & \\multicolumn{2}{c}{cambio\\_mat\\_bottom} \\\\ 
-\\\\[-1.8ex] & (1) & (2) & (3) & (4)\\\\ 
-\\hline \\\\[-1.8ex] 
- cambio\\_internet & $-$0.006 &  & 0.038 &  \\\\ 
-  & (0.014) &  & (0.031) &  \\\\ 
-  & & & & \\\\ 
- cambio\\_pc &  & 0.075$^{*}$ &  & $-$0.082 \\\\ 
-  &  & (0.042) &  & (0.091) \\\\ 
-  & & & & \\\\ 
- Constant & 5.444$^{***}$ & 5.150$^{***}$ & 6.884$^{***}$ & 7.546$^{***}$ \\\\ 
-  & (0.222) & (0.205) & (0.482) & (0.445) \\\\ 
-  & & & & \\\\ 
-\\hline \\\\[-1.8ex] 
-Observations & 11,515 & 11,515 & 11,515 & 11,515 \\\\ 
-\\hline 
-\\hline \\\\[-1.8ex] 
-\\end{tabular} 
-\\end{table}  "
-tex2markdown(textable)
+stargazer(e,f,g,h,type="latex")
+
 ```
 
 # Metodología

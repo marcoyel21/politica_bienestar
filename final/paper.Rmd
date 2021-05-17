@@ -76,6 +76,8 @@ attach(data)
 
 ```
 
+
+\tableofcontents
 # Introducción
 
 La educación en México continúa siendo uno de los mayores retos del país. El Banco Interamericano de Desarrollo, en su estudio titulado “Los Costos Educativos de la Crisis Sanitaria en América Latina y el Caribe 2020”, establece un panorama general de diversos países latinoamericanos, entre ellos México, del grado en que los sistemas educativos se encontraban preparados para enfrentar el desafío de la impartición de clases vía remota a través de medios digitales que se detonó con la pandemia.   
@@ -151,7 +153,7 @@ Las covariables que se evaluarán para ser incorporadas al modelo son las siguie
 •	$PEA_i$: el porcentaje de la población económicamente activa en la localidad i.
 •	$Pob_indig_i$: proporción de personas de un hogar donde el jefe del hogar o su cónyuge hablan alguna lengua indígena. 
 •	$Porc_Viv_Luz_i$: proporción de hogares que disponen de luz eléctrica.
-•	$Región_i$: #marco una clasificación de la región de INEGI a la que pertenece la localidad. ^[Son 4 posibles clasificaciones: Centro, Occidente, Norte y Sureste, para más información consultar https://www.inegi.org.mx/rnm/index.php/catalog/223/datafile/F25/V3358]
+•	$Región_i$:  una clasificación de la región de INEGI a la que pertenece la localidad. ^[Son 4 posibles clasificaciones: Centro, Occidente, Norte y Sureste, para más información consultar https://www.inegi.org.mx/rnm/index.php/catalog/223/datafile/F25/V3358]
 
 Y la variable de tratamiento, que tomará ocho valores distintos, según los puntos de corte de las ocho combinaciones de las variables dependientes por las definitorias (4 x 2): 
 
@@ -177,11 +179,11 @@ Por último, del documento de Bahia, Castells et al. se rescató la variable de 
 
 
 ## Estadísticas descriptivas 
-#marco
-```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,results='hide'}
+
+```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 dat<-data.frame(data$cambio_esp_top,data$cambio_mat_top, data$cambio_esp_bottom,data$cambio_mat_bottom,data$cambio_internet,data$promesc_10,data$marg,data$pocup_10, data$pobindig_10,data$porc_viv_luz,data$prop_niñas_12_14_esc)
 data$marg<-as.factor(data$marg)
-stargazer(dat,digits=2,type='text',title="Tabla 1. Resumen estadisticas descriptivas",covariate.labels =c("Cambio Top Espanol","Cambio Top Mate","Cambio Bottom Español","Cambio Bottom Mate","Cambio Internet","Promedio Escolaridad","Marginacion","Pob. Ocupada","Pob. Lengua indígena","Electricidad","Niñas estudiando"))
+stargazer(dat,digits=2,type='latex',title="Tabla 1. Resumen estadisticas descriptivas",covariate.labels =c("Cambio Top Espanol","Cambio Top Mate","Cambio Bottom Español","Cambio Bottom Mate","Cambio Internet","Promedio Escolaridad","Marginacion","Pob. Ocupada","Pob. Lengua indígena","Electricidad","Niñas estudiando"))
 ```
 
 Lo primero que notamos esque las medias del cambio son positivas para todas las variables dependientes con exepción del cambio en español para el grupo de menor aprovechamiento. Asimismo, notamos que la media y la varianza para ambas variables de cambio en matemáticas son mayores que en español. Esto quiere decir que los cambios en matemáticas han sido más sensibles en el periodo observado, tanto para el grupo de mayor como para el de menor aprovechamiento. Asimismo, notamos que el promedio de grado de marginación es ligeramente menor al 2, lo cual quiere decir que la distribución de dicha variable está ligeramente sesgada hacia la izquierda. Tambien notamos que el promedio de escolaridad es bajo y la proporción de personas quee hablan una lengua indígena es alta (con respecto al país). Esto es una consecuencia de que cuando se desagregan los datos a nivel localidad, las poblaciones rurales son sobrerepresentadas debido a que las localidades urbanas "empacan" grandes cantidades de habitantes, mientras que las rurales "empacan" menos y están distribuidas geograficamente con mayor exparsión. Además, notamos que la media el porcentaje de niñas estudiando es muy cercano al 50% con una desviación estandar de 11 puntos porcentuales.
@@ -317,75 +319,64 @@ as.numeric(data$marg)
 data <- data[(data$promesc_20<25), ] 
 attach(data)
 ```
+
 Los métodos de representación gráfica de datos usuales para hacer estadísticas descriptivas, por ejemplo los *scatter plots*, no son tan convenientes en el contexto de RD, ya que no permite ver las discontinuidades en el punto de corte que elijamos (@ Cattaneo). Para poder hacer una adecuada visualización de los datos,se mostrarán de forma agregada o suavizada con dos métodos en una sola gráfica. El primero es el del ajuste polinomial global (la línea), y el segundo el de medias condicionales locales (los puntos). El polinomio global es un ajuste de cuarto o quinto orden en dos partes: antes y después del corte. Las medias locales condicionales se crean al particionar a las observaciones en bandas y posteriormente calculando la media de cada una. 
+
+En cuanto a los puntos de corte iniciales, estos se elijieron graficamente de tal manera que se maximizara la diferencia de medias entre ambos grupos. Si bien, para algunas variables fue trivial, para otras simplemente no se encontro ningún punto optimo posible, probablemente debido a que no existe una discontinuidad o a que esta es muy débil.
 
 Hay dos tipos de bandas que se pueden usar para construir estas gráficas: las *equidistantes* o las *cuantilespaciadas* (@Cattaneo). Decidimos utilizar las segundas, ya que en el caso de las bandas equidistantes, de no haber un número balanceado de observaciones en cada una, se aumentaría mucho la varianza. En cambio, las bandas cuantilespaciadas tienen el mismo número de observaciones en cada una, por lo que la varianza será comparable entre bandas. Asimismo, representan a la densidad de las observaciones respecto a la variable definitoria (la cual tiene menos observaciones en los extremos), siendo "más fiel" de los datos. Dado que el rango de las X son de -100 a 100, usamos 20 bandas de cada lado. 
 
 ## Análisis descriptivo para cambio en acceso a Internet: RD
 
-.pull-left[
 ```{r, message= F, warning = F,results='hide'} 
 #TOP ESP INTERNET
 out7<- rdplot(cambio_esp_top,cambio_internet,nbins=c(20,20),x.lim=c(0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
 ```
-]
 
-.pull-right[
 ```{r, message= F, warning = F,results='hide'} 
 #TOP MAT INTERNET
 
 out7<- rdplot(cambio_mat_top,cambio_internet,nbins=c(20,20),x.lim=c(-0,50),y.lim=c(0,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=21,kernel="triangular", binselect = "qspr")
 ```
-]
 
-.pull-left[
 ```{r, message= F, warning = F,results='hide'} 
 #BOTTOM ESP INTERNET
 out7<- rdplot(cambio_esp_bottom,cambio_internet,nbins=c(20,20), x.lim=c(-1,35),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=3,kernel="triangular", binselect = "qspr")
 ```
-]
 
-.pull-right[
 ```{r, message= F, warning = F,results='hide'} 
 #BOTTOM MAT INTERNET
 
 out7<- rdplot(cambio_mat_bottom,cambio_internet,nbins=c(20,20), x.lim=c(0,40),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=6,kernel="triangular", binselect = "qspr")
 ```
-]
 
 Podemos notar que en general, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar que hay saltos positivos en el punto de la discontinuidad en el caso de la variable de cambio en las calificaciones más altas, mientras que el de los bottoms sería negativo en el grupo de tratamiento. Este es un indicador del efecto que esperamos ver: el acceso a Internet aumentó la proporción de alumnos en las localidades que pasaron a ser de los más altos, y disminuyó la proporción de alumnos que pasaron a ser de los más bajos.
 
 ## Análisis descriptivo para acceso a Internet y adquisición de equipo tecnológico: RD
 
-.pull-left[
+
 ```{r, message= F, warning = F,results='hide'} 
 #TOP ESP INTERNET:PC
 out7<- rdplot(cambio_esp_top,inter_pc_internet,nbins=c(20,20),x.lim=c(0,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=9,kernel="triangular", binselect = "qspr")
 ```
-]
 
-.pull-right[
 ```{r, message= F, warning = F,results='hide'} 
 #TOP MAT INTERNET
 out7<- rdplot(cambio_mat_top,inter_pc_internet,nbins=c(20,20),x.lim=c(0,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=17,kernel="triangular", binselect = "qspr")
 ```
-]
 
-.pull-left[
 ```{r, message= F, warning = F,results='hide'} 
 #BOTTOM ESP INTERNET:PC
 
 out7<- rdplot(cambio_esp_bottom,inter_pc_internet,nbins=c(20,20), x.lim=c(-5,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=3,kernel="triangular", binselect = "qspr")
 ```
-]
 
-.pull-right[
 ```{r, message= F, warning = F,results='hide'} 
 #BOTTOM MAT INTERNET:PC
 
 out7<- rdplot(cambio_mat_bottom,inter_pc_internet,nbins=c(20,20), x.lim=c(-5,100),y.lim=c(-5,20),x.label="Cambio Internet",y.label="Cambio Mate",title="Ajuste polinomial global y medias cuantil-espaciadas",c=17,kernel="triangular", binselect = "qspr")
 ```
-]
+
 
 Notamos que en Matemáticas se requiere un punto de corte más grande para notar un cambio en las localidades, sin embargo los signos son los esperados. Se observa un comportamiento similar al de acceso a Internet solo, pero más marcado. Esto tiene sentido, ya que el acceso a Internet sin estar acompañado de equipo tecnológico puede estar captando conectividad solo a través de los celulares, lo cual podría ser menos efectivo que una computadora u otro equipo (@Quello).
 

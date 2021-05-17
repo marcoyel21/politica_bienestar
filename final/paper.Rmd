@@ -1,11 +1,11 @@
 ---
-mainfont: Times New Roma
+mainfont: Times New Roman
 output:
   pdf_document: 
     latex_engine: xelatex
 geometry:  paperheight=27.94cm,paperwidth=21.59cm,left=30mm, right=30mm, top=25mm, bottom=25mm, asymmetric
 fontsize: 12pt
-bibliography: ENIF.bib
+bibliography: internet_educacion.bib
 csl: "mi_chicago.csl"
 header-includes :
   \usepackage{geometry}
@@ -19,7 +19,7 @@ header-includes :
   \emergencystretch=\maxdimen
   \hyphenpenalty=10000
   \hbadness=10000
-  \linespread{1.15}
+  \linespread{2}
   \usepackage{titling}
   \usepackage[spanish]{babel}
   \usepackage{setspace}
@@ -40,7 +40,7 @@ packages <- c(
   'kableExtra',
   'ggplot2',
   'ggthemes',
-  'RCT',
+  'RCT'
   )
 
 
@@ -493,13 +493,13 @@ Los anchos de banda que utilizaremos para implementar nuestro modelo son:
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 o1<-rdbwselect(cambio_esp_top, cambio_internet,c=9, kernel = "triangular", p = 1, bwselect = "mserd")
-o2<-rdbwselect(cambio_mate_top, cambio_internet,c=21, kernel = "triangular", p = 1, bwselect = "mserd")
+o2<-rdbwselect(cambio_mat_top, cambio_internet,c=21, kernel = "triangular", p = 1, bwselect = "mserd")
 o3<-rdbwselect(cambio_esp_bottom, cambio_internet,c=3, kernel = "triangular", p = 1, bwselect = "mserd")
-o4<-rdbwselect(cambio_mate_bottom, cambio_internet,c=6, kernel = "triangular", p = 1, bwselect = "mserd")
+o4<-rdbwselect(cambio_mat_bottom, cambio_internet,c=6, kernel = "triangular", p = 1, bwselect = "mserd")
 o5<-rdbwselect(cambio_esp_top, inter_pc_internet,c=9, kernel = "triangular", p = 1, bwselect = "mserd")
-o6<-rdbwselect(cambio_mate_top, inter_pc_internet,c=17, kernel = "triangular", p = 1, bwselect = "mserd")
+o6<-rdbwselect(cambio_mat_top, inter_pc_internet,c=17, kernel = "triangular", p = 1, bwselect = "mserd")
 o7<-rdbwselect(cambio_esp_bottom, inter_pc_internet,c=3, kernel = "triangular", p = 1, bwselect = "mserd")
-o8<-rdbwselect(cambio_mate_bottom, inter_pc_internet,c=17, kernel = "triangular", p = 1, bwselect = "mserd")
+o8<-rdbwselect(cambio_mat_bottom, inter_pc_internet,c=17, kernel = "triangular", p = 1, bwselect = "mserd")
 
 summary(o1)
 summary(o2)
@@ -648,28 +648,36 @@ out2 = rdplot(cambio_esp_bottom,cambio_internet,kernel = "triangular",nbins=c(20
 
 
 ```
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out3 = rdplot(cambio_mat_bottom,cambio_internet,kernel = "triangular", c=6,p = 1, x.lim=c(3.17,10.84),x.label="Cambio Internet",y.label="Cambio Mates Bottom",title="RLL de cambio en desempeño más bajo en matemáticas contra cambio en acceso a Internet",y.lim=c(0,7.5),binselect = "qspr",nbins=c(20,20))
-
-```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-out4 = rdplot(data$cambio_esp_top,data$inter_pc_internet,kernel = "triangular", c=9,p = 1,x.lim=c(-28.304,46.304),y.lim=c(0,7.5),title="RLL de cambio en desempeño más alto en español contra cambio en acceso a Internet y adquisición de equipo tecnológico")
+
+out3 = rdplot(cambio_mat_bottom,cambio_internet,kernel = "triangular", c=6,p = 1, x.lim=c(-3.17,10.84),x.label="Cambio Internet",y.label="Cambio Mates Bottom",title="RLL de cambio en desempeño más bajo en matemáticas contra cambio en acceso a Internet",y.lim=c(0,7.5),binselect = "qspr",nbins=c(20,20))
+
+
+```
+## xq elegimos el limite de x.lim=c(-28.304,46.304)?
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+out4 = rdplot(data$cambio_esp_top,data$inter_pc_internet, kernel = "triangular", c=9,p = 1,y.lim=c(-10,7.5),title="RLL de cambio en desempeño más alto en español contra cambio en acceso a Internet y adquisición de equipo tecnológico",nbins=c(20,20))
 
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 out5 = rdplot(data$cambio_mat_top,data$inter_pc_internet, kernel = "triangular", c=17,p = 1,x.lim=c(-18.984,52.984),y.lim=c(0,7.5),title="RLL de cambio en desempeño más alto en matemáticas contra cambio en acceso a Internet y adquisición de equipo tecnológico")
 
-```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out7<- rdplot(cambio_esp_bottom,inter_pc_internet,nbins=c(20,20),y.lim=c(0,7.5),x.label="Cambio Internet",y.label="Cambio Español Bottom",title="RLL de cambio en desempeño más bajo en español contra cambio en acceso a Internet y adquisición de equipo tecnológico",c=3,kernel="triangular", binselect = "qspr", x.lim=c(-35.146,41.146),y.lim=c(0,7.5),c=3)
 
 ```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
-out7<- rdplot(cambio_mat_bottom,inter_pc_internet,nbins=c(20,20), x.lim=c(-5,100),y.lim=c(-10,10),x.label="Cambio Internet",y.label="Cambio Mate Bottom",title="RLL de cambio en desempeño más bajo en matemáticas contra cambio en acceso a Internet y adquisición de equipo tecnológico",c=17,p = 1,x.lim=c(-24.53,58.53),y.lim=c(0,7.5),kernel="triangular", binselect = "qspr")
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+out7<- rdplot(cambio_esp_bottom,inter_pc_internet,nbins=c(20,20),y.lim=c(-10,7.5),x.label="Cambio Internet",y.label="Cambio Español Bottom",title="RLL de cambio en desempeño más bajo en español contra cambio en acceso a Internet y adquisición de equipo tecnológico",c=3,kernel="triangular", binselect = "qspr", x.lim=c(-35.146,41.146))
+
+```
+
+```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
+
+
+out7<- rdplot(cambio_mat_bottom,inter_pc_internet,nbins=c(20,20),y.lim=c(-0,15),x.label="Cambio Internet",y.label="Cambio Mate Bottom",title="RLL de cambio en desempeño más bajo en matemáticas contra cambio en acceso a Internet y adquisición de equipo tecnológico",c=17,p = 1,x.lim=c(-24.53,58.53),kernel="triangular", binselect = "qspr")
 
 ```
 
@@ -894,15 +902,16 @@ t.test(ninas_T,ninas_C,alternative="two.sided")
 ```
 
 
+## NO CUADRA SAM
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
-Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.T<-c("1.917","","43.091","1.919","14.682","74.592","49.415")
-Media.C<-c("1.805", "41.701","1.939","21.735","74.859","49.302")
-Diferencia<-c("0.112", "1.39","-0.02","-7.053","-0.027","0.113")
-Valor.p<-c(".049", "0.0004","0.103","0.000",".586","0.75")
-dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
-kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+#Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+#Media.T<-c("1.917","","43.091","1.919","14.682","74.592","49.415")
+#Media.C<-c("1.805", "41.701","1.939","21.735","74.859","49.302")
+#Diferencia<-c("0.112", "1.39","-0.02","-7.053","-0.027","0.113")
+#Valor.p<-c(".049", "0.0004","0.103","0.000",".586","0.75")
+#dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
+#kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
@@ -1011,9 +1020,11 @@ t.test(ind_T,ind_C,alternative="two.sided")
 t.test(luz_T,luz_C,alternative="two.sided")
 # 
 t.test(ninas_T,ninas_C,alternative="two.sided")
+```
+
+
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
 Media.T<-c("2.493", "41.489","1.936","18.497","73.335","x")
 Media.C<-c("1.594","43.374","1.908","12.489","75.439","x")

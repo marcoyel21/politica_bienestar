@@ -127,7 +127,7 @@ Emeka & Okoro (2016)[@Emeka2016] también efectuaron un estudio sobre el impacto
 
 Finalmente, Jackson, Von Eye & Biocca (2003) [@Jackson2003] realizaron un experimento denominado *HomeNetToo*, en el que registraron automáticamente el uso real de Internet de 130 niños estadounidenses con un promedio de edad de 13 años, de familias de bajos ingresos durante 16 meses. La mayoría de los niños eran afroamericanos (83%) y de sexo masculino (58%), y todos residían en una comunidad urbana de tamaño medio en los Estados Unidos. Los resultados indicaron que, cuanto más frecuentemente los niños utilizan Internet en casa, mejores eran sus promedios de calificaciones y los resultados de las pruebas estandarizadas.   
 
-Ahora bien, también resulta importante señalar que, de acuerdo con Blackhoff, Bouzas, Contreras, Hernández & García (2007) [@BackhoffE.2007], existen variables que resultan de utilidad para entender las diferencias en los niveles de logro educativo de los estudiantes mexicanos: principalmente, aquellas relacionadas con las características sociales e individuales de los alumnos. Para los alumnos de tercero de secundaria, en relación con las pruebas de español y matemáticas, las variables que mayor impacto tienen en el aprendizaje son las variables del estudiante a nivel individual, como el uso de lengua indígena, repetición de grado, fumar y/o beber,  y actividad laboral; en cuanto a las variables de la escuela las variables de modalidad y de tipo estructural (de la escuela) afectan por igual el aprendizaje en ambas asignaturas, mientras que las variables del estudiante afectan diferencialmente más el aprendizaje del Español que el de las Matemáticas. Por otro lado, Baeza, Contreras, Sánchez & Garza (2006) [@Baeza], utilizaron como determinantes de los resultados de los alumnos de primaria en la prueba ENLACE 2006 la eficiencia de los maestros, ingreso de las familias, escolaridad de los padres, cantidad de niñas estudiando, y el gasto de gobierno en educación.  
+Ahora bien, también resulta importante señalar que, de acuerdo con Blackhoff, Bouzas, Contreras, Hernández & García (2007) [@BackhoffE.2007], existen variables que resultan de utilidad para entender las diferencias en los niveles de logro educativo de los estudiantes mexicanos: principalmente, aquellas relacionadas con las características sociales e individuales de los alumnos. Para los alumnos de tercero de secundaria, en relación con las pruebas de español y matemáticas, las variables que mayor impacto tienen en el aprendizaje son las variables del estudiante a nivel individual, como el uso de lengua indígena, repetición de grado, fumar y/o beber,  y actividad laboral; en cuanto a las variables de la escuela las variables de modalidad y de tipo estructural (de la escuela) afectan por igual el aprendizaje en ambas asignaturas, mientras que las variables del estudiante afectan diferencialmente más el aprendizaje del Español que el de las Matemáticas. Por otro lado, Baeza, Contreras, Sánchez & Garza (2006) [@baeza], utilizaron como determinantes de los resultados de los alumnos de primaria en la prueba ENLACE 2006 la eficiencia de los maestros, ingreso de las familias, escolaridad de los padres, cantidad de niñas estudiando, y el gasto de gobierno en educación.  
 
 ## Objetivo e hipótesis
 
@@ -187,7 +187,7 @@ Las covariables que se evaluarán para ser incorporadas al modelo son las siguie
 ```{r, results='asis',echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 dat<-data.frame(data$cambio_esp_top,data$cambio_mat_top, data$cambio_esp_bottom,data$cambio_mat_bottom,data$cambio_internet,data$promesc_10,data$marg,data$pocup_10, data$pobindig_10,data$porc_viv_luz,data$prop_niñas_12_14_esc)
 data$marg<-as.factor(data$marg)
-stargazer(dat,digits=2,type='latex',title="Tabla 1. Resumen estadisticas descriptivas",covariate.labels =c("Cambio Top Espanol","Cambio Top Mate","Cambio Bottom Español","Cambio Bottom Mate","Cambio Internet","Promedio Escolaridad","Marginacion","Pob. Ocupada","Pob. Lengua indígena","Electricidad","Niñas estudiando"), header = F)
+stargazer(dat,digits=2,type='latex',title="Resumen estadisticas descriptivas",covariate.labels =c("Cambio Top Espanol","Cambio Top Mate","Cambio Bottom Español","Cambio Bottom Mate","Cambio Internet","Promedio Escolaridad","Marginacion","Pob. Ocupada","Pob. Lengua indígena","Electricidad","Niñas estudiando"), header = F)
 ```
 
 Lo primero que notamos es que las medias de cambio son positivas para todas las variables dependientes, con excepción del cambio en español para el grupo de menor aprovechamiento. Asimismo, notamos que la media y la varianza para ambas variables de cambio en matemáticas son mayores que en español. Esto quiere decir que los cambios en matemáticas han sido más sensibles en el periodo observado, tanto para el grupo de mayor como para el de menor aprovechamiento. Tambien notamos que el promedio de escolaridad es bajo y la proporción de personas que hablan una lengua indígena es alta (con respecto al resto del país). Finalmente, cabe resaltar que solo usamos observaciones completas en la base de datos, por lo que no contemplamos escuelas nuevas que antes no existían. Sin embargo, incluso con datos completos, notamos algunas localidades (muy pequeñas), que han logrado cambios desde -100 hasta 100 puntos porcentuales. 
@@ -231,7 +231,9 @@ ggarrange(a, b, c,d,e,f + rremove("x.text"),
           ncol = 2, nrow = 3)
 ```
 
-# III. Estrategia de identificación
+# III. Descripción del modelo a utilizar
+
+## Estrategia de identificación
 
 El diseño empírico del presente trabajo utiliza una regresión discontinua para encontrar el efecto causal del acceso a Internet por sí solo y del acceso a Internet aunado a un equipo tecnológico (computadora, PC o tablet) en el desempeño de las localidades en pruebas estandarizadas aplicadas a nivel nacional en dos diferentes áreas: Matemáticas y Lenguaje. 
 
@@ -282,7 +284,7 @@ BottomMat<-c("6","17")
 dataf<-data.frame(Row,TopEsp,BottomEsp,TopMat,BottomMat, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Variable definitoria", "Top", "Bottom",
-                                    "Top","Bottom"),caption = "Tabla 1. Valores de punto de corte") %>% 
+                                    "Top","Bottom"),caption = "Valores de punto de corte") %>% 
   kable_styling(position = "center") %>%  add_header_above(c(" " = 1, "Español" = 2, "Matemáticas" = 2))
 
 
@@ -397,7 +399,7 @@ BottomMat<-c("4.837","41.537")
 dataf<-data.frame(Row,TopEsp,BottomEsp,TopMat,BottomMat, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Variable definitoria", "Top", "Bottom",
-                                    "Top","Bottom"),caption = "Tabla 2. Anchos de banda óptimos") %>% 
+                                    "Top","Bottom"),caption = "Anchos de banda óptimos") %>% 
   kable_styling(position = "center") %>%  add_header_above(c(" " = 1, "Español" = 2, "Matemáticas" = 2))
 
 ```
@@ -466,7 +468,7 @@ ci<-c("[0.03 , 2.67]","[-1.50 , 5.61]","[-10.24 , 1.19]","[-5.902 , 5.488]")
 dataf<-data.frame(Row,cut,bw,pointe,pval,ci, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual",
-                                    "Valor-p","IC 95% robustos"),caption = "Tabla 3. Resultados de cambio acceso a Internet") %>%  kable_styling(position = "center", latex_options = "scale_down") %>%
+                                    "Valor-p","IC 95% robustos"),caption = "Resultados de cambio acceso a Internet") %>%  kable_styling(position = "center", latex_options = "scale_down") %>%
   footnote("Se incluyen intervalos de confianza robustos, los cuales consideran al sesgo positivo propio del diseño RD.")
 
 ```
@@ -493,7 +495,7 @@ ci<-c("[0.445 , 1.991]","[1.226 , 5.316]","[-6.797 , -1.239]","[-7.064 , 1.591]"
 dataf<-data.frame(Row,cut,bw,pointe,pval,ci, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual",
-                                    "Valor-p","IC 95% robustos"),caption = "Tabla 4. Resultados de cambio acceso a Internet") %>% 
+                                    "Valor-p","IC 95% robustos"),caption = "Resultados de cambio acceso a Internet") %>% 
   kable_styling(position = "center", latex_options = "scale_down") %>%
   footnote("Se incluyen intervalos de confianza robustos, los cuales consideran al sesgo positivo propio del diseño RD.")
 
@@ -586,7 +588,7 @@ edo<-c("Chiapas","Michoacán","Oaxaca","Tlaxcala")
 porcent<-c("42.0%","39.3%","23.1%","6.9%")
 dataf<-data.frame(edo,porcent, stringsAsFactors=TRUE)
 
-kable(dataf, booktabs=T,col.names=c("Estado","Porcentaje de escuelas evaluadas"),caption = "Tabla 1. Estados con poca cobertura de Planea") %>% 
+kable(dataf, booktabs=T,col.names=c("Estado","Porcentaje de escuelas evaluadas"),caption = "Estados con poca cobertura de Planea") %>% 
   kable_styling(position = "center") %>%
   footnote(general = "Fuente: Planea 2019.")
 ```
@@ -1028,7 +1030,7 @@ point.orig<-c("1.235","1.996","-3.914","-0.567")
 dataf<-data.frame(Row,cut,bw,point.nuev,pval,point.orig,ci, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual con Covariables",
-                                    "Valor-p","Estimador puntual sin Covariables","IC 95% robustos"),caption = "Tabla 1. Resultados de cambio acceso a Internet con covaria bles") %>%  kable_styling(position = "center", latex_options = "scale_down") 
+                                    "Valor-p","Estimador puntual sin Covariables","IC 95% robustos"),caption = "Resultados de cambio acceso a Internet con covaria bles") %>%  kable_styling(position = "center", latex_options = "scale_down") 
 
 ```
 
@@ -1044,7 +1046,7 @@ point.orig<-c("1.235","1.996","-3.914","-0.567")
 dataf<-data.frame(Row,cut,bw,point.nuev,pval,point.orig,ci, stringsAsFactors=TRUE)
 
 kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda", "Estimador puntual con Covariables",
-                                    "Valor-p","Estimador puntual sin Covariables","IC 95% robustos"),caption = "Tabla 2. Resultados de cambio acceso a Internet con covariables") %>% 
+                                    "Valor-p","Estimador puntual sin Covariables","IC 95% robustos"),caption = "Resultados de cambio acceso a Internet con covariables") %>% 
   kable_styling(position = "center", latex_options = "scale_down") 
 
 ```

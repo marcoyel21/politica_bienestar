@@ -588,6 +588,7 @@ kable(dataf, booktabs=T,col.names=c("Estado","Porcentaje de escuelas evaluadas")
 ```
 ## Anexo 2. Tablas de balance y pruebas Fisher de las covariables.
 
+Se realizaron ocho tablas de balance, respectivas a los ocho modelos. Para cada una se realizó una prueba Fisher de significancia conjunta, donde la hipótesis nula es que las diferencias entre tratamiento y control de cada variable, en su conjunto, no son diferentes de cero. En las ocho pruebas se rechazó con un nivel de significancia de cero. Por motivos de espacio, no se incluyeron las tablas. Sin embargo, se puede observar el balance de cada variable y el resultado de la prueba T de diferencia de medias para cada una. 
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -635,16 +636,6 @@ dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactor
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 
 ```
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-
-#F- test. P-value es cero. Rechazamos que sean iguales a cero en conjunto. No la podemos utilizar
-data1<-data[which(cambio_internet<=13.53 & cambio_internet>=4.461),]
-data$t1<-as.numeric(ifelse(data$cambio_internet<9,0,1))
-attach(data)
-variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t1,prop_niñas_12_14_esc)
-tabla1<-balance_regression(variables,treatment="t1")
-stargazer(as.data.frame(tabla1$F_test),type="text",summary=FALSE)
-```
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -684,7 +675,6 @@ t.test(ninas_T,ninas_C,alternative="two.sided")
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
-
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
 Media.T<-c("1.497","43.873","1.880","5.266","77.347","50.385")
 Media.C<-c("1.549", "43.616","1.871","6.508","75.918","49.761")
@@ -693,19 +683,6 @@ Valor.p<-c("0.455", "0.51","0.731",".076","0.001","0.110")
 dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-
-#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
-
-data2<-data[which(cambio_internet<=28.692 & cambio_internet>=13.308),]
-data$t2<-as.numeric(ifelse(data$cambio_internet<21,0,1))
-attach(data)
-variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t2,prop_niñas_12_14_esc)
-tabla2<-balance_regression(variables,treatment="t2")
-stargazer(as.data.frame(tabla2$F_test),type="text",summary=FALSE)
-```
-
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -742,31 +719,16 @@ t.test(luz_T,luz_C,alternative="two.sided")
 t.test(ninas_T,ninas_C,alternative="two.sided")
 ```
 
-
-## NO CUADRA SAM
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 
-#Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-#Media.T<-c("1.917","","43.091","1.919","14.682","74.592","49.415")
-#Media.C<-c("1.805", "41.701","1.939","21.735","74.859","49.302")
-#Diferencia<-c("0.112", "1.39","-0.02","-7.053","-0.027","0.113")
-#Valor.p<-c(".049", "0.0004","0.103","0.000",".586","0.75")
-#dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
-#kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
+Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
+Media.T<-c("1.917","43.091","1.919","14.682","74.592","49.415")
+Media.C<-c("1.805","41.701","1.939","21.735","74.859","49.302")
+Diferencia<-c("0.112", "1.39","-0.02","-7.053","-0.027","0.113")
+Valor.p<-c(".049", "0.0004","0.103","0.000",".586","0.75")
+dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactors=TRUE)
+kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
-
-data3<-data[which(cambio_internet<=5.885 & cambio_internet>=.115),]
-data$t3<-as.numeric(ifelse(data$cambio_internet<3,0,1))
-attach(data)
-variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t3,prop_niñas_12_14_esc)
-tabla3<-balance_regression(variables,treatment="t3")
-stargazer(as.data.frame(tabla3$F_test),type="text",summary=FALSE)
-
-```
-
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
@@ -815,18 +777,6 @@ dataf<-data.frame(Variable, Media.T, Media.C,Diferencia,Valor.p, stringsAsFactor
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 ```
 
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
-
-data4<-data[which(cambio_internet<=10.837 & cambio_internet>=1.163),]
-data$t4<-as.numeric(ifelse(data$cambio_internet<6,0,1))
-attach(data)
-variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t4,prop_niñas_12_14_esc)
-tabla4<-balance_regression(variables,treatment="t4")
-stargazer(as.data.frame(tabla4$F_test),type="text",summary=FALSE)
-```
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
 # español, top, internet+pc 9, 37.309
@@ -862,9 +812,6 @@ t.test(luz_T,luz_C,alternative="two.sided")
 # 
 t.test(ninas_T,ninas_C,alternative="two.sided")
 ```
-
-
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
 Media.T<-c("2.493", "41.489","1.936","18.497","73.335","x")
@@ -873,19 +820,6 @@ Diferencia<-c("0.899", "-1.885","0.028","6.008","-2.104","x")
 Valor.p<-c("0.00", "0.00","0.00","0.00","0.00","x")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
-
-```
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-
-#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
-
-data5<-data[which(cambio_internet<=46.309 & cambio_internet>=-28.309),]
-data$t5<-as.numeric(ifelse(data$cambio_internet<9,0,1))
-attach(data)
-variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t5)
-tabla5<-balance_regression(variables,treatment="t5")
-stargazer(as.data.frame(tabla5$F_test),type="text",summary=FALSE)
 
 ```
 
@@ -937,20 +871,6 @@ kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamie
 
 ```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-
-#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
-
-data6<-data[which(cambio_internet<=52.984 & cambio_internet>=-18.984),]
-data$t6<-as.numeric(ifelse(data$cambio_internet<17,0,1))
-attach(data)
-variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t6,prop_niñas_12_14_esc)
-tabla6<-balance_regression(variables,treatment="t6")
-stargazer(as.data.frame(tabla6$F_test),type="text",summary=FALSE)
-
-```
-
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
 #Español, bottom, internet + pc. 3, 38.146
@@ -998,18 +918,6 @@ kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamie
 
 ```
 
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
-
-data7<-data[which(cambio_internet<=41.146 & cambio_internet>=-35.146),]
-data$t7<-as.numeric(ifelse(data$cambio_internet<3,0,1))
-attach(data)
-variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t7,prop_niñas_12_14_esc)
-tabla7<-balance_regression(variables,treatment="t7")
-stargazer(as.data.frame(tabla7$F_test),type="text",summary=FALSE)
-
-```
-
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
 
 # Mate, bottom, internet+ pc- 17, 41.53
@@ -1054,19 +962,6 @@ Diferencia<-c("0.812", "-1.859","0.039","6.847","-2.269","-0.370")
 Valor.p<-c("0.00", "0.00","0.001","0.00","0.00","0.159")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
-```
-
-```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
-
-#F- test. p-value es 0. Rechazamos que sean iguales a cero en conjunto, no las podemos usar
-
-data8<-data[which(cambio_internet<=58.53 & cambio_internet>=-24.53),]
-data$t8<-as.numeric(ifelse(data$cambio_internet<17,0,1))
-attach(data)
-variables<-data.frame(marg,promesc_10,pocup_10,popindig_10_real,porc_viv_luz,t8,prop_niñas_12_14_esc)
-tabla8<-balance_regression(variables,treatment="t8")
-stargazer(as.data.frame(tabla8$F_test),type="text",summary=FALSE)
-
 ```
 
 ## Anexo 3. Test de robustez: resultados con covariables

@@ -84,12 +84,12 @@ attach(data)
 **Evaluación del impacto de una mayor conectividad en el logro educativo en México**
 \endgroup
 
-Cynthia Valdivia, Samantha Bravo y Marco Antonio Ramos 
+Cynthia Valdivia, Samantha Cervantes y Marco Antonio Ramos 
 
 
 **Resumen ejecutivo**
 
-\begin{spacing}{1}Este trabajo tiene como objetivo determinar el impacto de un mayor acceso a internet y tecnología en México en el desempeño escolar en las localidades rurales del país. Lo anterior a partir del incremento en la conectividad que experimentaron las localidades durante la década del 2010-2020. La hipotesis es que una mayor conectividad en los hogares de los alumnos causa un aumento en su desempeño escolar específicamente en el nivel de logro de los estudiantes de tercero de secundaria en las pruebas de matemáticas y español. Para averiguar esto se uso un diseño de regresión discontinua. Entre los principales hallazgos están que en las localidades rurales que tuvieron un aumento en la conectividad y en el acceso a computadora en su conjunto, se detectó un incremento en el cambio de la proporción de alumnos de tercero de secundaria con mayor nivel de logro en las pruebas de español y matemáticas y una disminución en el cambio de la proporción de alumnos de tercero de secundaria con menor nivel de logro en la prueba de español; asimismo, en las localidades rurales que tuvieron un aumento en la conectividad, se detectó un incremento en el cambio de la proporción de alumnos de tercero de secundaria con mayor nivel de logro en la prueba de español. Este trabajo tiene implicaciones útiles en materia de política pública pues pone en evidencia lo crucial que es complementar las políticas en materia educativa con una perspectiva de apertura tecnológica, es decir, sumar a los instrumentos de política pública ya existente, con apoyos que garanticen la conectividad; y/o enfocarse en políticas públicas que logren una cobertura total de acceso a internet y computadoras en las regiones más vulnerables del país.
+\begin{spacing}{1}Este trabajo tiene como objetivo determinar el impacto de un mayor acceso a internet y tecnología en México en el desempeño escolar en las localidades rurales del país. Lo anterior a partir del incremento en la conectividad que experimentaron las localidades durante la década del 2010-2020. La hipótesis es que una mayor conectividad en los hogares de los alumnos causa un aumento en su desempeño escolar, específicamente en el nivel de logro de los estudiantes de tercero de secundaria en las pruebas estandarizadas nacionales de Matemáticas y Español. Para averiguar, esto se usó un diseño de regresión discontinua. Entre los principales hallazgos están que en las localidades rurales que tuvieron un aumento en la conectividad y en el acceso a computadora en su conjunto, se detectó un incremento en el cambio de la proporción de alumnos de tercero de secundaria con mayor nivel de logro en las pruebas de Español, Matemáticas y una disminución en el cambio de la proporción de alumnos de tercero de secundaria con menor nivel de logro en la prueba de Español. Asimismo, en las localidades rurales que tuvieron un aumento en la conectividad, no acompañada de adquisición de equipo tecnológico, se detectó un incremento en el cambio de la proporción de alumnos de tercero de secundaria con mayor nivel de logro en la prueba de español. Este trabajo tiene implicaciones útiles en materia de política pública, pues pone en evidencia lo crucial que es complementar las políticas en materia educativa con una perspectiva de apertura tecnológica, es decir, sumar a los instrumentos de política pública ya existente, con apoyos que garanticen la conectividad; y/o enfocarse en políticas públicas que logren una cobertura total de acceso a internet y computadoras en las regiones más vulnerables del país.
 
 \end{spacing}
 
@@ -107,7 +107,7 @@ La educación en México continúa siendo uno de los mayores retos del país. El
 
 El estudio afirma que “ningún país de la región se encontraba totalmente preparado para brindar educación en línea de manera completa y totalmente satisfactoria a todos los estudiantes antes del año 2020”. Además, señala a México como uno de los países con una brecha digital más amplia entre clases sociales: el 12% de las personas entre 4 y 18 años con nivel socioeconómico pobre, viven en hogares sin computadora, televisor y acceso a Internet en la vivienda, con el jefe del hogar con un máximo de primaria completa y con 3 o más personas en edad escolar dentro del hogar [@Acevedo2020].    
 
-Ahora bien, en cuanto al acceso a Internet en México, resulta importante destacar el escenario del país previo y posterior a la Reforma en el sector de telecomunicaciones del año 2013, toda vez que, algunos autores como Ovando & Olivera (2018) [@Ovando2018a], en su anáisis del impacto de la Reforma en la adopción de Internet fijo, encontraron un aumento global del 66% en la adopción de Internet entre 2010 y 2015; por lo que existe evidencia de que la Reforma influyó en la adopción de acceso a Internet.  
+Ahora bien, en cuanto al acceso a Internet en México, resulta importante destacar el escenario del país previo y posterior a la Reforma en el sector de telecomunicaciones del año 2013, toda vez que, algunos autores como Ovando & Olivera (2018) [@Ovando2018a], en su análisis del impacto de la Reforma en la adopción de Internet fijo, encontraron un aumento global del 66% en la adopción de Internet entre 2010 y 2015; por lo que existe evidencia de que la Reforma influyó en la adopción de acceso a Internet.  
 
 El panorama existente antes de la Reforma, era un sector de telecomunicaciones que, desde la década de los 90, estaba áltamente concentrado, resultando en una falta de competencia, calidad de servicios baja y precios altos; en consecuencia, los niveles de penetración entre la población de los  servicios  de telecomunicaciones de banda ancha, se encontraban dentro de los más bajos que se registraban en los países que integran la OCDE; e incluso por debajo de varios países comparables en Latinoamérica [@Noll2013]. 
 
@@ -151,13 +151,11 @@ Planea es una evaluación aplicada por la Secretaria de Educación Pública anua
 
 Por otro lado, se usarán los datos censales del INEGI agregados a nivel localidad y publicados en “Principales Resultados por Localidad” (ITER), del 2010 y 2020. El ITER cuenta con indicadores socio-demográficos de las localidades y de características de la vivienda que las conforman. Se considera que los datos del 2019 de Planea y del 2020 del censo son comparables, ya que la prueba y las encuestas del censo se realizaron con 8 meses de diferencia. Asimismo, el censo se realizó del 2 al 27 de marzo, mientras que se declaró la pandemia en México el 11 de marzo, por lo que no se considera que haya habido cambios en las variables de interés.
 
-Para construir una base que relacionara  los Principales Resultados por Localidad y Planea y Enlace se hicieron dos emparejamientos: primero, el de Enlace 2010 con la ITER del INEGI del mismo año, así como la de Planea 2019 con la ITER del INEGI en 2020. Posteriormente, éstas se fusionaron en una sola base, sobre la cual se realizaron los análisis. 
-
-El análisis empírico se limitará a localidades rurales, ya que éstas son más comparables entre sí y para analizar si un incremento en el acceso a internet benefició a este grupo (el efecto posiblemente sería más bajo en el ámbito urbano, ya que este cuenta con niveles mayores de conectividad). La muestra final es de 13,720 localidades, que al filtrar por ámbito rural se reduce a 11,141.
+Para construir una base que relacionara  los Principales Resultados por Localidad y Planea y Enlace se hicieron dos emparejamientos: primero, el de Enlace 2010 con la ITER del INEGI del mismo año, así como la de Planea 2019 con la ITER del INEGI en 2020. Posteriormente, éstas se fusionaron en una sola base, sobre la cual se realizaron los análisis. La muestra final es de 13,720 localidades, que al filtrar por ámbito rural se reduce a 11,141.
 
 ## Variables
 
-En nuestra especificación, tendremos cuatro variables dependientes $\delta NivelLogro_i$. Estas son el cambio en la proporción de alumnos en el nivel más alto de logro ( el grupo de aprovechamiento IV o los *top*) de la evaluación del 2010 al 2019 de cada escuela para Matemáticas y Lenguaje, y; el cambio en la proporción de alumnos en el nivel más bajo (el grupo de aprovechamiento I o los *bottom*), en el mismo período de tiempo, también por Matemáticas y Español. A estos los indicamos como los "bottom". 
+En nuestra especificación, tendremos cuatro variables dependientes $\delta NivelLogro_i$. Estas son el cambio en la proporción de alumnos en el nivel más alto de logro ( el grupo de aprovechamiento IV o los *top*) de la evaluación del 2010 al 2019 de cada escuela para Matemáticas y Lenguaje, y; el cambio en la proporción de alumnos en el nivel más bajo (el grupo de aprovechamiento I o los *bottom*), en el mismo período de tiempo, también por Matemáticas y Español. 
 
 Las variables X, o las definitorias ($G_i$), serán: 
 
@@ -168,13 +166,20 @@ Las variables X, o las definitorias ($G_i$), serán:
 Las covariables que se evaluarán para ser incorporadas al modelo son las siguientes, todas del 2010:
 
 •	$Marg_i$: el nivel de marginación de la localidad i.^[Se usa como aproximación del ingreso de las familias por localidad, al ser un índice que mide las privaciones de las personas en cuatro dimensiones: educación, vivienda, distribución de la población e ingresos monetarios. (@gob conapo).]
+
 •	$Escolar_i$: el grado promedio de escolaridad en la localidad i.
+
 •	$PEA_i$: el porcentaje de la población económicamente activa en la localidad i.
-•	$Pob_indig_i$: proporción de personas de un hogar donde el jefe del hogar o su cónyuge hablan alguna lengua indígena.
-•	$Porc_Viv_Luz_i$: proporción de hogares que disponen de luz eléctrica.^[[@world]]
+
+•	$PobIndig_i$: proporción de personas de un hogar donde el jefe del hogar o su cónyuge hablan alguna lengua indígena.
+
+•	$PorcVivLuz_i$: proporción de hogares que disponen de luz eléctrica.^[[@world]]
+
 •	$Región_i$:  una clasificación de la región de INEGI a la que pertenece la localidad. ^[Son 4 posibles clasificaciones: Centro, Occidente, Norte y Sureste, para más información consultar https://www.inegi.org.mx/rnm/index.php/catalog/223/datafile/F25/V3358]
-* $PropNiñas_i $: proporcion de niñas del grupo de niños de 12 a 14 años que estudian.
-* $Tratamiento_i$: las variable de tratamiento, que tomarán valores distintos, según los puntos de corte cada combinación de variables dependiente con las definitorias (ocho en total).
+
+• $PropNiñas_i$: proporcion de niñas del grupo de niños de 12 a 14 años que estudian, respecto al total de alumnos de esta edad estudiando.
+
+• $Tratamiento_i$: las variable de tratamiento, que tomarán valores distintos, según los puntos de corte cada combinación de variables dependiente con las definitorias (ocho en total).
 
 
 ## Estadísticas descriptivas 
@@ -199,38 +204,38 @@ a<-ggplot(data, aes(x=cambio_internet))+
 b<-ggplot(data, aes(x=cambio_pc))+
   geom_histogram(color="black", fill="white")+ 
   theme_calc()+
-  xlab("Cambio en acceso a PC")+ theme_linedraw()+ ylab("Frec")
+  xlab("Cambio en acceso a Internet + PC")+ theme_linedraw()+ ylab("Frec")
 
 c<-ggplot(data, aes(x=cambio_esp_top))+
   geom_histogram(color="black", fill="white")+
   theme_calc()+
-  xlab("Cambio en el nivel más alto en español")+ theme_linedraw()+ ylab("Frec")
+  xlab("Cambio en el nivel más alto en Español")+ theme_linedraw()+ ylab("Frec")
 
 d<-ggplot(data, aes(x=cambio_esp_bottom))+
   geom_histogram(color="black", fill="white")+
   theme_calc()+
-  xlab("Cambio en el nivel más bajo en español ")+ theme_linedraw()+ ylab("Frec")
+  xlab("Cambio en el nivel más bajo en Español ")+ theme_linedraw()+ ylab("Frec")
 
 e<-ggplot(data, aes(x=cambio_mat_top))+
   geom_histogram(color="black", fill="white")+
   theme_calc()+
-  xlab("Cambio en el nivel más alto en matemáticas")+ theme_linedraw()+ ylab("Frec")
+  xlab("Cambio en el nivel más alto en Mate.")+ theme_linedraw()+ ylab("Frec")
 
 f<-ggplot(data, aes(x=cambio_mat_bottom))+
   geom_histogram(color="black", fill="white")+
   theme_calc()+
-  xlab("Cambio en el nivel más bajo en matemáticas")+ theme_linedraw()+ ylab("Frec")
+  xlab("Cambio en el nivel más bajo en Mate.")+ theme_linedraw()+ ylab("Frec")
 
 
 ggarrange(a, b, c,d,e,f + rremove("x.text"),
           ncol = 2, nrow = 3)
 ```
 
-# III. Descripción del modelo a utilizar
+# III. Estrategia de identificación
 
 El diseño empírico del presente trabajo utiliza una regresión discontinua para encontrar el efecto causal del acceso a Internet por sí solo y del acceso a Internet aunado a un equipo tecnológico (computadora, PC o tablet) en el desempeño de las localidades en pruebas estandarizadas aplicadas a nivel nacional en dos diferentes áreas: Matemáticas y Lenguaje. 
 
-Esta metodología calculará un LATE comparando a localidades que apenas están por encima del punto de corte de las variables definitorias contra las que se quedaron cerca de estar en este mismo punto de corte, por eso su naturaleza local. Si usáramos una regresión MCO, muy posiblemente habría factores de confusión para el efecto causal. Esto podría implicar un problema de variables omitidas o de endogeneidad. La regresión discontinua soluciona este problema tomando una ventana, determinada de forma óptima, alrededor de la discontinuidad. En este intervalo, se puede asumir que el grupo de localidades que está por debajo del punto de corte es un buen contrafactual para las comunidades que tienen acceso apenas por encima del corte, ya que se asume que estos grupos son prácticamente iguales porque están en el mismo punto del eje de la variable definitorias pero tienen asignación a tratamiento diferente. [@Davis]
+Esta metodología calculará un LATE comparando a localidades que apenas están por encima del punto de corte de las variables definitorias contra las que se quedaron cerca de estar en este mismo punto de corte, por eso su naturaleza local. Una regresión MCO podría tener factores de confusión para el efecto causal. Esto podría implicar un problema de variables omitidas o de endogeneidad. La regresión discontinua soluciona este problema tomando una ventana, determinada de forma óptima, alrededor de la discontinuidad. En este intervalo, se puede asumir que el grupo de localidades que está por debajo del punto de corte es un buen contrafactual para las comunidades que tienen acceso apenas por encima del corte, ya que se asume que estos grupos son prácticamente iguales porque están en el mismo punto del eje de la variable definitorias pero tienen asignación a tratamiento diferente. [@Davis]
 
 Formalmente, estimamos con una regresión discontinua local lineal:
 
@@ -246,15 +251,15 @@ T_i =&
   \end{cases}
 \end{align*}
 
-y $X_i$ es el vector de covariables de las localidades, que puede o no ser incluido en la estimación, como se explicará en la siguiente sección.
+$c$ es el punto de corte de las variables definitorias, y $X_i$ es el vector de covariables de las localidades. Los diferentes puntos de corte y el análisis de covariables se incluirán en la siguiente sección.
 
-Para estimar el efecto de tratamiento, se asume que la discontinuidad, o el salto, es el efecto causal. Esta será estimada con el coeficiente $\beta_2 T_i$ , utilizando un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i >= c$ del tratamiento. 
+Para estimar el efecto de tratamiento, se asume que la discontinuidad, o el salto, es el efecto causal. Esta será estimada con el coeficiente $\beta_2$ , utilizando un diseño Sharp, ya que la asignación a tratamiento es determinística y discontinua en el punto de corte: todas las observaciones con un $G_i < c$ serán parte del control y todas las que tengan un valor de $G_i \geq c$ del tratamiento. 
 
-Se utilizará el método de polinomio local, el cual hace un ajuste lineal para las observaciones alrededor del punto de corte y sus anchos de banda, usando un método de ponderación de Kernel triangular. De esta forma nos aseguramos de que las observaciones más cerca del punto de corte pesen más. Además, es la función recomendadada dado que provee estimaciones óptimas en cuanto a errores cuadrados medios[@Cattaneo].
+Se utilizará el método de polinomio local, el cual hace un ajuste lineal para las observaciones alrededor del punto de corte y sus anchos de banda, usando un método de ponderación de Kernel triangular. De esta forma nos aseguramos de que las observaciones más cerca del punto de corte pesen más. Además, es la función recomendadada dado que provee estimaciones óptimas en cuanto al error cuadrático medio[@Cattaneo].
 
 # IV. Implementación del modelo
 
-En total existan ocho modelos, resultados de la combinación de las dos asignaturas, los dos tipos de variables dependientes (cambio en "tops" y "bottoms"), y las dos variables $G_i$ (cambio en adopción de Internet y cambio adopción Internet + computadora, laptop o tablet). Entonces, habrá ocho puntos de corte $c$, donde ocurre la discontinuidad, cada una calculada de tal manera que se maximizaran las diferencias en las varibales dependientes para los grupos a la izquierda y a la derecha del punto de corte.
+En total existan ocho modelos, resultados de la combinación de las dos asignaturas, los dos tipos de variables dependientes (cambio en $tops$ y $bottoms$), y las dos variables $G_i$ (cambio en adopción de Internet y cambio adopción Internet + computadora, laptop o tablet). Entonces, habrá ocho puntos de corte $c$, donde ocurre la discontinuidad, cada una calculada de tal manera que se maximizaran las diferencias en las varibales dependientes para los grupos a la izquierda y a la derecha del punto de corte.
 
 Estos son: 
 
@@ -353,7 +358,7 @@ ggarrange(E,EFE,G,H + rremove("x.text"),
           ncol = 2, nrow = 2)
 
 ```
-Podemos notar que cuando usamos como variable dependiente el cambio en acceso a internet, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar que hay saltos positivos en el punto de la discontinuidad en el caso de la variable de cambio en las calificaciones más altas, mientras que el de los bottoms sería negativo en el grupo de tratamiento. Este es un indicador del efecto que esperamos ver: el acceso a Internet aumentó la proporción de alumnos en las localidades que pasaron a ser de los más altos, y disminuyó la proporción de alumnos que pasaron a ser de los más bajos.
+Podemos notar que cuando usamos como variable dependiente el cambio en acceso a internet, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar que hay saltos positivos en el punto de la discontinuidad en el caso de la variable de cambio en las calificaciones más altas, mientras que el de los $bottoms$ sería negativo en el grupo de tratamiento. Este es un indicador del efecto que se esperaría ver: el acceso a Internet aumentó la proporción de alumnos en las localidades que pasaron a ser de los más altos, y disminuyó la proporción de alumnos que pasaron a ser de los más bajos.
 
 Notamos que en Matemáticas se requiere un punto de corte más grande para notar un cambio en las localidades, sin embargo, los signos son los esperados. Se observa un comportamiento similar al de acceso a Internet solo, pero más marcado. Esto tiene sentido, ya que el acceso a Internet sin estar acompañado de equipo tecnológico puede estar captando conectividad solo a través de los celulares, lo cual podría ser menos efectivo que una computadora u otro equipo [@Hampton]. 
 
@@ -404,9 +409,6 @@ Podemos notar que mientras que las $h$ de cambio en el acceso a Internet son de 
 Como último paso antes de realizar el análisis, se verifica que las covariables enlistadas anteriormente estén balanceadas *en el punto de corte*. En caso de no serlo, no se podría asumir el supuesto de continuidad de los resultados potenciales. Entonces, para incluirlos se tendrían que hacer supuestos paramétricos o cambiar los parámetros de interés.[@Cattaneo]
 
 Para verificar esto, realizamos una tabla de balance para los ocho modelos (dos variables dependientes x dos variables definitorias x dos tipos de examen), considerando en cada uno sus respectivos puntos de corte y anchos de banda. Para ver la construcción de cada tabla, donde se señalan las medias de tratamiento y control de cada variable, la diferencia, el valor-p de las pruebas T de cada una, y las pruebas F, donde evaluamos para cada modelo si las medias en conjunto de las variables son iguales a cero, **ver Anexo 2**. En todos los modelos se rechazó la prueba F, por lo que no podemos asumir que las covariables son iguales en el punto de corte, por lo que no se incluirán en la implementación. Esto no representa un problema para la estimación: la inclusión de covariables, en caso de cumplir con el balance, es con fines de eficiencia. [@Cattaneo].
-
-
-# V. Resultados
 
 ## Modelos
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
@@ -542,6 +544,8 @@ ggarrange(M,N,O,P + rremove("x.text"),
 
 ```
 Los gráficos de la implementación de la regresión discontinua local lineal acotan los resultados al intervalo óptimo alrededor de cada punto de corte. Mientras que los polinomios globales son óptimos para describir a los datos, usarlos para la estimación puede dar estimadores sesgados, ya que toman en cuenta a observaciones muy alejadas del punto de corte. Se pueden observar los efectos mencionados anteriormente. Es importante recordar que en el análisis de los "Bottom" esperamos que el efecto sea negativo (una tasa de cambio negativa); por eso observamos que el nivel de los grupo de control es mayor al de tratamiento. 
+
+# V. Resultados
 
 ## Hallazgos
 

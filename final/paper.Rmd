@@ -582,6 +582,19 @@ out7<- rdplot(cambio_mat_bottom,inter_pc_internet,nbins=c(20,20),y.lim=c(-0,15),
 
 # Resultados
 
+Derivado del análisis efectuado en el presente trabajo, es posible destacar los siguientes resultados:   
+
+-	En las localidades rurales que tuvieron un aumento en la conectividad y en el acceso a computadora en su conjunto, se detectó un incremento en el cambio de la proporción de alumnos de tercero de secundaria con mayor nivel de logro en las pruebas de español y matemáticas.  
+
+-	En las localidades rurales que tuvieron un aumento en la conectividad y en el acceso a computadora en su conjunto, se detectó una disminución en el cambio de la proporción de alumnos de tercero de secundaria con menor nivel de logro en la prueba de español.  
+
+-	En las localidades rurales que tuvieron un aumento en la conectividad, se detectó un incremento en el cambio de la proporción de alumnos de tercero de secundaria con mayor nivel de logro en la prueba de español.   
+
+Es decir, de manera general, hay evidencia que nos muestra que el acceso a Internet y a computadoras sí produce un impacto en el desempeño escolar de los alumnos. A partir de la revisión de la literatura, se observó que no hay una postura única, existen autores que encontraron un efecto positivo de la cobertura de Internet en el desempeño escolar de los estudiantes -[@Grimes2017], [@Adjoa2018a], [@Emeka2016], [@Jackson2003]-, pero hay otros que no encuentran efecto alguno- [@Malamud2019a], [@Bessone2020a]. En ese sentido, nuestros resultados estarían en linea con aquellos autores que efectivamente encontraron un impacto en el rendimiento escolar.    
+
+Entre las aportaciones del presente trabajo, es posible mencionar que por si mismo este documento constituye una contribución al análisis causal del impacto del Internet en la educación en México, dado que para nuestro país este tipo de investigaciones son escasas. Además, entre los diversos enfoques que se han adoptado en la literatura para estudiar este fenómeno, no fue posible encontrar alguno que lo abordara con la metodología de regresión discontinua, por lo que este método constituye una innovación en la medición de este tipo de efectos. De igual forma, consideramos una aportación adicional la orientación que le dimos al estudio, acotándolo a estudiantes de tercero de secundaria para localidades rurales que son las de bajos ingresos, y la medición del desempeño escolar en términos de cambios en el nivel de logro educativo, así como las combinaciones de bases de datos que se utilizaron para poder hacer la identificación por localidad, lo cual también es una aproximación diferente, y por tanto valiosa en el análisis del tema.  
+
+
 # Conclusiones
 
 A partir de los resultados cuantitativos obtenidos, fue posible comprobar nuestra hipótesis general de que una mayor conectividad en los hogares de los alumnos, así como un mayor acceso a computadoras, causan un efecto positivo en el nivel de logro educativo de los estudiantes de tercero de secundaria.  

@@ -358,7 +358,7 @@ ggarrange(E,EFE,G,H + rremove("x.text"),
           ncol = 2, nrow = 2)
 
 ```
-Podemos notar que cuando usamos como variable dependiente el cambio en acceso a internet, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, podemos observar que hay saltos positivos en el punto de la discontinuidad en el caso de la variable de cambio en las calificaciones más altas, mientras que el de los $bottoms$ sería negativo en el grupo de tratamiento. Este es un indicador del efecto que se esperaría ver: el acceso a Internet aumentó la proporción de alumnos en las localidades que pasaron a ser de los más altos, y disminuyó la proporción de alumnos que pasaron a ser de los más bajos.
+Se puede notar que cuando usamos como variable dependiente el cambio en acceso a internet, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, se observa que hay saltos positivos en el punto de la discontinuidad en el caso de la variable de cambio en las calificaciones más altas, mientras que el de los $bottoms$ sería negativo en el grupo de tratamiento. Este es un indicador del efecto que se esperaría ver: el acceso a Internet aumentó la proporción de alumnos en las localidades que pasaron a ser de los más altos, y disminuyó la proporción de alumnos que pasaron a ser de los más bajos.
 
 Notamos que en Matemáticas se requiere un punto de corte más grande para notar un cambio en las localidades, sin embargo, los signos son los esperados. Se observa un comportamiento similar al de acceso a Internet solo, pero más marcado. Esto tiene sentido, ya que el acceso a Internet sin estar acompañado de equipo tecnológico puede estar captando conectividad solo a través de los celulares, lo cual podría ser menos efectivo que una computadora u otro equipo [@Hampton]. 
 
@@ -402,7 +402,7 @@ kable(dataf, booktabs=T,col.names=c("Variable definitoria", "Top", "Bottom",
 
 ```
 
-Podemos notar que mientras que las $h$ de cambio en el acceso a Internet son de tamaños relativamente bajos, las de cambio en Internet y equipo tecnológico son mucho más altas. Esto posiblemente se deba una mayor varianza en el intervalo cerca del punto de corte, o una cantidad de observaciones menor en este mismo intervalo, (h-c,h+c]. 
+Podemos notar que mientras que las $h$ de cambio en el acceso a Internet son de tamaños relativamente bajos, las de cambio en Internet y equipo tecnológico son mucho más altas. Esto posiblemente se deba a una mayor varianza en el intervalo cerca del punto de corte, o una cantidad de observaciones menor en este mismo intervalo, (h-c,h+c]. 
 
 ## Test de discontinuidad de las Covariables
 
@@ -566,7 +566,7 @@ Entre las aportaciones del presente trabajo, es posible mencionar que por si mis
 
 A partir de los resultados cuantitativos obtenidos, fue posible comprobar nuestra hipótesis general de que una mayor conectividad en los hogares de los alumnos, así como un mayor acceso a computadoras, causan un efecto positivo en el nivel de logro educativo de los estudiantes de tercero de secundaria.  
 
-Sin embargo, el efecto particular fue dispar entre las distintas pruebas -matemáticas y español-, los distintos niveles de logro de los alumnos -top y bottom-, así como entre los dos diferentes análisis que se llevaron a cabo: el análisis por si sólo del acceso a Internet, y el conjunto -Internet más computadora.   
+Sin embargo, el efecto particular fue dispar entre las distintas pruebas -matemáticas y español-, los distintos niveles de logro de los alumnos -$top$ y $bottom$-, así como entre los dos diferentes análisis que se llevaron a cabo: el análisis por si sólo del acceso a Internet, y el conjunto -Internet más computadora.   
 
 Consideramos que este trabajo puede tener implicaciones útiles en materia de política pública, dado que hay evidencia de que el acceso a Internet y a computadoras impacta de manera positiva en el rendimiento escolar. Por tanto, es crucial complementar las políticas en materia educativa con una perspectiva de apertura tecnológica, es decir, sumar a los instrumentos de política pública ya existente, con apoyos que garanticen la conectividad; y/o enfocarse en políticas públicas que logren una cobertura total de acceso a Internet y computadoras en las regiones más vulnerables del país. Lo anterior, siempre con una visión integral y considerando que si bien el Internet es una condición necesaria para mejorar el desempeño educativo, no hay evidencia de que sea suficiente por sí misma para mejorar el nivel de desempeño de los estudiantes.   
 
@@ -818,10 +818,10 @@ t.test(ninas_T,ninas_C,alternative="two.sided")
 ```
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE}
 Variable<-c("Promedio escolaridad", "Poblacion ocupada", "Nivel Marginacion", "Pob. indígena", "Electricidad hogares", "Niñas edad secundaria")
-Media.T<-c("2.493", "41.489","1.936","18.497","73.335","x")
-Media.C<-c("1.594","43.374","1.908","12.489","75.439","x")
-Diferencia<-c("0.899", "-1.885","0.028","6.008","-2.104","x")
-Valor.p<-c("0.00", "0.00","0.00","0.00","0.00","x")
+Media.T<-c("2.493", "41.489","1.936","18.497","73.335","49.952")
+Media.C<-c("1.594","43.374","1.908","12.489","75.439","49.320")
+Diferencia<-c("0.899", "-1.885","0.028","6.008","-2.104","0.632")
+Valor.p<-c("0.00", "0.00","0.00","0.00","0.00","0.17")
 dataf<-data.frame(Variable, Media.C, Media.T,Diferencia,Valor.p, stringsAsFactors=TRUE)
 kable(dataf, booktabs=T,col.names=c("Variable", "Media control", "Media Tratamiento","Diferencia","Valor-p")) %>% kable_styling(position = "center")
 

@@ -185,7 +185,7 @@ Para construir una base que relacionara  los Principales Resultados por Localida
 
 ## Variables
 
-En nuestra especificación, tendremos cuatro variables dependientes $\Delta NivelLogro_i$. Estas son el cambio en la proporción de alumnos en cada localidad $i$ en el nivel más alto de logro (el grupo de aprovechamiento IV o los *top*) de la evaluación del 2010 al 2019  para matemáticas y lenguaje y; el cambio en la proporción de alumnos en el nivel más bajo (el grupo de aprovechamiento I o los *bottom*), en el mismo período de tiempo, también por matemáticas y español.
+En nuestra especificación, tendremos cuatro variables dependientes $\Delta NivelLogro_i$. Estas son el cambio en la proporción de alumnos en cada localidad $i$ en el nivel más alto de logro (el grupo de aprovechamiento IV o los **top**) de la evaluación del 2010 al 2019  para matemáticas y lenguaje y; el cambio en la proporción de alumnos en el nivel más bajo (el grupo de aprovechamiento I o los **bottom**), en el mismo período de tiempo, también por matemáticas y español.
 Las variables X, o las definitorias ($G_i$), serán: 
 
 * Tasa de cambio en el acceso a internet en la proporción de hogares de las localidades. 
@@ -262,7 +262,7 @@ ggarrange(a, b, c,d,e,f + rremove("x.text"),
 
 # IV. Implementación del modelo
 
-En total existan ocho modelos, resultados de la combinación de las asignaturas, los tipos de variables dependientes (cambio en $tops$ y $bottoms$) y las dos variables $G_i$ (cambio en adopción de internet y el cambio en la interacción de adopción internet:computadora). Por ello habrá ocho puntos de corte $c$, donde ocurre la discontinuidad, cada una calculada de tal manera que se maximizaran las diferencias en las varibales dependientes para los grupos de tratamiento y control.Estos son: 
+En total existan ocho modelos, resultados de la combinación de las asignaturas, los tipos de variables dependientes (cambio en **tops** y **bottoms**) y las dos variables $G_i$ (cambio en adopción de internet y el cambio en la interacción de adopción internet:computadora). Por ello habrá ocho puntos de corte $c$, donde ocurre la discontinuidad, cada una calculada de tal manera que se maximizaran las diferencias en las varibales dependientes para los grupos de tratamiento y control.Estos son: 
 
 ```{r,include=FALSE, results='asis',echo=FALSE,message=FALSE,warning=FALSE}
 #Creamos variable de tratamiento (ambito rural) y recodificamos la de marginacion
@@ -356,7 +356,7 @@ ggarrange(E,EFE,G,H,
           ncol = 2, nrow = 2)
 
 ```
-Se puede notar que cuando usamos como variable dependiente el cambio en acceso a internet, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, se observa que hay saltos positivos en el punto de la discontinuidad en el caso de la variable de cambio en las calificaciones más altas, mientras que el de los $bottoms$ sería negativo en el grupo de tratamiento. Este es un indicador del efecto que se esperaría ver: el acceso a internet aumentó la proporción de alumnos en las localidades que pasaron a ser de los más altos, y disminuyó la proporción de alumnos que pasaron a ser de los más bajos.
+Se puede notar que cuando usamos como variable dependiente el cambio en acceso a internet, la función de regresión observada no es lineal, lo cual es más marcado en el grupo de control (a la izquierda del punto de corte). Asimismo, se observa que hay saltos positivos en el punto de la discontinuidad en el caso de la variable de cambio en las calificaciones más altas, mientras que el de los **bottoms** sería negativo en el grupo de tratamiento. Este es un indicador del efecto que se esperaría ver: el acceso a internet aumentó la proporción de alumnos en las localidades que pasaron a ser de los más altos, y disminuyó la proporción de alumnos que pasaron a ser de los más bajos.
 
 Notamos que en matemáticas se requiere un punto de corte más grande para notar un cambio en las localidades, sin embargo, los signos son los esperados. Se observa un comportamiento similar al de acceso a Internet solo, pero más marcado. Esto tiene sentido, ya que el acceso a internet sin estar acompañado de equipo tecnológico puede estar captando conectividad solo a través de los celulares, lo cual podría ser menos efectivo que una computadora u otro equipo [@Hampton]. 
 
@@ -387,7 +387,7 @@ summary(o8)
 ```
 
 ```{r,results='asis',echo=FALSE,message=FALSE,warning=FALSE}
-Row<-c("Internet","Internet + PC")
+Row<-c("Internet","Internet:PC")
 TopEsp<-c("4.539","37.309")
 BottomEsp<-c("2.885","38.146")
 TopMat<-c("7.692","35.984")
@@ -400,13 +400,13 @@ kable(dataf, booktabs=T,col.names=c("Variable definitoria", "Top", "Bottom",
 
 ```
 
-Podemos notar que mientras que las $h$ de cambio en el acceso a internet son de tamaños relativamente bajos, las de cambio en internet y equipo tecnológico son mucho más altas. Esto posiblemente se deba a una mayor varianza en el intervalo cerca del punto de corte, o una cantidad de observaciones menor en este mismo intervalo, (h-c,h+c]. 
+Podemos notar que mientras que las $h$ de cambio en el acceso a internet son de tamaños relativamente bajos, las de cambio en internet:PC son mucho más altas. Esto posiblemente se deba a una mayor varianza en el intervalo cerca del punto de corte, o una cantidad de observaciones menor en este mismo intervalo, (h-c,h+c]. 
 
 ## Test de discontinuidad de las Covariables
 
-Como último paso antes de realizar el análisis, se verifica que las covariables enlistadas anteriormente estén balanceadas *en el punto de corte*. En caso de no serlo, no se podría asumir el supuesto de continuidad de los resultados potenciales. Entonces, para incluirlos se tendrían que hacer supuestos paramétricos o cambiar los parámetros de interés.[@Cattaneo]
+Como último paso antes de realizar el análisis, se verifica que las covariables estén balanceadas *en el punto de corte*. En caso de no serlo, no se podría asumir el supuesto de continuidad de los resultados potenciales. Entonces, para incluirlos se tendrían que hacer supuestos paramétricos adicionales.[@Cattaneo]
 
-Para verificar esto, realizamos una tabla de balance para los ocho modelos (dos variables dependientes x dos variables definitorias x dos tipos de examen), considerando en cada uno sus respectivos puntos de corte y anchos de banda. Para ver la construcción de cada tabla, donde se señalan las medias de tratamiento y control de cada variable, la diferencia, el valor-p de las pruebas T de cada una, y las pruebas F, donde evaluamos para cada modelo si las medias en conjunto de las variables son iguales a cero, **ver Anexo 2**. En todos los modelos se rechazó la prueba F, por lo que no podemos asumir que las covariables son iguales en el punto de corte, por lo que no se incluirán en la implementación. Esto no representa un problema para la estimación: la inclusión de covariables, en caso de cumplir con el balance, es con fines de eficiencia. [@Cattaneo].
+Para verificar esto, realizamos una tabla de balance para los ocho modelos, considerando en cada uno sus respectivos puntos de corte y anchos de banda. Para ver la construcción de cada tabla, donde se señalan las medias de tratamiento y control de cada variable, la diferencia, el valor-p de las pruebas T de cada una, y las pruebas F, donde evaluamos para cada modelo si las medias en conjunto de las variables son iguales a cero, **ver Anexo 2**. En todos los modelos se rechazó la prueba F, por lo que no podemos asumir que las covariables son iguales en el punto de corte, por lo que no se incluirán en la implementación. Esto no representa un problema para la estimación pues la inclusión de covariables, en caso de cumplir con el balance, es con fines de eficiencia. [@Cattaneo].
 
 ## Modelos
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE, include=FALSE}
@@ -468,11 +468,9 @@ kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda",
   footnote("Se incluyen intervalos de confianza robustos, los cuales consideran al sesgo positivo propio del diseño RD.")
 
 ```
-Con esta variable definitoria, solo observamos resultados significativos en el cambio de la proporción de alumnos que pasan a ser del nivel de logro más alto en español, con un estimador del efecto de tratamiento local (LATE) de 1.234 puntos porcentuales y un nivel de significancia de 0.03. Los resultados para el cambio en nivel de logro más alto en matemáticas, y nivel de logro más bajo en ambos dominios no fueron significativos. 
+En este escenario, solo observamos resultados significativos en el cambio de la proporción de alumnos que pasan a ser del nivel de logro más alto en español, con un estimador del efecto de tratamiento local (LATE) de 1.234 puntos porcentuales y un nivel de significancia de 0.03. Los resultados para el cambio en nivel de logro más alto en matemáticas, y nivel de logro más bajo en ambos dominios no fueron significativos. 
 
-La interpretacion del cambio de logro en el nivel alto de español es que, dentro del intervalo de tasa de cambio en internet de 4.4 puntos porcentuales a 13.6 del 2010 al 2020, el aumento en las calificaciones promedio de las localidades rurales de control, de haber sido del grupo de tratamiento, hubiera sido de 1.17 puntos porcentuales. Este efecto es atribuible al acceso a internet. 
-
-Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.09 pp de 2010 al 2020, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.86 pp.
+La interpretacion del cambio de logro en el nivel alto de español es que, dentro del intervalo de tasa de cambio en internet de 4.4 puntos porcentuales a 13.6 del 2010 al 2020, el aumento en las calificaciones promedio de las localidades rurales de control, de haber sido del grupo de tratamiento, hubiera sido de 1.17 puntos porcentuales. Este coeficiente representa a la diferencia en los puntajes en español de las localidades que tienen acceso a internet *apenas por encima* del punto de corte, que es de un cambio en el puntaje de 4.09 pp de 2010 al 2020, menos el de las localidades que *apenas* están por debajo del punto de corte, que es de 2.86 pp donde dicho efecto es atribuible al acceso a internet.
 
 ```{r, echo=FALSE,message=FALSE,warning=FALSE,header=FALSE,include=FALSE}
 print(out$beta_p_r)
@@ -497,11 +495,11 @@ kable(dataf, booktabs=T,col.names=c("Modelo","Punto de corte", "Ancho de banda",
 
 ```
 
-En este caso, se puede notar que hubo cambios significativos para el cambio en la proporción de alumnos que pasan a ser los más altos en español, con un LATE de 1.252 pp y nivel de significancia de 0.00, y de matemáticas, con un estimador de 3.277 pp y un nivel de significancia de 0.001, así como una disminución significativa de la proporción de alumnos por localidad rural que dejaron de ser parte del nivel de logro más bajo en español, con un estimador del efecto de tratamiento de -3.855 pp y nivel de significancia de 0.003. 
+En este caso, se puede notar que hubo cambios significativos para el cambio en la proporción de alumnos que pasan a ser los **top** en español, con un LATE de 1.252 pp y nivel de significancia de 0.00, y de matemáticas, con un LATE de 3.277 pp y un nivel de significancia de 0.001, así como una disminución significativa de la proporción de alumnos por localidad rural que dejaron de ser parte del nivel de logro más bajo en español, con un LATE de -3.855 pp y nivel de significancia de 0.003. 
 
-Podemos notar que en estas estimaciones, en las que se analiza el efecto conjunto de acceso a internet en los hogares junto con la tenencia en los hogares de equipo tecnológico (computadora, tablet o laptop), hay un efecto mucho más pronunciado en los beneficios a la educación que el efecto de acceso a internet sin contar con equipo tecnológico, extendiendo el efecto a los alumnos de matemáticas "top" y a los de español "bottom". Mientras que el primer efecto (el de internet solo) parecía beneficiar solo a "los mejores", y solo en Español, el segundo efecto parece ser más general. Sin embargo, no se mejoró a los alumnos bottom de matemáticas. Esto puede ser en parte explicado por la naturaleza complementaria del acceso a internet: para mejorar la educación de los niños, son importantes factores de la escuela, de los maestros, y del hogar. 
+Podemos notar que en estas estimaciones, en las que se analiza la el cambio en la interacción del acceso a internet y PC, hay un efecto mucho más pronunciado en los beneficios a la educación que el simple efecto de acceso a internet, extendiendo el efecto a los alumnos de matemáticas **top** y a los de español **bottom**. Mientras que el primer efecto simple parecía beneficiar solo a **top**, y solo en español, el segundo efecto parece ser más general. Sin embargo, no se mejoró a los alumnos **bottom** de matemáticas. Esto puede ser en parte explicado por la naturaleza complementaria del acceso a internet: para mejorar la educación son importantes factores de la escuela, de los maestros y del hogar. 
 
-Para poder asegurar que la falta de balance en la discontinuidad no es una amenaza para la validez interna del modelo, como prueba de robustez se llevaron a cabo las mismas estimaciones incluyendo a las covariables. Para ver las tablas de resultados, ver Anexo 3.  Se puede observar que el cambio en el estimador puntual, así como en los valores-p y los intervalos de confianza robustos, es marginal, por lo que no cambian nuestras conclusiones. Esto implica que el LATE obtenido no es resultado de diferencias en las covariables, implicando que no hay un sesgo de selección y que se mantiene la validez de las conclusiones causales. 
+Para poder asegurar que la falta de balance en la discontinuidad no es una amenaza para la validez interna del modelo, como prueba de robustez en el Anexo 3 se llevaron a cabo las mismas estimaciones incluyendo a las covariables. Se puede observar que el cambio en el LATE, así como en los valores-p y los intervalos de confianza robustos, es marginal, por lo que no cambian nuestras conclusiones. Esto implica que el LATE obtenido no es resultado de diferencias en las covariables, es decir, no hay un sesgo de selección y se mantiene la validez de las conclusiones causales. 
 
 ## Gráficos
 
@@ -564,7 +562,7 @@ Entre las aportaciones del presente trabajo, es posible mencionar que por si mis
 
 A partir de los resultados cuantitativos obtenidos, fue posible comprobar nuestra hipótesis general de que una mayor conectividad en los hogares de los alumnos, así como un mayor acceso a computadoras, causan un efecto positivo en el nivel de logro educativo de los estudiantes de tercero de secundaria.  
 
-Sin embargo, el efecto particular fue dispar entre las distintas pruebas -matemáticas y español-, los distintos niveles de logro de los alumnos -$top$ y $bottom$-, así como entre los dos diferentes análisis que se llevaron a cabo: el análisis por si sólo del acceso a internet, y el conjunto -internet más computadora.   
+Sin embargo, el efecto particular fue dispar entre las distintas pruebas -matemáticas y español-, los distintos niveles de logro de los alumnos -**top** y **bottom**-, así como entre los dos diferentes análisis que se llevaron a cabo: el análisis por si sólo del acceso a internet, y el conjunto -internet más computadora.   
 
 Consideramos que este trabajo puede tener implicaciones útiles en materia de política pública, dado que hay evidencia de que el acceso a internet y a computadoras impacta de manera positiva en el rendimiento escolar. Por tanto, es crucial complementar las políticas en materia educativa con una perspectiva de apertura tecnológica, es decir, sumar a los instrumentos de política pública ya existente, con apoyos que garanticen la conectividad; y/o enfocarse en políticas públicas que logren una cobertura total de acceso a internet y computadoras en las regiones más vulnerables del país. Lo anterior, siempre con una visión integral y considerando que si bien el internet es una condición necesaria para mejorar el desempeño educativo, no hay evidencia de que sea suficiente por sí misma para mejorar el nivel de desempeño de los estudiantes.   
 
